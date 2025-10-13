@@ -1,0 +1,46 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import { render } from "astro:content";
+import { DEFAULT_LOCALE_SETTING } from "@/locales";
+import Layout from "@/layouts/BaseLayout.astro";
+import { getFileNameFromPath, getLangFromPath } from "@/common";
+import { Image } from 'astro:assets';
+
+
+export async function getStaticPaths() {
+	const posts: CollectionEntry<"blog">[] = (await getCollection("blog"));
+
+	const paths = posts.flatMap((post) => {
+
+		if(getLangFromPath(post.filePath) !== DEFAULT_LOCALE_SETTING) {
+			return [{
+				params: { slug: getFileNameFromPath(post.filePath), lang: getLangFromPath(post.filePath) },
+				props: post,
+			}];
+		}
+
+		return [{
+			params: { slug: getFileNameFromPath(post.filePath) },
+			props: post,
+		}];
+	});
+
+	return paths;
+}
+
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+const { Content } = await render(post);
+
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+	<h1 class="text-lg font-bold text-center mb-4">{post.data.title}</h1>
+	<article class="prose lg:prose-sm mx-auto prose-invert dark:prose-invert text-gray-600 dark:text-neutral-400">
+		{post.data.image && (
+			<Image src={post.data.image} alt={post.data.title} class="mx-auto mb-6 rounded max-h-64 w-auto" />
+		)}
+		<Content />
+	</article>
+</Layout>

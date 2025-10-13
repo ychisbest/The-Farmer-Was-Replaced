@@ -1,0 +1,93 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "@/layouts/BaseLayout.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+import { LOCALES_SETTING, DEFAULT_LOCALE_SETTING } from "@/locales";
+
+export const getStaticPaths = async () => {
+    const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+        if (lang !== DEFAULT_LOCALE_SETTING) {
+            return {
+                params: { lang: lang },
+            };
+        } else {
+            return { params: { lang: undefined } };
+        }
+    });
+
+    return paths;
+};
+
+const title= {
+  en: "Privacy Policy",
+  it: "Informativa sulla privacy",
+  de: "Datenschutzrichtlinie"
+};
+
+const description = {
+    en: `We respect your privacy. This policy explains how we handle your data on ${SITE_TITLE}.`,
+    it: `Rispettiamo la tua privacy. Questa politica spiega come gestiamo i tuoi dati su ${SITE_TITLE}.`,
+    de: `Wir respektieren Ihre Privatsphäre. Diese Richtlinie erklärt, wie wir Ihre Daten auf ${SITE_TITLE} behandeln.`
+};
+---
+
+<Layout title={title} description={description}>
+    <section class="privacy-policy max-w-2xl mx-auto px-4 py-10 space-y-8">
+        <h1 class="text-3xl font-bold mb-4">Privacy Policy</h1>
+        <p class="mb-6">
+            Welcome to {SITE_TITLE}! Your privacy is important to us. This
+            Privacy Policy explains how we collect, use, and protect your
+            information when you use {SITE_TITLE} ({SITE_DESCRIPTION}).
+        </p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-2">Information We Collect</h2>
+        <ul class="list-disc list-inside space-y-2 mb-6">
+            <li>
+                <span class="font-semibold">Personal Information:</span> We do not collect personal
+                information unless you voluntarily provide it.
+            </li>
+            <li>
+                <span class="font-semibold">Usage Data:</span> We may collect non-personal information
+                such as browser type, device information, and pages visited to improve
+                our services.
+            </li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-2">How We Use Your Information</h2>
+        <ul class="list-disc list-inside space-y-2 mb-6">
+            <li>To provide and maintain {SITE_TITLE}.</li>
+            <li>To analyze and improve user experience.</li>
+            <li>To ensure the security of our website.</li>
+        </ul>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-2">Cookies</h2>
+        <p class="mb-6">
+            {SITE_TITLE} may use cookies to enhance your browsing experience.
+            You can disable cookies in your browser settings if you prefer.
+        </p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-2">Third-Party Services</h2>
+        <p class="mb-6">
+            We may use third-party services for analytics or other
+            functionalities. These services have their own privacy policies.
+        </p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-2">Data Security</h2>
+        <p class="mb-6">
+            We take reasonable measures to protect your information from
+            unauthorized access or disclosure.
+        </p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-2">Changes to This Policy</h2>
+        <p class="mb-6">
+            We may update this Privacy Policy from time to time. Please review
+            this page periodically for any changes.
+        </p>
+
+        <h2 class="text-2xl font-semibold mt-8 mb-2">Contact Us</h2>
+        <p>
+            If you have any questions about this Privacy Policy, please contact
+            us via the information provided on {SITE_TITLE}.
+        </p>
+    </section>
+</Layout>

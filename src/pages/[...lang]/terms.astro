@@ -1,0 +1,85 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "@/layouts/BaseLayout.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+import { LOCALES_SETTING, DEFAULT_LOCALE_SETTING } from "@/locales";
+
+export const getStaticPaths = async () => {
+    const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+        if (lang !== DEFAULT_LOCALE_SETTING) {
+            return {
+                params: { lang: lang },
+            };
+        } else {
+            return { params: { lang: undefined } };
+        }
+    });
+
+    return paths;
+};
+
+
+const title= {
+  en: "Terms of Service",
+  it: "Termini di Servizio",
+  de: "Nutzungsbedingungen"
+};
+
+const description = {
+  en: `By using ${SITE_TITLE}, you agree to the following terms and conditions.`,
+  it: `Utilizzando ${SITE_TITLE}, accetti i seguenti termini e condizioni.`,
+  de: `Durch die Nutzung von ${SITE_TITLE} stimmen Sie den folgenden Bedingungen zu.`
+};
+---
+
+<Layout title={title} description={description}>
+
+  <section class="terms-of-service max-w-2xl mx-auto px-4 py-10 space-y-8">
+    <h1 class="text-3xl font-bold mb-4">Terms of Service</h1>
+    <p class="mb-6">
+      Welcome to {SITE_TITLE}! By accessing or using {SITE_TITLE} ({SITE_DESCRIPTION}), you agree to comply with and be bound by the following terms and conditions.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Acceptance of Terms</h2>
+    <p class="mb-6">
+      By using our website, you agree to these Terms of Service. If you do not agree, please do not use our website.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Use of the Website</h2>
+    <ul class="list-disc list-inside space-y-2 mb-6">
+      <li>You must use {SITE_TITLE} in compliance with all applicable laws and regulations.</li>
+      <li>You agree not to misuse or interfere with the proper functioning of the website.</li>
+      <li>You may not attempt to gain unauthorized access to any part of the website.</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Intellectual Property</h2>
+    <p class="mb-6">
+      All content on {SITE_TITLE}, including text, graphics, logos, and software, is the property of the website or its licensors and is protected by copyright and other laws.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Third-Party Links</h2>
+    <p class="mb-6">
+      {SITE_TITLE} may contain links to third-party websites. We are not responsible for the content or practices of these websites.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Disclaimer</h2>
+    <p class="mb-6">
+      {SITE_TITLE} is provided "as is" without warranties of any kind. We do not guarantee the accuracy or completeness of any information on the website.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Limitation of Liability</h2>
+    <p class="mb-6">
+      We are not liable for any damages arising from your use of {SITE_TITLE}.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Changes to Terms</h2>
+    <p class="mb-6">
+      We may update these Terms of Service at any time. Please review this page periodically for changes.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-8 mb-2">Contact Us</h2>
+    <p>
+      If you have any questions about these Terms of Service, please contact us via the information provided on {SITE_TITLE}.
+    </p>
+  </section>
+</Layout>

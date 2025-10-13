@@ -1,0 +1,43 @@
+---
+import "../styles/global.css";
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE } from "@/consts";
+import { LOCALES, useTranslations, type Lang } from "@/i18n";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+
+const { title  } = Astro.props;
+const { description } = Astro.props;
+---
+
+<!doctype html>
+<html lang={LOCALES[Astro.currentLocale as string].lang}>
+    <script is:inline>
+        const theme = localStorage.getItem("hs_theme");
+        if (
+            theme === "dark" ||
+            (!theme &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+            document.documentElement.classList.add("dark");
+            document.documentElement.classList.remove("light");
+        } else {
+            document.documentElement.classList.add("light");
+            document.documentElement.classList.remove("dark");
+        }
+    </script>
+    <BaseHead
+        title={SITE_TITLE + " - " + t(title)}
+        description={t(description)}
+    />
+
+    <body class="bg-white dark:bg-slate-900 text-gray-800 dark:text-gray-200 transition-colors">
+        <Header />
+        <main class="container mx-auto px-4 py-8">
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>

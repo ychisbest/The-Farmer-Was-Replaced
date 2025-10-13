@@ -1,0 +1,34 @@
+---
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+import { useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/BaseLayout.astro";
+import BlogList from "@/components/BlogList.astro";
+const t = useTranslations(Astro.currentLocale as Lang);
+export const getStaticPaths = async () => {
+    const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+        if (lang !== DEFAULT_LOCALE_SETTING) {
+            return {
+                params: { lang: lang },
+            };
+        } else {
+            return { params: { lang: undefined } };
+        }
+    });
+    return paths;
+};
+
+
+const title = {
+    en: "Rainbow Six Siege Stats Tracker - R6 Tracker | K/D Ratio, Win Rate & Performance Analytics",
+    it: "Tracker Statistiche Rainbow Six Siege - R6 Tracker | Rapporto K/D, Percentuale Vittorie & Analisi Prestazioni",
+    de: "Rainbow Six Siege Statistiken Tracker - R6 Tracker | K/D-Verhältnis, Gewinnrate & Leistungsanalysen"
+};
+const description = {
+    en: "R6 Tracker: Advanced Rainbow Six Siege statistics platform. Track your K/D ratio, win rate, operator performance, and match history in real-time. Free R6 stats analytics for competitive Siege players. Compare your performance with top players and improve your Rainbow Six Siege gameplay.",
+    it: "R6 Tracker: Piattaforma avanzata di statistiche Rainbow Six Siege. Monitora il tuo rapporto K/D, percentuale vittorie, prestazioni operatori e cronologia partite in tempo reale. Analisi statistiche R6 gratuite per giocatori competitivi Siege. Confronta le tue prestazioni con i migliori giocatori e migliora il tuo gameplay Rainbow Six Siege.",
+    de: "R6 Tracker: Fortgeschrittene Rainbow Six Siege Statistikplattform. Verfolge dein K/D-Verhältnis, Gewinnrate, Operator-Leistung und Spielverlauf in Echtzeit. Kostenlose R6 Statistikanalysen für wettbewerbsorientierte Siege-Spieler. Vergleiche deine Leistung mit Top-Spielern und verbessere dein Rainbow Six Siege Gameplay."
+};
+---
+<Layout title={title} description={description}>
+
+</Layout>

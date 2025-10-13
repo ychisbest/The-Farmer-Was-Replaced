@@ -1,0 +1,155 @@
+---
+import { SITE_TITLE } from "../consts";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslations, type Lang } from "@/i18n";
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
+---
+
+<header
+  class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-700/50 sticky top-0 z-50 transition-colors"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <a
+        href={getRelativeLocaleUrl(locale, "/")}
+        class="flex items-center space-x-2"
+      >
+        <span
+          class="text-xl font-bold text-slate-900 dark:text-white tracking-tight"
+        >
+          {t(SITE_TITLE)}
+        </span>
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-6">
+        <a
+          href={getRelativeLocaleUrl(locale, "/")}
+          class="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-medium"
+        >
+          {t({ en: "Home", it: "Home", de: "Startseite" })}
+        </a>
+        <a
+          href={getRelativeLocaleUrl(locale, "/blog")}
+          class="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-medium"
+        >
+          {t({ en: "Blog", it: "Blog", de: "Blog" })}
+        </a>
+      </nav>
+
+      <div class="flex items-center space-x-3">
+        <div class="relative">
+          <select
+            class="appearance-none bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-sm rounded-md px-3 py-1.5 pr-8 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors duration-200 shadow-sm hover:border-sky-400 dark:hover:border-sky-500"
+            aria-label="Select language"
+            onchange={`window.location.href = this.value`}
+          >
+            {
+              Object.keys(LOCALES_SETTING).map((l) => {
+          const target = getRelativeLocaleUrl(l as any, path || "/");
+          return (
+            <option value={target} selected={l === locale}>
+              {LOCALES_SETTING[l as keyof typeof LOCALES_SETTING].label}
+            </option>
+          );
+              })
+            }
+          </select>
+          <span class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-slate-400 dark:text-slate-500">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+
+        
+
+        <button
+          type="button"
+          class="relative font-medium text-gray-800 rounded-full px-1 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+          aria-label="Toggle dark mode"
+          onclick={`
+            if(document.documentElement.classList.contains('dark')){
+              document.documentElement.classList.remove('dark');
+              localStorage.setItem('hs_theme', 'light');
+            }else{
+              document.documentElement.classList.add('dark');
+              localStorage.setItem('hs_theme', 'dark');
+            }
+          `}
+        >
+          <span class="group inline-flex shrink-0 justify-center items-center size-9">
+            <svg
+              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-4 transition-opacity duration-200 dark:opacity-0 opacity-100"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+            <svg
+              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-4 transition-opacity duration-200 opacity-0 dark:opacity-100"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden bg-white dark:bg-slate-900 border-t border-slate-200/50 dark:border-slate-700/50 transition-colors"
+  >
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a
+        href={getRelativeLocaleUrl(locale, "/")}
+        class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+      >
+        {t({ en: "Home", it: "Home", de: "Startseite" })}
+      </a>
+      <a
+        href={getRelativeLocaleUrl(locale, "/blog")}
+        class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+      >
+        {t({ en: "Blog", it: "Blog", de: "Blog" })}
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const button = document.getElementById("mobile-menu-button");
+  const menu = document.getElementById("mobile-menu");
+  button?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+  });
+</script>

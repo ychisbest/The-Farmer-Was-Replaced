@@ -1,0 +1,12 @@
+{
+    "DEFAULT_LOCALE_SETTING": "en",
+    "LOCALES_SETTING": {
+        "en": {
+            "label": "English",
+            "lang": "en-US"
+        }
+    },
+    "SITE_URL": "https://thefarmerwasreplaced.com",
+    "SITE_TITLE":"The Farmer Was Replaced",
+    "SITE_DESCRIPTION": "Everything about the The Farmer Was Replaced, information, tutorials, code, etc."
+}

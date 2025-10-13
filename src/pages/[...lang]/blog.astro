@@ -1,0 +1,39 @@
+---
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+import { useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/BaseLayout.astro";
+import BlogList from "@/components/BlogList.astro";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+
+export const getStaticPaths = async () => {
+    const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+        if (lang !== DEFAULT_LOCALE_SETTING) {
+            return {
+                params: { lang: lang },
+            };
+        } else {
+            return { params: { lang: undefined } };
+        }
+    });
+
+    return paths;
+};
+
+const title = {
+    en: "blogs for R6 Tracker",
+    it: "blog per R6 Tracker",
+    de: "Blogs für R6 Tracker",
+};
+
+const description = {
+    en: "Explore the latest blogs and updates for R6 Tracker, your ultimate Rainbow Six Siege performance tracker.",
+    it: "Esplora gli ultimi blog e aggiornamenti per R6 Tracker, il tuo tracker definitivo delle prestazioni di Rainbow Six Siege.",
+    de: "Entdecken Sie die neuesten Blogs und Updates für R6 Tracker, Ihren ultimativen Rainbow Six Siege Leistungsmonitor.",
+};
+---
+
+<Layout title={title} description={description}>
+    <h1 class="text-center py-10 text-3xl font-black text-white">Blogs</h1>
+    <BlogList />
+</Layout>
