@@ -2,7 +2,7 @@
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
 import { useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/BaseLayout.astro";
-import BlogList from "@/components/BlogList.astro";
+
 const t = useTranslations(Astro.currentLocale as Lang);
 export const getStaticPaths = async () => {
     const paths = Object.keys(LOCALES_SETTING).map((lang) => {

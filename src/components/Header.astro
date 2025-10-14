@@ -30,13 +30,19 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
           href={getRelativeLocaleUrl(locale, "/")}
           class="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-medium"
         >
-          {t({ en: "Home", it: "Home", de: "Startseite" })}
+          {t({ en: "Home" })}
+        </a>
+        <a
+          href={getRelativeLocaleUrl(locale, "/")}
+          class="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-medium"
+        >
+          {t({ en: "Guide" })}
         </a>
         <a
           href={getRelativeLocaleUrl(locale, "/blog")}
           class="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-medium"
         >
-          {t({ en: "Blog", it: "Blog", de: "Blog" })}
+          {t({ en: "Codes" })}
         </a>
       </nav>
 
@@ -49,23 +55,32 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
           >
             {
               Object.keys(LOCALES_SETTING).map((l) => {
-          const target = getRelativeLocaleUrl(l as any, path || "/");
-          return (
-            <option value={target} selected={l === locale}>
-              {LOCALES_SETTING[l as keyof typeof LOCALES_SETTING].label}
-            </option>
-          );
+                const target = getRelativeLocaleUrl(l as any, path || "/");
+                return (
+                  <option value={target} selected={l === locale}>
+                    {LOCALES_SETTING[l as keyof typeof LOCALES_SETTING].label}
+                  </option>
+                );
               })
             }
           </select>
-          <span class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-slate-400 dark:text-slate-500">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+          <span
+            class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-slate-400 dark:text-slate-500"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M6 9l6 6 6-6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
             </svg>
           </span>
         </div>
-
-        
 
         <button
           type="button"
@@ -81,7 +96,9 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
             }
           `}
         >
-          <span class="group inline-flex shrink-0 justify-center items-center size-9">
+          <span
+            class="group inline-flex shrink-0 justify-center items-center size-9"
+          >
             <svg
               class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-4 transition-opacity duration-200 dark:opacity-0 opacity-100"
               xmlns="http://www.w3.org/2000/svg"

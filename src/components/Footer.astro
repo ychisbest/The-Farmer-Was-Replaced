@@ -1,4 +1,5 @@
 ---
+import { SITE_TITLE } from "@/consts";
 import { useTranslations, type Lang } from "@/i18n";
 import { DEFAULT_LOCALE_SETTING,LOCALES_SETTING } from "@/locales";
 import { getRelativeLocaleUrl } from "astro:i18n";
@@ -8,18 +9,16 @@ const today = new Date();
 const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
 ---
 
-<footer class="py-10 ">
-        <div class="container mx-auto px-4">
+<footer class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-t border-slate-200/50 dark:border-slate-700/50 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-6">
                         <div class="flex items-center space-x-3 mb-4 md:mb-0">
-                                <div class="bg-red-600 w-10 h-10 rounded-full flex items-center justify-center shadow-lg">
-                                        <span class="font-extrabold text-lg tracking-wider">R6</span>
-                                </div>
-                                <h3 class="text-2xl font-extrabold tracking-tight">R6 Tracker</h3>
+
+                                <h3 class="text-lg font-bold text-slate-900 dark:text-white tracking-tight"></h3>
                         </div>
-                        <ul class="flex flex-wrap gap-6 text-gray-300 text-base font-medium">
+                        <ul class="flex flex-wrap gap-6 text-slate-700 dark:text-slate-300 text-sm font-medium">
                                 <li>
-                                        <a href="/privacy/" class="hover:text-red-400 transition-colors">
+                                        <a href="/privacy/" class="hover:text-slate-900 dark:hover:text-white transition-colors duration-200">
                                                 {t({
                                                         en: "Privacy Policy",
                                                         it: "Informativa sulla privacy",
@@ -28,7 +27,7 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="/terms/" class="hover:text-red-400 transition-colors">
+                                        <a href="/terms/" class="hover:text-slate-900 dark:hover:text-white transition-colors duration-200">
                                                 {t({
                                                         en: "Terms of Service",
                                                         it: "Termini di servizio",
@@ -45,10 +44,10 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
                                                         <li>
                                                                 <a
                                                                         href={getRelativeLocaleUrl(l, path || "/")}
-                                                                        class={`px-2 py-1 rounded transition-colors ${
+                                                                        class={`px-2 py-1 rounded text-sm transition-colors duration-200 ${
                                                                                 locale === l
-                                                                                        ? "bg-red-600 text-white font-bold"
-                                                                                        : "hover:bg-gray-700 hover:text-red-300"
+                                                                                        ? "bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-white font-medium"
+                                                                                        : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
                                                                         }`}
                                                                         aria-current={locale === l ? "page" : undefined}
                                                                 >
@@ -60,14 +59,6 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
                                 </li>
                         </ul>
                 </div>
-                <div class="border-t border-gray-100 dark:border-gray-800 mt-8 pt-5 text-center text-gray-400 text-sm">
-                        <p>
-                                &copy; {today.getFullYear()} R6 Tracker. {t({
-                                        en: "This website is not affiliated with Ubisoft or Rainbow Six Siege.",
-                                        it: "Questo sito non è affiliato con Ubisoft o Rainbow Six Siege.",
-                                        de: "Diese Website ist nicht mit Ubisoft oder Rainbow Six Siege verbunden."
-                                })}
-                        </p>
-                </div>
+
         </div>
 </footer>
