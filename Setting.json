@@ -4,6 +4,10 @@
         "en": {
             "label": "English",
             "lang": "en-US"
+        },
+        "zh":{
+            "label": "简体中文",
+            "lang": "zh-CN"
         }
     },
     "SITE_URL": "https://thefarmerwasreplaced.com",

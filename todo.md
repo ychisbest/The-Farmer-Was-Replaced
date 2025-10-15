@@ -7,3 +7,4 @@
 
 任务1. 修改footer.astro的风格与header.astro对齐，目前界面不太好 已完成
 任务2. 根据网站信息写一个README.md文档
+任务3. 完成index.astro页面，"The Farmer Was Replaced"这个关键字的密度约为3%，预留一些需要的链接，包含一些seo技巧，文字1000左右

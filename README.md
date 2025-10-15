@@ -1,18 +1,60 @@
 # The Farmer Was Replaced - Website
 
-A comprehensive website dedicated to "The Farmer Was Replaced" - a programming-based farming automation game that teaches coding through gameplay.
+A comprehensive website dedicated to "The Farmer Was Replaced" - the innovative programming farm automation game that teaches coding through gameplay. This educational game has revolutionized programming education by combining farm management with Python-like programming in an engaging, continuous progression system.
 
-## About the Game
+## 🎮 About The Farmer Was Replaced
 
-"The Farmer Was Replaced" is an innovative programming farm automation game developed by Swiss indie developer Timon Herzog. Released on February 10, 2023 (Early Access) and officially launched version 1.0 on October 10, 2025, the game uses a Python-like programming language to program drones for automating various farming tasks.
+**The Farmer Was Replaced** is an educational programming game developed by Swiss indie developer **Timon Herzog** (Metaroot). The game began Early Access on February 10, 2023, and officially launched version 1.0 on October 10, 2025. Built with Unity engine and currently available for Windows platform, this unique game has garnered **96% positive reviews** on Steam.
 
-### Key Features
+### Revolutionary Game Concept
 
-- **Programming Language**: Uses a Python-like simplified programming language
-- **Continuous Progression**: No traditional levels - unlock technologies by collecting resources
-- **Multi-language Support**: Available in multiple languages with i18n support
-- **Educational Value**: Excellent tool for learning programming concepts
-- **Advanced Features**: Mazes, companion planting, multi-crop rotation, and more
+Unlike traditional programming tutorials, The Farmer Was Replaced lets players program a drone using a **Python-like programming language** to automate various farming tasks. The game features a **continuous progression system** rather than traditional levels - players unlock new technologies by collecting resources and gradually expand their automated farm operations.
+
+### Core Programming Features
+
+- **Python-like Language**: Simplified programming language nearly identical to Python syntax
+- **Real Code Files**: All code stored in `.py` files, editable in external editors like VS Code
+- **File Monitoring**: Game automatically detects external code changes when enabled
+- **Python IntelliSense Support**: Compatible with Python development tools
+- **Advanced Programming**: Supports functions, loops, conditionals, lists, dictionaries, and algorithms
+
+### Advanced Farming Systems
+
+**The Farmer Was Replaced** features sophisticated farming mechanics:
+
+- **Crop Diversity**: 7+ crop types including grass/hay, bushes/trees, carrots, pumpkins, sunflowers, and even dinosaurs
+- **Farm Operations**: Harvesting, planting, tilling, watering, fertilizing, and trading
+- **Advanced Techniques**: Companion planting for yield bonuses, multi-crop rotation strategies
+- **Resource Management**: Balance different crops, optimize inventory thresholds, strategic purchasing
+
+### Technology Tree Progression
+
+The game's **technology tree system** guides learning progression:
+
+**Beginner Unlocks:**
+- Basic loops (`while`, `for`) and conditionals (`if/elif/else`)
+- Variable systems and data manipulation
+- Farm expansion from 1×1 to larger areas
+
+**Intermediate Features:**
+- Function definitions for reusable code blocks
+- List operations and data collections
+- Precise drone movement control
+- Multi-crop management systems
+
+**Advanced Programming:**
+- Maze generation and solving algorithms
+- Recursive programming techniques
+- Sorting algorithms (bubble sort, etc.)
+- Dictionary data structures for complex data management
+
+### Maze Solving Challenge
+
+A unique feature of **The Farmer Was Replaced** is the maze system:
+- **Generation**: 10% chance when fertilizing fully grown bushes
+- **Treasure Rewards**: Central treasure worth maze area value
+- **Algorithm Practice**: Perfect for implementing pathfinding algorithms
+- **Popular Solutions**: Right-hand rule, depth-first search, distance optimization
 
 ## Website Features
 
