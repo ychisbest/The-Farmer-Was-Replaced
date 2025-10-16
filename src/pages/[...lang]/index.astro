@@ -2,9 +2,14 @@
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
 import { useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/BaseLayout.astro";
-import { z } from "astro:content";
+import { Image } from "astro:assets";
+import hero from "@/assets/Hero.jpg";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import CodeBlock from "@/components/CodeBlock.astro";
+import image1 from "@/assets/geminiHero.png"
 
 const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
 export const getStaticPaths = async () => {
     const paths = Object.keys(LOCALES_SETTING).map((lang) => {
         if (lang !== DEFAULT_LOCALE_SETTING) {
@@ -18,16 +23,151 @@ export const getStaticPaths = async () => {
     return paths;
 };
 
-
 const title = {
-    en: "The Farmer Was Replaced - Programming Farm Automation Game",
-    zh:"The Farmer Was Replaced - 编程农场自动化游戏"
+    en: "Home",
+    zh: "编程农场中文站",
 };
 const description = {
     en: "The Farmer Was Replaced is the ultimate programming game for learning Python through farm automation. Discover tutorials, code examples, and strategies for this educational farming simulation.",
-    zh:"The Farmer Was Replaced 是通过农场自动化学习Python的终极编程游戏。发现教程、代码示例和策略。"
+    zh: "编程农场是通过农场自动化学习Python的终极编程游戏。发现教程、代码示例和策略。",
 };
 ---
+
 <Layout title={title} description={description}>
-    
+    <!-- Hero Section -->
+    <section class="flex felx-row py-10 items-center justify-center">
+        <Image
+            src={hero}
+            height={200}
+            alt={t({ zh: "游戏英雄图片", en: "Hero Game Image" })}
+            class=" dark:brightness-[0.7] rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+        />
+
+        <div class="ml-8 flex flex-col justify-center">
+            <h1 class="text-3xl font-bold mb-4">
+                {
+                    t({
+                        zh: "欢迎来到",
+                        en: "Welcome to ",
+                    })
+                }
+                <span class="bg-yellow-100 dark:bg-yellow-900 font-extrabold">
+                    {
+                        t({
+                            zh: "编程农场",
+                            en: "The Farmer Was Replaced",
+                        })
+                    }
+                </span>
+                {
+                    t({
+                        zh: "中文站!",
+                        en: "Aggregator!",
+                    })
+                }
+            </h1>
+            <p class="text-lg mb-6 max-w-xl">
+                {
+                    t({
+                        zh: "The Farmer Was Replaced 是一个通过农场自动化学习 Python 的终极编程游戏。探索教程、代码示例和策略，提升你的编程技能，同时享受有趣的农场模拟体验。",
+                        en: "The Farmer Was Replaced is the ultimate programming game for learning Python through farm automation. Explore tutorials, code examples, and strategies to enhance your coding skills while enjoying a fun farming simulation.",
+                    })
+                }
+            </p>
+            <div>
+                <a class="text-xl underline text-blue-500"
+                    >{
+                        t({
+                            zh: "教程",
+                            en: "Tutorials",
+                        })
+                    }</a
+                > |
+                <a class="text-xl underline text-blue-500"
+                    >{
+                        t({
+                            zh: "代码示例",
+                            en: "Code Examples",
+                        })
+                    }</a
+                >
+            </div>
+        </div>
+    </section>
+
+    <!--steamlink -->
+    <section class="py-10">
+        <h2 class="text-2xl font-bold mb-4">
+            {t({ zh: "如何获取游戏", en: "How to Get the Game" })}
+        </h2>
+        <div class="border-l-8 py-3 px-3 border-gray-300">
+            {
+                t({
+                    zh: "游戏仅在 Steam 平台发售，请进入 Steam 平台购买",
+                    en: "The game is only available on the Steam platform, please go to the Steam platform to purchase",
+                })
+            }
+            <br />
+            <a
+                class="inline-block text-blue-500 underline cursor-pointer"
+                href="https://store.steampowered.com/app/2060160/_/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >{
+                    t({
+                        zh: "前往 Steam 商店页面",
+                        en: "Go to the Steam Store Page",
+                    })
+                }</a
+            >
+        </div>
+    </section>
+
+    <!--steamlink -->
+    <section class="py-10">
+        <h2 class="text-2xl font-bold mb-4">
+            {t({ zh: "前置知识", en: "Prerequisites" })}
+        </h2>
+        <div class="border-l-8 py-3 px-3 border-gray-300">
+            {
+                t({
+                    zh: "为了能更好的开始游戏，建议先学习一些 Python 基础知识，只需要学习至while循环即可，大概需要 30 分钟",
+                    en: "To get a better start in the game, it is recommended to learn some basic Python knowledge, only need to learn up to while loops, which takes about 30 minutes",
+                })
+            }
+            <br />
+            <a
+                class="inline-block text-blue-500 underline cursor-pointer"
+                href={getRelativeLocaleUrl(locale, "/tutorial")}
+                target="_blank"
+                rel="noopener noreferrer"
+                >{
+                    t({
+                        zh: "前往 Python 基础知识页面",
+                        en: "Go to the Python Basics Page",
+                    })
+                }</a
+            >
+        </div>
+    </section>
+
+    <!--steamlink -->
+    <section class="py-10">
+        <h2 class="text-2xl font-bold mb-4">
+            {t({ zh: "代码案例", en: "Code Examples" })}
+        </h2>
+        <div class="border-l-8 py-3 px-3 border-gray-300">
+            {
+                t({
+                    zh: "使用这些代码案例来快速提升你的游戏体验与编程技巧！",
+                    en: "Use these code examples to quickly enhance your gaming experience and coding skills!",
+                })
+            }
+        </div>
+        <CodeBlock code={
+        `while True:
+        if is_raining():`}
+        image={image1}
+        ></CodeBlock>
+    </section>
 </Layout>

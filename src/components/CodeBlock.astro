@@ -1,0 +1,45 @@
+---
+import { useTranslations, type Lang } from "@/i18n";
+import{Code}from"astro:components";
+const t=useTranslations(Astro.currentLocale as Lang);
+import {Image} from "astro:assets";
+
+const {image,alt="",code=""}=Astro.props;
+---
+
+<div class="my-3 flex flex-row">
+    <div class="relative flex-1">
+        <button
+            class="absolute top-2 right-2 bg-gray-700 text-white px-2 py-1 rounded text-sm hover:bg-gray-600"
+            data-code={code}
+            onclick="
+                const btn = this;
+                navigator.clipboard.writeText(this.getAttribute('data-code'));
+                const originalText = btn.textContent;
+                btn.textContent = btn.getAttribute('data-success');
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            "
+            data-success={t({ zh: "已复制!", en: "Copied!" })}
+        >
+            {t({ zh: "复制", en: "Copy" })}
+        </button>
+        <Code
+            class="p-3 rounded-2xl h-full"
+            code={code}
+            lang="python"
+        />
+    </div>
+
+    {image &&
+    <div>
+        <Image
+            src={image}
+            alt={alt}
+            width={400}
+            height={400}
+            class="ml-4 rounded-2xl shadow-2xl dark:brightness-[0.7]"
+        />
+    </div>}
+</div>

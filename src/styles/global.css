@@ -2,7 +2,19 @@
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:where(.dark, .dark *));
 
-:root   { --active-bg:#f1f5f9; }
-.dark   { --active-bg:rgba(255,255,255,.07); }
+.dark {
+    --active-bg: rgba(255, 255, 255, .07);
+}
 
-.active { background-color: var(--active-bg); }
+.active {
+    background-color: var(--active-bg);
+}
+
+:root {
+    --active-bg: #f1f5f9;
+    --font-sans: 'Inter', 'Noto Sans', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    font-family: var(--font-sans);
+}

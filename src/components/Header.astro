@@ -10,24 +10,27 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
 ---
 
 <header class="border-b border-neutral-200 bg-white sticky top-0 z-50 dark:bg-neutral-900 dark:border-neutral-700 transition-colors">
-  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <nav class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center gap-8">
         <a href={getRelativeLocaleUrl(locale, "/")} class="text-xl font-bold text-neutral-900 dark:text-white">
-          {t(SITE_TITLE)}
+          {t({
+            en: "The Farmer Was Replaced",
+            zh: "编程农场",
+          })}
         </a>
         <div class="hidden md:flex items-center gap-6">
           <a href={getRelativeLocaleUrl(locale, "/")} class="text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors dark:text-white dark:hover:text-neutral-300">
-            {t({ en: "Home" })}
+            {t({ en: "Home", zh: "首页" })}
           </a>
           <a href={getRelativeLocaleUrl(locale, "/guide")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
-            {t({ en: "Guide" })}
+            {t({ en: "Guide", zh: "指南" })}
           </a>
           <a href={getRelativeLocaleUrl(locale, "/blog")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
-            {t({ en: "Codes" })}
+            {t({ en: "Codes", zh: "代码" })}
           </a>
           <a href={getRelativeLocaleUrl(locale, "/about")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
-            {t({ en: "About" })}
+            {t({ en: "About", zh: "关于" })}
           </a>
         </div>
       </div>

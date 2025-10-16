@@ -1,0 +1,280 @@
+---
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+import { useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/BaseLayout.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { Code } from "astro:components";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+
+export const getStaticPaths = async () => {
+    const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+        if (lang !== DEFAULT_LOCALE_SETTING) {
+            return {
+                params: { lang: lang },
+            };
+        } else {
+            return { params: { lang: undefined } };
+        }
+    });
+    return paths;
+};
+
+const title = {
+    en: "Python Basics Tutorial - Learn Programming for The Farmer Was Replaced",
+    zh: "Python基础教程 - 学习编程农场的必备知识"
+};
+
+const description = {
+    en: "Learn Python programming basics from variables to while loops. Essential knowledge for playing The Farmer Was Replaced programming game.",
+    zh: "学习Python编程基础，从变量到while循环。游玩编程农场游戏的必备知识。"
+};
+---
+
+<Layout title={title} description={description}>
+    <div class="max-w-4xl mx-auto px-4 py-12">
+        <div class="text-center mb-16">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                {t({ zh: "Python基础教程", en: "Python Basics Tutorial" })}
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                {t({
+                    zh: "学习Python编程基础，掌握变量、数据类型、条件语句和循环知识。这些是游玩《The Farmer Was Replaced》编程农场游戏的必备基础知识。",
+                    en: "Learn Python programming basics including variables, data types, conditional statements, and loops. These are essential fundamentals for playing The Farmer Was Replaced programming game."
+                })}
+            </p>
+        </div>
+
+        <div class="space-y-12">
+            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+                    {t({ zh: "1. 变量 (Variables)", en: "1. Variables" })}
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                    {t({
+                        zh: "变量是用来存储数据的容器。在Python中，你可以直接给变量赋值，无需声明类型。",
+                        en: "Variables are containers for storing data. In Python, you can assign values directly without declaring types."
+                    })}
+                </p>
+
+                <Code lang={"python"} class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
+                    code={`# Variable assignment examples
+name = "John"
+age = 25
+height = 1.75`}
+                />
+
+                <p class="text-gray-700 dark:text-gray-300">
+                    {t({
+                        zh: "Python会自动识别数据类型：字符串、整数、浮点数等。",
+                        en: "Python automatically identifies data types: string, integer, float, etc."
+                    })}
+                </p>
+            </section>
+
+            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+                    {t({ zh: "2. 数据类型 (Data Types)", en: "2. Data Types" })}
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                    {t({
+                        zh: "Python有以下基本数据类型：",
+                        en: "Python has the following basic data types:"
+                    })}
+                </p>
+
+                <Code lang={"python"} class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
+                    code={`# Data type examples
+text = "Hello World"      # String
+number = 42               # Integer
+decimal = 3.14            # Float
+is_true = True            # Boolean
+items = [1, 2, 3]         # List`}
+                />
+            </section>
+
+            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+                    {t({ zh: "3. 基本运算 (Basic Operations)", en: "3. Basic Operations" })}
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                    {t({
+                        zh: "Python支持各种数学和逻辑运算：",
+                        en: "Python supports various mathematical and logical operations:"
+                    })}
+                </p>
+
+                <Code lang={"python"} class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
+                    code={`# Arithmetic operations
+a = 10 + 5    # Addition
+b = 10 - 3    # Subtraction
+c = 10 * 2    # Multiplication
+d = 10 / 3    # Division
+
+# Comparison operations
+x = 5 > 3     # True
+y = 5 < 3     # False
+z = 5 == 5    # True`}
+                />
+            </section>
+
+            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+                    {t({ zh: "4. 条件语句 (Conditional Statements)", en: "4. Conditional Statements" })}
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                    {t({
+                        zh: "使用if、elif、else来根据条件执行不同的代码块：",
+                        en: "Use if, elif, else to execute different code blocks based on conditions:"
+                    })}
+                </p>
+
+                <Code lang={"python"} class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
+                    code={`age = 18
+
+if age < 18:
+    print("Underage")
+elif age == 18:
+    print("Just turned adult")
+else:
+    print("Adult")`}
+                />
+            </section>
+
+            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+                    {t({ zh: "5. 列表 (Lists)", en: "5. Lists" })}
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                    {t({
+                        zh: "列表是存储多个项目的有序集合：",
+                        en: "Lists are ordered collections that store multiple items:"
+                    })}
+                </p>
+
+                <Code lang={"python"} class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
+                    code={`# Create a list
+fruits = ["Apple", "Banana", "Orange"]
+
+# Access element
+first_fruit = fruits[0]    # "Apple"
+
+# Add element
+fruits.append("Grape")
+
+# Iterate over list
+for fruit in fruits:
+    print(fruit)`}
+                />
+            </section>
+
+            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+                    {t({ zh: "6. For循环 (For Loops)", en: "6. For Loops" })}
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                    {t({
+                        zh: "For循环用于遍历序列中的每个元素：",
+                        en: "For loops are used to iterate over each element in a sequence:"
+                    })}
+                </p>
+
+                <Code lang={"python"} class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
+                    code={`# Iterate over list
+animals = ["Dog", "Cat", "Bird"]
+for animal in animals:
+    print("I like", animal)
+
+# Numeric loop
+for i in range(5):
+    print("Number:", i)`}
+                />
+            </section>
+
+            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+                    {t({ zh: "7. While循环 (While Loops)", en: "7. While Loops" })}
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                    {t({
+                        zh: "While循环在条件为真时重复执行代码块。这是《The Farmer Was Replaced》中最重要的循环结构：",
+                        en: "While loops repeat code blocks while the condition is true. This is the most important loop structure in The Farmer Was Replaced:"
+                    })}
+                </p>
+
+                <Code lang={"python"} class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
+                    code={`# Basic while loop
+count = 0
+while count < 5:
+    print("Count:", count)
+    count = count + 1
+
+# Infinite loop (common in games)
+while True:
+    # Get the next action
+    action = get_next_action()
+    if action == "Stop":
+        break
+    execute_action(action)`}
+                />
+            </section>
+
+            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+                    {t({ zh: "8. 函数 (Functions)", en: "8. Functions" })}
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                    {t({
+                        zh: "函数是可重用的代码块，用于执行特定任务：",
+                        en: "Functions are reusable code blocks that perform specific tasks:"
+                    })}
+                </p>
+
+                <Code lang={"python"} class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
+                    code={`# Define function
+def greet(name):
+    return "Hello, " + name + "!"
+
+# Call function
+message = greet("Xiao Ming")
+print(message)
+
+# Function with multiple parameters
+def calculate_area(length, width):
+    return length * width
+
+area = calculate_area(5, 3)
+print("Area:", area)`}
+                />
+            </section>
+        </div>
+
+        <section class="mt-16 p-8 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+                {t({ zh: "游戏要求", en: "Game Requirements" })}
+            </h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+                {t({
+                    zh: "要开始游玩《The Farmer Was Replaced》，你需要掌握以下核心概念：",
+                    en: "To start playing The Farmer Was Replaced, you need to master these core concepts:"
+                })}
+            </p>
+
+            <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-6">
+                <li>{t({ zh: "变量的创建和使用", en: "Creating and using variables" })}</li>
+                <li>{t({ zh: "基本数据类型（字符串、数字、布尔值）", en: "Basic data types (strings, numbers, booleans)" })}</li>
+                <li>{t({ zh: "条件判断（if语句）", en: "Conditional statements (if statements)" })}</li>
+                <li>{t({ zh: "列表的基本操作", en: "Basic list operations" })}</li>
+                <li>{t({ zh: "While循环的使用", en: "Using while loops" })}</li>
+                <li>{t({ zh: "函数的定义和调用", en: "Defining and calling functions" })}</li>
+            </ul>
+
+            <div class="text-center">
+                <a href={getRelativeLocaleUrl(locale, "/")} class="inline-block px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200">
+                    {t({ zh: "返回首页", en: "Back to Home" })}
+                </a>
+            </div>
+        </section>
+    </div>
+</Layout>
