@@ -1,10 +1,23 @@
-- 项目的背景信息是info.md,项目的规则是Rule.md
-- 项目使用了tailwindcss,整体风格为notion like style，文字请尽量使用小号，并且留白空间大一点，显得高级。
-- 我将列出你所有你需要做的工作，并让你每次只执行一步，如果完成了，我会为你标记。
+- 这是astro项目，网址是https://thefarmerwasreplaced.com
+- 网站的常用字段保存在Setting.json中
+- 项目的背景信息是info.md
+- 生成代码时先读取BaseLayout.astro、Footer.astro、Header.astro，保持风格统一
 - 仅仅修改我强调的文件，不要擅自修改其他文件。
 - 完成任务后不要擅自使用npm run来执行，我会自己检查，等待我回复就好。
-- 总是进行最后一个任务
+- 使用多语言
+- 多语言按如下方式书写，多语言内容直接写在标签中，不会在其他地方定义
 
-任务1. 修改footer.astro的风格与header.astro对齐，目前界面不太好 已完成
-任务2. 根据网站信息写一个README.md文档
-任务3. 完成index.astro页面，"The Farmer Was Replaced"这个关键字的密度约为3%，预留一些需要的链接，包含一些seo技巧，文字1000左右
+- 这是windows系统。使用patch file的方式写入文件
+```
+<p>
+{
+    t({
+        en:"content",
+        zh:"contnet",
+    })
+}
+</p>
+```
+
+
+任务：完成index.astro中的主页

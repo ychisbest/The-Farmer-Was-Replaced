@@ -9,47 +9,32 @@ const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
 const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
 ---
 
-<header
-  class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-700/50 sticky top-0 z-50 transition-colors"
->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<header class="border-b border-neutral-200 bg-white sticky top-0 z-50 dark:bg-neutral-900 dark:border-neutral-700 transition-colors">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <a
-        href={getRelativeLocaleUrl(locale, "/")}
-        class="flex items-center space-x-2"
-      >
-        <span
-          class="text-xl font-bold text-slate-900 dark:text-white tracking-tight"
-        >
+      <div class="flex items-center gap-8">
+        <a href={getRelativeLocaleUrl(locale, "/")} class="text-xl font-bold text-neutral-900 dark:text-white">
           {t(SITE_TITLE)}
-        </span>
-      </a>
-
-      <nav class="hidden md:flex items-center space-x-6">
-        <a
-          href={getRelativeLocaleUrl(locale, "/")}
-          class="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-medium"
-        >
-          {t({ en: "Home" })}
         </a>
-        <a
-          href={getRelativeLocaleUrl(locale, "/")}
-          class="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-medium"
-        >
-          {t({ en: "Guide" })}
-        </a>
-        <a
-          href={getRelativeLocaleUrl(locale, "/blog")}
-          class="text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors duration-200 font-medium"
-        >
-          {t({ en: "Codes" })}
-        </a>
-      </nav>
-
-      <div class="flex items-center space-x-3">
+        <div class="hidden md:flex items-center gap-6">
+          <a href={getRelativeLocaleUrl(locale, "/")} class="text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors dark:text-white dark:hover:text-neutral-300">
+            {t({ en: "Home" })}
+          </a>
+          <a href={getRelativeLocaleUrl(locale, "/guide")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
+            {t({ en: "Guide" })}
+          </a>
+          <a href={getRelativeLocaleUrl(locale, "/blog")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
+            {t({ en: "Codes" })}
+          </a>
+          <a href={getRelativeLocaleUrl(locale, "/about")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
+            {t({ en: "About" })}
+          </a>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
         <div class="relative">
           <select
-            class="appearance-none bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-sm rounded-md px-3 py-1.5 pr-8 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-colors duration-200 shadow-sm hover:border-sky-400 dark:hover:border-sky-500"
+            class="appearance-none bg-white border border-neutral-300 text-neutral-900 text-sm rounded-lg px-3 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-neutral-500 transition-colors dark:bg-neutral-800 dark:border-neutral-600 dark:text-neutral-200 dark:focus:ring-neutral-400"
             aria-label="Select language"
             onchange={`window.location.href = this.value`}
           >
@@ -64,27 +49,16 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
               })
             }
           </select>
-          <span
-            class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-slate-400 dark:text-slate-500"
-          >
-            <svg
-              class="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M6 9l6 6 6-6"
-                stroke-linecap="round"
-                stroke-linejoin="round"></path>
+          <span class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-neutral-500 dark:text-neutral-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </span>
         </div>
 
         <button
           type="button"
-          class="relative font-medium text-gray-800 rounded-full px-1 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+          class="relative p-2 text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors dark:text-neutral-100 dark:hover:bg-neutral-800"
           aria-label="Toggle dark mode"
           onclick={`
             if(document.documentElement.classList.contains('dark')){
@@ -96,11 +70,9 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
             }
           `}
         >
-          <span
-            class="group inline-flex shrink-0 justify-center items-center size-9"
-          >
+          <span class="group inline-flex shrink-0 justify-center items-center size-5">
             <svg
-              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-4 transition-opacity duration-200 dark:opacity-0 opacity-100"
+              class="absolute size-5 transition-opacity duration-200 dark:opacity-0 opacity-100"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -114,7 +86,7 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
               <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
             </svg>
             <svg
-              class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 size-4 transition-opacity duration-200 opacity-0 dark:opacity-100"
+              class="absolute size-5 transition-opacity duration-200 opacity-0 dark:opacity-100"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -137,36 +109,53 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
             </svg>
           </span>
         </button>
+
+        <button
+          type="button"
+          id="mobile-menu-button"
+          class="md:hidden p-2 text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors dark:text-neutral-100 dark:hover:bg-neutral-800"
+          aria-label="Toggle mobile menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
       </div>
     </div>
-  </div>
+  </nav>
 
-  <div
-    id="mobile-menu"
-    class="md:hidden hidden bg-white dark:bg-slate-900 border-t border-slate-200/50 dark:border-slate-700/50 transition-colors"
-  >
-    <div class="px-2 pt-2 pb-3 space-y-1">
-      <a
-        href={getRelativeLocaleUrl(locale, "/")}
-        class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
-      >
-        {t({ en: "Home", it: "Home", de: "Startseite" })}
+  <div id="mobile-menu" class="hidden md:hidden pb-4">
+    <div class="px-4 flex flex-col gap-3">
+      <a href={getRelativeLocaleUrl(locale, "/")} class="text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors dark:text-white dark:hover:text-neutral-300">
+        {t({ en: "Home" })}
       </a>
-      <a
-        href={getRelativeLocaleUrl(locale, "/blog")}
-        class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
-      >
-        {t({ en: "Blog", it: "Blog", de: "Blog" })}
+      <a href={getRelativeLocaleUrl(locale, "/guide")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
+        {t({ en: "Guide" })}
+      </a>
+      <a href={getRelativeLocaleUrl(locale, "/blog")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
+        {t({ en: "Codes" })}
+      </a>
+      <a href={getRelativeLocaleUrl(locale, "/about")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
+        {t({ en: "About" })}
       </a>
     </div>
   </div>
 </header>
 
 <script>
-  // Mobile menu toggle
-  const button = document.getElementById("mobile-menu-button");
-  const menu = document.getElementById("mobile-menu");
-  button?.addEventListener("click", () => {
-    menu?.classList.toggle("hidden");
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  mobileMenuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
+  });
+</script>
+
+<script>
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  mobileMenuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
   });
 </script>
