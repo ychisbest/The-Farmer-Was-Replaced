@@ -7,6 +7,7 @@ import hero from "@/assets/Hero.jpg";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import CodeBlock from "@/components/CodeBlock.astro";
 import { images } from "@/lib/images";
+import FAQ from "@/components/FAQ.astro";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -91,7 +92,9 @@ const description = {
                         })
                     }</a
                 > |
-                <a class="text-lg md:text-xl underline text-blue-500"
+                <a
+                    class="text-lg md:text-xl underline text-blue-500"
+                    href={getRelativeLocaleUrl(locale, "/codes")}
                     >{
                         t({
                             zh: "代码",
@@ -180,9 +183,7 @@ const description = {
             <div>
                 <a
                     class="inline-block text-blue-500 underline cursor-pointer"
-                    href="https://store.steampowered.com/app/2060160/_/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={getRelativeLocaleUrl(locale, "/codes")}
                     >{
                         t({
                             zh: "前往 代码案例 页面",
@@ -210,4 +211,7 @@ harvest()`,
             image={images["1"]}
         />
     </section>
+
+    <!-- FAQ Section -->
+    <FAQ />
 </Layout>

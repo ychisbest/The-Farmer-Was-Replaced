@@ -44,16 +44,16 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
       </div>
       <div>
       <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
-        {t({ en: "Resources", zh: "资源" })}
+        {t({ en: "Policy", zh: "网站政策" })}
       </h4>
       <ul class="space-y-2 text-sm">
         <li>
-        <a href={getRelativeLocaleUrl(locale, "/guide#beginner")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+        <a href={getRelativeLocaleUrl(locale, "/terms")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
           {t({ en: "Terms", zh: "使用条款" })}
         </a>
         </li>
         <li>
-        <a href={getRelativeLocaleUrl(locale, "/guide#advanced")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+        <a href={getRelativeLocaleUrl(locale, "/privacy")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
           {t({ en: "Pravacy", zh: "隐私政策" })}
         </a>
         </li>
@@ -65,22 +65,17 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
       </h4>
       <ul class="space-y-2 text-sm">
         <li>
-        <a href="#" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Discord", zh: "Discord" })}
-        </a>
-        </li>
-        <li>
-        <a href="#" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+        <a href="https://github.com/ychisbest/The-Farmer-Was-Replaced" target="_blank" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
           {t({ en: "GitHub", zh: "GitHub" })}
         </a>
         </li>
         <li>
-        <a href="#" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+        <a href="https://www.reddit.com/r/TheFarmerWasReplaced" target="_blank" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
           {t({ en: "Reddit", zh: "Reddit" })}
         </a>
         </li>
         <li>
-        <a href="#" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+        <a href="https://store.steampowered.com/app/2060160/_/" target="_blank" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
           {t({ en: "Steam", zh: "Steam" })}
         </a>
         </li>

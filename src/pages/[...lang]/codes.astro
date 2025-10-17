@@ -1,0 +1,551 @@
+---
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+import { useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/BaseLayout.astro";
+import CodeBlock from "@/components/CodeBlock.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+
+export const getStaticPaths = async () => {
+    const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+        if (lang !== DEFAULT_LOCALE_SETTING) {
+            return {
+                params: { lang: lang },
+            };
+        } else {
+            return { params: { lang: undefined } };
+        }
+    });
+    return paths;
+};
+
+const title = {
+    en: "Code Examples",
+    zh: "代码示例",
+};
+
+const description = {
+    en: "Complete code examples for The Farmer Was Replaced game with detailed explanations and multilingual support.",
+    zh: "编程农场游戏完整代码示例，包含详细解释和多语言支持。",
+};
+---
+
+<Layout title={title} description={description}>
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <section class="py-8">
+            <h1 class="text-3xl font-bold mb-6 text-center">
+                {t({
+                    en: "The Farmer Was Replaced - Code Examples",
+                    zh: "编程农场 - 代码示例"
+                })}
+            </h1>
+            <p class="text-base text-neutral-600 dark:text-neutral-400 text-center mb-8">
+                {t({
+                    en: "Complete code examples from the game with detailed explanations. Copy and paste these codes directly into your game to improve your farming automation skills.",
+                    zh: "游戏完整代码示例，包含详细解释。直接复制粘贴这些代码到游戏中，提升你的农场自动化技能。"
+                })}
+            </p>
+            <div class="text-center mb-8">
+                <a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
+                    {t({
+                        en: "← Back to Home",
+                        zh: "← 返回主页"
+                    })}
+                </a>
+            </div>
+        </section>
+
+        <!-- Example 1: Basic Auto Harvest -->
+        <section class="mb-12">
+            <h2 class="text-xl font-bold mb-4">
+                {t({
+                    en: "Example 1: Basic Auto Harvest",
+                    zh: "示例1：基础自动收获"
+                })}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                {t({
+                    en: "The simplest automation script that continuously harvests mature grass.",
+                    zh: "最简单的自动化脚本，持续收获成熟的草。"
+                })}
+            </p>
+            <CodeBlock
+                code={t({
+                    en: `# Auto harvest grass
+while True:
+    if can_harvest():
+        harvest()`,
+                    zh: `# 自动收获草地
+while True:
+    if can_harvest():
+        harvest()`
+                })}
+            />
+        </section>
+
+        <!-- Example 2: 3x3 Farm Auto Traversal -->
+        <section class="mb-12">
+            <h2 class="text-xl font-bold mb-4">
+                {t({
+                    en: "Example 2: 3×3 Farm Auto Traversal",
+                    zh: "示例2：3×3农场自动遍历"
+                })}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                {t({
+                    en: "Automatically traverse all tiles and harvest.",
+                    zh: "自动遍历所有方块并收获。"
+                })}
+            </p>
+            <CodeBlock
+                code={t({
+                    en: `# Traverse entire farm for harvesting
+while True:
+    if can_harvest():
+        harvest()
+
+    # Move east
+    move(East)
+
+    # When reaching end of row, move north
+    if get_pos_x() == get_world_size() - 1:
+        move(North)`,
+                    zh: `# 遍历整个农场收获
+while True:
+    if can_harvest():
+        harvest()
+
+    # 向东移动
+    move(East)
+
+    # 到达行尾时向北移动并返回行首
+    if get_pos_x() == get_world_size() - 1:
+        move(North)`
+                })}
+            />
+        </section>
+
+        <!-- Example 3: Multi-Crop Automation -->
+        <section class="mb-12">
+            <h2 class="text-xl font-bold mb-4">
+                {t({
+                    en: "Example 3: Multi-Crop Automation (Grass + Bush + Carrot)",
+                    zh: "示例3：多作物自动化（草+灌木+胡萝卜）"
+                })}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                {t({
+                    en: "Plant different crops based on column position.",
+                    zh: "根据列位置种植不同作物。"
+                })}
+            </p>
+            <CodeBlock
+                code={t({
+                    en: `# First column: grass, second: bushes, third: carrots
+while True:
+    if can_harvest():
+        harvest()
+
+    x = get_pos_x()
+
+    if x == 0:
+        # First column: grass (no planting needed)
+        pass
+    elif x == 1:
+        # Second column: bushes
+        plant(Entities.Bush)
+    elif x == 2:
+        # Third column: carrots
+        if get_ground_type() != Grounds.Soil:
+            till()
+        if num_items(Items.Carrot_Seed) < 1:
+            trade(Items.Carrot_Seed)
+        plant(Entities.Carrot)
+
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)`,
+                    zh: `# 第一列种草，第二列种灌木，第三列种胡萝卜
+while True:
+    if can_harvest():
+        harvest()
+
+    x = get_pos_x()
+
+    if x == 0:
+        # 第一列：草（不需要种植）
+        pass
+    elif x == 1:
+        # 第二列：灌木
+        plant(Entities.Bush)
+    elif x == 2:
+        # 第三列：胡萝卜
+        if get_ground_type() != Grounds.Soil:
+            till()
+        if num_items(Items.Carrot_Seed) < 1:
+            trade(Items.Carrot_Seed)
+        plant(Entities.Carrot)
+
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)`
+                })}
+            />
+        </section>
+
+        <!-- Example 4: Tree Checkerboard Planting -->
+        <section class="mb-12">
+            <h2 class="text-xl font-bold mb-4">
+                {t({
+                    en: "Example 4: Tree Checkerboard Planting",
+                    zh: "示例4：树木棋盘格种植"
+                })}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                {t({
+                    en: "Trees need checkerboard planting to avoid adjacency.",
+                    zh: "树木需要棋盘格种植以避免相邻。"
+                })}
+            </p>
+            <CodeBlock
+                code={t({
+                    en: `# Checkerboard pattern for trees and bushes
+while True:
+    if can_harvest():
+        harvest()
+
+    x = get_pos_x()
+    y = get_pos_y()
+
+    # Checkerboard logic
+    if (x % 2 == 0 and y % 2 == 0) or (x % 2 == 1 and y % 2 == 1):
+        plant(Entities.Tree)
+    else:
+        plant(Entities.Bush)
+
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)`,
+                    zh: `# 棋盘格模式种植树木和灌木
+while True:
+    if can_harvest():
+        harvest()
+
+    x = get_pos_x()
+    y = get_pos_y()
+
+    # 棋盘格判断
+    if (x % 2 == 0 and y % 2 == 0) or (x % 2 == 1 and y % 2 == 1):
+        plant(Entities.Tree)
+    else:
+        plant(Entities.Bush)
+
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)`
+                })}
+            />
+        </section>
+
+        <!-- Example 5: Resource Priority Management -->
+        <section class="mb-12">
+            <h2 class="text-xl font-bold mb-4">
+                {t({
+                    en: "Example 5: Resource Priority Management",
+                    zh: "示例5：资源优先级管理"
+                })}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                {t({
+                    en: "Intelligent resource management, prioritize collecting scarce resources.",
+                    zh: "智能资源管理，优先收集稀缺资源。"
+                })}
+            </p>
+            <CodeBlock
+                code={t({
+                    en: `# Auto-adjust planting strategy based on resources
+while True:
+    if can_harvest():
+        harvest()
+
+    x = get_pos_x()
+
+    # Priority: ensure hay inventory first
+    if num_items(Items.Hay) < 500:
+        # Don't plant, let grass grow naturally
+        pass
+    # Second priority: ensure wood inventory
+    elif num_items(Items.Wood) < 300:
+        plant(Entities.Bush)
+    # Finally: plant carrots
+    elif num_items(Items.Carrot) < 200:
+        if get_ground_type() != Grounds.Soil:
+            till()
+        if num_items(Items.Carrot_Seed) == 0:
+            trade(Items.Carrot_Seed)
+        plant(Entities.Carrot)
+
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)`,
+                    zh: `# 根据资源量自动调整种植策略
+while True:
+    if can_harvest():
+        harvest()
+
+    x = get_pos_x()
+
+    # 优先确保干草库存
+    if num_items(Items.Hay) < 500:
+        # 不种植，让草自然生长
+        pass
+    # 其次确保木材库存
+    elif num_items(Items.Wood) < 300:
+        plant(Entities.Bush)
+    # 最后种植胡萝卜
+    elif num_items(Items.Carrot) < 200:
+        if get_ground_type() != Grounds.Soil:
+            till()
+        if num_items(Items.Carrot_Seed) == 0:
+            trade(Items.Carrot_Seed)
+        plant(Entities.Carrot)
+
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)`
+                })}
+            />
+        </section>
+
+        <!-- Example 6: Auto Watering System -->
+        <section class="mb-12">
+            <h2 class="text-xl font-bold mb-4">
+                {t({
+                    en: "Example 6: Auto Watering System",
+                    zh: "示例6：自动浇水系统"
+                })}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                {t({
+                    en: "Automated watering system, speeds up crop growth up to 5x.",
+                    zh: "自动化浇水系统，加速作物生长至5倍速度。"
+                })}
+            </p>
+            <CodeBlock
+                code={t({
+                    en: `# Auto buy water tanks and water crops
+while True:
+    # Ensure enough water tanks
+    if num_items(Items.Water_Tank) < 100:
+        trade(Items.Empty_Tank)
+
+    # Check and water
+    if get_water() < 0.75:
+        use_item(Items.Water_Tank)
+
+    if can_harvest():
+        harvest()
+
+    # Planting and movement logic
+    if get_ground_type() != Grounds.Soil:
+        till()
+    if num_items(Items.Carrot_Seed) < 1:
+        trade(Items.Carrot_Seed)
+    plant(Entities.Carrot)
+
+    move(East)
+    if get_pos_x() == get_world_size() - 1:
+        move(North)`,
+                    zh: `# 自动购买水箱并浇水
+while True:
+    # 确保有足够的水箱
+    if num_items(Items.Water_Tank) < 100:
+        trade(Items.Empty_Tank)
+
+    # 检测并浇水
+    if get_water() < 0.75:
+        use_item(Items.Water_Tank)
+
+    if can_harvest():
+        harvest()
+
+    # 种植和移动逻辑
+    if get_ground_type() != Grounds.Soil:
+        till()
+    if num_items(Items.Carrot_Seed) < 1:
+        trade(Items.Carrot_Seed)
+    plant(Entities.Carrot)
+
+    move(East)
+    if get_pos_x() == get_world_size() - 1:
+        move(North)`
+                })}
+            />
+        </section>
+
+        <!-- Example 7: Function Encapsulation -->
+        <section class="mb-12">
+            <h2 class="text-xl font-bold mb-4">
+                {t({
+                    en: "Example 7: Function Encapsulation",
+                    zh: "示例7：函数封装"
+                })}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                {t({
+                    en: "Use functions to make code clearer and more readable.",
+                    zh: "使用函数使代码更清晰易读。"
+                })}
+            </p>
+            <CodeBlock
+                code={t({
+                    en: `# Define function to move to next tile
+def move_to_next():
+    x = get_pos_x()
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)
+
+# Define function to plant carrots
+def plant_carrot():
+    if get_ground_type() != Grounds.Soil:
+        till()
+    if num_items(Items.Carrot_Seed) < 1:
+        trade(Items.Carrot_Seed)
+    plant(Entities.Carrot)
+
+# Main program
+while True:
+    if can_harvest():
+        harvest()
+
+    if num_items(Items.Carrot) < 100:
+        plant_carrot()
+
+    move_to_next()`,
+                    zh: `# 定义移动到下一个方块的函数
+def move_to_next():
+    x = get_pos_x()
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)
+
+# 定义种植胡萝卜的函数
+def plant_carrot():
+    if get_ground_type() != Grounds.Soil:
+        till()
+    if num_items(Items.Carrot_Seed) < 1:
+        trade(Items.Carrot_Seed)
+    plant(Entities.Carrot)
+
+# 主程序
+while True:
+    if can_harvest():
+        harvest()
+
+    if num_items(Items.Carrot) < 100:
+        plant_carrot()
+
+    move_to_next()`
+                })}
+            />
+        </section>
+
+        <!-- Example 8: Sunflower Energy Optimization -->
+        <section class="mb-12">
+            <h2 class="text-xl font-bold mb-4">
+                {t({
+                    en: "Example 8: Sunflower Energy Optimization",
+                    zh: "示例8：向日葵能量优化"
+                })}
+            </h2>
+            <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                {t({
+                    en: "Sunflower optimization strategy, only harvest high-energy flowers.",
+                    zh: "向日葵优化策略，只收获高能量的花。"
+                })}
+            </p>
+            <CodeBlock
+                code={t({
+                    en: `# Measure and harvest highest energy sunflowers
+sunflowers = []
+world_size = get_world_size()
+
+# Plant and measure all sunflowers
+for i in range(world_size * world_size):
+    if get_ground_type() == Grounds.Turf:
+        till()
+    if num_items(Items.Sunflower_Seed) > 0 or trade(Items.Sunflower_Seed):
+        plant(Entities.Sunflower)
+
+    if get_entity_type() == Entities.Sunflower:
+        sunflowers.append(measure())
+
+    move(East)
+    if get_pos_x() == 0:
+        move(North)
+
+# Find highest energy value
+max_val = 0
+max_index = 0
+for i in range(len(sunflowers)):
+    if sunflowers[i] > max_val:
+        max_val = sunflowers[i]
+        max_index = i
+
+# Move to highest energy sunflower and harvest
+# (Movement logic omitted)
+if measure() == max_val:
+    if can_harvest():
+        harvest()`,
+                    zh: `# 测量并收获最高能量的向日葵
+sunflowers = []
+world_size = get_world_size()
+
+# 种植并测量所有向日葵
+for i in range(world_size * world_size):
+    if get_ground_type() == Grounds.Turf:
+        till()
+    if num_items(Items.Sunflower_Seed) > 0 or trade(Items.Sunflower_Seed):
+        plant(Entities.Sunflower)
+
+    if get_entity_type() == Entities.Sunflower:
+        sunflowers.append(measure())
+
+    move(East)
+    if get_pos_x() == 0:
+        move(North)
+
+# 找到最高能量值
+max_val = 0
+max_index = 0
+for i in range(len(sunflowers)):
+    if sunflowers[i] > max_val:
+        max_val = sunflowers[i]
+        max_index = i
+
+# 移动到最高能量向日葵并收获
+# (移动逻辑省略)
+if measure() == max_val:
+    if can_harvest():
+        harvest()`
+                })}
+            />
+        </section>
+
+        <!-- Footer Navigation -->
+        <section class="py-8 border-t border-neutral-200 dark:border-neutral-700">
+            <div class="text-center">
+                <a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
+                    {t({
+                        en: "← Back to Home",
+                        zh: "← 返回主页"
+                    })}
+                </a>
+            </div>
+        </section>
+    </div>
+</Layout>

@@ -1,0 +1,102 @@
+---
+import { useTranslations, type Lang } from "@/i18n";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+
+const faqs = [
+  {
+    question: t({
+      en: "What is The Farmer Was Replaced?",
+      zh: "什么是编程农场？"
+    }),
+    answer: t({
+      en: "The Farmer Was Replaced is an educational programming game where players learn Python through farm automation. In this programming game, you write code to automate farming tasks, making it the perfect way to learn programming concepts while having fun with farming simulation.",
+      zh: "编程农场是一个教育性编程游戏，玩家通过农场自动化学习Python。在这个编程游戏中，你编写代码来自动化农场任务，是学习编程概念同时享受农场模拟乐趣的完美方式。"
+    })
+  },
+  {
+    question: t({
+      en: "How do I get started with The Farmer Was Replaced?",
+      zh: "如何开始玩编程农场？"
+    }),
+    answer: t({
+      en: "To start playing The Farmer Was Replaced, first purchase the game on Steam. Then learn basic Python fundamentals like while loops (about 30 minutes of learning). The Farmer Was Replaced provides an intuitive environment where you can practice programming through engaging farming challenges.",
+      zh: "要开始玩编程农场，首先在Steam上购买游戏。然后学习基础Python知识如while循环（约30分钟学习时间）。编程农场提供了一个直观的环境，你可以通过有趣的农场挑战练习编程。"
+    })
+  },
+  {
+    question: t({
+      en: "Do I need programming experience for The Farmer Was Replaced?",
+      zh: "玩编程农场需要编程经验吗？"
+    }),
+    answer: t({
+      en: "No programming experience is required for The Farmer Was Replaced! The game is designed for beginners. You only need basic Python knowledge up to while loops. The Farmer Was Replaced teaches programming concepts gradually as you progress through the farming automation challenges.",
+      zh: "玩编程农场不需要编程经验！游戏专为初学者设计。你只需要基础的Python知识直到while循环。编程农场在你逐步完成农场自动化挑战的过程中教授编程概念。"
+    })
+  },
+  {
+    question: t({
+      en: "What programming skills will I learn in The Farmer Was Replaced?",
+      zh: "在编程农场中我会学到什么编程技能？"
+    }),
+    answer: t({
+      en: "In The Farmer Was Replaced, you'll learn essential Python programming skills including variables, functions, loops, conditionals, and problem-solving. The programming game focuses on practical coding through farm automation, making it an engaging way to develop real programming abilities.",
+      zh: "在编程农场中，你将学习关键的Python编程技能，包括变量、函数、循环、条件和问题解决。这个编程游戏通过农场自动化专注于实用编码，是发展真实编程能力的有趣方式。"
+    })
+  },
+  {
+    question: t({
+      en: "Where can I find code examples for The Farmer Was Replaced?",
+      zh: "在哪里可以找到编程农场的代码示例？"
+    }),
+    answer: t({
+      en: "Our website offers comprehensive code examples and tutorials for The Farmer Was Replaced. You can find farming automation scripts, Python solutions, and strategies to enhance your gameplay. The Farmer Was Replaced community also shares creative code solutions for various farming challenges.",
+      zh: "我们的网站提供编程农场的全面代码示例和教程。你可以找到农场自动化脚本、Python解决方案和策略来增强游戏体验。编程农场社区还分享各种农场挑战的创意代码解决方案。"
+    })
+  },
+  {
+    question: t({
+      en: "Is The Farmer Was Replaced suitable for learning Python?",
+      zh: "编程农场适合学习Python吗？"
+    }),
+    answer: t({
+      en: "Absolutely! The Farmer Was Replaced is perfect for learning Python. The game combines education with entertainment, teaching Python programming through engaging farm automation tasks. Many players find The Farmer Was Replaced more effective than traditional programming courses for learning coding fundamentals.",
+      zh: "当然！编程农场非常适合学习Python。游戏将教育与娱乐结合，通过有趣的农场自动化任务教授Python编程。许多玩家发现编程农场比传统编程课程更能有效学习编程基础。"
+    })
+  }
+];
+---
+
+<section class="py-10" id="faq">
+    <h2 class="text-2xl font-bold mb-6">
+        {t({
+            en: "Frequently Asked Questions about The Farmer Was Replaced",
+            zh: "关于编程农场的常见问题"
+        })}
+    </h2>
+
+    <div class="space-y-4">
+        {faqs.map((faq, index) => (
+            <div class="border border-neutral-200 rounded-lg overflow-hidden dark:border-neutral-700">
+                <details class="group">
+                    <summary class="flex justify-between items-center cursor-pointer p-4 bg-neutral-50 hover:bg-neutral-100 transition-colors dark:bg-neutral-800 dark:hover:bg-neutral-700">
+                        <h3 class="font-medium text-neutral-900 dark:text-white pr-4">
+                            {faq.question}
+                        </h3>
+                        <span class="flex-shrink-0 ml-2 text-neutral-500 group-open:rotate-180 transition-transform duration-200">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="p-4 bg-white dark:bg-neutral-900">
+                        <p class="text-sm text-neutral-600 leading-relaxed dark:text-neutral-400">
+                            {faq.answer}
+                        </p>
+                    </div>
+                </details>
+            </div>
+        ))}
+    </div>
+
+</section>
