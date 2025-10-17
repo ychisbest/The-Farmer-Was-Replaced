@@ -13,6 +13,7 @@
 :root {
     --active-bg: #f1f5f9;
     --font-sans: 'Inter', 'Noto Sans', system-ui, -apple-system, sans-serif;
+    text-autospace: normal;
 }
 
 body {

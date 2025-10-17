@@ -17,6 +17,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, image = FallbackImage } = Astro.props;
 
 const t = useTranslations(Astro.currentLocale as Lang);
+
+// Additional SEO keywords for educational programming games
+const keywords = {
+    en: "programming game, learn Python, educational game, coding game, farm automation, Python tutorial, learn coding, educational technology, STEM education, coding for beginners",
+    zh: "编程游戏,学习Python,教育游戏,编程游戏,农场自动化,Python教程,学习编程,教育技术,STEM教育,编程入门"
+};
+
+// Additional meta tags for enhanced SEO
+const currentLocale = Astro.currentLocale || "en";
 ---
 
 <!-- Global Metadata -->
@@ -42,10 +51,54 @@ const t = useTranslations(Astro.currentLocale as Lang);
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
+<!-- Hreflang Tags for International SEO -->
+{currentLocale === "en" && <link rel="alternate" hreflang="en" href={canonicalURL} />}
+{currentLocale === "en" && <link rel="alternate" hreflang="zh" href={new URL(Astro.url.pathname.replace(/^\//, "/zh/"), Astro.url.origin)} />}
+{currentLocale === "zh" && <link rel="alternate" hreflang="zh" href={canonicalURL} />}
+{currentLocale === "zh" && <link rel="alternate" hreflang="en" href={new URL(Astro.url.pathname.replace(/^\/zh\//, "/"), Astro.url.origin)} />}
+<link rel="alternate" hreflang="x-default" href={new URL(Astro.url.pathname.replace(/^\/zh\//, "/"), Astro.url.origin)} />
+
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+
+<!-- Enhanced SEO Meta Tags -->
+<meta name="keywords" content={keywords[currentLocale as keyof typeof keywords] || keywords.en} />
+<meta name="author" content="The Farmer Was Replaced" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="language" content={currentLocale} />
+<meta name="revisit-after" content="7 days" />
+<meta name="category" content="educational programming game" />
+<meta name="coverage" content="Worldwide" />
+<meta name="distribution" content="Global" />
+<meta name="rating" content="General" />
+
+<!-- Educational Content Specific Tags -->
+<meta name="educational-role" content="student" />
+<meta name="educational-use" content="programming instruction" />
+<meta name="learning-resource-type" content="interactive game" />
+<meta name="target-audience" content="beginning programmers" />
+<meta name="subject" content="Python Programming" />
+
+<!-- Additional SEO for Search Engines -->
+<meta name="theme-color" content="#3b82f6" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="The Farmer Was Replaced" />
+
+<!-- Additional Open Graph Properties -->
+<meta property="og:site_name" content="The Farmer Was Replaced" />
+<meta property="og:locale" content={currentLocale === "zh" ? "zh_CN" : "en_US"} />
+<meta property="og:type" content="website" />
+<meta property="og:updated_time" content={new Date().toISOString()} />
+
+<!-- Enhanced Twitter Meta Tags -->
+<meta name="twitter:creator" content="@thefarmerwasreplaced" />
+<meta name="twitter:site" content="@thefarmerwasreplaced" />
+<meta name="twitter:app:name:iphone" content="The Farmer Was Replaced" />
+<meta name="twitter:app:name:ipad" content="The Farmer Was Replaced" />
+<meta name="twitter:app:name:googleplay" content="The Farmer Was Replaced" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
