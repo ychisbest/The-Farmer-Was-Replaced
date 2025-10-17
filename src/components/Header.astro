@@ -15,7 +15,7 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
   <nav class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center gap-2">
-        <Image src={logo} alt="Logo" class="h-12 w-12 rounded-xl" />
+        <Image src={logo} alt="Logo" width={50} height={50} class=" rounded-xl" />
         <a href={getRelativeLocaleUrl(locale, "/")} class="w-40 text-sm font-bold text-neutral-900 dark:text-white">
           {t({
             en: "The Farmer Was Replaced Aggregator",

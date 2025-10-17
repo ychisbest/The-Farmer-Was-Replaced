@@ -9,8 +9,8 @@ import {SITE_URL} from "./src/consts"
 // https://astro.build/config
 export default defineConfig({
 
-  image: {
-    service: passthroughImageService(),
+ image: {
+    service: { entrypoint: 'astro/assets/services/sharp' }
   },
 
   site: SITE_URL,
