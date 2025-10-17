@@ -13,93 +13,78 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
   <div class=" mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid md:grid-cols-4 gap-8 mb-8">
       <div>
-        <h3 class="font-bold text-lg mb-4 text-neutral-900 dark:text-white">
-          {t(SITE_TITLE)}
-        </h3>
-        <p class="text-sm text-neutral-600 leading-relaxed dark:text-neutral-400">
-          {t({ en: "The Farmer Was Replaced game information, guides, and code sharing platform" })}
-        </p>
+      <h3 class="font-bold text-lg mb-4 text-neutral-900 dark:text-white">
+        {t({ en: "The farmer was replaced", zh: "编程农场中文站" })}
+      </h3>
+      <p class="text-sm text-neutral-600 leading-relaxed dark:text-neutral-400">
+        {t({ en: "The Farmer Was Replaced game information, guides, and code sharing platform", zh: "编程农场游戏信息、指南和代码分享平台" })}
+      </p>
       </div>
       <div>
-        <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
-          {t({ en: "Quick Links" })}
-        </h4>
-        <ul class="space-y-2 text-sm">
-          <li>
-            <a href={getRelativeLocaleUrl(locale, "/")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-              {t({ en: "Home" })}
-            </a>
-          </li>
-          <li>
-            <a href={getRelativeLocaleUrl(locale, "/guide")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-              {t({ en: "Guide" })}
-            </a>
-          </li>
-          <li>
-            <a href={getRelativeLocaleUrl(locale, "/blog")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-              {t({ en: "Codes" })}
-            </a>
-          </li>
-          <li>
-            <a href={getRelativeLocaleUrl(locale, "/about")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-              {t({ en: "About" })}
-            </a>
-          </li>
-        </ul>
+      <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
+        {t({ en: "Quick Links", zh: "快速链接" })}
+      </h4>
+      <ul class="space-y-2 text-sm">
+        <li>
+        <a href={getRelativeLocaleUrl(locale, "/")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+          {t({ en: "Home", zh: "主页" })}
+        </a>
+        </li>
+        <li>
+        <a href={getRelativeLocaleUrl(locale, "/tutorial")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+          {t({ en: "Python Basics", zh: "Python 基础" })}
+        </a>
+        </li>
+        <li>
+        <a href={getRelativeLocaleUrl(locale, "/blog")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+          {t({ en: "Codes", zh: "代码" })}
+        </a>
+        </li>
+      </ul>
       </div>
       <div>
-        <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
-          {t({ en: "Resources" })}
-        </h4>
-        <ul class="space-y-2 text-sm">
-          <li>
-            <a href={getRelativeLocaleUrl(locale, "/guide#beginner")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-              {t({ en: "Beginner Guide" })}
-            </a>
-          </li>
-          <li>
-            <a href={getRelativeLocaleUrl(locale, "/guide#advanced")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-              {t({ en: "Advanced Tips" })}
-            </a>
-          </li>
-          <li>
-            <a href={getRelativeLocaleUrl(locale, "/blog#examples")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-              {t({ en: "Code Library" })}
-            </a>
-          </li>
-          <li>
-            <a href={getRelativeLocaleUrl(locale, "/about")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-              {t({ en: "About Us" })}
-            </a>
-          </li>
-        </ul>
+      <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
+        {t({ en: "Resources", zh: "资源" })}
+      </h4>
+      <ul class="space-y-2 text-sm">
+        <li>
+        <a href={getRelativeLocaleUrl(locale, "/guide#beginner")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+          {t({ en: "Terms", zh: "使用条款" })}
+        </a>
+        </li>
+        <li>
+        <a href={getRelativeLocaleUrl(locale, "/guide#advanced")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+          {t({ en: "Pravacy", zh: "隐私政策" })}
+        </a>
+        </li>
+      </ul>
       </div>
       <div>
-        <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
-          {t({ en: "Community" })}
-        </h4>
-        <ul class="space-y-2 text-sm">
-          <li>
-            <a href="#" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-              {t({ en: "Discord" })}
-            </a>
-          </li>
-          <li>
-            <a href="#" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-              {t({ en: "GitHub" })}
-            </a>
-          </li>
-          <li>
-            <a href="#" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-              {t({ en: "Reddit" })}
-            </a>
-          </li>
-          <li>
-            <a href="#" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-              {t({ en: "Steam" })}
-            </a>
-          </li>
-        </ul>
+      <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
+        {t({ en: "Community", zh: "社区" })}
+      </h4>
+      <ul class="space-y-2 text-sm">
+        <li>
+        <a href="#" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+          {t({ en: "Discord", zh: "Discord" })}
+        </a>
+        </li>
+        <li>
+        <a href="#" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+          {t({ en: "GitHub", zh: "GitHub" })}
+        </a>
+        </li>
+        <li>
+        <a href="#" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+          {t({ en: "Reddit", zh: "Reddit" })}
+        </a>
+        </li>
+        <li>
+        <a href="#" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+          {t({ en: "Steam", zh: "Steam" })}
+        </a>
+        </li>
+      </ul>
       </div>
     </div>
     <div class="pt-8 border-t border-neutral-200 text-center text-sm text-neutral-600 dark:border-neutral-700 dark:text-neutral-500">

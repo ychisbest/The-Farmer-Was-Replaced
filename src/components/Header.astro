@@ -3,6 +3,8 @@ import { SITE_TITLE } from "../consts";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslations, type Lang } from "@/i18n";
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+import { Image } from "astro:assets";
+import logo from "@/assets/geminiHero.png";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -12,26 +14,16 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
 <header class="border-b border-neutral-200 bg-white sticky top-0 z-50 dark:bg-neutral-900 dark:border-neutral-700 transition-colors">
   <nav class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <div class="flex items-center gap-8">
-        <a href={getRelativeLocaleUrl(locale, "/")} class="text-xl font-bold text-neutral-900 dark:text-white">
+      <div class="flex items-center gap-2">
+        <Image src={logo} alt="Logo" class="h-12 w-12 rounded-xl" />
+        <a href={getRelativeLocaleUrl(locale, "/")} class="w-40 text-sm font-bold text-neutral-900 dark:text-white">
           {t({
-            en: "The Farmer Was Replaced",
-            zh: "编程农场",
+            en: "The Farmer Was Replaced Aggregator",
+            zh: "编程农场中文站",
           })}
         </a>
         <div class="hidden md:flex items-center gap-6">
-          <a href={getRelativeLocaleUrl(locale, "/")} class="text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors dark:text-white dark:hover:text-neutral-300">
-            {t({ en: "Home", zh: "首页" })}
-          </a>
-          <a href={getRelativeLocaleUrl(locale, "/guide")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
-            {t({ en: "Guide", zh: "指南" })}
-          </a>
-          <a href={getRelativeLocaleUrl(locale, "/blog")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
-            {t({ en: "Codes", zh: "代码" })}
-          </a>
-          <a href={getRelativeLocaleUrl(locale, "/about")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
-            {t({ en: "About", zh: "关于" })}
-          </a>
+
         </div>
       </div>
       <div class="flex items-center gap-3">
@@ -113,52 +105,7 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
           </span>
         </button>
 
-        <button
-          type="button"
-          id="mobile-menu-button"
-          class="md:hidden p-2 text-neutral-900 hover:bg-neutral-100 rounded-lg transition-colors dark:text-neutral-100 dark:hover:bg-neutral-800"
-          aria-label="Toggle mobile menu"
-        >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
       </div>
     </div>
   </nav>
 
-  <div id="mobile-menu" class="hidden md:hidden pb-4">
-    <div class="px-4 flex flex-col gap-3">
-      <a href={getRelativeLocaleUrl(locale, "/")} class="text-sm font-medium text-neutral-900 hover:text-neutral-600 transition-colors dark:text-white dark:hover:text-neutral-300">
-        {t({ en: "Home" })}
-      </a>
-      <a href={getRelativeLocaleUrl(locale, "/guide")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
-        {t({ en: "Guide" })}
-      </a>
-      <a href={getRelativeLocaleUrl(locale, "/blog")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
-        {t({ en: "Codes" })}
-      </a>
-      <a href={getRelativeLocaleUrl(locale, "/about")} class="text-sm font-medium text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-300 dark:hover:text-white">
-        {t({ en: "About" })}
-      </a>
-    </div>
-  </div>
-</header>
-
-<script>
-  const mobileMenuButton = document.getElementById("mobile-menu-button");
-  const mobileMenu = document.getElementById("mobile-menu");
-
-  mobileMenuButton?.addEventListener("click", () => {
-    mobileMenu?.classList.toggle("hidden");
-  });
-</script>
-
-<script>
-  const mobileMenuButton = document.getElementById("mobile-menu-button");
-  const mobileMenu = document.getElementById("mobile-menu");
-
-  mobileMenuButton?.addEventListener("click", () => {
-    mobileMenu?.classList.toggle("hidden");
-  });
-</script>

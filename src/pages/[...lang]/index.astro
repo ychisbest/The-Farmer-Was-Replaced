@@ -6,7 +6,7 @@ import { Image } from "astro:assets";
 import hero from "@/assets/Hero.jpg";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import CodeBlock from "@/components/CodeBlock.astro";
-import image1 from "@/assets/geminiHero.png"
+import { images } from "@/lib/images";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -35,16 +35,20 @@ const description = {
 
 <Layout title={title} description={description}>
     <!-- Hero Section -->
-    <section class="flex felx-row py-10 items-center justify-center">
+    <section
+        class="flex flex-col md:flex-row py-5 items-center justify-center px-4"
+    >
         <Image
             src={hero}
             height={200}
             alt={t({ zh: "游戏英雄图片", en: "Hero Game Image" })}
-            class=" dark:brightness-[0.7] rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+            class="w-full md:w-auto max-w-[300px] dark:brightness-[0.7] rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
         />
 
-        <div class="ml-8 flex flex-col justify-center">
-            <h1 class="text-3xl font-bold mb-4">
+        <div class="mt-6 md:mt-0 md:ml-8 flex flex-col justify-center">
+            <h1
+                class="text-2xl md:text-3xl font-bold mb-4 text-center md:text-left"
+            >
                 {
                     t({
                         zh: "欢迎来到",
@@ -66,7 +70,9 @@ const description = {
                     })
                 }
             </h1>
-            <p class="text-lg mb-6 max-w-xl">
+            <p
+                class="text-base md:text-lg mb-6 max-w-xl text-center md:text-left"
+            >
                 {
                     t({
                         zh: "The Farmer Was Replaced 是一个通过农场自动化学习 Python 的终极编程游戏。探索教程、代码示例和策略，提升你的编程技能，同时享受有趣的农场模拟体验。",
@@ -74,20 +80,22 @@ const description = {
                     })
                 }
             </p>
-            <div>
-                <a class="text-xl underline text-blue-500"
+            <div class="text-center md:text-left">
+                <a
+                    class="text-lg md:text-xl underline text-blue-500"
+                    href={getRelativeLocaleUrl(locale, "/tutorial")}
                     >{
                         t({
-                            zh: "教程",
-                            en: "Tutorials",
+                            zh: "Python 基础",
+                            en: "Python Basics",
                         })
                     }</a
                 > |
-                <a class="text-xl underline text-blue-500"
+                <a class="text-lg md:text-xl underline text-blue-500"
                     >{
                         t({
-                            zh: "代码示例",
-                            en: "Code Examples",
+                            zh: "代码",
+                            en: "Codes",
                         })
                     }</a
                 >
@@ -96,11 +104,13 @@ const description = {
     </section>
 
     <!--steamlink -->
-    <section class="py-10">
+    <section class="py-5 mt-10">
         <h2 class="text-2xl font-bold mb-4">
             {t({ zh: "如何获取游戏", en: "How to Get the Game" })}
         </h2>
-        <div class="border-l-8 py-3 px-3 border-gray-300">
+        <div
+            class="border-l-8 py-3 px-3 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mb-6"
+        >
             {
                 t({
                     zh: "游戏仅在 Steam 平台发售，请进入 Steam 平台购买",
@@ -124,11 +134,13 @@ const description = {
     </section>
 
     <!--steamlink -->
-    <section class="py-10">
+    <section class="py-5">
         <h2 class="text-2xl font-bold mb-4">
             {t({ zh: "前置知识", en: "Prerequisites" })}
         </h2>
-        <div class="border-l-8 py-3 px-3 border-gray-300">
+        <div
+            class="border-l-8 py-3 px-3 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mb-6"
+        >
             {
                 t({
                     zh: "为了能更好的开始游戏，建议先学习一些 Python 基础知识，只需要学习至while循环即可，大概需要 30 分钟",
@@ -156,18 +168,46 @@ const description = {
         <h2 class="text-2xl font-bold mb-4">
             {t({ zh: "代码案例", en: "Code Examples" })}
         </h2>
-        <div class="border-l-8 py-3 px-3 border-gray-300">
+        <div
+            class="border-l-8 py-3 px-3 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mb-6"
+        >
             {
                 t({
                     zh: "使用这些代码案例来快速提升你的游戏体验与编程技巧！",
                     en: "Use these code examples to quickly enhance your gaming experience and coding skills!",
                 })
             }
+            <div>
+                <a
+                    class="inline-block text-blue-500 underline cursor-pointer"
+                    href="https://store.steampowered.com/app/2060160/_/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >{
+                        t({
+                            zh: "前往 代码案例 页面",
+                            en: "Go to the Codes Page",
+                        })
+                    }</a
+                >
+            </div>
         </div>
-        <CodeBlock code={
-        `while True:
-        if is_raining():`}
-        image={image1}
-        ></CodeBlock>
+        <CodeBlock
+            code={t({
+                en: `# Quickly harvest 5 times for unlock while loop function
+harvest()
+harvest()
+harvest()
+harvest()
+harvest()`,
+                zh: `# 快速收获5次以解锁while循环功能
+harvest()
+harvest()
+harvest()
+harvest()
+harvest()`,
+            })}
+            image={images["1"]}
+        />
     </section>
 </Layout>
