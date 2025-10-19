@@ -1,10 +1,10 @@
 ---
 import { useTranslations, type Lang } from "@/i18n";
-import{Code}from"astro:components";
-const t=useTranslations(Astro.currentLocale as Lang);
-import {Image} from "astro:assets";
+import { Code } from "astro:components";
+const t = useTranslations(Astro.currentLocale as Lang);
+import { Image } from "astro:assets";
 
-const {image,alt="",code=""}=Astro.props;
+const { image, alt = "", code = "" } = Astro.props;
 ---
 
 <div class="my-3 flex flex-col md:flex-row">
@@ -25,21 +25,32 @@ const {image,alt="",code=""}=Astro.props;
         >
             {t({ zh: "复制", en: "Copy" })}
         </button>
-        <Code
-            class="p-3 rounded-2xl h-full"
-            code={code}
-            lang="python"
-        />
+        <div class="rounded-2xl h-full overflow-hidden">
+            <Code
+                class=`max-h-[250px] p-3 h-full
+           overflow-auto
+           [&::-webkit-scrollbar]:w-2
+           [&::-webkit-scrollbar]:h-2  
+           [&::-webkit-scrollbar-track]:bg-transparent
+           [&::-webkit-scrollbar-thumb]:bg-gray-600
+           [&::-webkit-scrollbar-thumb]:rounded-full`
+                code={code}
+                lang="python"
+            />
+        </div>
     </div>
 
-    {image &&
-    <div class="mt-4 md:mt-0">
-        <Image
-            src={image}
-            alt={alt}
-            width={300}
-            height={300}
-            class="mx-auto md:ml-4 rounded-2xl shadow-2xl dark:brightness-[0.7] border-2 border-neutral-200"
-        />
-    </div>}
+    {
+        image && (
+            <div class="mt-4 md:mt-0">
+                <Image
+                    src={image}
+                    alt={alt}
+                    width={300}
+                    height={300}
+                    class="mx-auto md:ml-4 rounded-2xl shadow-2xl dark:brightness-[0.7] border-2 border-neutral-200"
+                />
+            </div>
+        )
+    }
 </div>

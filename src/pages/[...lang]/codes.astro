@@ -4,6 +4,7 @@ import { useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/BaseLayout.astro";
 import CodeBlock from "@/components/CodeBlock.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { images } from "@/lib/images";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -83,6 +84,7 @@ while True:
     if can_harvest():
         harvest()`
                 })}
+                image={images[2]}
             />
         </section>
 
@@ -125,6 +127,7 @@ while True:
     if get_pos_x() == get_world_size() - 1:
         move(North)`
                 })}
+                image={images[3]}
             />
         </section>
 
