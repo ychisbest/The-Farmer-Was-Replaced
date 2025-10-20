@@ -84,7 +84,7 @@ const description = {
             </p>
             <div class="text-center md:text-left">
                 <a
-                    class="text-lg md:text-xl underline text-blue-500"
+                    class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
                     href={getRelativeLocaleUrl(locale, "/tutorial")}
                     >{
                         t({
@@ -94,8 +94,8 @@ const description = {
                     }</a
                 > |
                 <a
-                    class="text-lg md:text-xl underline text-blue-500"
-                    href={getRelativeLocaleUrl(locale, "/codes")}
+                    class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
+                    href={getRelativeLocaleUrl(locale, "/#code")}
                     >{
                         t({
                             zh: "代码",
@@ -123,7 +123,7 @@ const description = {
             }
             <br />
             <a
-                class="inline-block text-blue-500 underline cursor-pointer"
+                class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
                 href="https://store.steampowered.com/app/2060160/_/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -153,7 +153,7 @@ const description = {
             }
             <br />
             <a
-                class="inline-block text-blue-500 underline cursor-pointer"
+                class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
                 href={getRelativeLocaleUrl(locale, "/tutorial")}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -168,7 +168,7 @@ const description = {
     </section>
 
     <!--steamlink -->
-    <section class="py-10">
+    <section class="py-10 scroll-mt-10" id="code">
         <h2 class="text-2xl font-bold mb-4">
             {t({ zh: "代码案例", en: "Code Examples" })}
         </h2>
@@ -183,34 +183,17 @@ const description = {
             }
             <div>
                 <a
-                    class="inline-block text-blue-500 underline cursor-pointer"
-                    href={getRelativeLocaleUrl(locale, "/codes")}
+                    class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
+                    href={getRelativeLocaleUrl(locale, "/basic-codes")}
                     >{
                         t({
-                            zh: "前往 代码案例 页面",
-                            en: "Go to the Codes Page",
+                            zh: "编程农场的一些基础代码案例",
+                            en: "basic code examples",
                         })
                     }</a
                 >
             </div>
         </div>
-        <CodeBlock
-            code={t({
-                en: `# Quickly harvest 5 times for unlock while loop function
-harvest()
-harvest()
-harvest()
-harvest()
-harvest()`,
-                zh: `# 快速收获5次以解锁while循环功能
-harvest()
-harvest()
-harvest()
-harvest()
-harvest()`,
-            })}
-            image={images["1"]}
-        />
     </section>
 
     <!-- FAQ Section -->
