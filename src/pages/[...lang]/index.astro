@@ -95,7 +95,7 @@ const description = {
                 > |
                 <a
                     class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
-                    href={getRelativeLocaleUrl(locale, "/#code")}
+                   href={getRelativeLocaleUrl(locale, "#code").replace(/\/$/, '')}
                     >{
                         t({
                             zh: "代码",

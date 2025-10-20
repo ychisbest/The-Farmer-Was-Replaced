@@ -8,7 +8,7 @@ import {SITE_URL} from "./src/consts"
 
 // https://astro.build/config
 export default defineConfig({
- trailingSlash: 'always',
+ trailingSlash: 'ignore',
  image: {
     service: { entrypoint: 'astro/assets/services/sharp' }
   },
