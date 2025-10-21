@@ -20,8 +20,8 @@ const t = useTranslations(Astro.currentLocale as Lang);
 
 // Additional SEO keywords for educational programming games
 const keywords = {
-    en: "programming game, learn Python, educational game, coding game, farm automation, Python tutorial, learn coding, educational technology, STEM education, coding for beginners",
-    zh: "编程游戏,学习Python,教育游戏,编程游戏,农场自动化,Python教程,学习编程,教育技术,STEM教育,编程入门"
+	en: "programming game, learn Python, educational game, coding game, farm automation, Python tutorial, learn coding, educational technology, STEM education, coding for beginners",
+	zh: "编程游戏,学习Python,教育游戏,编程游戏,农场自动化,Python教程,学习编程,教育技术,STEM教育,编程入门",
 };
 
 // Additional meta tags for enhanced SEO
@@ -52,11 +52,49 @@ const currentLocale = Astro.currentLocale || "en";
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Hreflang Tags for International SEO -->
-{currentLocale === "en" && <link rel="alternate" hreflang="en" href={canonicalURL} />}
-{currentLocale === "en" && <link rel="alternate" hreflang="zh" href={new URL(Astro.url.pathname.replace(/^\//, "/zh/"), Astro.url.origin)} />}
-{currentLocale === "zh" && <link rel="alternate" hreflang="zh" href={canonicalURL} />}
-{currentLocale === "zh" && <link rel="alternate" hreflang="en" href={new URL(Astro.url.pathname.replace(/^\/zh\//, "/"), Astro.url.origin)} />}
-<link rel="alternate" hreflang="x-default" href={new URL(Astro.url.pathname.replace(/^\/zh\//, "/"), Astro.url.origin)} />
+{
+	currentLocale === "en" && (
+		<link rel="alternate" hreflang="en" href={canonicalURL} />
+	)
+}
+{
+	currentLocale === "en" && (
+		<link
+			rel="alternate"
+			hreflang="zh"
+			href={
+				new URL(
+					Astro.url.pathname.replace(/^\//, "/zh/"),
+					Astro.url.origin,
+				)
+			}
+		/>
+	)
+}
+{
+	currentLocale === "zh" && (
+		<link rel="alternate" hreflang="zh" href={canonicalURL} />
+	)
+}
+{
+	currentLocale === "zh" && (
+		<link
+			rel="alternate"
+			hreflang="en"
+			href={
+				new URL(
+					Astro.url.pathname.replace(/^\/zh\//, "/"),
+					Astro.url.origin,
+				)
+			}
+		/>
+	)
+}
+<link
+	rel="alternate"
+	hreflang="x-default"
+	href={new URL(Astro.url.pathname.replace(/^\/zh\//, "/"), Astro.url.origin)}
+/>
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -64,7 +102,10 @@ const currentLocale = Astro.currentLocale || "en";
 <meta name="description" content={description} />
 
 <!-- Enhanced SEO Meta Tags -->
-<meta name="keywords" content={keywords[currentLocale as keyof typeof keywords] || keywords.en} />
+<meta
+	name="keywords"
+	content={keywords[currentLocale as keyof typeof keywords] || keywords.en}
+/>
 <meta name="author" content="The Farmer Was Replaced" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 <meta name="language" content={currentLocale} />
@@ -89,7 +130,10 @@ const currentLocale = Astro.currentLocale || "en";
 
 <!-- Additional Open Graph Properties -->
 <meta property="og:site_name" content="The Farmer Was Replaced" />
-<meta property="og:locale" content={currentLocale === "zh" ? "zh_CN" : "en_US"} />
+<meta
+	property="og:locale"
+	content={currentLocale === "zh" ? "zh_CN" : "en_US"}
+/>
 <meta property="og:type" content="website" />
 <meta property="og:updated_time" content={new Date().toISOString()} />
 
@@ -145,5 +189,5 @@ const currentLocale = Astro.currentLocale || "en";
 		t.src = "https://www.clarity.ms/tag/" + i;
 		y = l.getElementsByTagName(r)[0];
 		y.parentNode.insertBefore(t, y);
-	})(window, document, "clarity", "script", "t7xg0mmy7d");
+	})(window, document, "clarity", "script", "tt6tomsxh9");
 </script>

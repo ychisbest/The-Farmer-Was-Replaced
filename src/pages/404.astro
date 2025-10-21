@@ -1,169 +1,51 @@
 ---
-import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
-import { useTranslations, type Lang } from "@/i18n";
-import Layout from "@/layouts/BaseLayout.astro";
-import { getRelativeLocaleUrl } from "astro:i18n";
+// Redirect to 404 page for user's system locale
+// Basically, you don't need to edit this file.
 
-const t = useTranslations(Astro.currentLocale as Lang);
-const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+import { LOCALES, DEFAULT_LOCALE } from "@/i18n";
 
-export const getStaticPaths = async () => {
-    const paths = Object.keys(LOCALES_SETTING).map((lang) => {
-        if (lang !== DEFAULT_LOCALE_SETTING) {
-            return {
-                params: { lang: lang },
-            };
-        } else {
-            return { params: { lang: undefined } };
-        }
-    });
-    return paths;
-};
-
-const title = {
-    en: "404 - Page Not Found",
-    zh: "404 - 页面未找到",
-};
-
-const description = {
-    en: "The page you're looking for doesn't exist. Return to the homepage of The Farmer Was Replaced programming game aggregator.",
-    zh: "您要查找的页面不存在。返回编程农场聚合器主页。",
-};
+const langs = Object.keys(LOCALES);
+const baseUrl = import.meta.env.PROD ? Astro.site : "/";
+const defaultLocale = DEFAULT_LOCALE;
 ---
 
-<Layout title={title} description={description}>
-    <!-- 404 Hero Section -->
-    <section
-        class="flex flex-col items-center justify-center text-center py-20 px-4"
-    >
-        <div class="mb-8">
-            <h1 class="text-6xl md:text-8xl font-bold text-gray-300 dark:text-gray-600 mb-4">
-                404
-            </h1>
-        </div>
+<html lang={DEFAULT_LOCALE}>
+  <head>
+    <meta charset="UTF-8" />
+    <title>404 PAGE NOT FOUND</title>
+    <link rel="canonical" href={Astro.site} />
 
-        <div class="max-w-2xl mx-auto">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4">
-                <span class="bg-yellow-100 dark:bg-yellow-900 font-extrabold">
-                    {
-                        t({
-                            zh: "页面未找到",
-                            en: "Page Not Found",
-                        })
-                    }
-                </span>
-            </h2>
+    <noscript>
+      <meta
+        http-equiv="refresh"
+        content={`0;url=${baseUrl + DEFAULT_LOCALE}/404/`}
+      />
+    </noscript>
 
-            <p class="text-base md:text-lg mb-8 text-gray-600 dark:text-gray-400">
-                {
-                    t({
-                        zh: "哎呀！您要查找的页面似乎不存在。可能页面已被移动、删除或您输入了错误的地址。",
-                        en: "Oops! The page you're looking for seems to have vanished. It might have been moved, deleted, or you might have typed the wrong address.",
-                    })
-                }
-            </p>
+    <script is:inline define:vars={{ langs, baseUrl, defaultLocale }}>
+      const urlHasLang = langs.includes(location.pathname.split("/")[1]);
+      const localStorageHasLang =
+        localStorage.selectedLang && langs.includes(localStorage.selectedLang);
+      const referrerHasLang =
+        document.referrer &&
+        new URL(document.referrer).host == location.host &&
+        langs.includes(new URL(document.referrer).pathname.split("/")[1]);
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                <a
-                    href={getRelativeLocaleUrl(locale, "/")}
-                    class="inline-block px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200 font-semibold"
-                >
-                    {
-                        t({
-                            zh: "返回首页",
-                            en: "Return Home",
-                        })
-                    }
-                </a>
-
-                <a
-                    href={getRelativeLocaleUrl(locale, "/tutorial")}
-                    class="inline-block px-6 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-gray-400 dark:hover:border-gray-500 transition-colors duration-200 font-semibold"
-                >
-                    {
-                        t({
-                            zh: "Python 基础",
-                            en: "Python Basics",
-                        })
-                    }
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Help Section -->
-    <section class="py-10 border-t border-gray-200 dark:border-gray-700">
-        <div class="max-w-4xl mx-auto">
-            <h3 class="text-xl font-bold mb-4 text-center">
-                {
-                    t({
-                        zh: "您可能在寻找：",
-                        en: "You might be looking for:",
-                    })
-                }
-            </h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a
-                    href={getRelativeLocaleUrl(locale, "/codes")}
-                    class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-300 dark:hover:border-blue-600 transition-colors duration-200"
-                >
-                    <h4 class="font-semibold mb-2">
-                        {
-                            t({
-                                zh: "代码案例",
-                                en: "Code Examples",
-                            })
-                        }
-                    </h4>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {
-                            t({
-                                zh: "查看游戏代码示例和解决方案",
-                                en: "View game code examples and solutions",
-                            })
-                        }
-                    </p>
-                </a>
-
-                <a
-                    href="https://store.steampowered.com/app/2060160/_/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-blue-300 dark:hover:border-blue-600 transition-colors duration-200"
-                >
-                    <h4 class="font-semibold mb-2">
-                        {
-                            t({
-                                zh: "Steam 商店",
-                                en: "Steam Store",
-                            })
-                        }
-                    </h4>
-                    <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {
-                            t({
-                                zh: "在 Steam 上购买游戏",
-                                en: "Purchase the game on Steam",
-                            })
-                        }
-                    </p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="py-10">
-        <div class="max-w-2xl mx-auto text-center">
-            <p class="text-sm text-gray-500 dark:text-gray-500">
-                {
-                    t({
-                        zh: "如果问题仍然存在，请确保您访问的 URL 是正确的。",
-                        en: "If the problem persists, please make sure you've entered the correct URL.",
-                    })
-                }
-            </p>
-        </div>
-    </section>
-</Layout>
+      if (urlHasLang) {
+        localStorage.userAccessPath = location.pathname;
+        location.href = `${baseUrl + location.pathname.split("/")[1]}/404/`;
+      } else if (localStorageHasLang) {
+        location.href = baseUrl + localStorage.selectedLang + location.pathname;
+      } else if (referrerHasLang) {
+        const referrerLang = new URL(document.referrer).pathname.split("/")[1];
+        location.href = baseUrl + referrerLang + location.pathname;
+      } else {
+        location.href = baseUrl + defaultLocale + location.pathname;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>404 PAGE NOT FOUND</h1>
+    <a href={baseUrl}>TOP PAGE</a>
+  </body>
+</html>
