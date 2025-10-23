@@ -8,7 +8,7 @@ import { LOCALES, useTranslations, type Lang } from "@/i18n";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 
-const { title  } = Astro.props;
+const { title } = Astro.props;
 const { description } = Astro.props;
 ---
 
@@ -27,13 +27,38 @@ const { description } = Astro.props;
             document.documentElement.classList.add("light");
             document.documentElement.classList.remove("dark");
         }
+
+        function loadUtterances() {
+            const theme =
+                localStorage.getItem("hs_theme") === "dark"
+                    ? "github-dark"
+                    : "github-light";
+            const container = document.getElementById("utterances-container");
+
+            // 清空容器，避免重复加载
+            container.innerHTML = "";
+
+            const script = document.createElement("script");
+            script.src = "https://utteranc.es/client.js";
+            script.setAttribute("repo", "ychisbest/The-Farmer-Was-Replaced");
+            script.setAttribute("issue-term", "pathname");
+            script.setAttribute("theme", theme);
+            script.setAttribute("crossorigin", "anonymous");
+            script.async = true;
+
+            container.appendChild(script);
+        }
+        // 页面加载时初始化
+        document.addEventListener("DOMContentLoaded", loadUtterances);
     </script>
     <BaseHead
         title={SITE_TITLE + " - " + t(title)}
         description={t(description)}
     />
 
-    <body class=" max-w-7xl mx-auto bg-white dark:bg-neutral-900  text-gray-800 dark:text-gray-200 transition-colors">
+    <body
+        class="max-w-7xl mx-auto bg-white dark:bg-neutral-900 text-gray-800 dark:text-gray-200 transition-colors"
+    >
         <Header />
         <main class="container mx-auto px-4 py-8">
             <slot />

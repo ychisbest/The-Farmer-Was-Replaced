@@ -63,6 +63,8 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
               document.documentElement.classList.add('dark');
               localStorage.setItem('hs_theme', 'dark');
             }
+
+            loadUtterances();
           `}
         >
           <span class="group inline-flex shrink-0 justify-center items-center size-5">

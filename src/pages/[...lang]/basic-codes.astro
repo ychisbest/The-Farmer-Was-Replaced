@@ -38,23 +38,34 @@ const description = {
         <!-- Header -->
         <section class="py-8">
             <h1 class="text-3xl font-bold mb-6 text-center">
-                {t({
-                    en: "The Farmer Was Replaced - Code Examples",
-                    zh: "编程农场 - 代码示例"
-                })}
+                {
+                    t({
+                        en: "The Farmer Was Replaced - Code Examples",
+                        zh: "编程农场 - 代码示例",
+                    })
+                }
             </h1>
-            <p class="text-base text-neutral-600 dark:text-neutral-400 text-center mb-8">
-                {t({
-                    en: "Complete code examples from the game with detailed explanations. Copy and paste these codes directly into your game to improve your farming automation skills.",
-                    zh: "游戏完整代码示例，包含详细解释。直接复制粘贴这些代码到游戏中，提升你的农场自动化技能。"
-                })}
+            <p
+                class="text-base text-neutral-600 dark:text-neutral-400 text-center mb-8"
+            >
+                {
+                    t({
+                        en: "Complete code examples from the game with detailed explanations. Copy and paste these codes directly into your game to improve your farming automation skills.",
+                        zh: "游戏完整代码示例，包含详细解释。直接复制粘贴这些代码到游戏中，提升你的农场自动化技能。",
+                    })
+                }
             </p>
             <div class="text-center mb-8">
-                <a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
-                    {t({
-                        en: "← Back to Home",
-                        zh: "← 返回主页"
-                    })}
+                <a
+                    href={getRelativeLocaleUrl(locale, "/")}
+                    class="text-blue-500 hover:text-blue-700 underline"
+                >
+                    {
+                        t({
+                            en: "← Back to Home",
+                            zh: "← 返回主页",
+                        })
+                    }
                 </a>
             </div>
         </section>
@@ -62,16 +73,20 @@ const description = {
         <!-- Example 1: Basic Auto Harvest -->
         <section class="mb-12">
             <h2 class="text-xl font-bold mb-4">
-                {t({
-                    en: "Example 1: Basic Auto Harvest",
-                    zh: "示例1：基础自动收获"
-                })}
+                {
+                    t({
+                        en: "Example 1: Basic Auto Harvest",
+                        zh: "示例1：基础自动收获",
+                    })
+                }
             </h2>
             <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-                {t({
-                    en: "The simplest automation script that continuously harvests mature grass.",
-                    zh: "最简单的自动化脚本，持续收获成熟的草。"
-                })}
+                {
+                    t({
+                        en: "The simplest automation script that continuously harvests mature grass.",
+                        zh: "最简单的自动化脚本，持续收获成熟的草。",
+                    })
+                }
             </p>
             <CodeBlock
                 code={t({
@@ -82,7 +97,7 @@ while True:
                     zh: `# 自动收获草地
 while True:
     if can_harvest():
-        harvest()`
+        harvest()`,
                 })}
                 image={images[2]}
             />
@@ -91,16 +106,20 @@ while True:
         <!-- Example 2: 3x3 Farm Auto Traversal -->
         <section class="mb-12">
             <h2 class="text-xl font-bold mb-4">
-                {t({
-                    en: "Example 2: 3×3 Farm Auto Traversal",
-                    zh: "示例2：3×3农场自动遍历"
-                })}
+                {
+                    t({
+                        en: "Example 2: 3×3 Farm Auto Traversal",
+                        zh: "示例2：3×3农场自动遍历",
+                    })
+                }
             </h2>
             <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-                {t({
-                    en: "Automatically traverse all tiles and harvest.",
-                    zh: "自动遍历所有方块并收获。"
-                })}
+                {
+                    t({
+                        en: "Automatically traverse all tiles and harvest.",
+                        zh: "自动遍历所有方块并收获。",
+                    })
+                }
             </p>
             <CodeBlock
                 code={t({
@@ -125,7 +144,7 @@ while True:
 
     # 到达行尾时向北移动并返回行首
     if get_pos_x() == get_world_size() - 1:
-        move(North)`
+        move(North)`,
                 })}
                 image={images[3]}
             />
@@ -134,16 +153,20 @@ while True:
         <!-- Example 3: Multi-Crop Automation -->
         <section class="mb-12">
             <h2 class="text-xl font-bold mb-4">
-                {t({
-                    en: "Example 3: Multi-Crop Automation (Grass + Bush + Carrot)",
-                    zh: "示例3：多作物自动化（草+灌木+胡萝卜）"
-                })}
+                {
+                    t({
+                        en: "Example 3: Multi-Crop Automation (Grass + Bush + Carrot)",
+                        zh: "示例3：多作物自动化（草+灌木+胡萝卜）",
+                    })
+                }
             </h2>
             <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-                {t({
-                    en: "Plant different crops based on column position.",
-                    zh: "根据列位置种植不同作物。"
-                })}
+                {
+                    t({
+                        en: "Plant different crops based on column position.",
+                        zh: "根据列位置种植不同作物。",
+                    })
+                }
             </p>
             <CodeBlock
                 code={t({
@@ -194,7 +217,7 @@ while True:
 
     move(East)
     if x == get_world_size() - 1:
-        move(North)`
+        move(North)`,
                 })}
             />
         </section>
@@ -202,16 +225,20 @@ while True:
         <!-- Example 4: Tree Checkerboard Planting -->
         <section class="mb-12">
             <h2 class="text-xl font-bold mb-4">
-                {t({
-                    en: "Example 4: Tree Checkerboard Planting",
-                    zh: "示例4：树木棋盘格种植"
-                })}
+                {
+                    t({
+                        en: "Example 4: Tree Checkerboard Planting",
+                        zh: "示例4：树木棋盘格种植",
+                    })
+                }
             </h2>
             <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-                {t({
-                    en: "Trees need checkerboard planting to avoid adjacency.",
-                    zh: "树木需要棋盘格种植以避免相邻。"
-                })}
+                {
+                    t({
+                        en: "Trees need checkerboard planting to avoid adjacency.",
+                        zh: "树木需要棋盘格种植以避免相邻。",
+                    })
+                }
             </p>
             <CodeBlock
                 code={t({
@@ -248,7 +275,7 @@ while True:
 
     move(East)
     if x == get_world_size() - 1:
-        move(North)`
+        move(North)`,
                 })}
             />
         </section>
@@ -256,16 +283,20 @@ while True:
         <!-- Example 5: Resource Priority Management -->
         <section class="mb-12">
             <h2 class="text-xl font-bold mb-4">
-                {t({
-                    en: "Example 5: Resource Priority Management",
-                    zh: "示例5：资源优先级管理"
-                })}
+                {
+                    t({
+                        en: "Example 5: Resource Priority Management",
+                        zh: "示例5：资源优先级管理",
+                    })
+                }
             </h2>
             <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-                {t({
-                    en: "Intelligent resource management, prioritize collecting scarce resources.",
-                    zh: "智能资源管理，优先收集稀缺资源。"
-                })}
+                {
+                    t({
+                        en: "Intelligent resource management, prioritize collecting scarce resources.",
+                        zh: "智能资源管理，优先收集稀缺资源。",
+                    })
+                }
             </p>
             <CodeBlock
                 code={t({
@@ -318,7 +349,7 @@ while True:
 
     move(East)
     if x == get_world_size() - 1:
-        move(North)`
+        move(North)`,
                 })}
             />
         </section>
@@ -326,16 +357,20 @@ while True:
         <!-- Example 6: Auto Watering System -->
         <section class="mb-12">
             <h2 class="text-xl font-bold mb-4">
-                {t({
-                    en: "Example 6: Auto Watering System",
-                    zh: "示例6：自动浇水系统"
-                })}
+                {
+                    t({
+                        en: "Example 6: Auto Watering System",
+                        zh: "示例6：自动浇水系统",
+                    })
+                }
             </h2>
             <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-                {t({
-                    en: "Automated watering system, speeds up crop growth up to 5x.",
-                    zh: "自动化浇水系统，加速作物生长至5倍速度。"
-                })}
+                {
+                    t({
+                        en: "Automated watering system, speeds up crop growth up to 5x.",
+                        zh: "自动化浇水系统，加速作物生长至5倍速度。",
+                    })
+                }
             </p>
             <CodeBlock
                 code={t({
@@ -384,7 +419,7 @@ while True:
 
     move(East)
     if get_pos_x() == get_world_size() - 1:
-        move(North)`
+        move(North)`,
                 })}
             />
         </section>
@@ -392,16 +427,20 @@ while True:
         <!-- Example 7: Function Encapsulation -->
         <section class="mb-12">
             <h2 class="text-xl font-bold mb-4">
-                {t({
-                    en: "Example 7: Function Encapsulation",
-                    zh: "示例7：函数封装"
-                })}
+                {
+                    t({
+                        en: "Example 7: Function Encapsulation",
+                        zh: "示例7：函数封装",
+                    })
+                }
             </h2>
             <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-                {t({
-                    en: "Use functions to make code clearer and more readable.",
-                    zh: "使用函数使代码更清晰易读。"
-                })}
+                {
+                    t({
+                        en: "Use functions to make code clearer and more readable.",
+                        zh: "使用函数使代码更清晰易读。",
+                    })
+                }
             </p>
             <CodeBlock
                 code={t({
@@ -452,7 +491,7 @@ while True:
     if num_items(Items.Carrot) < 100:
         plant_carrot()
 
-    move_to_next()`
+    move_to_next()`,
                 })}
             />
         </section>
@@ -460,16 +499,20 @@ while True:
         <!-- Example 8: Sunflower Energy Optimization -->
         <section class="mb-12">
             <h2 class="text-xl font-bold mb-4">
-                {t({
-                    en: "Example 8: Sunflower Energy Optimization",
-                    zh: "示例8：向日葵能量优化"
-                })}
+                {
+                    t({
+                        en: "Example 8: Sunflower Energy Optimization",
+                        zh: "示例8：向日葵能量优化",
+                    })
+                }
             </h2>
             <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-                {t({
-                    en: "Sunflower optimization strategy, only harvest high-energy flowers.",
-                    zh: "向日葵优化策略，只收获高能量的花。"
-                })}
+                {
+                    t({
+                        en: "Sunflower optimization strategy, only harvest high-energy flowers.",
+                        zh: "向日葵优化策略，只收获高能量的花。",
+                    })
+                }
             </p>
             <CodeBlock
                 code={t({
@@ -534,19 +577,28 @@ for i in range(len(sunflowers)):
 # (移动逻辑省略)
 if measure() == max_val:
     if can_harvest():
-        harvest()`
+        harvest()`,
                 })}
             />
         </section>
 
+        <div id="utterances-container" class="my-10"></div>
+
         <!-- Footer Navigation -->
-        <section class="py-8 border-t border-neutral-200 dark:border-neutral-700">
+        <section
+            class="py-8 border-t border-neutral-200 dark:border-neutral-700"
+        >
             <div class="text-center">
-                <a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
-                    {t({
-                        en: "← Back to Home",
-                        zh: "← 返回主页"
-                    })}
+                <a
+                    href={getRelativeLocaleUrl(locale, "/")}
+                    class="text-blue-500 hover:text-blue-700 underline"
+                >
+                    {
+                        t({
+                            en: "← Back to Home",
+                            zh: "← 返回主页",
+                        })
+                    }
                 </a>
             </div>
         </section>
