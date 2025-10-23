@@ -26,11 +26,13 @@ export const getStaticPaths = async () => {
 const title = {
     en: "Cactus Code",
     zh: "仙人掌代码",
+    de: "Kaktus-Code",
 };
 
 const description = {
     en: "Complete code examples for The Farmer Was Replaced game with detailed explanations and multilingual support.",
     zh: "编程农场游戏完整代码示例，包含详细解释和多语言支持。",
+    de: "Vollständige Codebeispiele für das The Farmer Was Replaced Spiel mit detaillierten Erklärungen und mehrsprachiger Unterstützung.",
 };
 ---
 
@@ -41,7 +43,8 @@ const description = {
             <h1 class="text-3xl font-bold mb-6 text-center">
                 {t({
                     en: "The Farmer Was Replaced - Code Examples",
-                    zh: "编程农场 - 代码示例"
+                    zh: "编程农场 - 代码示例",
+                    de: "The Farmer Was Replaced - Codebeispiele"
                 })}
             </h1>
 
@@ -52,7 +55,8 @@ const description = {
             <h2 class="text-xl font-bold mb-4">
                 {t({
                     en: "Bubble Sort — Auto Harvest Cactus",
-                    zh: "冒泡排序 — 自动收获仙人掌"
+                    zh: "冒泡排序 — 自动收获仙人掌",
+                    de: "Blasensortierung — Automatische Kaktusernte"
                 })}
             </h2>
 
@@ -61,7 +65,8 @@ const description = {
  <br>
         <h2 class="text-xl font-bold mb-4">{t({
                 en: "Complete Code:",
-                zh: "完整代码："
+                zh: "完整代码：",
+                de: "Vollständiger Code:"
         })}</h2>
             <CodeBlock
             height="max-h-[1000px]"
@@ -171,7 +176,8 @@ cactusProject(6)
                 <a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
                     {t({
                         en: "← Back to Home",
-                        zh: "← 返回主页"
+                        zh: "← 返回主页",
+                        de: "← Zurück zur Startseite"
                     })}
                 </a>
             </div>

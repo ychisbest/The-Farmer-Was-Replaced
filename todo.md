@@ -5,6 +5,20 @@
 - 仅仅修改我强调的文件，不要擅自修改其他文件。
 - 完成任务后不要擅自使用npm run来执行，我会自己检查，等待我回复就好。
 - 使用多语言
+- 以下是所有国家语言对该游戏的翻译，为我增加多语言时别写错游戏名了
+```
+简体中文: 编程农场
+韩语: 농부는 대체되었다
+日语: 農家は Replace() されました
+英语: The Farmer Was Replaced
+法语: The Farmer Was Replaced
+意大利语: The Farmer Was Replaced
+德语: The Farmer Was Replaced
+西班牙语 - 西班牙: The Farmer Was Replaced
+波兰语: The Farmer Was Replaced
+葡萄牙语 - 巴西: The Farmer Was Replaced
+俄语: The Farmer Was Replaced
+```
 - 多语言按如下方式书写，多语言内容直接写在标签中，不会在其他地方定义
 ```
 <p>
@@ -20,5 +34,4 @@
 - [lang]文件夹中的页面请参照index.astro写好getstaticpath方法，不然会导致报错
 
 
-当前任务：目前的tutorial页面过于简单和抽象，全部重写，用比喻的方式针对每一个细节进行教学，把用户当作十二岁小孩，进行详细的编程指导，code部分使用codeblock组件，和codes页面一样，代码的注释都要使用多语言。
-示例代码不要和农场有关，因为你不懂详细的游戏规则，会误导用户，使用农场无关的代码案例
+当前任务：为所有页面和组件增加德语

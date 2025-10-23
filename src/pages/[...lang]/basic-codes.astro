@@ -25,11 +25,13 @@ export const getStaticPaths = async () => {
 const title = {
     en: "Code Examples",
     zh: "代码示例",
+    de: "Codebeispiele",
 };
 
 const description = {
     en: "Complete code examples for The Farmer Was Replaced game with detailed explanations and multilingual support.",
     zh: "编程农场游戏完整代码示例，包含详细解释和多语言支持。",
+    de: "Vollständige Codebeispiele für das The Farmer Was Replaced Spiel mit detaillierten Erklärungen und mehrsprachiger Unterstützung.",
 };
 ---
 
@@ -42,6 +44,7 @@ const description = {
                     t({
                         en: "The Farmer Was Replaced - Code Examples",
                         zh: "编程农场 - 代码示例",
+                        de: "The Farmer Was Replaced - Codebeispiele",
                     })
                 }
             </h1>
@@ -52,6 +55,7 @@ const description = {
                     t({
                         en: "Complete code examples from the game with detailed explanations. Copy and paste these codes directly into your game to improve your farming automation skills.",
                         zh: "游戏完整代码示例，包含详细解释。直接复制粘贴这些代码到游戏中，提升你的农场自动化技能。",
+                        de: "Vollständige Codebeispiele aus dem Spiel mit detaillierten Erklärungen. Kopieren und fügen Sie diese Codes direkt in Ihr Spiel ein, um Ihre Fähigkeiten in der Farmautomatisierung zu verbessern.",
                     })
                 }
             </p>
@@ -64,6 +68,7 @@ const description = {
                         t({
                             en: "← Back to Home",
                             zh: "← 返回主页",
+                            de: "← Zurück zur Startseite",
                         })
                     }
                 </a>
@@ -77,6 +82,7 @@ const description = {
                     t({
                         en: "Example 1: Basic Auto Harvest",
                         zh: "示例1：基础自动收获",
+                        de: "Beispiel 1: Grundlegende automatische Ernte",
                     })
                 }
             </h2>
@@ -85,6 +91,7 @@ const description = {
                     t({
                         en: "The simplest automation script that continuously harvests mature grass.",
                         zh: "最简单的自动化脚本，持续收获成熟的草。",
+                        de: "Das einfachste Automatisierungsskript, das kontinuierlich reifes Gras erntet.",
                     })
                 }
             </p>
@@ -95,6 +102,10 @@ while True:
     if can_harvest():
         harvest()`,
                     zh: `# 自动收获草地
+while True:
+    if can_harvest():
+        harvest()`,
+                    de: `# Gras automatisch ernten
 while True:
     if can_harvest():
         harvest()`,
@@ -110,6 +121,7 @@ while True:
                     t({
                         en: "Example 2: 3×3 Farm Auto Traversal",
                         zh: "示例2：3×3农场自动遍历",
+                        de: "Beispiel 2: Automatischer 3×3-Farm-Durchlauf",
                     })
                 }
             </h2>
@@ -118,6 +130,7 @@ while True:
                     t({
                         en: "Automatically traverse all tiles and harvest.",
                         zh: "自动遍历所有方块并收获。",
+                        de: "Automatisch alle Felder durchlaufen und ernten.",
                     })
                 }
             </p>
@@ -145,6 +158,17 @@ while True:
     # 到达行尾时向北移动并返回行首
     if get_pos_x() == get_world_size() - 1:
         move(North)`,
+                    de: `# Gesamte Farm für Ernte durchlaufen
+while True:
+    if can_harvest():
+        harvest()
+
+    # Nach Osten bewegen
+    move(East)
+
+    # Beim Erreichen des Zeilenendes nach Norden bewegen
+    if get_pos_x() == get_world_size() - 1:
+        move(North)`,
                 })}
                 image={images[3]}
             />
@@ -157,6 +181,7 @@ while True:
                     t({
                         en: "Example 3: Multi-Crop Automation (Grass + Bush + Carrot)",
                         zh: "示例3：多作物自动化（草+灌木+胡萝卜）",
+                        de: "Beispiel 3: Mehrfachfrucht-Automatisierung (Gras + Busch + Karotte)",
                     })
                 }
             </h2>
@@ -165,6 +190,7 @@ while True:
                     t({
                         en: "Plant different crops based on column position.",
                         zh: "根据列位置种植不同作物。",
+                        de: "Verschiedene Früchte basierend auf der Spaltenposition anbauen.",
                     })
                 }
             </p>
@@ -218,6 +244,30 @@ while True:
     move(East)
     if x == get_world_size() - 1:
         move(North)`,
+                    de: `# Erste Spalte: Gras, zweite: Büsche, dritte: Karotten
+while True:
+    if can_harvest():
+        harvest()
+
+    x = get_pos_x()
+
+    if x == 0:
+        # Erste Spalte: Gras (keine Pflanzung nötig)
+        pass
+    elif x == 1:
+        # Zweite Spalte: Büsche
+        plant(Entities.Bush)
+    elif x == 2:
+        # Dritte Spalte: Karotten
+        if get_ground_type() != Grounds.Soil:
+            till()
+        if num_items(Items.Carrot_Seed) < 1:
+            trade(Items.Carrot_Seed)
+        plant(Entities.Carrot)
+
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)`,
                 })}
             />
         </section>
@@ -229,6 +279,7 @@ while True:
                     t({
                         en: "Example 4: Tree Checkerboard Planting",
                         zh: "示例4：树木棋盘格种植",
+                        de: "Beispiel 4: Schachbrettartiges Pflanzen von Bäumen",
                     })
                 }
             </h2>
@@ -237,6 +288,7 @@ while True:
                     t({
                         en: "Trees need checkerboard planting to avoid adjacency.",
                         zh: "树木需要棋盘格种植以避免相邻。",
+                        de: "Bäume benötigen schachbrettartiges Pflanzen, um Benachbarte zu vermeiden.",
                     })
                 }
             </p>
@@ -276,6 +328,23 @@ while True:
     move(East)
     if x == get_world_size() - 1:
         move(North)`,
+                    de: `# Schachbrettmuster für Bäume und Büsche
+while True:
+    if can_harvest():
+        harvest()
+
+    x = get_pos_x()
+    y = get_pos_y()
+
+    # Schachbrett-Logik
+    if (x % 2 == 0 and y % 2 == 0) or (x % 2 == 1 and y % 2 == 1):
+        plant(Entities.Tree)
+    else:
+        plant(Entities.Bush)
+
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)`,
                 })}
             />
         </section>
@@ -287,6 +356,7 @@ while True:
                     t({
                         en: "Example 5: Resource Priority Management",
                         zh: "示例5：资源优先级管理",
+                        de: "Beispiel 5: Ressourcen-Prioritätsmanagement",
                     })
                 }
             </h2>
@@ -295,6 +365,7 @@ while True:
                     t({
                         en: "Intelligent resource management, prioritize collecting scarce resources.",
                         zh: "智能资源管理，优先收集稀缺资源。",
+                        de: "Intelligentes Ressourcenmanagement, Priorisierung der Sammlung knapper Ressourcen.",
                     })
                 }
             </p>
@@ -350,6 +421,31 @@ while True:
     move(East)
     if x == get_world_size() - 1:
         move(North)`,
+                    de: `# Pflanzstrategie basierend auf Ressourcen automatisch anpassen
+while True:
+    if can_harvest():
+        harvest()
+
+    x = get_pos_x()
+
+    # Priorität: Zuerst Heuvorrat sicherstellen
+    if num_items(Items.Hay) < 500:
+        # Nicht pflanzen, Gras natürlich wachsen lassen
+        pass
+    # Zweite Priorität: Holzlager sicherstellen
+    elif num_items(Items.Wood) < 300:
+        plant(Entities.Bush)
+    # Schließlich: Karotten pflanzen
+    elif num_items(Items.Carrot) < 200:
+        if get_ground_type() != Grounds.Soil:
+            till()
+        if num_items(Items.Carrot_Seed) == 0:
+            trade(Items.Carrot_Seed)
+        plant(Entities.Carrot)
+
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)`,
                 })}
             />
         </section>
@@ -361,6 +457,7 @@ while True:
                     t({
                         en: "Example 6: Auto Watering System",
                         zh: "示例6：自动浇水系统",
+                        de: "Beispiel 6: Automatisches Bewässerungssystem",
                     })
                 }
             </h2>
@@ -369,6 +466,7 @@ while True:
                     t({
                         en: "Automated watering system, speeds up crop growth up to 5x.",
                         zh: "自动化浇水系统，加速作物生长至5倍速度。",
+                        de: "Automatisiertes Bewässerungssystem, beschleunigt das Pflanzenwachstum bis zu 5-fach.",
                     })
                 }
             </p>
@@ -420,6 +518,29 @@ while True:
     move(East)
     if get_pos_x() == get_world_size() - 1:
         move(North)`,
+                    de: `# Wassertanks automatisch kaufen und Pflanzen bewässern
+while True:
+    # Genug Wassertanks sicherstellen
+    if num_items(Items.Water_Tank) < 100:
+        trade(Items.Empty_Tank)
+
+    # Überprüfen und bewässern
+    if get_water() < 0.75:
+        use_item(Items.Water_Tank)
+
+    if can_harvest():
+        harvest()
+
+    # Pflanz- und Bewegungslogik
+    if get_ground_type() != Grounds.Soil:
+        till()
+    if num_items(Items.Carrot_Seed) < 1:
+        trade(Items.Carrot_Seed)
+    plant(Entities.Carrot)
+
+    move(East)
+    if get_pos_x() == get_world_size() - 1:
+        move(North)`,
                 })}
             />
         </section>
@@ -431,6 +552,7 @@ while True:
                     t({
                         en: "Example 7: Function Encapsulation",
                         zh: "示例7：函数封装",
+                        de: "Beispiel 7: Funktionskapselung",
                     })
                 }
             </h2>
@@ -439,6 +561,7 @@ while True:
                     t({
                         en: "Use functions to make code clearer and more readable.",
                         zh: "使用函数使代码更清晰易读。",
+                        de: "Funktionen verwenden, um Code klarer und lesbarer zu machen.",
                     })
                 }
             </p>
@@ -492,6 +615,30 @@ while True:
         plant_carrot()
 
     move_to_next()`,
+                    de: `# Funktion zum Bewegen zum nächsten Feld definieren
+def move_to_next():
+    x = get_pos_x()
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)
+
+# Funktion zum Pflanzen von Karotten definieren
+def plant_carrot():
+    if get_ground_type() != Grounds.Soil:
+        till()
+    if num_items(Items.Carrot_Seed) < 1:
+        trade(Items.Carrot_Seed)
+    plant(Entities.Carrot)
+
+# Hauptprogramm
+while True:
+    if can_harvest():
+        harvest()
+
+    if num_items(Items.Carrot) < 100:
+        plant_carrot()
+
+    move_to_next()`,
                 })}
             />
         </section>
@@ -503,6 +650,7 @@ while True:
                     t({
                         en: "Example 8: Sunflower Energy Optimization",
                         zh: "示例8：向日葵能量优化",
+                        de: "Beispiel 8: Sonnenblumen-Energieoptimierung",
                     })
                 }
             </h2>
@@ -511,6 +659,7 @@ while True:
                     t({
                         en: "Sunflower optimization strategy, only harvest high-energy flowers.",
                         zh: "向日葵优化策略，只收获高能量的花。",
+                        de: "Sonnenblumen-Optimierungsstrategie, nur hochenergetische Blumen ernten.",
                     })
                 }
             </p>
@@ -578,6 +727,37 @@ for i in range(len(sunflowers)):
 if measure() == max_val:
     if can_harvest():
         harvest()`,
+                    de: `# Höchste Energie-Sonnenblumen messen und ernten
+sunflowers = []
+world_size = get_world_size()
+
+# Alle Sonnenblumen pflanzen und messen
+for i in range(world_size * world_size):
+    if get_ground_type() == Grounds.Turf:
+        till()
+    if num_items(Items.Sunflower_Seed) > 0 or trade(Items.Sunflower_Seed):
+        plant(Entities.Sunflower)
+
+    if get_entity_type() == Entities.Sunflower:
+        sunflowers.append(measure())
+
+    move(East)
+    if get_pos_x() == 0:
+        move(North)
+
+# Höchsten Energiewert finden
+max_val = 0
+max_index = 0
+for i in range(len(sunflowers)):
+    if sunflowers[i] > max_val:
+        max_val = sunflowers[i]
+        max_index = i
+
+# Zur höchsten Energie-Sonnenblume bewegen und ernten
+# (Bewegungslogik weggelassen)
+if measure() == max_val:
+    if can_harvest():
+        harvest()`,
                 })}
             />
         </section>
@@ -597,6 +777,7 @@ if measure() == max_val:
                         t({
                             en: "← Back to Home",
                             zh: "← 返回主页",
+                            de: "← Zurück zur Startseite",
                         })
                     }
                 </a>

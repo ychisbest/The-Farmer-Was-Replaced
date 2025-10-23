@@ -27,10 +27,12 @@ export const getStaticPaths = async () => {
 const title = {
     en: "Home",
     zh: "编程农场中文站",
+    de: "Startseite",
 };
 const description = {
     en: "The Farmer Was Replaced is the ultimate programming game for learning Python through farm automation. Discover tutorials, code examples, and strategies for this educational farming simulation.",
     zh: "编程农场是通过农场自动化学习Python的终极编程游戏。发现教程、代码示例和策略。",
+    de: "The Farmer Was Replaced ist das ultimative Programmierspiel zum Lernen von Python durch Farm-Automatisierung. Entdecke Tutorials, Codebeispiele und Strategien für diese Bildungsfarm-Simulation.",
 };
 ---
 
@@ -66,6 +68,7 @@ const description = {
                     t({
                         zh: "欢迎来到",
                         en: "Welcome to ",
+                        de: "Willkommen bei ",
                     })
                 }
                 <span class="bg-yellow-100 dark:bg-yellow-900 font-extrabold">
@@ -73,6 +76,7 @@ const description = {
                         t({
                             zh: "编程农场",
                             en: "The Farmer Was Replaced",
+                            de: "The Farmer Was Replaced",
                         })
                     }
                 </span>
@@ -80,6 +84,7 @@ const description = {
                     t({
                         zh: "中文站!",
                         en: "Aggregator!",
+                        de: "Aggregator!",
                     })
                 }
             </h1>
@@ -90,6 +95,7 @@ const description = {
                     t({
                         zh: "The Farmer Was Replaced 是一个通过农场自动化学习 Python 的终极编程游戏。探索教程、代码示例和策略，提升你的编程技能，同时享受有趣的农场模拟体验。",
                         en: "The Farmer Was Replaced is the ultimate programming game for learning Python through farm automation. Explore tutorials, code examples, and strategies to enhance your coding skills while enjoying a fun farming simulation.",
+                        de: "The Farmer Was Replaced ist das ultimative Programmierspiel zum Lernen von Python durch Farm-Automatisierung. Entdecke Tutorials, Codebeispiele und Strategien, um deine Programmierfähigkeiten zu verbessern und dabei eine unterhaltsame Farm-Simulation zu genießen.",
                     })
                 }
             </p>
@@ -101,6 +107,7 @@ const description = {
                         t({
                             zh: "Python 基础",
                             en: "Python Basics",
+                            de: "Python-Grundlagen",
                         })
                     }</a
                 > |
@@ -114,6 +121,7 @@ const description = {
                         t({
                             zh: "代码",
                             en: "Codes",
+                            de: "Codes",
                         })
                     }</a
                 >
@@ -124,7 +132,7 @@ const description = {
     <!--steamlink -->
     <section class="py-5 mt-10">
         <h2 class="text-2xl font-bold mb-4">
-            {t({ zh: "如何获取游戏", en: "How to Get the Game" })}
+            {t({ zh: "如何获取游戏", en: "How to Get the Game", de: "Wie man das Spiel bekommt" })}
         </h2>
         <div
             class="border-l-8 py-3 px-3 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mb-6"
@@ -133,6 +141,7 @@ const description = {
                 t({
                     zh: "游戏仅在 Steam 平台发售，请进入 Steam 平台购买",
                     en: "The game is only available on the Steam platform, please go to the Steam platform to purchase",
+                    de: "Das Spiel ist nur auf der Steam-Plattform verfügbar, bitte gehe zur Steam-Plattform zum Kauf",
                 })
             }
             <br />
@@ -145,6 +154,7 @@ const description = {
                     t({
                         zh: "前往 Steam 商店页面",
                         en: "Go to the Steam Store Page",
+                        de: "Zur Steam-Shopseite gehen",
                     })
                 }</a
             >
@@ -154,7 +164,7 @@ const description = {
     <!--steamlink -->
     <section class="py-5">
         <h2 class="text-2xl font-bold mb-4">
-            {t({ zh: "前置知识", en: "Prerequisites" })}
+            {t({ zh: "前置知识", en: "Prerequisites", de: "Vorkenntnisse" })}
         </h2>
         <div
             class="border-l-8 py-3 px-3 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mb-6"
@@ -163,6 +173,7 @@ const description = {
                 t({
                     zh: "为了能更好的开始游戏，建议先学习一些 Python 基础知识，只需要学习至while循环即可，大概需要 30 分钟",
                     en: "To get a better start in the game, it is recommended to learn some basic Python knowledge, only need to learn up to while loops, which takes about 30 minutes",
+                    de: "Um besser im Spiel zu starten, wird empfohlen, einige Python-Grundlagen zu lernen. Man muss nur bis zu While-Schleifen lernen, was etwa 30 Minuten dauert",
                 })
             }
             <br />
@@ -175,6 +186,7 @@ const description = {
                     t({
                         zh: "前往 Python 基础知识页面",
                         en: "Go to the Python Basics Page",
+                        de: "Zur Python-Grundlagen Seite",
                     })
                 }</a
             >
@@ -184,7 +196,7 @@ const description = {
     <!--steamlink -->
     <section class="py-10 scroll-mt-10" id="code">
         <h2 class="text-2xl font-bold mb-4">
-            {t({ zh: "代码案例", en: "Code Examples" })}
+            {t({ zh: "代码案例", en: "Code Examples", de: "Codebeispiele" })}
         </h2>
         <div
             class="border-l-8 py-3 px-3 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mb-6"
@@ -193,6 +205,7 @@ const description = {
                 t({
                     zh: "使用这些代码案例来快速提升你的游戏体验与编程技巧！",
                     en: "Use these code examples to quickly enhance your gaming experience and coding skills!",
+                    de: "Verwende diese Codebeispiele, um deine Spielerfahrung und Programmierfähigkeiten schnell zu verbessern!",
                 })
             }
             <div>
@@ -205,6 +218,7 @@ const description = {
                             t({
                                 zh: "编程农场的一些基础代码案例",
                                 en: "Basic Code Examples",
+                                de: "Grundlegende Codebeispiele",
                             })
                         }</a
                     >
@@ -223,6 +237,7 @@ const description = {
                             t({
                                 zh: "自动化收获仙人掌代码",
                                 en: "Auto Harvest Cactus Code",
+                                de: "Automatischer Kaktus-Erntecode",
                             })
                         }</a
                     >

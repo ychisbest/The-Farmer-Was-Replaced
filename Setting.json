@@ -8,6 +8,10 @@
         "zh":{
             "label": "简体中文",
             "lang": "zh-CN"
+        },
+        "de": {
+            "label": "Deutsch",
+            "lang": "de-DE"
         }
     },
     "SITE_URL": "https://thefarmerwasreplaced.com",

@@ -14,76 +14,76 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
     <div class="grid md:grid-cols-4 gap-8 mb-8">
       <div>
       <h3 class="font-bold text-lg mb-4 text-neutral-900 dark:text-white">
-        {t({ en: "The farmer was replaced", zh: "编程农场中文站" })}
+        {t({ en: "The farmer was replaced", zh: "编程农场中文站", de: "The farmer was replaced" })}
       </h3>
       <p class="text-sm text-neutral-600 leading-relaxed dark:text-neutral-400">
-        {t({ en: "The Farmer Was Replaced game information, guides, and code sharing platform", zh: "编程农场游戏信息、指南和代码分享平台" })}
+        {t({ en: "The Farmer Was Replaced game information, guides, and code sharing platform", zh: "编程农场游戏信息、指南和代码分享平台", de: "The Farmer Was Replaced Spielinformationen, Leitfäden und Code-Sharing-Plattform" })}
       </p>
       </div>
       <div>
       <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
-        {t({ en: "Quick Links", zh: "快速链接" })}
+        {t({ en: "Quick Links", zh: "快速链接", de: "Schnelllinks" })}
       </h4>
       <ul class="space-y-2 text-sm">
         <li>
         <a href={getRelativeLocaleUrl(locale, "/")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Home", zh: "主页" })}
+          {t({ en: "Home", zh: "主页", de: "Startseite" })}
         </a>
         </li>
         <li>
         <a href={getRelativeLocaleUrl(locale, "/tutorial")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Python Basics", zh: "Python 基础" })}
+          {t({ en: "Python Basics", zh: "Python 基础", de: "Python-Grundlagen" })}
         </a>
         </li>
         <li>
         <a href={getRelativeLocaleUrl(locale, "#code").replace(/\/$/, '')} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Codes", zh: "代码" })}
+          {t({ en: "Codes", zh: "代码", de: "Codes" })}
         </a>
         </li>
       </ul>
       </div>
       <div>
       <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
-        {t({ en: "Policy", zh: "网站政策" })}
+        {t({ en: "Policy", zh: "网站政策", de: "Richtlinien" })}
       </h4>
       <ul class="space-y-2 text-sm">
         <li>
         <a href={getRelativeLocaleUrl(locale, "/terms")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Terms", zh: "使用条款" })}
+          {t({ en: "Terms", zh: "使用条款", de: "Nutzungsbedingungen" })}
         </a>
         </li>
         <li>
         <a href={getRelativeLocaleUrl(locale, "/privacy")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Pravacy", zh: "隐私政策" })}
+          {t({ en: "Pravacy", zh: "隐私政策", de: "Datenschutz" })}
         </a>
         </li>
       </ul>
       </div>
       <div>
       <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
-        {t({ en: "Community", zh: "社区" })}
+        {t({ en: "Community", zh: "社区", de: "Community" })}
       </h4>
       <ul class="space-y-2 text-sm">
         <li>
         <a href="https://github.com/ychisbest/The-Farmer-Was-Replaced" target="_blank" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "GitHub", zh: "GitHub" })}
+          {t({ en: "GitHub", zh: "GitHub", de: "GitHub" })}
         </a>
         </li>
         <li>
         <a href="https://www.reddit.com/r/TheFarmerWasReplaced" target="_blank" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Reddit", zh: "Reddit" })}
+          {t({ en: "Reddit", zh: "Reddit", de: "Reddit" })}
         </a>
         </li>
         <li>
         <a href="https://store.steampowered.com/app/2060160/_/" target="_blank" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Steam", zh: "Steam" })}
+          {t({ en: "Steam", zh: "Steam", de: "Steam" })}
         </a>
         </li>
       </ul>
       </div>
     </div>
     <div class="pt-8 border-t border-neutral-200 text-center text-sm text-neutral-600 dark:border-neutral-700 dark:text-neutral-500">
-      <p>&copy; {today.getFullYear()} {t(SITE_TITLE)} {t({ en: "Game Information Site. All rights reserved." })}</p>
+      <p>&copy; {today.getFullYear()} {t(SITE_TITLE)} {t({ en: "Game Information Site. All rights reserved.", de: "Spiel-Informationsseite. Alle Rechte vorbehalten." })}</p>
     </div>
   </div>
 </footer>
