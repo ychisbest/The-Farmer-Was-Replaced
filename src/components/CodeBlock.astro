@@ -4,7 +4,7 @@ import { Code } from "astro:components";
 const t = useTranslations(Astro.currentLocale as Lang);
 import { Image } from "astro:assets";
 
-const { image, alt = "", code = "" } = Astro.props;
+const { image, alt = "", code = "" ,height="max-h-[250px]"} = Astro.props;
 ---
 
 <div class="my-3 flex flex-col md:flex-row">
@@ -27,13 +27,13 @@ const { image, alt = "", code = "" } = Astro.props;
         </button>
         <div class="rounded-2xl h-full overflow-hidden">
             <Code
-                class=`max-h-[250px] p-3 h-full
+                class={`${height} p-3 h-full
            overflow-auto
            [&::-webkit-scrollbar]:w-2
            [&::-webkit-scrollbar]:h-2  
            [&::-webkit-scrollbar-track]:bg-transparent
            [&::-webkit-scrollbar-thumb]:bg-gray-600
-           [&::-webkit-scrollbar-thumb]:rounded-full`
+           [&::-webkit-scrollbar-thumb]:rounded-full`}
                 code={code}
                 lang="python"
             />
