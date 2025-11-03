@@ -1,0 +1,324 @@
+---
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+import { useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/BaseLayout.astro";
+import CodeBlock from "@/components/CodeBlock.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { images } from "@/lib/images";
+import { Image } from "astro:assets";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+
+export const getStaticPaths = async () => {
+    const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+        if (lang !== DEFAULT_LOCALE_SETTING) {
+            return {
+                params: { lang: lang },
+            };
+        } else {
+            return { params: { lang: undefined } };
+        }
+    });
+    return paths;
+};
+
+const title = {
+    en: "The Farmer Was Replaced Pumpkin Code",
+    zh: "编程农场南瓜代码",
+    de:"Kürbis-Code"
+};
+
+const description = {
+    en: "Complete code examples for The Farmer Was Replaced game with detailed explanations and multilingual support.",
+    zh: "编程农场游戏完整代码示例，包含详细解释和多语言支持。",
+    de: "Vollständige Codebeispiele für das The Farmer Was Replaced Spiel mit detaillierten Erklärungen und mehrsprachiger Unterstützung.",
+};
+---
+
+<Layout title={title} description={description}>
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <section class="py-8">
+            <h1 class="text-3xl font-bold mb-6 text-center">
+                {t({
+                    en: "The Farmer Was Replaced - Code Examples",
+                    zh: "编程农场 - 代码示例",
+                    de: "The Farmer Was Replaced - Codebeispiele"
+                })}
+            </h1>
+
+        </section>
+
+        <!-- Example 1: Basic Auto Harvest -->
+        <section class="mb-12">
+            <h2 class="text-xl font-bold mb-4">
+                {t({
+                    en: "Auto Harvest Pumpkin",
+                })}
+            </h2>
+
+
+ <br>
+        <h2 class="text-xl font-bold mb-4">{t({
+                en: "Complete Code:",
+                zh: "完整代码：",
+                de: "Vollständiger Code:"
+        })}</h2>
+            <CodeBlock
+            height="max-h-[1000px]"
+            code={`
+def back(x=0,y=0):
+	while x!=get_pos_x() or y!=get_pos_y():
+		while get_pos_x()!=x:
+			if(get_pos_x()<x):
+				moveEx(East)
+			else:
+				moveEx(West)
+		while get_pos_y()!=y:
+			if(get_pos_y()<y):
+				moveEx(North)
+			else:
+				moveEx(South)
+
+def moveEx(dir):
+	dirs=[East,South,West,North]
+	dirs.remove(dir)
+	if(not move(dir)):
+		if(not move(dirs[0])):
+			if(not move(dirs[1])):
+				if(not move(dirs[2])):
+					return False
+
+	
+def reverse(dir):
+	if(dir == West):
+		return East
+	if(dir == East):
+		return West
+	if(dir == North):
+		return South
+	if(dir == South):
+		return North
+	
+
+def do(x,worldsize=0):
+	if worldsize == 0:
+		worldsize=get_world_size()
+	
+	dir=East
+	for i in range(worldsize):
+		for j in range(worldsize-1):
+			x()
+			move(dir)
+		x()
+		move(North)
+		if(dir==East):
+			dir=West
+		else:
+			dir=East
+			
+def doSpace(x):
+	dir=East
+	skip=False
+	for i in range(get_world_size()):
+		for j in range(get_world_size()-1):
+			if not skip:
+				x()
+				skip=True
+			else: 
+				skip=False
+
+			move(dir)
+		if not skip:
+			x()
+			skip=True
+		else: 
+			skip=False
+		move(North)
+		if(dir==East):
+			dir=West
+		else:
+			dir=East
+
+def doPumpkin():
+	back()
+	success = []
+	def adddie():
+		if not can_harvest():
+			success.append({"x":get_pos_x(),"y":get_pos_y()})
+			plantpumpkin()
+
+	def removedie():
+		if(can_harvest()):
+			success.remove({"x":get_pos_x(),"y":get_pos_y()})
+		else:
+			plantpumpkin()
+
+	def plantonce(x):
+		dir = East
+		for i in range(10):
+			for j in range(9):
+				x()
+				move(dir)
+			x()
+			move(North)
+			if dir == East:
+				dir=West
+			else:
+				dir=East
+	
+	plantonce(plantpumpkin)
+	back()
+	plantonce(adddie)
+	while(len(success) != 0):
+		for pos in success:
+			back(pos["x"],pos["y"])
+			removedie()
+
+	return len(success)==0
+
+def tillx():
+	if(get_ground_type()==Grounds.Grassland):
+		till()
+
+def tillAll(size=0):
+	back()
+	do(tillx,size)
+
+def plantcorrot():
+	plant(Entities.Carrot)			
+
+def plantbush():
+	plant(Entities.Bush)	
+	
+def planttree():
+	plant(Entities.Tree)	
+	
+def plantpumpkin():
+	plant(Entities.Pumpkin)		
+	
+def plantCactus():
+	if get_ground_type()==Grounds.Grassland:
+		till()
+	plant(Entities.Cactus)
+	
+def plantSunflower():
+	if get_ground_type()==Grounds.Grassland:
+		till()
+	plant(Entities.Sunflower)
+
+def water():
+	use_item(Items.Water)
+
+def corrotProject():
+	back()
+	do(till)
+	while True:
+		do(water)
+		for i in range(4):
+			back()
+			do(plantcorrot)
+			back()
+			do(harvest)
+		
+def woodProject():
+	while True:
+		clear()
+		back()
+		do(plantbush)
+		do(harvest)
+		
+def treeProject():
+	clear()
+	doSpace(till)
+	while True:
+		doSpace(water)
+		for i in range(4):
+			doSpace(planttree)
+			doSpace(harvest)
+		
+def hayProject():
+	while True:
+		clear()
+		do(harvest)
+		
+def pumpProject():
+	tillAll()
+	while True:
+		while doPumpkin():
+			back()
+			harvest()
+
+
+def cactusProject(size=3):
+	while True:
+		dir=East
+		vdir=North
+		sorted=False
+		vsorted=False
+		for i in range(size):
+			for j in range(size):
+				plantCactus()
+				if(j!=size-1):
+					move(dir)
+			if(i!=size-1):
+				move(vdir)
+			dir=reverse(dir)
+		vdir=reverse(vdir)
+		
+		while not sorted or not vsorted:
+			sorted=True
+			vsorted=True
+			for i in range(size):
+				for j in range(size):
+					x=get_pos_x()
+					y=get_pos_y()
+					current=measure()
+					neighbor=measure(dir)
+					down=measure(South)
+					up=measure(North)
+					if(x!=size-1 and neighbor!=None and dir==East and current>neighbor):
+						swap(East)
+						sorted=False
+					if(x!=0 and neighbor!=None and dir==West and current<neighbor):
+						swap(West)
+						sorted=False
+					if(y!=0 and down != None and current<down):
+						swap(South)
+						vsorted=False
+					if(y!=size-1 and up != None and current>up):
+						swap(North)
+						vsorted=False
+					if(j!=size-1):
+						move(dir)
+				if(i!=size-1):
+					move(vdir)
+				dir=reverse(dir)
+			vdir=reverse(vdir)
+		back()
+		harvest()
+
+clear()
+pumpProject()
+            `}
+
+            />
+        </section>
+
+		    <div id="utterances-container" class="my-10"></div>
+
+        <!-- Footer Navigation -->
+        <section class="py-8 border-t border-neutral-200 dark:border-neutral-700">
+            <div class="text-center">
+                <a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
+                    {t({
+                        en: "← Back to Home",
+                        zh: "← 返回主页",
+                        de: "← Zurück zur Startseite"
+                    })}
+                </a>
+            </div>
+        </section>
+    </div>
+</Layout>
