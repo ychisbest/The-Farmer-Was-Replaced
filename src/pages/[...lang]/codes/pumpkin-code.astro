@@ -13,9 +13,7 @@ const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
 export const getStaticPaths = async () => {
     const paths = Object.keys(LOCALES_SETTING).map((lang) => {
         if (lang !== DEFAULT_LOCALE_SETTING) {
-            return {
-                params: { lang: lang },
-            };
+            return { params: { lang: lang } };
         } else {
             return { params: { lang: undefined } };
         }
@@ -24,301 +22,325 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-    en: "The Farmer Was Replaced Pumpkin Code",
-    zh: "编程农场南瓜代码",
-    de:"Kürbis-Code"
+    en: "Pumpkin Mega-Harvest Algorithm - The Farmer Was Replaced",
+    zh: "南瓜巨大化自动化算法详解 - 编程农场",
+    de: "Kürbis-Mega-Ernte-Algorithmus - The Farmer Was Replaced",
 };
 
 const description = {
-    en: "Complete code examples for The Farmer Was Replaced game with detailed explanations and multilingual support.",
-    zh: "编程农场游戏完整代码示例，包含详细解释和多语言支持。",
-    de: "Vollständige Codebeispiele für das The Farmer Was Replaced Spiel mit detaillierten Erklärungen und mehrsprachiger Unterstützung.",
+    en: "Learn how to automate giant pumpkin farming. This script handles replanting, coordinate tracking, and mega-crop optimization.",
+    zh: "学习如何自动化种植巨大南瓜。本脚本包含补种逻辑、坐标追踪以及巨大化作物优化策略。",
+    de: "Lernen Sie, wie man den Anbau von Riesenkürbissen automatisiert. Dieses Skript behandelt das Nachpflanzen und die Optimierung.",
 };
 ---
 
 <Layout title={title} description={description}>
-    <div class="max-w-4xl mx-auto">
-        <!-- Header -->
-        <section class="py-8">
-            <h1 class="text-3xl font-bold mb-6 text-center">
+    <div class="max-w-4xl mx-auto px-4">
+        
+        <section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
                 {t({
-                    en: "The Farmer Was Replaced - Code Examples",
-                    zh: "编程农场 - 代码示例",
-                    de: "The Farmer Was Replaced - Codebeispiele"
+                    en: "Mastering Mega Pumpkins: Coordinate Tracking",
+                    zh: "精通巨大南瓜：坐标追踪法",
+                    de: "Meisterung der Riesenkürbisse: Koordinatenverfolgung"
                 })}
             </h1>
-
+            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                {t({
+                    en: "Pumpkins are special because they fuse into larger crops. A simple harvest loop won't work. We need a smart script that waits for the fusion to complete.",
+                    zh: "南瓜非常特殊，因为它们会聚合成更大的作物。简单的循环收割不仅效率低，还会破坏聚合。我们需要一个智能脚本来等待聚合完成。",
+                    de: "Kürbisse sind besonders, weil sie zu größeren Pflanzen verschmelzen. Wir brauchen ein intelligentes Skript."
+                })}
+            </p>
         </section>
 
-        <!-- Example 1: Basic Auto Harvest -->
-        <section class="mb-12">
-            <h2 class="text-xl font-bold mb-4">
+        <section class="py-10 grid md:grid-cols-2 gap-8 items-center">
+            <div class="order-2 md:order-1">
+                <h2 class="text-2xl font-bold mb-4 text-orange-600 dark:text-orange-400">
+                    {t({
+                        en: "The Strategy: Patch & Wait",
+                        zh: "核心策略：修补与等待",
+                        de: "Die Strategie: Flicken & Warten"
+                    })}
+                </h2>
+                <div class="prose dark:prose-invert text-gray-700 dark:text-gray-300 space-y-4">
+                    <p>
+                        {t({
+                            en: "The goal is to get a full grid of pumpkins to form a Giant Pumpkin. If one spot dies or is empty, the fusion fails.",
+                            zh: "我们的目标是让整个网格长满南瓜，从而形成“巨大南瓜”。如果网格中哪怕有一个位置是空的或作物枯死，聚合就会失败。",
+                            de: "Das Ziel ist es, ein volles Raster von Kürbissen zu bekommen, um einen Riesenkürbis zu bilden."
+                        })}
+                    </p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>
+                            <strong>{t({ zh: "追踪 (Track):", en: "Track:", de: "Verfolgen:" })}</strong> 
+                            {t({ zh: "记录所有尚未成熟或空的坐标点。", en: "Record coordinates of all empty or unripe spots.", de: "Koordinaten aufzeichnen." })}
+                        </li>
+                        <li>
+                            <strong>{t({ zh: "修补 (Patch):", en: "Patch:", de: "Flicken:" })}</strong> 
+                            {t({ zh: "无人机只飞向这些特定坐标进行补种，而不是盲目遍历全图。", en: "Drone visits only these specific spots to replant.", de: "Drohne besucht nur diese Punkte." })}
+                        </li>
+                        <li>
+                            <strong>{t({ zh: "收割 (Harvest):", en: "Harvest:", de: "Ernten:" })}</strong> 
+                            {t({ zh: "只有当列表中没有“问题坐标”时（意味着全图已聚合），才进行收割。", en: "Harvest only when the problem list is empty (grid is full).", de: "Ernten nur wenn das Raster voll ist." })}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="order-1 md:order-2">
+                <div class="bg-orange-50 dark:bg-orange-900/20 p-2 rounded-2xl shadow-lg border border-orange-100 dark:border-orange-800">
+                     <div class="aspect-video flex items-center justify-center text-6xl">
+                        🎃
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-10">
+            <h2 class="text-2xl font-bold mb-8 text-center">
                 {t({
-                    en: "Auto Harvest Pumpkin",
+                    en: "Step-by-Step Code Analysis",
+                    zh: "代码分步解析",
+                    de: "Schritt-für-Schritt Code-Analyse"
                 })}
             </h2>
 
+            <div class="mb-12 bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                    <span class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Step 1</span>
+                    {t({ zh: "智能移动逻辑", en: "Smart Movement Logic", de: "Intelligente Bewegung" })}
+                </h3>
+                <p class="mb-4 text-gray-600 dark:text-gray-400">
+                    {t({
+                        zh: "为了防止无人机被巨大的南瓜卡住，我们需要一个更健壮的移动函数 `moveEx`。如果主要方向被阻挡，它会尝试其他方向。",
+                        en: "To prevent the drone from getting stuck on giant pumpkins, we need a robust `moveEx` function. If blocked, it tries other directions.",
+                        de: "Um zu verhindern, dass die Drohne stecken bleibt, benötigen wir `moveEx`."
+                    })}
+                </p>
+                <CodeBlock code={`def moveEx(dir):
+    dirs=[East,South,West,North]
+    dirs.remove(dir)
+    # Try intended direction first
+    if(not move(dir)):
+        # If blocked, try alternatives to wiggle out
+        if(not move(dirs[0])):
+            if(not move(dirs[1])):
+                if(not move(dirs[2])):
+                    return False`} />
+            </div>
 
- <br>
-        <h2 class="text-xl font-bold mb-4">{t({
-                en: "Complete Code:",
-                zh: "完整代码：",
-                de: "Vollständiger Code:"
-        })}</h2>
-            <CodeBlock
-            height="max-h-[1000px]"
-            code={`
-def back(x=0,y=0):
-	while x!=get_pos_x() or y!=get_pos_y():
-		while get_pos_x()!=x:
-			if(get_pos_x()<x):
-				moveEx(East)
-			else:
-				moveEx(West)
-		while get_pos_y()!=y:
-			if(get_pos_y()<y):
-				moveEx(North)
-			else:
-				moveEx(South)
+            <div class="mb-12 bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                    <span class="bg-orange-100 text-orange-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-orange-900 dark:text-orange-300">Step 2</span>
+                    {t({ zh: "坐标追踪与补种", en: "Tracking & Replanting", de: "Verfolgen & Nachpflanzen" })}
+                </h3>
+                <p class="mb-4 text-gray-600 dark:text-gray-400">
+                    {t({
+                        zh: "函数 `doPumpkin` 维护一个 `success` 列表。它会反复检查这个列表中的位置，直到所有位置都满足收获条件（即全部长好）。",
+                        en: "The `doPumpkin` function maintains a \`success\` list. It repeatedly checks spots in this list until everything is ready.",
+                        de: "Die Funktion `doPumpkin` verwaltet eine Liste."
+                    })}
+                </p>
+                <CodeBlock code={`def doPumpkin():
+    back()
+    success = [] # List of "problematic" coordinates
+    
+    # Helper to track empty spots
+    def adddie():
+        if not can_harvest():
+            success.append({"x":get_pos_x(),"y":get_pos_y()})
+            plantpumpkin()
 
-def moveEx(dir):
-	dirs=[East,South,West,North]
-	dirs.remove(dir)
-	if(not move(dir)):
-		if(not move(dirs[0])):
-			if(not move(dirs[1])):
-				if(not move(dirs[2])):
-					return False
+    # Helper to check if spot is fixed
+    def removedie():
+        if(can_harvest()):
+            success.remove({"x":get_pos_x(),"y":get_pos_y()})
+        else:
+            plantpumpkin()
 
-	
-def reverse(dir):
-	if(dir == West):
-		return East
-	if(dir == East):
-		return West
-	if(dir == North):
-		return South
-	if(dir == South):
-		return North
-	
+    # Initial Pass: Scan whole grid
+    plantonce(adddie) 
+    
+    # Re-visit Loop: Only go to bad spots
+    while(len(success) != 0):
+        for pos in success:
+            back(pos["x"],pos["y"])
+            removedie()
 
-def do(x,worldsize=0):
-	if worldsize == 0:
-		worldsize=get_world_size()
-	
-	dir=East
-	for i in range(worldsize):
-		for j in range(worldsize-1):
-			x()
-			move(dir)
-		x()
-		move(North)
-		if(dir==East):
-			dir=West
-		else:
-			dir=East
-			
-def doSpace(x):
-	dir=East
-	skip=False
-	for i in range(get_world_size()):
-		for j in range(get_world_size()-1):
-			if not skip:
-				x()
-				skip=True
-			else: 
-				skip=False
-
-			move(dir)
-		if not skip:
-			x()
-			skip=True
-		else: 
-			skip=False
-		move(North)
-		if(dir==East):
-			dir=West
-		else:
-			dir=East
-
-def doPumpkin():
-	back()
-	success = []
-	def adddie():
-		if not can_harvest():
-			success.append({"x":get_pos_x(),"y":get_pos_y()})
-			plantpumpkin()
-
-	def removedie():
-		if(can_harvest()):
-			success.remove({"x":get_pos_x(),"y":get_pos_y()})
-		else:
-			plantpumpkin()
-
-	def plantonce(x):
-		dir = East
-		for i in range(10):
-			for j in range(9):
-				x()
-				move(dir)
-			x()
-			move(North)
-			if dir == East:
-				dir=West
-			else:
-				dir=East
-	
-	plantonce(plantpumpkin)
-	back()
-	plantonce(adddie)
-	while(len(success) != 0):
-		for pos in success:
-			back(pos["x"],pos["y"])
-			removedie()
-
-	return len(success)==0
-
-def tillx():
-	if(get_ground_type()==Grounds.Grassland):
-		till()
-
-def tillAll(size=0):
-	back()
-	do(tillx,size)
-
-def plantcorrot():
-	plant(Entities.Carrot)			
-
-def plantbush():
-	plant(Entities.Bush)	
-	
-def planttree():
-	plant(Entities.Tree)	
-	
-def plantpumpkin():
-	plant(Entities.Pumpkin)		
-	
-def plantCactus():
-	if get_ground_type()==Grounds.Grassland:
-		till()
-	plant(Entities.Cactus)
-	
-def plantSunflower():
-	if get_ground_type()==Grounds.Grassland:
-		till()
-	plant(Entities.Sunflower)
-
-def water():
-	use_item(Items.Water)
-
-def corrotProject():
-	back()
-	do(till)
-	while True:
-		do(water)
-		for i in range(4):
-			back()
-			do(plantcorrot)
-			back()
-			do(harvest)
-		
-def woodProject():
-	while True:
-		clear()
-		back()
-		do(plantbush)
-		do(harvest)
-		
-def treeProject():
-	clear()
-	doSpace(till)
-	while True:
-		doSpace(water)
-		for i in range(4):
-			doSpace(planttree)
-			doSpace(harvest)
-		
-def hayProject():
-	while True:
-		clear()
-		do(harvest)
-		
-def pumpProject():
-	tillAll()
-	while True:
-		while doPumpkin():
-			back()
-			harvest()
-
-
-def cactusProject(size=3):
-	while True:
-		dir=East
-		vdir=North
-		sorted=False
-		vsorted=False
-		for i in range(size):
-			for j in range(size):
-				plantCactus()
-				if(j!=size-1):
-					move(dir)
-			if(i!=size-1):
-				move(vdir)
-			dir=reverse(dir)
-		vdir=reverse(vdir)
-		
-		while not sorted or not vsorted:
-			sorted=True
-			vsorted=True
-			for i in range(size):
-				for j in range(size):
-					x=get_pos_x()
-					y=get_pos_y()
-					current=measure()
-					neighbor=measure(dir)
-					down=measure(South)
-					up=measure(North)
-					if(x!=size-1 and neighbor!=None and dir==East and current>neighbor):
-						swap(East)
-						sorted=False
-					if(x!=0 and neighbor!=None and dir==West and current<neighbor):
-						swap(West)
-						sorted=False
-					if(y!=0 and down != None and current<down):
-						swap(South)
-						vsorted=False
-					if(y!=size-1 and up != None and current>up):
-						swap(North)
-						vsorted=False
-					if(j!=size-1):
-						move(dir)
-				if(i!=size-1):
-					move(vdir)
-				dir=reverse(dir)
-			vdir=reverse(vdir)
-		back()
-		harvest()
-
-clear()
-pumpProject()
-            `}
-
-            />
+    return len(success)==0`} />
+            </div>
         </section>
 
-		    <div id="utterances-container" class="my-10"></div>
-
-        <!-- Footer Navigation -->
-        <section class="py-8 border-t border-neutral-200 dark:border-neutral-700">
-            <div class="text-center">
-                <a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
+        <section class="mb-16">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold">
                     {t({
-                        en: "← Back to Home",
-                        zh: "← 返回主页",
-                        de: "← Zurück zur Startseite"
+                        en: "Complete Source Code",
+                        zh: "完整源代码",
+                        de: "Vollständiger Quellcode"
+                    })}
+                </h2>
+                <span class="text-sm text-gray-500 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
+                    Python
+                </span>
+            </div>
+            
+            <p class="mb-4 text-sm text-gray-500 italic">
+                {t({
+                    zh: "注：此代码包含多种作物的逻辑，但主要入口点是底部的 pumpProject()。",
+                    en: "Note: This script includes logic for multiple crops, but the main entry point is pumpProject() at the bottom.",
+                    de: "Hinweis: Dieses Skript enthält Logik für mehrere Pflanzen."
+                })}
+            </p>
+
+            <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-orange-600 to-yellow-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                <div class="relative">
+                    <CodeBlock
+                        height="max-h-[800px]"
+                        code={`def back(x=0,y=0):
+    while x!=get_pos_x() or y!=get_pos_y():
+        while get_pos_x()!=x:
+            if(get_pos_x()<x):
+                moveEx(East)
+            else:
+                moveEx(West)
+        while get_pos_y()!=y:
+            if(get_pos_y()<y):
+                moveEx(North)
+            else:
+                moveEx(South)
+
+def moveEx(dir):
+    dirs=[East,South,West,North]
+    dirs.remove(dir)
+    if(not move(dir)):
+        if(not move(dirs[0])):
+            if(not move(dirs[1])):
+                if(not move(dirs[2])):
+                    return False
+    
+def do(x,worldsize=0):
+    if worldsize == 0:
+        worldsize=get_world_size()
+    dir=East
+    for i in range(worldsize):
+        for j in range(worldsize-1):
+            x()
+            move(dir)
+        x()
+        move(North)
+        if(dir==East):
+            dir=West
+        else:
+            dir=East
+
+# --- Pumpkin Logic Start ---
+def plantpumpkin():
+    plant(Entities.Pumpkin) 
+
+def doPumpkin():
+    back()
+    success = []
+    def adddie():
+        if not can_harvest():
+            success.append({"x":get_pos_x(),"y":get_pos_y()})
+            plantpumpkin()
+
+    def removedie():
+        if(can_harvest()):
+            success.remove({"x":get_pos_x(),"y":get_pos_y()})
+        else:
+            plantpumpkin()
+
+    def plantonce(x):
+        dir = East
+        for i in range(get_world_size()):
+            for j in range(get_world_size()-1):
+                x()
+                move(dir)
+            x()
+            move(North)
+            if dir == East:
+                dir=West
+            else:
+                dir=East
+    
+    plantonce(plantpumpkin) # First planting
+    back()
+    plantonce(adddie) # Check for failures
+    
+    # Keep fixing specific spots
+    while(len(success) != 0):
+        for pos in success:
+            back(pos["x"],pos["y"])
+            removedie()
+
+    return len(success)==0
+
+def pumpProject():
+    # Helper to till ground first
+    def tillx():
+        if(get_ground_type()==Grounds.Grassland):
+            till()
+    back()
+    do(tillx)
+    
+    while True:
+        # Wait until doPumpkin returns true (all spots ready)
+        while doPumpkin():
+            back()
+            harvest()
+# --- Pumpkin Logic End ---
+
+# Start the bot
+clear()
+pumpProject()`}
+                    />
+                </div>
+            </div>
+        </section>
+
+        <section class="py-8 bg-orange-50 dark:bg-orange-900/20 rounded-2xl border border-orange-100 dark:border-orange-800 p-6 mb-12">
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-orange-800 dark:text-orange-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                {t({ zh: "南瓜种植技巧", en: "Pumpkin Farming Tips", de: "Kürbis-Anbautipps" })}
+            </h3>
+            <ul class="space-y-2 text-orange-900 dark:text-orange-100">
+                <li class="flex items-start gap-2">
+                    <span class="font-bold">•</span>
+                    {t({
+                        zh: "确保你的土地已经开垦。该脚本包含 `tillx` 函数会自动开垦草地。",
+                        en: "Ensure your land is tilled. The script includes `tillx` to handle grassland automatically.",
+                        de: "Stellen Sie sicher, dass Ihr Land gepflügt ist."
+                    })}
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="font-bold">•</span>
+                    {t({
+                        zh: "尽量使用浇水系统。虽然脚本能工作，但有水的情况下南瓜长得更快，巨大化的几率更高。",
+                        en: "Use water if possible. Pumpkins grow faster and fuse more reliably on watered soil.",
+                        de: "Verwenden Sie wenn möglich Wasser."
+                    })}
+                </li>
+            </ul>
+        </section>
+
+        <section class="py-8 border-t border-neutral-200 dark:border-neutral-700">
+            <div class="flex justify-center">
+                <a href={getRelativeLocaleUrl(locale, "/")} class="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full transition text-gray-700 dark:text-gray-300 font-medium">
+                    <span>←</span>
+                    {t({
+                        en: "Back to Home",
+                        zh: "返回主页",
+                        de: "Zurück zur Startseite"
                     })}
                 </a>
             </div>
         </section>
+        
+        <div id="utterances-container" class="my-10"></div>
     </div>
 </Layout>
