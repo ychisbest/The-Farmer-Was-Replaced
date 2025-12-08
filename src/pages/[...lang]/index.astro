@@ -2,21 +2,25 @@
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
 import { useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/BaseLayout.astro";
-import { Image } from "astro:assets";
-import hero from "@/assets/Hero.jpg";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import CodeBlock from "@/components/CodeBlock.astro";
-import { images } from "@/lib/images";
 import FAQ from "@/components/FAQ.astro";
+import { getCollection } from "astro:content";
 
+// --- Data Fetching Logic ---
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+
+// 获取最新发布的 3 篇文章
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+    .filter((post) => post.data.title.startsWith(locale + "/"))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, 3);
+
 export const getStaticPaths = async () => {
     const paths = Object.keys(LOCALES_SETTING).map((lang) => {
         if (lang !== DEFAULT_LOCALE_SETTING) {
-            return {
-                params: { lang: lang },
-            };
+            return { params: { lang: lang } };
         } else {
             return { params: { lang: undefined } };
         }
@@ -25,253 +29,239 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-    en: "Home",
-    zh: "编程农场中文站",
-    de: "Startseite",
+    en: "The Farmer Was Replaced: Ultimate Guide, Wiki & Scripts",
+    zh: "编程农场 (The Farmer Was Replaced) 中文终极指南与脚本站",
+    de: "The Farmer Was Replaced: Ultimativer Guide, Wiki & Skripte",
 };
+
 const description = {
-    en: "The Farmer Was Replaced is the ultimate programming game for learning Python through farm automation. Discover tutorials, code examples, and strategies for this educational farming simulation.",
-    zh: "编程农场是通过农场自动化学习Python的终极编程游戏。发现教程、代码示例和策略。",
-    de: "The Farmer Was Replaced ist das ultimative Programmierspiel zum Lernen von Python durch Farm-Automatisierung. Entdecke Tutorials, Codebeispiele und Strategien für diese Bildungsfarm-Simulation.",
+    en: "Master Python automation in 'The Farmer Was Replaced'. Browse our extensive collection of farming scripts, optimization algorithms, and beginner-friendly tutorials.",
+    zh: "精通《编程农场》的 Python 自动化。浏览我们海量的农场脚本、优化算法和新手友好的教程。",
+    de: "Meistere Python-Automatisierung in 'The Farmer Was Replaced'. Durchstöbere unsere umfangreiche Sammlung von Farm-Skripten, Optimierungsalgorithmen und anfängerfreundlichen Tutorials.",
 };
 ---
 
 <Layout title={title} description={description}>
-    <!-- Hero Section -->
-    <section
-        class="flex flex-col md:flex-row py-5 items-center justify-center px-4"
-    >
-        <!-- <Image
-            src={hero}
-            height={172}
-            width={300}
-            alt={t({ zh: "游戏英雄图片", en: "Hero Game Image" })}
-            class="w-full md:w-auto max-w-[300px] dark:brightness-[0.7] rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
-        /> -->
+    
+    <section class="relative pt-20 pb-24 px-4 dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16">
+            
+            <div class="flex-1 text-center md:text-left space-y-8">
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-none">
+                    {t({
+                        zh: "用代码",
+                        en: "Automate Your Farm",
+                        de: "Automatisiere deine Farm",
+                    })}
+                    <span class="text-green-600 block mt-4">
+                        {t({
+                            zh: "解放你的双手",
+                            en: "Master Python Logic",
+                            de: "Meistere Python-Logik",
+                        })}
+                    </span>
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto md:mx-0 leading-relaxed">
+                    {t({
+                        zh: "欢迎来到《The Farmer Was Replaced》最大的中文知识库。无论你是编程新手还是追求效率的算法专家，这里都有你需要的 Python 脚本和策略。",
+                        en: "Welcome to the largest knowledge base for 'The Farmer Was Replaced'. Whether you are a coding beginner or an algorithm expert seeking efficiency, we have the Python scripts and strategies you need.",
+                        de: "Willkommen in der größten Wissensdatenbank für 'The Farmer Was Replaced'. Egal ob Programmieranfänger oder Algorithmus-Experte, hier findest du die Python-Skripte und Strategien, die du brauchst.",
+                    })}
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start pt-6">
+                    <a href={getRelativeLocaleUrl(locale, "/tutorial")} class="px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold shadow-lg shadow-green-200 dark:shadow-none transition transform hover:-translate-y-1">
+                        {t({ zh: "开始学习 Python", en: "Start Learning Python", de: "Python lernen starten" })}
+                    </a>
+                    <a href="#scripts" class="px-8 py-4 bg-white hover:bg-gray-50 text-gray-900 border-2 border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 rounded-xl font-bold transition">
+                        {t({ zh: "浏览脚本库", en: "Browse Scripts", de: "Skripte durchsuchen" })}
+                    </a>
+                </div>
+            </div>
 
-        <iframe
-            width="560"
-            height="315"
-            class="rounded-2xl"
-            src="https://www.youtube.com/embed/oscg57aRxhM?si=ghp1s3zuoGFdSw2F"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen></iframe>
-
-        <div class="mt-6 md:mt-0 md:ml-8 flex flex-col justify-center">
-            <h1
-                class="text-2xl md:text-3xl font-bold mb-4 text-center md:text-left"
-            >
-                {
-                    t({
-                        zh: "欢迎来到",
-                        en: "Welcome to ",
-                        de: "Willkommen bei ",
-                    })
-                }
-                <span class="bg-yellow-100 dark:bg-yellow-900 font-extrabold">
-                    {
-                        t({
-                            zh: "编程农场",
-                            en: "The Farmer Was Replaced",
-                            de: "The Farmer Was Replaced",
-                        })
-                    }
-                </span>
-                {
-                    t({
-                        zh: "中文站!",
-                        en: "Aggregator!",
-                        de: "Aggregator!",
-                    })
-                }
-            </h1>
-            <p
-                class="text-base md:text-lg mb-6 max-w-xl text-center md:text-left"
-            >
-                {
-                    t({
-                        zh: "The Farmer Was Replaced 是一个通过农场自动化学习 Python 的终极编程游戏。探索教程、代码示例和策略，提升你的编程技能，同时享受有趣的农场模拟体验。",
-                        en: "The Farmer Was Replaced is the ultimate programming game for learning Python through farm automation. Explore tutorials, code examples, and strategies to enhance your coding skills while enjoying a fun farming simulation.",
-                        de: "The Farmer Was Replaced ist das ultimative Programmierspiel zum Lernen von Python durch Farm-Automatisierung. Entdecke Tutorials, Codebeispiele und Strategien, um deine Programmierfähigkeiten zu verbessern und dabei eine unterhaltsame Farm-Simulation zu genießen.",
-                    })
-                }
-            </p>
-            <div class="text-center md:text-left">
-                <a
-                    class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
-                    href={getRelativeLocaleUrl(locale, "/tutorial")}
-                    >{
-                        t({
-                            zh: "Python 基础",
-                            en: "Python Basics",
-                            de: "Python-Grundlagen",
-                        })
-                    }</a
-                > |
-                <a
-                    class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
-                    href={getRelativeLocaleUrl(locale, "#code").replace(
-                        /\/$/,
-                        "",
-                    )}
-                    >{
-                        t({
-                            zh: "代码",
-                            en: "Codes",
-                            de: "Codes",
-                        })
-                    }</a
-                >
+            <div class="flex-1 w-full max-w-xl">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-gray-900/5 dark:ring-white/10">
+                    <iframe
+                        class="w-full aspect-video"
+                        src="https://www.youtube.com/embed/oscg57aRxhM?si=ghp1s3zuoGFdSw2F"
+                        title="The Farmer Was Replaced Gameplay"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
             </div>
         </div>
     </section>
 
-    <!--steamlink -->
-    <section class="py-5 mt-10">
-        <h2 class="text-2xl font-bold mb-4">
-            {
-                t({
-                    zh: "如何获取游戏",
-                    en: "How to Get the Game",
-                    de: "Wie man das Spiel bekommt",
-                })
-            }
-        </h2>
-        <div
-            class="border-l-8 py-3 px-3 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mb-6"
-        >
-            {
-                t({
-                    zh: "游戏仅在 Steam 平台发售，请进入 Steam 平台购买",
-                    en: "The game is only available on the Steam platform, please go to the Steam platform to purchase",
-                    de: "Das Spiel ist nur auf der Steam-Plattform verfügbar, bitte gehe zur Steam-Plattform zum Kauf",
-                })
-            }
-            <br />
-            <a
-                class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
-                href="https://store.steampowered.com/app/2060160/_/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >{
-                    t({
-                        zh: "前往 Steam 商店页面",
-                        en: "Go to the Steam Store Page",
-                        de: "Zur Steam-Shopseite gehen",
-                    })
-                }</a
-            >
+    <section class="py-24 px-4 bg-white dark:bg-gray-900">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                {t({ zh: "为什么选择这个游戏学习编程？", en: "Why Learn Coding with This Game?", de: "Warum Programmieren mit diesem Spiel lernen?" })}
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 text-gray-700 dark:text-gray-300 leading-loose">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="bg-green-100 text-green-700 p-2 rounded-lg">🐍</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                            {t({ zh: "真正的 Python 环境", en: "Real Python Environment", de: "Echte Python-Umgebung" })}
+                        </h3>
+                    </div>
+                    <p>
+                        {t({
+                            zh: "这就不仅仅是一个游戏。你在游戏中编写的每一行代码都是真实的 Python 语法。你将学习变量、循环、函数以及复杂的数据结构，这些技能可以直接应用到现实世界的软件开发中。",
+                            en: "This isn't just a game. Every line of code you write is real Python syntax. You will learn variables, loops, functions, and complex data structures—skills directly applicable to real-world software development.",
+                            de: "Das ist nicht nur ein Spiel. Jede Codezeile ist echte Python-Syntax. Du lernst Variablen, Schleifen, Funktionen und komplexe Datenstrukturen – Fähigkeiten für die reale Softwareentwicklung.",
+                        })}
+                    </p>
+                </div>
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="bg-blue-100 text-blue-700 p-2 rounded-lg">👁️</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                            {t({ zh: "可视化的算法反馈", en: "Visual Algorithm Feedback", de: "Visuelles Algorithmus-Feedback" })}
+                        </h3>
+                    </div>
+                    <p>
+                        {t({
+                            zh: "通过控制无人机进行播种、浇水和收割，你可以立即看到代码运行的结果。这种即时反馈机制是理解抽象编程概念（如递归、路径查找算法）的最佳方式。",
+                            en: "By controlling drones to plant, water, and harvest, you see the results of your code instantly. This immediate feedback loop is the best way to understand abstract programming concepts like recursion and pathfinding algorithms.",
+                            de: "Indem du Drohnen zum Pflanzen, Bewässern und Ernten steuerst, siehst du sofort Ergebnisse. Dieses Feedback ist der beste Weg, um abstrakte Konzepte wie Rekursion und Pfadfindung zu verstehen.",
+                        })}
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!--steamlink -->
-    <section class="py-5">
-        <h2 class="text-2xl font-bold mb-4">
-            {t({ zh: "前置知识", en: "Prerequisites", de: "Vorkenntnisse" })}
-        </h2>
-        <div
-            class="border-l-8 py-3 px-3 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mb-6"
-        >
-            {
-                t({
-                    zh: "为了能更好的开始游戏，建议先学习一些 Python 基础知识，只需要学习至while循环即可，大概需要 30 分钟",
-                    en: "To get a better start in the game, it is recommended to learn some basic Python knowledge, only need to learn up to while loops, which takes about 30 minutes",
-                    de: "Um besser im Spiel zu starten, wird empfohlen, einige Python-Grundlagen zu lernen. Man muss nur bis zu While-Schleifen lernen, was etwa 30 Minuten dauert",
-                })
-            }
-            <br />
-            <a
-                class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
-                href={getRelativeLocaleUrl(locale, "/tutorial")}
-                target="_blank"
-                rel="noopener noreferrer"
-                >{
-                    t({
-                        zh: "前往 Python 基础知识页面",
-                        en: "Go to the Python Basics Page",
-                        de: "Zur Python-Grundlagen Seite",
-                    })
-                }</a
-            >
+    {recentPosts.length > 0 && (
+        <section class="py-24 px-4 border-t border-gray-100 dark:border-gray-800 dark:bg-gray-900">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">
+                            {t({ zh: "最新教程与策略", en: "Latest Tutorials & Strategies", de: "Neueste Tutorials & Strategien" })}
+                        </h2>
+                        <p class="text-gray-600 dark:text-gray-400">保持更新，掌握最先进的自动化技术</p>
+                    </div>
+                    <a href={getRelativeLocaleUrl(locale, "/blog")} class="group inline-flex items-center gap-1 text-green-600 hover:text-green-800 font-bold transition">
+                        {t({ zh: "查看所有文章", en: "View All Posts", de: "Alle Artikel ansehen" })}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </a>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    {recentPosts.map((post) => (
+                        <article class="bg-white dark:bg-gray-800 rounded-2xl p-6 ring-1 ring-gray-200 dark:ring-gray-700 hover:ring-green-500 dark:hover:ring-green-500 hover:shadow-xl shadow-sm transition-all duration-300 flex flex-col">
+                            <div class="mb-4 text-sm font-medium text-green-600 dark:text-green-400">
+                                New Update
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 leading-snug">
+                                <a href={getRelativeLocaleUrl(locale, `/blog/${post.data.title.split('/').pop()}`)} class="hover:text-green-700 dark:hover:text-green-400 transition">
+                                    {post.data.title}
+                                </a>
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 line-clamp-3 mb-6 flex-grow leading-relaxed">
+                                {post.data.description}
+                            </p>
+                            <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+                                <span class="text-sm text-gray-500 dark:text-gray-400">
+                                    {post.data.date.toLocaleDateString()}
+                                </span>
+                                <a href={getRelativeLocaleUrl(locale, `/blog/${post.data.title.split('/').pop()}`)} class="text-sm font-bold text-green-600 hover:text-green-800 dark:text-green-400 transition">
+                                    Read More →
+                                </a>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )}
+
+    <section id="scripts" class="py-24 px-4 border-t border-gray-100 dark:border-gray-800 dark:bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">
+                    {t({ zh: "热门自动化脚本库", en: "Popular Automation Scripts", de: "Beliebte Automatisierungsskripte" })}
+                </h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    {t({ zh: "一键复制经过优化的 Python 代码，快速提升你的农场效率。从基础到高级，应有尽有。", en: "Copy optimized Python code with one click to boost your farm efficiency. From basics to advanced.", de: "Kopieren Sie optimierten Python-Code mit einem Klick, um Ihre Farm-Effizienz zu steigern. Von den Grundlagen bis zu Fortgeschrittenen." })}
+                </p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <a href={getRelativeLocaleUrl(locale, "/basic-codes")} class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-orange-100 dark:border-orange-900/30 hover:border-orange-400 dark:hover:border-orange-500 hover:shadow-lg transition-all duration-300 text-center">
+                    <div class="w-14 h-14 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition">
+                        <span class="text-2xl">⚡</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">
+                        {t({ zh: "基础代码", en: "Basics", de: "Grundlagen" })}
+                    </h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        {t({ zh: "循环与变量入门", en: "Loops & Variables", de: "Schleifen & Variablen" })}
+                    </p>
+                </a>
+
+                <a href={getRelativeLocaleUrl(locale, "/codes/cactus-code")} class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-green-100 dark:border-green-900/30 hover:border-green-400 dark:hover:border-green-500 hover:shadow-lg transition-all duration-300 text-center">
+                    <div class="w-14 h-14 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition">
+                        <span class="text-2xl">🌵</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">
+                        {t({ zh: "仙人掌脚本", en: "Cactus Script", de: "Kaktus-Skript" })}
+                    </h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        {t({ zh: "网格种植策略", en: "Grid Planting Strategy", de: "Raster-Pflanzstrategie" })}
+                    </p>
+                </a>
+
+                <a href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")} class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-yellow-100 dark:border-yellow-900/30 hover:border-yellow-400 dark:hover:border-yellow-500 hover:shadow-lg transition-all duration-300 text-center">
+                    <div class="w-14 h-14 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition">
+                        <span class="text-2xl">🎃</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">
+                        {t({ zh: "南瓜脚本", en: "Pumpkin Script", de: "Kürbis-Skript" })}
+                    </h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        {t({ zh: "巨大化作物逻辑", en: "Mega Crop Logic", de: "Mega-Ernte-Logik" })}
+                    </p>
+                </a>
+
+                <a href={getRelativeLocaleUrl(locale, "/tutorial")} class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-purple-100 dark:border-purple-900/30 hover:border-purple-400 dark:hover:border-purple-500 hover:shadow-lg transition-all duration-300 text-center">
+                    <div class="w-14 h-14 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition">
+                        <span class="text-2xl">🌻</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">
+                        {t({ zh: "进阶向日葵", en: "Sunflowers", de: "Sonnenblumen" })}
+                    </h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                        {t({ zh: "花瓣计数算法", en: "Petal Counting Algo", de: "Blütenblatt-Algorithmus" })}
+                    </p>
+                </a>
+            </div>
         </div>
     </section>
 
-    <!--steamlink -->
-    <section class="py-10 scroll-mt-10" id="code">
-        <h2 class="text-2xl font-bold mb-4">
-            {t({ zh: "代码案例", en: "Code Examples", de: "Codebeispiele" })}
-        </h2>
-        <div
-            class="border-l-8 py-3 px-3 border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 mb-6"
-        >
-            {
-                t({
-                    zh: "使用这些代码案例来快速提升你的游戏体验与编程技巧！",
-                    en: "Use these code examples to quickly enhance your gaming experience and coding skills!",
-                    de: "Verwende diese Codebeispiele, um deine Spielerfahrung und Programmierfähigkeiten schnell zu verbessern!",
-                })
-            }
+    <section class="py-16 px-4 border-t border-gray-100 dark:border-gray-800 dark:bg-gray-900">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 p-8 bg-gray-50 dark:bg-gray-800 rounded-2xl">
             <div>
-                <div class="my-2">
-                    <a
-                        class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
-                        href={getRelativeLocaleUrl(locale, "/basic-codes")}
-                        >{
-                            t({
-                                zh: "编程农场的一些基础代码案例",
-                                en: "Basic Code Examples",
-                                de: "Grundlegende Codebeispiele",
-                            })
-                        }</a
-                    >
-                </div>
-
-                <div class="my-2">
-                    <a
-                        class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
-                        href={getRelativeLocaleUrl(
-                            locale,
-                            "/codes/cactus-code",
-                        )}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        >{
-                            t({
-                                zh: "自动化收获仙人掌代码",
-                                en: "Auto Harvest Cactus Code",
-                                de: "Automatischer Kaktus-Erntecode",
-                            })
-                        }</a
-                    >
-                </div>
-
-                <div class="my-2">
-                    <a
-                        class="inline-block text-blue-500 underline cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
-                        href={getRelativeLocaleUrl(
-                            locale,
-                            "/codes/pumpkin-code",
-                        )}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        >{
-                            t({
-                                en: "The Farmer Was Replaced Pumpkin Code",
-                                zh: "编程农场南瓜代码",
-                                de: "Kürbis-Code",
-                            })
-                        }</a
-                    >
-                </div>
+                <h3 class="font-bold text-xl mb-2 text-gray-900 dark:text-white">{t({ zh: "准备好开始了吗？", en: "Ready to start?", de: "Bereit zu starten?" })}</h3>
+                <p class="text-gray-600 dark:text-gray-400">{t({ zh: "请前往 Steam 购买正版游戏支持开发者", en: "Support the devs on Steam", de: "Unterstütze die Entwickler auf Steam" })}</p>
             </div>
+            <a 
+                href="https://store.steampowered.com/app/2060160/_/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="flex items-center gap-3 px-8 py-4 bg-gray-900 hover:bg-black text-white rounded-xl font-bold transition transform hover:scale-105"
+            >
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/></svg>
+                <span>Steam Store</span>
+            </a>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <FAQ />
+    <div class="py-16 border-t border-gray-100 dark:border-gray-800 dark:bg-gray-900">
+        <FAQ />
+    </div>
 
-    <div id="utterances-container" class="my-10"></div>
 </Layout>

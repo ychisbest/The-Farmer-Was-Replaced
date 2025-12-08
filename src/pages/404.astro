@@ -14,14 +14,7 @@ const defaultLocale = DEFAULT_LOCALE;
     <meta charset="UTF-8" />
     <title>404 PAGE NOT FOUND</title>
     <link rel="canonical" href={Astro.site} />
-
-    <noscript>
-      <meta
-        http-equiv="refresh"
-        content={`0;url=${baseUrl + DEFAULT_LOCALE}/404/`}
-      />
-    </noscript>
-
+    
     <script is:inline define:vars={{ langs, baseUrl, defaultLocale }}>
       const urlHasLang = langs.includes(location.pathname.split("/")[1]);
       const localStorageHasLang =
