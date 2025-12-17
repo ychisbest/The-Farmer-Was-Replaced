@@ -6,6 +6,9 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import FAQ from "@/components/FAQ.astro";
 import { getCollection } from "astro:content";
 
+import { Image } from "astro:assets";
+import logo from "@/assets/geminiHero.png";
+
 // --- Data Fetching Logic ---
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -43,7 +46,7 @@ const description = {
 
 <Layout title={title} description={description}>
     <section
-        class="relative pt-20 pb-24 px-4 dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800"
+        class="relative pt-20 pb-24 px-4  border-b border-gray-100 dark:border-gray-800"
     >
         <div
             class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16"
@@ -74,9 +77,9 @@ const description = {
                 >
                     {
                         t({
-                            zh: "欢迎来到《The Farmer Was Replaced》最大的中文知识库。无论你是编程新手还是追求效率的算法专家，这里都有你需要的 Python 脚本和策略。",
-                            en: "Welcome to the largest knowledge base for 'The Farmer Was Replaced'. Whether you are a coding beginner or an algorithm expert seeking efficiency, we have the Python scripts and strategies you need.",
-                            de: "Willkommen in der größten Wissensdatenbank für 'The Farmer Was Replaced'. Egal ob Programmieranfänger oder Algorithmus-Experte, hier findest du die Python-Skripte und Strategien, die du brauchst.",
+                            zh: "欢迎来到《编程农场》最大的中文知识库。游戏化学习是最高效的编程教育方式——无论你是编程新手还是追求效率的算法专家，这里都有你需要的 Python 脚本和优化策略。",
+                            en: "Welcome to the largest knowledge base for 'The Farmer Was Replaced'. Gamified learning is the most effective way to master Python—whether you're a coding beginner or an algorithm expert seeking optimization, we have the scripts and strategies you need.",
+                            de: "Willkommen in der größten Wissensdatenbank für 'The Farmer Was Replaced'. Spielbasiertes Lernen ist der effektivste Weg, Python zu meistern—ob Programmieranfänger oder Algorithmus-Experte, hier findest du die Skripte und Strategien, die du brauchst.",
                         })
                     }
                 </p>
@@ -114,385 +117,374 @@ const description = {
                 <div
                     class="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-gray-900/5 dark:ring-white/10"
                 >
-                    <iframe
-                        class="w-full aspect-video"
-                        src="https://www.youtube.com/embed/oscg57aRxhM?si=ghp1s3zuoGFdSw2F"
-                        title="The Farmer Was Replaced Gameplay"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                    >
-                    </iframe>
+                    <Image
+                        src={logo}
+                        alt="Logo"
+                        width={600}
+                        height={600}
+                        class="rounded-xl"
+                    />
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-24 px-4 bg-white dark:bg-gray-900">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold mb-12 text-center">
+{
+    recentPosts.length > 0 && (
+        <section class="py-24 px-4 border-t border-gray-100 dark:border-gray-800 dark:bg-gray-900">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">
+                            {t({
+                                zh: "最新教程与策略",
+                                en: "Latest Tutorials & Strategies",
+                                de: "Neueste Tutorials & Strategien",
+                            })}
+                        </h2>
+                        <p class="text-gray-600 dark:text-gray-400">
+                            保持更新，掌握最先进的自动化技术
+                        </p>
+                    </div>
+                    <a
+                        href={getRelativeLocaleUrl(locale, "/blog")}
+                        class="group inline-flex items-center gap-1 text-green-600 hover:text-green-800 font-bold transition"
+                    >
+                        {t({
+                            zh: "查看所有文章",
+                            en: "View All Posts",
+                            de: "Alle Artikel ansehen",
+                        })}
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5 group-hover:translate-x-1 transition"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    {recentPosts.map((post) => (
+                        <article class="bg-white dark:bg-gray-800 rounded-2xl p-6 ring-1 ring-gray-200 dark:ring-gray-700 hover:ring-green-500 dark:hover:ring-green-500 hover:shadow-xl shadow-sm transition-all duration-300 flex flex-col">
+                            <div class="mb-4 text-sm font-medium text-green-600 dark:text-green-400">
+                                New Update
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 leading-snug">
+                                <a
+                                    href={getRelativeLocaleUrl(
+                                        locale,
+                                        `/blog/${post.data.title.split("/").pop()}`,
+                                    )}
+                                    class="hover:text-green-700 dark:hover:text-green-400 transition"
+                                >
+                                    {post.data.title}
+                                </a>
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 line-clamp-3 mb-6 flex-grow leading-relaxed">
+                                {post.data.description}
+                            </p>
+                            <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+                                <span class="text-sm text-gray-500 dark:text-gray-400">
+                                    {post.data.date.toLocaleDateString()}
+                                </span>
+                                <a
+                                    href={getRelativeLocaleUrl(
+                                        locale,
+                                        `/blog/${post.data.title.split("/").pop()}`,
+                                    )}
+                                    class="text-sm font-bold text-green-600 hover:text-green-800 dark:text-green-400 transition"
+                                >
+                                    Read More →
+                                </a>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )
+}
+
+<section id="scripts" class="py-24 px-4">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4">
                 {
                     t({
-                        zh: "为什么选择这个游戏学习编程？",
-                        en: "Why Learn Coding with This Game?",
-                        de: "Warum Programmieren mit diesem Spiel lernen?",
+                        zh: "热门自动化脚本库",
+                        en: "Popular Automation Scripts",
+                        de: "Beliebte Automatisierungsskripte",
                     })
                 }
             </h2>
-
-            <div
-                class="grid md:grid-cols-2 gap-12 text-gray-700 dark:text-gray-300 leading-loose"
-            >
-                <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="bg-green-100 text-green-700 p-2 rounded-lg"
-                            >🐍</span
-                        >
-                        <h3
-                            class="text-xl font-bold text-gray-900 dark:text-white"
-                        >
-                            {
-                                t({
-                                    zh: "真正的 Python 环境",
-                                    en: "Real Python Environment",
-                                    de: "Echte Python-Umgebung",
-                                })
-                            }
-                        </h3>
-                    </div>
-                    <p>
-                        {
-                            t({
-                                zh: "这就不仅仅是一个游戏。你在游戏中编写的每一行代码都是真实的 Python 语法。你将学习变量、循环、函数以及复杂的数据结构，这些技能可以直接应用到现实世界的软件开发中。",
-                                en: "This isn't just a game. Every line of code you write is real Python syntax. You will learn variables, loops, functions, and complex data structures—skills directly applicable to real-world software development.",
-                                de: "Das ist nicht nur ein Spiel. Jede Codezeile ist echte Python-Syntax. Du lernst Variablen, Schleifen, Funktionen und komplexe Datenstrukturen – Fähigkeiten für die reale Softwareentwicklung.",
-                            })
-                        }
-                    </p>
-                </div>
-                <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="bg-blue-100 text-blue-700 p-2 rounded-lg"
-                            >👁️</span
-                        >
-                        <h3
-                            class="text-xl font-bold text-gray-900 dark:text-white"
-                        >
-                            {
-                                t({
-                                    zh: "可视化的算法反馈",
-                                    en: "Visual Algorithm Feedback",
-                                    de: "Visuelles Algorithmus-Feedback",
-                                })
-                            }
-                        </h3>
-                    </div>
-                    <p>
-                        {
-                            t({
-                                zh: "通过控制无人机进行播种、浇水和收割，你可以立即看到代码运行的结果。这种即时反馈机制是理解抽象编程概念（如递归、路径查找算法）的最佳方式。",
-                                en: "By controlling drones to plant, water, and harvest, you see the results of your code instantly. This immediate feedback loop is the best way to understand abstract programming concepts like recursion and pathfinding algorithms.",
-                                de: "Indem du Drohnen zum Pflanzen, Bewässern und Ernten steuerst, siehst du sofort Ergebnisse. Dieses Feedback ist der beste Weg, um abstrakte Konzepte wie Rekursion und Pfadfindung zu verstehen.",
-                            })
-                        }
-                    </p>
-                </div>
-            </div>
+            <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                {
+                    t({
+                        zh: "一键复制经过优化的 Python 代码，快速提升你的农场效率。从基础到高级，应有尽有。",
+                        en: "Copy optimized Python code with one click to boost your farm efficiency. From basics to advanced.",
+                        de: "Kopieren Sie optimierten Python-Code mit einem Klick, um Ihre Farm-Effizienz zu steigern. Von den Grundlagen bis zu Fortgeschrittenen.",
+                    })
+                }
+            </p>
         </div>
-    </section>
 
-    {
-        recentPosts.length > 0 && (
-            <section class="py-24 px-4 border-t border-gray-100 dark:border-gray-800 dark:bg-gray-900">
-                <div class="max-w-6xl mx-auto">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
-                        <div>
-                            <h2 class="text-3xl font-bold mb-2">
-                                {t({
-                                    zh: "最新教程与策略",
-                                    en: "Latest Tutorials & Strategies",
-                                    de: "Neueste Tutorials & Strategien",
-                                })}
-                            </h2>
-                            <p class="text-gray-600 dark:text-gray-400">
-                                保持更新，掌握最先进的自动化技术
-                            </p>
-                        </div>
-                        <a
-                            href={getRelativeLocaleUrl(locale, "/blog")}
-                            class="group inline-flex items-center gap-1 text-green-600 hover:text-green-800 font-bold transition"
-                        >
-                            {t({
-                                zh: "查看所有文章",
-                                en: "View All Posts",
-                                de: "Alle Artikel ansehen",
-                            })}
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5 group-hover:translate-x-1 transition"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"
-                                />
-                            </svg>
-                        </a>
-                    </div>
-
-                    <div class="grid md:grid-cols-3 gap-8">
-                        {recentPosts.map((post) => (
-                            <article class="bg-white dark:bg-gray-800 rounded-2xl p-6 ring-1 ring-gray-200 dark:ring-gray-700 hover:ring-green-500 dark:hover:ring-green-500 hover:shadow-xl shadow-sm transition-all duration-300 flex flex-col">
-                                <div class="mb-4 text-sm font-medium text-green-600 dark:text-green-400">
-                                    New Update
-                                </div>
-                                <h3 class="text-xl font-bold mb-3 leading-snug">
-                                    <a
-                                        href={getRelativeLocaleUrl(
-                                            locale,
-                                            `/blog/${post.data.title.split("/").pop()}`,
-                                        )}
-                                        class="hover:text-green-700 dark:hover:text-green-400 transition"
-                                    >
-                                        {post.data.title}
-                                    </a>
-                                </h3>
-                                <p class="text-gray-600 dark:text-gray-300 line-clamp-3 mb-6 flex-grow leading-relaxed">
-                                    {post.data.description}
-                                </p>
-                                <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
-                                    <span class="text-sm text-gray-500 dark:text-gray-400">
-                                        {post.data.date.toLocaleDateString()}
-                                    </span>
-                                    <a
-                                        href={getRelativeLocaleUrl(
-                                            locale,
-                                            `/blog/${post.data.title.split("/").pop()}`,
-                                        )}
-                                        class="text-sm font-bold text-green-600 hover:text-green-800 dark:text-green-400 transition"
-                                    >
-                                        Read More →
-                                    </a>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
+        <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <a
+                href={getRelativeLocaleUrl(locale, "/basic-codes")}
+                class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-orange-100 dark:border-orange-900/30 hover:border-orange-400 dark:hover:border-orange-500 hover:shadow-lg transition-all duration-300 text-center"
+            >
+                <div
+                    class="w-14 h-14 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition"
+                >
+                    <span class="text-2xl">⚡</span>
                 </div>
-            </section>
-        )
-    }
-
-    <section
-        id="scripts"
-        class="py-24 px-4 border-t border-gray-100 dark:border-gray-800 dark:bg-gray-900"
-    >
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">
+                <h3
+                    class="font-bold text-lg text-gray-900 dark:text-white mb-2"
+                >
+                    {t({ zh: "基础代码", en: "Basics", de: "Grundlagen" })}
+                </h3>
+                <p
+                    class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
+                >
                     {
                         t({
-                            zh: "热门自动化脚本库",
-                            en: "Popular Automation Scripts",
-                            de: "Beliebte Automatisierungsskripte",
-                        })
-                    }
-                </h2>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                    {
-                        t({
-                            zh: "一键复制经过优化的 Python 代码，快速提升你的农场效率。从基础到高级，应有尽有。",
-                            en: "Copy optimized Python code with one click to boost your farm efficiency. From basics to advanced.",
-                            de: "Kopieren Sie optimierten Python-Code mit einem Klick, um Ihre Farm-Effizienz zu steigern. Von den Grundlagen bis zu Fortgeschrittenen.",
+                            zh: "循环与变量入门",
+                            en: "Loops & Variables",
+                            de: "Schleifen & Variablen",
                         })
                     }
                 </p>
-            </div>
+            </a>
 
-            <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-                <a
-                    href={getRelativeLocaleUrl(locale, "/basic-codes")}
-                    class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-orange-100 dark:border-orange-900/30 hover:border-orange-400 dark:hover:border-orange-500 hover:shadow-lg transition-all duration-300 text-center"
+            <a
+                href={getRelativeLocaleUrl(locale, "/codes/cactus-code")}
+                class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-green-100 dark:border-green-900/30 hover:border-green-400 dark:hover:border-green-500 hover:shadow-lg transition-all duration-300 text-center"
+            >
+                <div
+                    class="w-14 h-14 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition"
                 >
-                    <div
-                        class="w-14 h-14 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition"
-                    >
-                        <span class="text-2xl">⚡</span>
-                    </div>
-                    <h3
-                        class="font-bold text-lg text-gray-900 dark:text-white mb-2"
-                    >
-                        {t({ zh: "基础代码", en: "Basics", de: "Grundlagen" })}
-                    </h3>
-                    <p
-                        class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
-                    >
-                        {
-                            t({
-                                zh: "循环与变量入门",
-                                en: "Loops & Variables",
-                                de: "Schleifen & Variablen",
-                            })
-                        }
-                    </p>
-                </a>
-
-                <a
-                    href={getRelativeLocaleUrl(locale, "/codes/cactus-code")}
-                    class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-green-100 dark:border-green-900/30 hover:border-green-400 dark:hover:border-green-500 hover:shadow-lg transition-all duration-300 text-center"
-                >
-                    <div
-                        class="w-14 h-14 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition"
-                    >
-                        <span class="text-2xl">🌵</span>
-                    </div>
-                    <h3
-                        class="font-bold text-lg text-gray-900 dark:text-white mb-2"
-                    >
-                        {
-                            t({
-                                zh: "仙人掌脚本",
-                                en: "Cactus Script",
-                                de: "Kaktus-Skript",
-                            })
-                        }
-                    </h3>
-                    <p
-                        class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
-                    >
-                        {
-                            t({
-                                zh: "网格种植策略",
-                                en: "Grid Planting Strategy",
-                                de: "Raster-Pflanzstrategie",
-                            })
-                        }
-                    </p>
-                </a>
-
-                <a
-                    href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")}
-                    class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-yellow-100 dark:border-yellow-900/30 hover:border-yellow-400 dark:hover:border-yellow-500 hover:shadow-lg transition-all duration-300 text-center"
-                >
-                    <div
-                        class="w-14 h-14 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition"
-                    >
-                        <span class="text-2xl">🎃</span>
-                    </div>
-                    <h3
-                        class="font-bold text-lg text-gray-900 dark:text-white mb-2"
-                    >
-                        {
-                            t({
-                                zh: "南瓜脚本",
-                                en: "Pumpkin Script",
-                                de: "Kürbis-Skript",
-                            })
-                        }
-                    </h3>
-                    <p
-                        class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
-                    >
-                        {
-                            t({
-                                zh: "巨大化作物逻辑",
-                                en: "Mega Crop Logic",
-                                de: "Mega-Ernte-Logik",
-                            })
-                        }
-                    </p>
-                </a>
-
-                {
-                    /* 这里的 href 设置为 javascript:void(0) 防止跳转，cursor-default 去掉手型鼠标 */
-                }
-                <a
-                    href="javascript:void(0)"
-                    class="group p-8 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-700 cursor-default transition-all duration-300 text-center"
-                >
-                    <div
-                        class="w-14 h-14 bg-gray-100 dark:bg-gray-700 text-gray-400 rounded-xl flex items-center justify-center mx-auto mb-6"
-                    >
-                        {/* 图标改为施工或等待 */}
-                        <span class="text-2xl">🚧</span>
-                    </div>
-                    <h3
-                        class="font-bold text-lg text-gray-500 dark:text-gray-400 mb-2"
-                    >
-                        {/* 标题：更多教程 */}
-                        {
-                            t({
-                                zh: "更多教程",
-                                en: "More Tutorials",
-                                de: "Mehr Tutorials",
-                            })
-                        }
-                    </h3>
-                    <p
-                        class="text-sm text-gray-400 dark:text-gray-500 leading-relaxed"
-                    >
-                        {/* 描述：正在编辑中 */}
-                        {
-                            t({
-                                zh: "代码教程正在编辑中...",
-                                en: "Editing in progress...",
-                                de: "Wird bearbeitet...",
-                            })
-                        }
-                    </p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section
-        class="py-16 px-4 border-t border-gray-100 dark:border-gray-800 dark:bg-gray-900"
-    >
-        <div
-            class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 p-8 bg-gray-50 dark:bg-gray-800 rounded-2xl"
-        >
-            <div>
+                    <span class="text-2xl">🌵</span>
+                </div>
                 <h3
-                    class="font-bold text-xl mb-2 text-gray-900 dark:text-white"
+                    class="font-bold text-lg text-gray-900 dark:text-white mb-2"
                 >
                     {
                         t({
-                            zh: "准备好开始了吗？",
-                            en: "Ready to start?",
-                            de: "Bereit zu starten?",
+                            zh: "仙人掌脚本",
+                            en: "Cactus Script",
+                            de: "Kaktus-Skript",
                         })
                     }
                 </h3>
-                <p class="text-gray-600 dark:text-gray-400">
+                <p
+                    class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
+                >
                     {
                         t({
-                            zh: "请前往 Steam 购买正版游戏支持开发者",
-                            en: "Support the devs on Steam",
-                            de: "Unterstütze die Entwickler auf Steam",
+                            zh: "网格种植策略",
+                            en: "Grid Planting Strategy",
+                            de: "Raster-Pflanzstrategie",
+                        })
+                    }
+                </p>
+            </a>
+
+            <a
+                href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")}
+                class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-yellow-100 dark:border-yellow-900/30 hover:border-yellow-400 dark:hover:border-yellow-500 hover:shadow-lg transition-all duration-300 text-center"
+            >
+                <div
+                    class="w-14 h-14 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition"
+                >
+                    <span class="text-2xl">🎃</span>
+                </div>
+                <h3
+                    class="font-bold text-lg text-gray-900 dark:text-white mb-2"
+                >
+                    {
+                        t({
+                            zh: "南瓜脚本",
+                            en: "Pumpkin Script",
+                            de: "Kürbis-Skript",
+                        })
+                    }
+                </h3>
+                <p
+                    class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
+                >
+                    {
+                        t({
+                            zh: "巨大化作物逻辑",
+                            en: "Mega Crop Logic",
+                            de: "Mega-Ernte-Logik",
+                        })
+                    }
+                </p>
+            </a>
+
+            {
+                /* 这里的 href 设置为 javascript:void(0) 防止跳转，cursor-default 去掉手型鼠标 */
+            }
+            <a
+                href="javascript:void(0)"
+                class="group p-8 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-700 cursor-default transition-all duration-300 text-center"
+            >
+                <div
+                    class="w-14 h-14 bg-gray-100 dark:bg-gray-700 text-gray-400 rounded-xl flex items-center justify-center mx-auto mb-6"
+                >
+                    {/* 图标改为施工或等待 */}
+                    <span class="text-2xl">🚧</span>
+                </div>
+                <h3
+                    class="font-bold text-lg text-gray-500 dark:text-gray-400 mb-2"
+                >
+                    {/* 标题：更多教程 */}
+                    {
+                        t({
+                            zh: "更多教程",
+                            en: "More Tutorials",
+                            de: "Mehr Tutorials",
+                        })
+                    }
+                </h3>
+                <p
+                    class="text-sm text-gray-400 dark:text-gray-500 leading-relaxed"
+                >
+                    {/* 描述：正在编辑中 */}
+                    {
+                        t({
+                            zh: "代码教程正在编辑中...",
+                            en: "Editing in progress...",
+                            de: "Wird bearbeitet...",
+                        })
+                    }
+                </p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 px-4 ">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center">
+            {
+                t({
+                    zh: "为什么选择这个游戏学习编程？",
+                    en: "Why Learn Coding with This Game?",
+                    de: "Warum Programmieren mit diesem Spiel lernen?",
+                })
+            }
+        </h2>
+
+        <div
+            class="grid md:grid-cols-2 gap-12 text-gray-700 dark:text-gray-300 leading-loose"
+        >
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-green-100 text-green-700 p-2 rounded-lg"
+                        >🐍</span
+                    >
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                        {
+                            t({
+                                zh: "真正的 Python 环境",
+                                en: "Real Python Environment",
+                                de: "Echte Python-Umgebung",
+                            })
+                        }
+                    </h3>
+                </div>
+                <p>
+                    {
+                        t({
+                            zh: "这就不仅仅是一个游戏。你在游戏中编写的每一行代码都是真实的 Python 语法。你将学习变量、循环、函数以及复杂的数据结构，这些技能可以直接应用到现实世界的软件开发中。",
+                            en: "This isn't just a game. Every line of code you write is real Python syntax. You will learn variables, loops, functions, and complex data structures—skills directly applicable to real-world software development.",
+                            de: "Das ist nicht nur ein Spiel. Jede Codezeile ist echte Python-Syntax. Du lernst Variablen, Schleifen, Funktionen und komplexe Datenstrukturen – Fähigkeiten für die reale Softwareentwicklung.",
                         })
                     }
                 </p>
             </div>
-            <a
-                href="https://store.steampowered.com/app/2060160/_/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-3 px-8 py-4 bg-gray-900 hover:bg-black text-white rounded-xl font-bold transition transform hover:scale-105"
-            >
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"
-                    ><path
-                        d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"
-                    ></path></svg
-                >
-                <span>Steam Store</span>
-            </a>
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-blue-100 text-blue-700 p-2 rounded-lg"
+                        >👁️</span
+                    >
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                        {
+                            t({
+                                zh: "可视化的算法反馈",
+                                en: "Visual Algorithm Feedback",
+                                de: "Visuelles Algorithmus-Feedback",
+                            })
+                        }
+                    </h3>
+                </div>
+                <p>
+                    {
+                        t({
+                            zh: "通过控制无人机进行播种、浇水和收割，你可以立即看到代码运行的结果。这种即时反馈机制是理解抽象编程概念（如递归、路径查找算法）的最佳方式。",
+                            en: "By controlling drones to plant, water, and harvest, you see the results of your code instantly. This immediate feedback loop is the best way to understand abstract programming concepts like recursion and pathfinding algorithms.",
+                            de: "Indem du Drohnen zum Pflanzen, Bewässern und Ernten steuerst, siehst du sofort Ergebnisse. Dieses Feedback ist der beste Weg, um abstrakte Konzepte wie Rekursion und Pfadfindung zu verstehen.",
+                        })
+                    }
+                </p>
+            </div>
         </div>
-    </section>
-
-    <div
-        class="py-16 border-t border-gray-100 dark:border-gray-800 dark:bg-gray-900"
-    >
-        <FAQ />
     </div>
+</section>
+
+<section
+    class="py-16 px-4 border-t border-gray-100 dark:border-gray-800 "
+>
+    <div
+        class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 p-8 bg-gray-50 dark:bg-gray-800 rounded-2xl"
+    >
+        <div>
+            <h3 class="font-bold text-xl mb-2 text-gray-900 dark:text-white">
+                {
+                    t({
+                        zh: "准备好开始了吗？",
+                        en: "Ready to start?",
+                        de: "Bereit zu starten?",
+                    })
+                }
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400">
+                {
+                    t({
+                        zh: "请前往 Steam 购买正版游戏支持开发者",
+                        en: "Support the devs on Steam",
+                        de: "Unterstütze die Entwickler auf Steam",
+                    })
+                }
+            </p>
+        </div>
+        <a
+            href="https://store.steampowered.com/app/2060160/_/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-3 px-8 py-4 bg-gray-900 hover:bg-black text-white rounded-xl font-bold transition transform hover:scale-105"
+        >
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"
+                ><path
+                    d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"
+                ></path></svg
+            >
+            <span>Steam Store</span>
+        </a>
+    </div>
+</section>
+
+<div
+    class="py-16 border-t border-gray-100 dark:border-gray-800 "
+>
+    <FAQ />
+</div>
 </Layout>

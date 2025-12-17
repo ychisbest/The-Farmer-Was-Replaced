@@ -3,8 +3,7 @@ import { SITE_TITLE } from "../consts";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslations, type Lang } from "@/i18n";
 import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
-import { Image } from "astro:assets";
-import logo from "@/assets/geminiHero.png";
+
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -15,12 +14,12 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
   <nav class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <div class="flex items-center gap-2">
-        <Image src={logo} alt="Logo" width={50} height={50} class=" rounded-xl" />
+
         <a href={getRelativeLocaleUrl(locale, "/")} class="w-40 text-sm font-bold text-neutral-900 dark:text-white">
           {t({
-            en: "The Farmer Was Replaced Aggregator",
+            en: "The Farmer Was Replaced",
             zh: "编程农场中文站",
-            de: "The Farmer Was Replaced Aggregator",
+            de: "The Farmer Was Replaced",
           })}
         </a>
         <div class="hidden md:flex items-center gap-6">
