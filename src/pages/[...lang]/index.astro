@@ -9,6 +9,8 @@ import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import logo from "@/assets/geminiHero.png";
 
+import CollapsibleText from "@/components/CollapsibleText.astro";
+
 // --- Data Fetching Logic ---
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -110,6 +112,9 @@ const description = {
                             })
                         }
                     </a>
+                </div>
+                <div class="flex justify-center md:justify-start w-full">
+                    <CollapsibleText />
                 </div>
             </div>
 
