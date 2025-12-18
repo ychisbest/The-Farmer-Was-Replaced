@@ -1,0 +1,58 @@
+---
+// Code analysis component for educational purposes
+interface Props {
+    code: string;
+    language: string;
+}
+
+const { code, language } = Astro.props;
+
+// Simple analysis functions
+function countLines(code: string): number {
+    return code.split('\n').length;
+}
+
+function countFunctions(code: string): number {
+    const functionMatches = code.match(/def\s+\w+\s*\(/g);
+    return functionMatches ? functionMatches.length : 0;
+}
+
+function countLoops(code: string): number {
+    const loopMatches = code.match(/(while|for)\s+/g);
+    return loopMatches ? loopMatches.length : 0;
+}
+
+function countConditionals(code: string): number {
+    const conditionalMatches = code.match(/(if|elif|else)/g);
+    return conditionalMatches ? conditionalMatches.length : 0;
+}
+
+const analysis = {
+    lines: countLines(code),
+    functions: countFunctions(code),
+    loops: countLoops(code),
+    conditionals: countConditionals(code)
+};
+---
+
+<div class="code-analysis bg-gray-50 dark:bg-gray-800 rounded-lg p-4 mt-4 border border-gray-200 dark:border-gray-700">
+    <h4 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">📊 Code Analysis</h4>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+        <div class="text-center">
+            <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">{analysis.lines}</div>
+            <div class="text-gray-600 dark:text-gray-400">Lines</div>
+        </div>
+        <div class="text-center">
+            <div class="text-2xl font-bold text-green-600 dark:text-green-400">{analysis.functions}</div>
+            <div class="text-gray-600 dark:text-gray-400">Functions</div>
+        </div>
+        <div class="text-center">
+            <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">{analysis.loops}</div>
+            <div class="text-gray-600 dark:text-gray-400">Loops</div>
+        </div>
+        <div class="text-center">
+            <div class="text-2xl font-bold text-orange-600 dark:text-orange-400">{analysis.conditionals}</div>
+            <div class="text-gray-600 dark:text-gray-400">Conditions</div>
+        </div>
+    </div>
+</div>

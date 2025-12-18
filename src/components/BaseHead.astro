@@ -191,3 +191,50 @@ const currentLocale = Astro.currentLocale || "en";
 		y.parentNode.insertBefore(t, y);
 	})(window, document, "clarity", "script", "tt6tomsxh9");
 </script>
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{SITE_TITLE}",
+  "description": "Learn Python programming through gamified farming automation. Complete code examples, tutorials, and educational resources for The Farmer Was Replaced game.",
+  "url": "{Astro.site}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{Astro.site}search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "The Farmer Was Replaced",
+    "url": "{Astro.site}"
+  },
+  "educationalUse": "instructionalMaterial",
+  "learningResourceType": "interactive game tutorial",
+  "teaches": "Python programming",
+  "inLanguage": ["en", "zh", "de"]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "The Farmer Was Replaced",
+  "description": "Educational programming game that teaches Python through farming automation",
+  "url": "{Astro.site}",
+  "sameAs": [
+    "https://store.steampowered.com/app/2060160/_/"
+  ],
+  "educationalCredentialAwarded": "Python Programming Skills",
+  "hasEducationalUse": "Programming Education",
+  "teaches": [
+    "Python Variables",
+    "Control Structures",
+    "Functions",
+    "Algorithms",
+    "Problem Solving"
+  ]
+}
+</script>

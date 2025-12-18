@@ -3,6 +3,7 @@ import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
 import { useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/BaseLayout.astro";
 import CodeBlock from "@/components/CodeBlock.astro";
+import CodeAnalysis from "@/components/CodeAnalysis.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { images } from "@/lib/images";
 
@@ -97,20 +98,50 @@ const description = {
             </p>
             <CodeBlock
                 code={t({
-                    en: `# Auto harvest grass
+                    en: `# Basic Auto Harvest - The simplest automation script
+# This continuously checks and harvests mature crops
 while True:
     if can_harvest():
-        harvest()`,
-                    zh: `# 自动收获草地
+        harvest()
+    # The game will automatically pause between iterations`,
+                    zh: `# 基础自动收获 - 最简单的自动化脚本
+# 这会持续检查并收获成熟的作物
 while True:
     if can_harvest():
-        harvest()`,
-                    de: `# Gras automatisch ernten
+        harvest()
+    # 游戏会在迭代之间自动暂停`,
+                    de: `# Grundlegende automatische Ernte - Das einfachste Automationsskript
+# Dies überprüft kontinuierlich und erntet reife Pflanzen
 while True:
     if can_harvest():
-        harvest()`,
+        harvest()
+    # Das Spiel pausiert automatisch zwischen den Iterationen`,
                 })}
                 image={images[2]}
+                height="max-h-[200px]"
+            />
+            <CodeAnalysis
+                code={t({
+                    en: `# Basic Auto Harvest - The simplest automation script
+# This continuously checks and harvests mature crops
+while True:
+    if can_harvest():
+        harvest()
+    # The game will automatically pause between iterations`,
+                    zh: `# 基础自动收获 - 最简单的自动化脚本
+# 这会持续检查并收获成熟的作物
+while True:
+    if can_harvest():
+        harvest()
+    # 游戏会在迭代之间自动暂停`,
+                    de: `# Grundlegende automatische Ernte - Das einfachste Automationsskript
+# Dies überprüft kontinuierlich und erntet reife Pflanzen
+while True:
+    if can_harvest():
+        harvest()
+    # Das Spiel pausiert automatisch zwischen den Iterationen`,
+                })}
+                language="python"
             />
         </section>
 
@@ -136,41 +167,51 @@ while True:
             </p>
             <CodeBlock
                 code={t({
-                    en: `# Traverse entire farm for harvesting
+                    en: `# 3x3 Farm Auto Traversal - Systematic farming pattern
+# This script moves in a grid pattern to cover the entire farm
 while True:
+    # Always check for harvestable crops first
     if can_harvest():
         harvest()
 
-    # Move east
+    # Move to the next tile (East direction)
     move(East)
 
-    # When reaching end of row, move north
+    # When reaching the end of a row, move to the next row (North)
+    # get_world_size() returns the size of your farm (usually 3x3 or 5x5)
     if get_pos_x() == get_world_size() - 1:
         move(North)`,
-                    zh: `# 遍历整个农场收获
+                    zh: `# 3x3农场自动遍历 - 系统性的耕作模式
+# 这个脚本以网格模式移动，覆盖整个农场
 while True:
+    # 总是先检查可收获的作物
     if can_harvest():
         harvest()
 
-    # 向东移动
+    # 移动到下一个格子（东方向）
     move(East)
 
-    # 到达行尾时向北移动并返回行首
+    # 当到达行末尾时，移动到下一行（北方向）
+    # get_world_size() 返回你的农场大小（通常是3x3或5x5）
     if get_pos_x() == get_world_size() - 1:
         move(North)`,
-                    de: `# Gesamte Farm für Ernte durchlaufen
+                    de: `# 3x3-Farm automatischer Durchlauf - Systematisches Bewirtschaftungsmuster
+# Dieses Skript bewegt sich in einem Gittermuster, um die gesamte Farm abzudecken
 while True:
+    # Immer zuerst nach erntefähigen Pflanzen suchen
     if can_harvest():
         harvest()
 
-    # Nach Osten bewegen
+    # Zum nächsten Feld bewegen (Ost-Richtung)
     move(East)
 
-    # Beim Erreichen des Zeilenendes nach Norden bewegen
+    # Beim Erreichen des Zeilenendes zur nächsten Reihe bewegen (Nord)
+    # get_world_size() gibt die Größe deiner Farm zurück (normalerweise 3x3 oder 5x5)
     if get_pos_x() == get_world_size() - 1:
         move(North)`,
                 })}
                 image={images[3]}
+                height="max-h-[250px]"
             />
         </section>
 
@@ -196,79 +237,104 @@ while True:
             </p>
             <CodeBlock
                 code={t({
-                    en: `# First column: grass, second: bushes, third: carrots
+                    en: `# Multi-Crop Automation - Different crops per column
+# Demonstrates conditional logic and resource management
 while True:
+    # Always harvest what's ready first
     if can_harvest():
         harvest()
 
+    # Get current position (x-coordinate)
     x = get_pos_x()
 
+    # Column-based planting strategy:
     if x == 0:
-        # First column: grass (no planting needed)
-        pass
+        # Column 0: Let grass grow naturally (free resource)
+        pass  # No action needed
     elif x == 1:
-        # Second column: bushes
+        # Column 1: Plant bushes for wood
         plant(Entities.Bush)
     elif x == 2:
-        # Third column: carrots
+        # Column 2: Plant carrots (requires soil preparation)
+        # Check if ground is soil, if not, till it
         if get_ground_type() != Grounds.Soil:
             till()
+        # Ensure we have carrot seeds before planting
         if num_items(Items.Carrot_Seed) < 1:
-            trade(Items.Carrot_Seed)
+            trade(Items.Carrot_Seed)  # Buy seeds if needed
         plant(Entities.Carrot)
 
+    # Move to next column
     move(East)
+    # When reaching end of row, move to next row
     if x == get_world_size() - 1:
         move(North)`,
-                    zh: `# 第一列种草，第二列种灌木，第三列种胡萝卜
+                    zh: `# 多作物自动化 - 按列种植不同作物
+# 演示条件逻辑和资源管理
 while True:
+    # 总是先收获已准备好的作物
     if can_harvest():
         harvest()
 
+    # 获取当前位置（x坐标）
     x = get_pos_x()
 
+    # 基于列的种植策略：
     if x == 0:
-        # 第一列：草（不需要种植）
-        pass
+        # 第0列：让草自然生长（免费资源）
+        pass  # 无需操作
     elif x == 1:
-        # 第二列：灌木
+        # 第1列：种植灌木获取木材
         plant(Entities.Bush)
     elif x == 2:
-        # 第三列：胡萝卜
+        # 第2列：种植胡萝卜（需要土壤准备）
+        # 检查地面是否为土壤，如果不是就耕作
         if get_ground_type() != Grounds.Soil:
             till()
+        # 确保有胡萝卜种子再种植
         if num_items(Items.Carrot_Seed) < 1:
-            trade(Items.Carrot_Seed)
+            trade(Items.Carrot_Seed)  # 需要时购买种子
         plant(Entities.Carrot)
 
+    # 移动到下一列
     move(East)
+    # 当到达行末尾时，移动到下一行
     if x == get_world_size() - 1:
         move(North)`,
-                    de: `# Erste Spalte: Gras, zweite: Büsche, dritte: Karotten
+                    de: `# Mehrfachfrucht-Automatisierung - Verschiedene Früchte pro Spalte
+# Demonstriert bedingte Logik und Ressourcenmanagement
 while True:
+    # Immer zuerst ernten was bereit ist
     if can_harvest():
         harvest()
 
+    # Aktuelle Position abrufen (x-Koordinate)
     x = get_pos_x()
 
+    # Spaltenbasierte Pflanzstrategie:
     if x == 0:
-        # Erste Spalte: Gras (keine Pflanzung nötig)
-        pass
+        # Spalte 0: Gras natürlich wachsen lassen (kostenlose Ressource)
+        pass  # Keine Aktion nötig
     elif x == 1:
-        # Zweite Spalte: Büsche
+        # Spalte 1: Büsche für Holz pflanzen
         plant(Entities.Bush)
     elif x == 2:
-        # Dritte Spalte: Karotten
+        # Spalte 2: Karotten pflanzen (erfordert Bodenbearbeitung)
+        # Überprüfen ob Boden Erde ist, falls nicht, umpflügen
         if get_ground_type() != Grounds.Soil:
             till()
+        # Sicherstellen, dass wir Karottensamen haben
         if num_items(Items.Carrot_Seed) < 1:
-            trade(Items.Carrot_Seed)
+            trade(Items.Carrot_Seed)  # Samen kaufen falls nötig
         plant(Entities.Carrot)
 
+    # Zur nächsten Spalte bewegen
     move(East)
+    # Beim Erreichen des Zeilenendes zur nächsten Reihe bewegen
     if x == get_world_size() - 1:
         move(North)`,
                 })}
+                height="max-h-[300px]"
             />
         </section>
 
@@ -294,58 +360,83 @@ while True:
             </p>
             <CodeBlock
                 code={t({
-                    en: `# Checkerboard pattern for trees and bushes
+                    en: `# Checkerboard Planting Pattern - Space-efficient farming
+# Trees cannot be planted adjacent to each other, so use checkerboard pattern
 while True:
+    # Harvest any mature crops
     if can_harvest():
         harvest()
 
-    x = get_pos_x()
-    y = get_pos_y()
+    # Get current coordinates
+    x = get_pos_x()  # Current column (0, 1, 2, etc.)
+    y = get_pos_y()  # Current row (0, 1, 2, etc.)
 
-    # Checkerboard logic
+    # Checkerboard logic: Plant trees on "black squares", bushes on "white squares"
+    # This ensures no two trees are adjacent (trees need space to grow)
     if (x % 2 == 0 and y % 2 == 0) or (x % 2 == 1 and y % 2 == 1):
+        # "Black squares" - plant trees
         plant(Entities.Tree)
     else:
+        # "White squares" - plant bushes
         plant(Entities.Bush)
 
+    # Move to next tile
     move(East)
+    # Wrap to next row when reaching end of current row
     if x == get_world_size() - 1:
         move(North)`,
-                    zh: `# 棋盘格模式种植树木和灌木
+                    zh: `# 棋盘格种植模式 - 空间高效的耕作
+# 树木不能相邻种植，因此使用棋盘格模式
 while True:
+    # 收获任何成熟的作物
     if can_harvest():
         harvest()
 
-    x = get_pos_x()
-    y = get_pos_y()
+    # 获取当前位置坐标
+    x = get_pos_x()  # 当前列（0, 1, 2, 等）
+    y = get_pos_y()  # 当前行（0, 1, 2, 等）
 
-    # 棋盘格判断
+    # 棋盘格逻辑：在"黑格"中种树，在"白格"中种灌木
+    # 这确保没有两棵树相邻（树需要生长空间）
     if (x % 2 == 0 and y % 2 == 0) or (x % 2 == 1 and y % 2 == 1):
+        # "黑格" - 种植树木
         plant(Entities.Tree)
     else:
+        # "白格" - 种植灌木
         plant(Entities.Bush)
 
+    # 移动到下一个格子
     move(East)
+    # 当到达当前行末尾时，换到下一行
     if x == get_world_size() - 1:
         move(North)`,
-                    de: `# Schachbrettmuster für Bäume und Büsche
+                    de: `# Schachbrett-Pflanzmuster - Raum-effiziente Landwirtschaft
+# Bäume können nicht nebeneinander gepflanzt werden, daher Schachbrettmuster verwenden
 while True:
+    # Alle reifen Pflanzen ernten
     if can_harvest():
         harvest()
 
-    x = get_pos_x()
-    y = get_pos_y()
+    # Aktuelle Koordinaten abrufen
+    x = get_pos_x()  # Aktuelle Spalte (0, 1, 2, etc.)
+    y = get_pos_y()  # Aktuelle Reihe (0, 1, 2, etc.)
 
-    # Schachbrett-Logik
+    # Schachbrett-Logik: Bäume auf "schwarzen Feldern", Büsche auf "weißen Feldern"
+    # Dies stellt sicher, dass keine zwei Bäume nebeneinander stehen (Bäume brauchen Platz)
     if (x % 2 == 0 and y % 2 == 0) or (x % 2 == 1 and y % 2 == 1):
+        # "Schwarze Felder" - Bäume pflanzen
         plant(Entities.Tree)
     else:
+        # "Weiße Felder" - Büsche pflanzen
         plant(Entities.Bush)
 
+    # Zum nächsten Feld bewegen
     move(East)
+    # Zur nächsten Reihe wechseln wenn Ende der aktuellen Reihe erreicht
     if x == get_world_size() - 1:
         move(North)`,
                 })}
+                height="max-h-[280px]"
             />
         </section>
 
@@ -371,82 +462,113 @@ while True:
             </p>
             <CodeBlock
                 code={t({
-                    en: `# Auto-adjust planting strategy based on resources
+                    en: `# Resource Priority Management - Smart resource allocation
+# Automatically adjusts farming strategy based on current inventory levels
 while True:
+    # Always harvest first - this is our primary action
     if can_harvest():
         harvest()
 
+    # Get current position for planting decisions
     x = get_pos_x()
 
-    # Priority: ensure hay inventory first
+    # Resource-based planting strategy with priorities:
+
+    # PRIORITY 1: Ensure hay supply (essential for trading and feeding)
     if num_items(Items.Hay) < 500:
-        # Don't plant, let grass grow naturally
-        pass
-    # Second priority: ensure wood inventory
+        # Don't plant anything - let grass grow naturally for free hay
+        pass  # No action needed
+
+    # PRIORITY 2: Maintain wood supply (needed for various upgrades)
     elif num_items(Items.Wood) < 300:
+        # Plant bushes to generate wood
         plant(Entities.Bush)
-    # Finally: plant carrots
+
+    # PRIORITY 3: Build carrot reserves (for food and advanced trading)
     elif num_items(Items.Carrot) < 200:
+        # Plant carrots (requires soil preparation)
         if get_ground_type() != Grounds.Soil:
-            till()
+            till()  # Prepare soil if needed
         if num_items(Items.Carrot_Seed) == 0:
-            trade(Items.Carrot_Seed)
+            trade(Items.Carrot_Seed)  # Buy seeds if we don't have any
         plant(Entities.Carrot)
 
+    # Move to next tile in systematic pattern
     move(East)
     if x == get_world_size() - 1:
         move(North)`,
-                    zh: `# 根据资源量自动调整种植策略
+                    zh: `# 资源优先级管理 - 智能资源分配
+# 根据当前库存水平自动调整耕作策略
 while True:
+    # 总是先收获 - 这是我们的主要行动
     if can_harvest():
         harvest()
 
+    # 获取当前位置用于种植决策
     x = get_pos_x()
 
-    # 优先确保干草库存
+    # 基于资源的种植策略，按优先级排序：
+
+    # 优先级1：确保干草供应（交易和喂养必需品）
     if num_items(Items.Hay) < 500:
-        # 不种植，让草自然生长
-        pass
-    # 其次确保木材库存
+        # 什么都不种 - 让草自然生长获得免费干草
+        pass  # 无需操作
+
+    # 优先级2：维持木材供应（各种升级所需）
     elif num_items(Items.Wood) < 300:
+        # 种植灌木生成木材
         plant(Entities.Bush)
-    # 最后种植胡萝卜
+
+    # 优先级3：建立胡萝卜储备（食物和高级交易）
     elif num_items(Items.Carrot) < 200:
+        # 种植胡萝卜（需要土壤准备）
         if get_ground_type() != Grounds.Soil:
-            till()
+            till()  # 需要时准备土壤
         if num_items(Items.Carrot_Seed) == 0:
-            trade(Items.Carrot_Seed)
+            trade(Items.Carrot_Seed)  # 如果没有种子就购买
         plant(Entities.Carrot)
 
+    # 以系统化模式移动到下一个格子
     move(East)
     if x == get_world_size() - 1:
         move(North)`,
-                    de: `# Pflanzstrategie basierend auf Ressourcen automatisch anpassen
+                    de: `# Ressourcen-Prioritätsmanagement - Intelligente Ressourcenverteilung
+# Passt die Bewirtschaftungsstrategie automatisch an aktuelle Lagerbestände an
 while True:
+    # Immer zuerst ernten - dies ist unsere Hauptaktion
     if can_harvest():
         harvest()
 
+    # Aktuelle Position für Pflanzentscheidungen abrufen
     x = get_pos_x()
 
-    # Priorität: Zuerst Heuvorrat sicherstellen
+    # Ressourcenbasierte Pflanzstrategie mit Prioritäten:
+
+    # PRIORITÄT 1: Heuvorrat sicherstellen (essenziell für Handel und Fütterung)
     if num_items(Items.Hay) < 500:
-        # Nicht pflanzen, Gras natürlich wachsen lassen
-        pass
-    # Zweite Priorität: Holzlager sicherstellen
+        # Nichts pflanzen - Gras natürlich wachsen lassen für kostenloses Heu
+        pass  # Keine Aktion nötig
+
+    # PRIORITÄT 2: Holzvorrat aufrechterhalten (für verschiedene Upgrades benötigt)
     elif num_items(Items.Wood) < 300:
+        # Büsche pflanzen um Holz zu erzeugen
         plant(Entities.Bush)
-    # Schließlich: Karotten pflanzen
+
+    # PRIORITÄT 3: Karottenreserven aufbauen (für Nahrung und fortgeschrittenen Handel)
     elif num_items(Items.Carrot) < 200:
+        # Karotten pflanzen (erfordert Bodenbearbeitung)
         if get_ground_type() != Grounds.Soil:
-            till()
+            till()  # Boden vorbereiten falls nötig
         if num_items(Items.Carrot_Seed) == 0:
-            trade(Items.Carrot_Seed)
+            trade(Items.Carrot_Seed)  # Samen kaufen wenn wir keine haben
         plant(Entities.Carrot)
 
+    # Zum nächsten Feld in systematischem Muster bewegen
     move(East)
     if x == get_world_size() - 1:
         move(North)`,
                 })}
+                height="max-h-[320px]"
             />
         </section>
 
@@ -472,76 +594,104 @@ while True:
             </p>
             <CodeBlock
                 code={t({
-                    en: `# Auto buy water tanks and water crops
+                    en: `# Auto Watering System - Advanced crop acceleration
+# Maintains water tanks and accelerates crop growth up to 5x speed
 while True:
-    # Ensure enough water tanks
+    # WATER MANAGEMENT: Ensure adequate water supply
+    # Water tanks are essential for speeding up crop growth
     if num_items(Items.Water_Tank) < 100:
+        # Trade for empty tanks if we don't have enough
         trade(Items.Empty_Tank)
 
-    # Check and water
+    # WATER APPLICATION: Use water when crops need it
+    # get_water() returns hydration level (0.0 to 1.0)
+    # 0.75 means crops are 75% hydrated - water when below this
     if get_water() < 0.75:
-        use_item(Items.Water_Tank)
+        use_item(Items.Water_Tank)  # Apply water to current tile
 
+    # HARVEST: Always check for mature crops first
     if can_harvest():
         harvest()
 
-    # Planting and movement logic
+    # PLANTING: Maintain carrot crop cycle
+    # Prepare soil if needed (carrots require tilled soil)
     if get_ground_type() != Grounds.Soil:
-        till()
+        till()  # Convert turf/grass to soil
+    # Ensure we have seeds before planting
     if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)
-    plant(Entities.Carrot)
+        trade(Items.Carrot_Seed)  # Purchase seeds if needed
+    plant(Entities.Carrot)  # Plant carrot seeds
 
+    # MOVEMENT: Continue systematic traversal
     move(East)
     if get_pos_x() == get_world_size() - 1:
         move(North)`,
-                    zh: `# 自动购买水箱并浇水
+                    zh: `# 自动浇水系统 - 高级作物加速
+# 维持水箱供应，将作物生长速度加速至5倍
 while True:
-    # 确保有足够的水箱
+    # 水资源管理：确保充足的水供应
+    # 水箱对于加速作物生长至关重要
     if num_items(Items.Water_Tank) < 100:
+        # 如果没有足够的空水箱就交易获取
         trade(Items.Empty_Tank)
 
-    # 检测并浇水
+    # 水分应用：作物需要时使用水
+    # get_water() 返回水分水平（0.0到1.0）
+    # 0.75意味着作物水分达75% - 低于此值时浇水
     if get_water() < 0.75:
-        use_item(Items.Water_Tank)
+        use_item(Items.Water_Tank)  # 对当前格子应用水
 
+    # 收获：总是先检查成熟的作物
     if can_harvest():
         harvest()
 
-    # 种植和移动逻辑
+    # 种植：维持胡萝卜作物周期
+    # 需要时准备土壤（胡萝卜需要耕作过的土壤）
     if get_ground_type() != Grounds.Soil:
-        till()
+        till()  # 将草地转换为土壤
+    # 确保种植前有种子
     if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)
-    plant(Entities.Carrot)
+        trade(Items.Carrot_Seed)  # 需要时购买种子
+    plant(Entities.Carrot)  # 种植胡萝卜种子
 
+    # 移动：继续系统化遍历
     move(East)
     if get_pos_x() == get_world_size() - 1:
         move(North)`,
-                    de: `# Wassertanks automatisch kaufen und Pflanzen bewässern
+                    de: `# Automatisches Bewässerungssystem - Fortgeschrittene Pflanzenbeschleunigung
+# Hält Wassertanks bereit und beschleunigt Pflanzenwachstum bis zu 5-fach
 while True:
-    # Genug Wassertanks sicherstellen
+    # WASSERMANAGEMENT: Ausreichende Wasserversorgung sicherstellen
+    # Wassertanks sind essenziell für die Beschleunigung des Pflanzenwachstums
     if num_items(Items.Water_Tank) < 100:
+        # Für leere Tanks handeln wenn wir nicht genug haben
         trade(Items.Empty_Tank)
 
-    # Überprüfen und bewässern
+    # WASSERANWENDUNG: Wasser verwenden wenn Pflanzen es brauchen
+    # get_water() gibt Hydrationslevel zurück (0.0 bis 1.0)
+    # 0.75 bedeutet Pflanzen sind 75% hydriert - Wasser wenn darunter
     if get_water() < 0.75:
-        use_item(Items.Water_Tank)
+        use_item(Items.Water_Tank)  # Wasser auf aktuelles Feld anwenden
 
+    # ERNTE: Immer zuerst nach reifen Pflanzen suchen
     if can_harvest():
         harvest()
 
-    # Pflanz- und Bewegungslogik
+    # PFLANZEN: Karotten-Pflanzenzyklus aufrechterhalten
+    # Boden vorbereiten falls nötig (Karotten benötigen umgegrabenen Boden)
     if get_ground_type() != Grounds.Soil:
-        till()
+        till()  # Rasen/Gras in Erde umwandeln
+    # Sicherstellen dass wir Samen haben bevor wir pflanzen
     if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)
-    plant(Entities.Carrot)
+        trade(Items.Carrot_Seed)  # Samen kaufen falls nötig
+    plant(Entities.Carrot)  # Karottensamen pflanzen
 
+    # BEWEGUNG: Systematische Traversierung fortsetzen
     move(East)
     if get_pos_x() == get_world_size() - 1:
         move(North)`,
                 })}
+                height="max-h-[340px]"
             />
         </section>
 
@@ -567,79 +717,116 @@ while True:
             </p>
             <CodeBlock
                 code={t({
-                    en: `# Define function to move to next tile
+                    en: `# Function Encapsulation - Code organization and reusability
+# Break down complex logic into reusable functions
+
+# FUNCTION: Handle movement to next tile in grid pattern
 def move_to_next():
+    """Move to the next tile, wrapping to next row when reaching end"""
     x = get_pos_x()
-    move(East)
+    move(East)  # Always try to move east first
+    # If we reached the end of current row, move north to next row
     if x == get_world_size() - 1:
         move(North)
 
-# Define function to plant carrots
+# FUNCTION: Handle carrot planting with all necessary preparations
 def plant_carrot():
+    """Plant a carrot with soil preparation and seed management"""
+    # Ensure we have proper soil for carrots
     if get_ground_type() != Grounds.Soil:
-        till()
+        till()  # Prepare soil if needed
+    # Ensure we have carrot seeds
     if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)
+        trade(Items.Carrot_Seed)  # Buy seeds if we don't have any
+    # Plant the carrot
     plant(Entities.Carrot)
 
-# Main program
+# MAIN PROGRAM: Clean, readable logic using our functions
 while True:
+    # Harvest any mature crops (always do this first)
     if can_harvest():
         harvest()
 
+    # Maintain carrot production if inventory is low
     if num_items(Items.Carrot) < 100:
-        plant_carrot()
+        plant_carrot()  # Use our function for clean code
 
-    move_to_next()`,
-                    zh: `# 定义移动到下一个方块的函数
+    # Move to next position using our movement function
+    move_to_next()  # Clean, reusable movement logic`,
+                    zh: `# 函数封装 - 代码组织和重用性
+# 将复杂逻辑分解为可重用的函数
+
+# 函数：处理网格模式下移动到下一个格子的逻辑
 def move_to_next():
+    """移动到下一个格子，到达行末时换到下一行"""
     x = get_pos_x()
-    move(East)
+    move(East)  # 总是先尝试向东移动
+    # 如果到达当前行末尾，向北移动到下一行
     if x == get_world_size() - 1:
         move(North)
 
-# 定义种植胡萝卜的函数
+# 函数：处理胡萝卜种植的所有必要准备工作
 def plant_carrot():
+    """种植胡萝卜，包括土壤准备和种子管理"""
+    # 确保有适合胡萝卜的土壤
     if get_ground_type() != Grounds.Soil:
-        till()
+        till()  # 需要时准备土壤
+    # 确保有胡萝卜种子
     if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)
+        trade(Items.Carrot_Seed)  # 如果没有就购买种子
+    # 种植胡萝卜
     plant(Entities.Carrot)
 
-# 主程序
+# 主程序：使用函数的清晰、可读逻辑
 while True:
+    # 收获任何成熟的作物（总是先做这个）
     if can_harvest():
         harvest()
 
+    # 如果库存不足，维持胡萝卜生产
     if num_items(Items.Carrot) < 100:
-        plant_carrot()
+        plant_carrot()  # 使用我们的函数保持代码整洁
 
-    move_to_next()`,
-                    de: `# Funktion zum Bewegen zum nächsten Feld definieren
+    # 使用移动函数移动到下一个位置
+    move_to_next()  # 整洁、可重用的移动逻辑`,
+                    de: `# Funktionskapselung - Code-Organisation und Wiederverwendbarkeit
+# Komplexe Logik in wiederverwendbare Funktionen aufteilen
+
+# FUNKTION: Bewegung zum nächsten Feld im Gittermuster handhaben
 def move_to_next():
+    """Zum nächsten Feld bewegen, zur nächsten Reihe wechseln wenn Ende erreicht"""
     x = get_pos_x()
-    move(East)
+    move(East)  # Immer zuerst versuchen ostwärts zu bewegen
+    # Wenn wir das Ende der aktuellen Reihe erreicht haben, nordwärts zur nächsten Reihe
     if x == get_world_size() - 1:
         move(North)
 
-# Funktion zum Pflanzen von Karotten definieren
+# FUNKTION: Karottenpflanzen mit allen notwendigen Vorbereitungen handhaben
 def plant_carrot():
+    """Karotte mit Bodenbearbeitung und Samenmanagement pflanzen"""
+    # Sicherstellen dass wir geeigneten Boden für Karotten haben
     if get_ground_type() != Grounds.Soil:
-        till()
+        till()  # Boden vorbereiten falls nötig
+    # Sicherstellen dass wir Karottensamen haben
     if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)
+        trade(Items.Carrot_Seed)  # Samen kaufen wenn wir keine haben
+    # Karotte pflanzen
     plant(Entities.Carrot)
 
-# Hauptprogramm
+# HAUPTPROGRAMM: Saubere, lesbare Logik mit unseren Funktionen
 while True:
+    # Alle reifen Pflanzen ernten (immer zuerst tun)
     if can_harvest():
         harvest()
 
+    # Karottenproduktion aufrechterhalten wenn Lager niedrig
     if num_items(Items.Carrot) < 100:
-        plant_carrot()
+        plant_carrot()  # Unsere Funktion für sauberen Code verwenden
 
-    move_to_next()`,
+    # Mit unserer Bewegungsfunktion zur nächsten Position bewegen
+    move_to_next()  # Saubere, wiederverwendbare Bewegungslogik`,
                 })}
+                height="max-h-[300px]"
             />
         </section>
 
@@ -665,100 +852,134 @@ while True:
             </p>
             <CodeBlock
                 code={t({
-                    en: `# Measure and harvest highest energy sunflowers
-sunflowers = []
+                    en: `# Sunflower Energy Optimization - Advanced measurement and selection
+# This script demonstrates loops, arrays, and optimization algorithms
+
+# PHASE 1: Plant and measure all sunflowers across the farm
+sunflowers = []  # Array to store energy measurements
 world_size = get_world_size()
 
-# Plant and measure all sunflowers
+# Plant sunflowers on every tile and measure their energy
 for i in range(world_size * world_size):
+    # Prepare soil if needed
     if get_ground_type() == Grounds.Turf:
         till()
+
+    # Plant sunflower (trade for seeds if we don't have any)
     if num_items(Items.Sunflower_Seed) > 0 or trade(Items.Sunflower_Seed):
         plant(Entities.Sunflower)
 
+    # Measure energy if sunflower is planted
     if get_entity_type() == Entities.Sunflower:
-        sunflowers.append(measure())
+        energy = measure()  # Get sunflower's energy value
+        sunflowers.append(energy)  # Store in our array
 
+    # Move to next tile in row-major order
     move(East)
-    if get_pos_x() == 0:
-        move(North)
+    if get_pos_x() == 0:  # Reached end of row
+        move(North)  # Move to next row
 
-# Find highest energy value
+# PHASE 2: Find the sunflower with highest energy
 max_val = 0
 max_index = 0
+# Iterate through all measurements to find maximum
 for i in range(len(sunflowers)):
     if sunflowers[i] > max_val:
-        max_val = sunflowers[i]
-        max_index = i
+        max_val = sunflowers[i]  # Update max value
+        max_index = i  # Remember position of best sunflower
 
-# Move to highest energy sunflower and harvest
-# (Movement logic omitted)
-if measure() == max_val:
+# PHASE 3: Move to and harvest the optimal sunflower
+# (In a real implementation, you'd need movement logic to go to max_index position)
+# For now, we'll assume we're at the right position
+if measure() == max_val:  # Double-check we're at the right flower
     if can_harvest():
-        harvest()`,
-                    zh: `# 测量并收获最高能量的向日葵
-sunflowers = []
+        harvest()  # Harvest the highest-energy sunflower`,
+                    zh: `# 向日葵能量优化 - 高级测量和选择
+# 这个脚本演示循环、数组和优化算法
+
+# 第一阶段：在农场种植并测量所有向日葵
+sunflowers = []  # 数组存储能量测量值
 world_size = get_world_size()
 
-# 种植并测量所有向日葵
+# 在每个格子种植向日葵并测量其能量
 for i in range(world_size * world_size):
+    # 需要时准备土壤
     if get_ground_type() == Grounds.Turf:
         till()
+
+    # 种植向日葵（如果没有种子就交易获取）
     if num_items(Items.Sunflower_Seed) > 0 or trade(Items.Sunflower_Seed):
         plant(Entities.Sunflower)
 
+    # 如果种植了向日葵就测量能量
     if get_entity_type() == Entities.Sunflower:
-        sunflowers.append(measure())
+        energy = measure()  # 获取向日葵的能量值
+        sunflowers.append(energy)  # 存储到我们的数组中
 
+    # 以行主序移动到下一个格子
     move(East)
-    if get_pos_x() == 0:
-        move(North)
+    if get_pos_x() == 0:  # 到达行末尾
+        move(North)  # 移动到下一行
 
-# 找到最高能量值
+# 第二阶段：找到能量最高的向日葵
 max_val = 0
 max_index = 0
+# 遍历所有测量值找到最大值
 for i in range(len(sunflowers)):
     if sunflowers[i] > max_val:
-        max_val = sunflowers[i]
-        max_index = i
+        max_val = sunflowers[i]  # 更新最大值
+        max_index = i  # 记住最佳向日葵的位置
 
-# 移动到最高能量向日葵并收获
-# (移动逻辑省略)
-if measure() == max_val:
+# 第三阶段：移动到并收获最优向日葵
+# （在实际实现中，你需要移动逻辑到达max_index位置）
+# 现在，我们假设我们在正确的位置
+if measure() == max_val:  # 再次确认我们在正确的花朵位置
     if can_harvest():
-        harvest()`,
-                    de: `# Höchste Energie-Sonnenblumen messen und ernten
-sunflowers = []
+        harvest()  # 收获能量最高的向日葵`,
+                    de: `# Sonnenblumen-Energieoptimierung - Fortgeschrittene Messung und Auswahl
+# Dieses Skript demonstriert Schleifen, Arrays und Optimierungsalgorithmen
+
+# PHASE 1: Alle Sonnenblumen auf der Farm pflanzen und messen
+sunflowers = []  # Array zur Speicherung der Energiemessungen
 world_size = get_world_size()
 
-# Alle Sonnenblumen pflanzen und messen
+# Sonnenblumen auf jedem Feld pflanzen und Energie messen
 for i in range(world_size * world_size):
+    # Boden vorbereiten falls nötig
     if get_ground_type() == Grounds.Turf:
         till()
+
+    # Sonnenblume pflanzen (für Samen handeln wenn wir keine haben)
     if num_items(Items.Sunflower_Seed) > 0 or trade(Items.Sunflower_Seed):
         plant(Entities.Sunflower)
 
+    # Energie messen wenn Sonnenblume gepflanzt wurde
     if get_entity_type() == Entities.Sunflower:
-        sunflowers.append(measure())
+        energy = measure()  # Sonnenblumen-Energie-Wert abrufen
+        sunflowers.append(energy)  # In unserem Array speichern
 
+    # Zum nächsten Feld in zeilenweiser Reihenfolge bewegen
     move(East)
-    if get_pos_x() == 0:
-        move(North)
+    if get_pos_x() == 0:  # Ende der Reihe erreicht
+        move(North)  # Zur nächsten Reihe bewegen
 
-# Höchsten Energiewert finden
+# PHASE 2: Die Sonnenblume mit höchster Energie finden
 max_val = 0
 max_index = 0
+# Alle Messungen durchlaufen um Maximum zu finden
 for i in range(len(sunflowers)):
     if sunflowers[i] > max_val:
-        max_val = sunflowers[i]
-        max_index = i
+        max_val = sunflowers[i]  # Max-Wert aktualisieren
+        max_index = i  # Position der besten Sonnenblume merken
 
-# Zur höchsten Energie-Sonnenblume bewegen und ernten
-# (Bewegungslogik weggelassen)
-if measure() == max_val:
+# PHASE 3: Zur optimalen Sonnenblume bewegen und ernten
+# (In einer realen Implementierung bräuchte man Bewegungslogik zur max_index Position)
+# Für jetzt nehmen wir an wir sind an der richtigen Position
+if measure() == max_val:  # Doppelte Überprüfung dass wir bei der richtigen Blume sind
     if can_harvest():
-        harvest()`,
+        harvest()  # Höchstenergetische Sonnenblume ernten`,
                 })}
+                height="max-h-[380px]"
             />
         </section>
 
