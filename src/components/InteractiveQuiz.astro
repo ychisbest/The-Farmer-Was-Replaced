@@ -1,0 +1,76 @@
+---
+import { useTranslations, type Lang } from "@/i18n";
+
+interface Option {
+    id: string;
+    text: { [key: string]: string };
+}
+
+interface Props {
+    question: { [key: string]: string };
+    options: Option[];
+    correctId: string;
+    explanation: { [key: string]: string };
+}
+
+const { question, options, correctId, explanation } = Astro.props;
+const t = useTranslations(Astro.currentLocale as Lang);
+const uniqueId = Math.random().toString(36).substring(2, 9);
+---
+
+<div class="quiz-container bg-white dark:bg-gray-800 rounded-xl p-6 border-2 border-dashed border-gray-200 dark:border-gray-700 my-6" data-correct={correctId} id={`quiz-${uniqueId}`}>
+    <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+        <span class="flex w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 items-center justify-center text-xs font-bold">?</span>
+        {t(question)}
+    </h4>
+
+    <div class="space-y-3">
+        {options.map((option) => (
+            <button
+                class="quiz-option w-full text-left p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200"
+                data-id={option.id}
+            >
+                {t(option.text)}
+            </button>
+        ))}
+    </div>
+
+    <div class="quiz-feedback hidden mt-6 p-4 rounded-lg border-t-4 transition-all duration-300">
+        <p class="font-bold mb-2 feedback-title"></p>
+        <p class="text-gray-700 dark:text-gray-300 feedback-text">{t(explanation)}</p>
+    </div>
+</div>
+
+<script define:vars={{ uniqueId, correctId }}>
+    const container = document.getElementById(`quiz-${uniqueId}`);
+    const options = container.querySelectorAll('.quiz-option');
+    const feedback = container.querySelector('.quiz-feedback');
+    const feedbackTitle = container.querySelector('.feedback-title');
+    const feedbackText = container.querySelector('.feedback-text');
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const selectedId = option.getAttribute('data-id');
+            const isCorrect = selectedId === correctId;
+
+            // Reset all options
+            options.forEach(opt => {
+                opt.classList.remove('bg-green-100', 'border-green-500', 'dark:bg-green-900/30', 'dark:border-green-400', 'bg-red-100', 'border-red-500', 'dark:bg-red-900/30', 'dark:border-red-400');
+            });
+
+            // Show feedback
+            feedback.classList.remove('hidden');
+            if (isCorrect) {
+                option.classList.add('bg-green-100', 'border-green-500', 'dark:bg-green-900/30', 'dark:border-green-400');
+                feedback.classList.add('bg-green-50', 'border-green-200', 'text-green-800', 'dark:bg-green-900/20', 'dark:border-green-800', 'dark:text-green-200');
+                feedback.classList.remove('bg-red-50', 'border-red-200', 'text-red-800', 'dark:bg-red-900/20', 'dark:border-red-800', 'dark:text-red-200');
+                feedbackTitle.textContent = "🌟 " + (document.documentElement.lang === 'zh' ? "太棒了！分析正确" : "Excellent! Correct Analysis");
+            } else {
+                option.classList.add('bg-red-100', 'border-red-500', 'dark:bg-red-900/30', 'dark:border-red-400');
+                feedback.classList.add('bg-red-50', 'border-red-200', 'text-red-800', 'dark:bg-red-900/20', 'dark:border-red-800', 'dark:text-red-200');
+                feedback.classList.remove('bg-green-50', 'border-green-200', 'text-green-800', 'dark:bg-green-900/20', 'dark:border-green-800', 'dark:text-green-200');
+                feedbackTitle.textContent = "🔍 " + (document.documentElement.lang === 'zh' ? "再思考一下" : "Think about it again");
+            }
+        });
+    });
+</script>

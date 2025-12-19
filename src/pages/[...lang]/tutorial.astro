@@ -3,7 +3,8 @@ import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
 import { useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/BaseLayout.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { Code } from "astro:components";
+import CodeBlock from "@/components/CodeBlock.astro";
+import InteractiveQuiz from "@/components/InteractiveQuiz.astro";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -22,391 +23,406 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-    en: "Python Basics Tutorial - Learn Programming for The Farmer Was Replaced",
-    zh: "Python基础教程 - 学习编程农场的必备知识",
-    de: "Python-Grundlagen Tutorial - Lerne Programmierung für The Farmer Was Replaced",
+    en: "Complete Python Tutorial for The Farmer Was Replaced - Master Automation",
+    zh: "编程农场完整 Python 教程 - 掌握自动化编程",
+    de: "Vollständiges Python-Tutorial für The Farmer Was Replaced - Meistere die Automatisierung",
 };
 
 const description = {
-    en: "Learn Python programming basics from variables to while loops. Essential knowledge for playing The Farmer Was Replaced programming game.",
-    zh: "学习Python编程基础，从变量到while循环。游玩编程农场游戏的必备知识。",
-    de: "Lerne Python-Programmiergrundlagen von Variablen bis zu While-Schleifen. Wesentliches Wissen für das Spielen des The Farmer Was Replaced Programmierspiels.",
+    en: "Learn Python from scratch with interactive quizzes. Perfect guide for mastering The Farmer Was Replaced farm automation.",
+    zh: "通过交互式问答从零学习 Python。掌握编程农场自动化任务的完美指南。",
+    de: "Lerne Python von Grund auf mit interaktiven Quizfragen. Der perfekte Leitfaden zur Beherrschung der Farmautomatisierung in The Farmer Was Replaced.",
 };
 ---
 
 <Layout title={title} description={description}>
     <div class="max-w-4xl mx-auto px-4 py-12">
+        <!-- Hero Section -->
         <div class="text-center mb-16">
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                {t({ zh: "Python基础教程", en: "Python Basics Tutorial", de: "Python-Grundlagen Tutorial" })}
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
+                {t({ zh: "Python 编程：从入门到农场大亨", en: "Python Programming: From Zero to Farm Tycoon", de: "Python-Programmierung: Vom Anfänger zum Farm-Tycoon" })}
             </h1>
-            <p
-                class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
-            >
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
                 {
                     t({
-                        zh: "学习Python编程基础，掌握变量、数据类型、条件语句和循环知识。这些是游玩《The Farmer Was Replaced》编程农场游戏的必备基础知识。",
-                        en: "Learn Python programming basics including variables, data types, conditional statements, and loops. These are essential fundamentals for playing The Farmer Was Replaced programming game.",
-                        de: "Lerne Python-Programmiergrundlagen einschließlich Variablen, Datentypen, Bedingungen und Schleifen. Dies sind wesentliche Grundlagen für das Spielen des The Farmer Was Replaced Programmierspiels.",
+                        zh: "在《The Farmer Was Replaced》中，代码就是你的农具。本教程将教你编写高效自动化脚本所需的一切 Python 基础知识。",
+                        en: "In The Farmer Was Replaced, code is your tool. This tutorial teaches you all the Python basics needed to write efficient automation scripts.",
+                        de: "In The Farmer Was Replaced ist Code dein Werkzeug. Dieses Tutorial lehrt dich alle Python-Grundlagen, die du zum Schreiben effizienter Automatisierungsskripte benötigst.",
                     })
                 }
             </p>
         </div>
 
-        <div class="space-y-12">
-            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
-                <h2
-                    class="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
-                >
-                    {t({ zh: "1. 变量 (Variables)", en: "1. Variables", de: "1. Variablen" })}
-                </h2>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">
-                    {
-                        t({
-                            zh: "变量是用来存储数据的容器。在Python中，你可以直接给变量赋值，无需声明类型。",
-                            en: "Variables are containers for storing data. In Python, you can assign values directly without declaring types.",
-                            de: "Variablen sind Container zum Speichern von Daten. In Python kannst du Werte direkt zuweisen, ohne Typen zu deklarieren.",
-                        })
-                    }
-                </p>
+        <div class="space-y-24">
+            <!-- Section 1: Variables -->
+            <section id="variables" class="scroll-mt-20">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="flex-shrink-0 w-12 h-12 rounded-2xl bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center text-2xl font-bold">01</span>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+                        {t({ zh: "变量与赋值 (Variables)", en: "Variables & Assignment", de: "Variablen & Zuweisung" })}
+                    </h2>
+                </div>
+                
+                <div class="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+                    <p>
+                        {t({
+                            zh: "变量就像农场里的仓库标签。你可以给仓库贴上标签（变量名），然后往里存东西（赋值）。在 Python 中，我们使用 `=` 来进行赋值。",
+                            en: "Variables are like labels in a warehouse. You can label a container (variable name) and then store something inside (assignment). In Python, we use `=` for assignment.",
+                            de: "Variablen sind wie Etiketten in einem Lagerhaus. Du kannst einen Behälter beschriften (Variablenname) und dann etwas darin speichern (Zuweisung). In Python verwenden wir `=` für die Zuweisung.",
+                        })}
+                    </p>
+                    
+                    <CodeBlock
+                        code={`# Store "Carrot" in a variable named crop
+crop = "Carrot"
 
-                <Code
-                    lang={"python"}
-                    class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
-                    code={`# Variable assignment examples
-name = "John"
-age = 25
-height = 1.75`}
-                />
+# Store the number 10 in a variable named count
+count = 10
 
-                <p class="text-gray-700 dark:text-gray-300">
-                    {
-                        t({
-                            zh: "Python会自动识别数据类型：字符串、整数、浮点数等。",
-                            en: "Python automatically identifies data types: string, integer, float, etc.",
-                            de: "Python erkennt automatisch Datentypen: Zeichenketten, Ganzzahlen, Fließkommazahlen usw.",
-                        })
-                    }
-                </p>
-            </section>
+# You can change a variable's value anytime
+count = count + 5  # Now count is 15`}
+                    />
 
-            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
-                <h2
-                    class="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
-                >
-                    {t({ zh: "2. 数据类型 (Data Types)", en: "2. Data Types", de: "2. Datentypen" })}
-                </h2>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">
-                    {
-                        t({
-                            zh: "Python有以下基本数据类型：",
-                            en: "Python has the following basic data types:",
-                            de: "Python hat die folgenden grundlegenden Datentypen:",
-                        })
-                    }
-                </p>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-400 p-6 my-8 rounded-r-xl shadow-sm">
+                        <h4 class="font-bold text-yellow-800 dark:text-yellow-200 mb-2">{t({ zh: "💡 命名规则", en: "💡 Naming Rules", de: "💡 Namensregeln" })}</h4>
+                        <ul class="list-disc list-inside space-y-1 text-sm text-yellow-800/80 dark:text-yellow-200/80">
+                            <li>{t({ zh: "只能包含字母、数字和下划线 (_)", en: "Can only contain letters, numbers, and underscores (_)", de: "Darf nur Buchstaben, Zahlen und Unterstriche (_) enthalten" })}</li>
+                            <li>{t({ zh: "不能以数字开头", en: "Cannot start with a number", de: "Darf nicht mit einer Zahl beginnen" })}</li>
+                            <li>{t({ zh: "区分大小写 (crop 和 Crop 是不同的变量)", en: "Case-sensitive (crop and Crop are different)", de: "Groß-/Kleinschreibung wird beachtet (crop und Crop sind unterschiedlich)" })}</li>
+                        </ul>
+                    </div>
+                </div>
 
-                <Code
-                    lang={"python"}
-                    class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
-                    code={`# Data type examples
-text = "Hello World"      # String
-number = 42               # Integer
-decimal = 3.14            # Float
-is_true = True            # Boolean
-items = [1, 2, 3]         # List`}
+                <InteractiveQuiz
+                    question={{
+                        zh: "执行代码 `x = 5; x = x + 2` 后，x 的值是多少？",
+                        en: "After executing `x = 5; x = x + 2`, what is the value of x?",
+                        de: "Was ist der Wert von x nach der Ausführung von `x = 5; x = x + 2`?"
+                    }}
+                    options={[
+                        { id: "a", text: { zh: "5", en: "5", de: "5" } },
+                        { id: "b", text: { zh: "2", en: "2", de: "2" } },
+                        { id: "c", text: { zh: "7", en: "7", de: "7" } }
+                    ]}
+                    correctId="c"
+                    explanation={{
+                        zh: "首先 x 被赋值为 5，然后我们在 5 的基础上加 2，并将新结果 7 存回 x。",
+                        en: "First x is assigned 5, then we add 2 to 5 and store the new result 7 back into x.",
+                        de: "Zuerst wird x der Wert 5 zugewiesen, dann addieren wir 2 zu 5 und speichern das neue Ergebnis 7 wieder in x."
+                    }}
                 />
             </section>
 
-            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
-                <h2
-                    class="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
-                >
-                    {
-                        t({
-                            zh: "3. 基本运算 (Basic Operations)",
-                            en: "3. Basic Operations",
-                            de: "3. Grundlegende Operationen",
-                        })
-                    }
-                </h2>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">
-                    {
-                        t({
-                            zh: "Python支持各种数学和逻辑运算：",
-                            en: "Python supports various mathematical and logical operations:",
-                            de: "Python unterstützt verschiedene mathematische und logische Operationen:",
-                        })
-                    }
-                </p>
+            <!-- Section 2: Data Types -->
+            <section id="datatypes" class="scroll-mt-20">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="flex-shrink-0 w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center text-2xl font-bold">02</span>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+                        {t({ zh: "数据类型 (Data Types)", en: "Data Types", de: "Datentypen" })}
+                    </h2>
+                </div>
+                
+                <div class="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+                    <p>
+                        {t({
+                            zh: "农场里有不同种类的物品（干草、木头、金币），Python 中也有不同的数据类型：",
+                            en: "There are different types of items on the farm (hay, wood, gold), and Python has different data types too:",
+                            de: "Es gibt verschiedene Arten von Gegenständen auf der Farm (Heu, Holz, Gold), und Python hat ebenfalls verschiedene Datentypen:",
+                        })}
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 my-6">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors">
+                            <code class="text-blue-600 dark:text-blue-400 font-bold">Integer (int)</code>
+                            <p class="text-sm mt-2">{t({ zh: "整数，如 10, -5, 0。用于计数。", en: "Integers, e.g., 10, -5, 0. Used for counting.", de: "Ganzzahlen, z.B. 10, -5, 0. Zum Zählen verwendet." })}</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors">
+                            <code class="text-blue-600 dark:text-blue-400 font-bold">String (str)</code>
+                            <p class="text-sm mt-2">{t({ zh: "字符串，必须用引号包裹，如 'Hello'。", en: "Strings, must be wrapped in quotes, e.g., 'Hello'.", de: "Zeichenketten, müssen in Anführungszeichen stehen, z.B. 'Hello'." })}</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors">
+                            <code class="text-blue-600 dark:text-blue-400 font-bold">Boolean (bool)</code>
+                            <p class="text-sm mt-2">{t({ zh: "布尔值，只有 True 或 False。用于判断。", en: "Booleans, only True or False. Used for logic.", de: "Booleans, nur True oder False. Für die Logik verwendet." })}</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors">
+                            <code class="text-blue-600 dark:text-blue-400 font-bold">Float</code>
+                            <p class="text-sm mt-2">{t({ zh: "浮点数（小数），如 3.14, 0.5。", en: "Floats (decimal numbers), e.g., 3.14, 0.5.", de: "Floats (Dezimalzahlen), z.B. 3.14, 0.5." })}</p>
+                        </div>
+                    </div>
+                </div>
 
-                <Code
-                    lang={"python"}
-                    class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
-                    code={`# Arithmetic operations
-a = 10 + 5    # Addition
-b = 10 - 3    # Subtraction
-c = 10 * 2    # Multiplication
-d = 10 / 3    # Division
-
-# Comparison operations
-x = 5 > 3     # True
-y = 5 < 3     # False
-z = 5 == 5    # True`}
+                <InteractiveQuiz
+                    question={{
+                        zh: "在 Python 中，'10' (带有引号) 的数据类型是什么？",
+                        en: "In Python, what is the data type of '10' (with quotes)?",
+                        de: "Was ist in Python der Datentyp von '10' (mit Anführungszeichen)?"
+                    }}
+                    options={[
+                        { id: "a", text: { zh: "Integer", en: "Integer", de: "Integer" } },
+                        { id: "b", text: { zh: "String", en: "String", de: "String" } },
+                        { id: "c", text: { zh: "Float", en: "Float", de: "Float" } }
+                    ]}
+                    correctId="b"
+                    explanation={{
+                        zh: "任何包裹在引号（单引号或双引号）中的内容都被视为字符串，即使它看起来像个数字。",
+                        en: "Anything wrapped in quotes (single or double) is treated as a string, even if it looks like a number.",
+                        de: "Alles, was in Anführungszeichen (einfach oder doppelt) steht, wird als String behandelt, auch wenn es wie eine Zahl aussieht."
+                    }}
                 />
             </section>
 
-            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
-                <h2
-                    class="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
-                >
-                    {
-                        t({
-                            zh: "4. 条件语句 (Conditional Statements)",
-                            en: "4. Conditional Statements",
-                            de: "4. Bedingte Anweisungen",
-                        })
-                    }
-                </h2>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">
-                    {
-                        t({
-                            zh: "使用if、elif、else来根据条件执行不同的代码块：",
-                            en: "Use if, elif, else to execute different code blocks based on conditions:",
-                            de: "Verwende if, elif, else, um verschiedene Codeblöcke basierend auf Bedingungen auszuführen:",
-                        })
-                    }
-                </p>
+            <!-- Section 3: Conditionals -->
+            <section id="conditionals" class="scroll-mt-20">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="flex-shrink-0 w-12 h-12 rounded-2xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl font-bold">03</span>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+                        {t({ zh: "条件判断 (If Statements)", en: "Conditional Statements", de: "Bedingte Anweisungen" })}
+                    </h2>
+                </div>
+                
+                <div class="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+                    <p>
+                        {t({
+                            zh: "条件语句让你的代码学会“思考”。如果某个条件成立，就执行一段代码；否则，执行另一段。",
+                            en: "Conditionals let your code 'think'. If a condition is true, execute a block of code; otherwise, execute another.",
+                            de: "Bedingungen lassen deinen Code 'denken'. Wenn eine Bedingung wahr ist, führe einen Codeblock aus; andernfalls führe einen anderen aus.",
+                        })}
+                    </p>
+                    
+                    <CodeBlock
+                        code={`water_level = 20
 
-                <Code
-                    lang={"python"}
-                    class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
-                    code={`age = 18
-
-if age < 18:
-    print("Underage")
-elif age == 18:
-    print("Just turned adult")
+if water_level < 50:
+    print("需要浇水")  # Need watering
+elif water_level > 80:
+    print("水太多了")  # Too much water
 else:
-    print("Adult")`}
+    print("水分刚好")  # Water is just right`}
+                    />
+
+                    <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-400 p-6 my-8 rounded-r-xl shadow-sm">
+                        <p class="text-sm font-medium text-blue-900 dark:text-blue-100">
+                            {t({ zh: "⚠️ 注意：Python 使用缩进（行首的空格）来区分代码块。这非常重要！", en: "⚠️ Note: Python uses indentation (spaces at the start of a line) to define code blocks. This is crucial!", de: "⚠️ Hinweis: Python verwendet Einrückungen (Leerzeichen am Zeilenanfang), um Codeblöcke zu definieren. Das ist entscheidend!" })}
+                        </p>
+                    </div>
+                </div>
+
+                <InteractiveQuiz
+                    question={{
+                        zh: "如果 `x = 10`，执行 `if x > 5: print('A') else: print('B')` 会输出什么？",
+                        en: "If `x = 10`, what will `if x > 5: print('A') else: print('B')` output?",
+                        de: "Was wird `if x > 5: print('A') else: print('B')` ausgeben, wenn `x = 10` ist?"
+                    }}
+                    options={[
+                        { id: "a", text: { zh: "A", en: "A", de: "A" } },
+                        { id: "b", text: { zh: "B", en: "B", de: "B" } },
+                        { id: "c", text: { zh: "什么都不输出", en: "Nothing", de: "Nichts" } }
+                    ]}
+                    correctId="a"
+                    explanation={{
+                        zh: "因为 10 大于 5，所以 if 后面的代码块会被执行。",
+                        en: "Since 10 is greater than 5, the code block after 'if' is executed.",
+                        de: "Da 10 größer als 5 ist, wird der Codeblock nach 'if' ausgeführt."
+                    }}
                 />
             </section>
 
-            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
-                <h2
-                    class="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
-                >
-                    {t({ zh: "5. 列表 (Lists)", en: "5. Lists", de: "5. Listen" })}
-                </h2>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">
-                    {
-                        t({
-                            zh: "列表是存储多个项目的有序集合：",
-                            en: "Lists are ordered collections that store multiple items:",
-                            de: "Listen sind geordnete Sammlungen, die mehrere Elemente speichern:",
-                        })
-                    }
-                </p>
+            <!-- Section 4: Loops -->
+            <section id="loops" class="scroll-mt-20">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="flex-shrink-0 w-12 h-12 rounded-2xl bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 flex items-center justify-center text-2xl font-bold">04</span>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+                        {t({ zh: "循环 (Loops) - 自动化的灵魂", en: "Loops - The Soul of Automation", de: "Schleifen - Die Seele der Automatisierung" })}
+                    </h2>
+                </div>
+                
+                <div class="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+                    <p>
+                        {t({
+                            zh: "在农场里，你不想手动收割 100 颗南瓜。这就是循环的作用：让电脑重复执行枯燥的任务。",
+                            en: "On the farm, you don't want to manually harvest 100 pumpkins. That's what loops are for: making the computer repeat boring tasks.",
+                            de: "Auf der Farm willst du nicht 100 Kürbisse manuell ernten. Dafür sind Schleifen da: den Computer langweilige Aufgaben wiederholen lassen.",
+                        })}
+                    </p>
 
-                <Code
-                    lang={"python"}
-                    class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
-                    code={`# Create a list
-fruits = ["Apple", "Banana", "Orange"]
+                    <div class="mt-8 space-y-6">
+                        <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700">
+                            <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                <span class="text-xl">🔄</span>
+                                {t({ zh: "While 循环 (最常用)", en: "While Loop (Most Common)", de: "While-Schleife (Am häufigsten)" })}
+                            </h4>
+                            <p class="mb-4 text-sm opacity-80">{t({ zh: "只要条件满足，就一直做某事。", en: "As long as the condition is true, keep doing something.", de: "Solange die Bedingung wahr ist, tue etwas." })}</p>
+                            <CodeBlock
+                                code={`# Loop until fuel tank is empty
+while get_fuel() > 0:
+    move_forward()
+    harvest()`}
+                            />
+                        </div>
 
-# Access element
-first_fruit = fruits[0]    # "Apple"
+                        <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700">
+                            <h4 class="font-bold text-lg mb-2 flex items-center gap-2">
+                                <span class="text-xl">🔢</span>
+                                {t({ zh: "For 循环", en: "For Loop", de: "For-Schleife" })}
+                            </h4>
+                            <p class="mb-4 text-sm opacity-80">{t({ zh: "遍历一个序列（如列表）中的每一项。", en: "Iterate over each item in a sequence (like a list).", de: "Iteriere über jedes Element in einer Sequenz (wie einer Liste)." })}</p>
+                            <CodeBlock
+                                code={`for i in range(10):
+    print("This is repetition number", i)  # This is repetition number i`}
+                            />
+                        </div>
+                    </div>
+                </div>
 
-# Add element
-fruits.append("Grape")
-
-# Iterate over list
-for fruit in fruits:
-    print(fruit)`}
+                <InteractiveQuiz
+                    question={{
+                        zh: "哪种循环最适合用来创建一个‘永远运行’的农场脚本？",
+                        en: "Which loop is best for creating an 'ever-running' farm script?",
+                        de: "Welche Schleife eignet sich am besten zum Erstellen eines 'ewig laufenden' Farm-Skripts?"
+                    }}
+                    options={[
+                        { id: "a", text: { zh: "while True:", en: "while True:", de: "while True:" } },
+                        { id: "b", text: { zh: "for i in range(10):", en: "for i in range(10):", de: "for i in range(10):" } },
+                        { id: "c", text: { zh: "if True:", en: "if True:", de: "if True:" } }
+                    ]}
+                    correctId="a"
+                    explanation={{
+                        zh: "`while True` 会创建一个无限循环，这在游戏开发和自动化脚本中非常常见，让无人机不停地工作。",
+                        en: "`while True` creates an infinite loop, which is very common in game development and automation scripts to keep the drone working.",
+                        de: "`while True` erzeugt eine Endlosschleife, was in der Spieleentwicklung und in Automatisierungsskripten sehr verbreitet ist, um die Drohne am Laufen zu halten."
+                    }}
                 />
             </section>
 
-            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
-                <h2
-                    class="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
-                >
-                    {t({ zh: "6. For循环 (For Loops)", en: "6. For Loops", de: "6. For-Schleifen" })}
-                </h2>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">
-                    {
-                        t({
-                            zh: "For循环用于遍历序列中的每个元素：",
-                            en: "For loops are used to iterate over each element in a sequence:",
-                            de: "For-Schleifen werden verwendet, um über jedes Element in einer Sequenz zu iterieren:",
-                        })
-                    }
-                </p>
+            <!-- Section 5: Lists -->
+            <section id="lists" class="scroll-mt-20">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="flex-shrink-0 w-12 h-12 rounded-2xl bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 flex items-center justify-center text-2xl font-bold">05</span>
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+                        {t({ zh: "列表 (Lists)", en: "Lists", de: "Listen" })}
+                    </h2>
+                </div>
+                
+                <div class="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+                    <p>
+                        {t({
+                            zh: "列表就像一个有编号的货架，可以存放多个数据。",
+                            en: "Lists are like numbered shelves that can store multiple pieces of data.",
+                            de: "Listen sind wie nummerierte Regale, die mehrere Datenstücke speichern können.",
+                        })}
+                    </p>
+                    
+                    <CodeBlock
+                        code={`crops = ["Carrot", "Pumpkin", "Sunflower"]
 
-                <Code
-                    lang={"python"}
-                    class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
-                    code={`# Iterate over list
-animals = ["Dog", "Cat", "Bird"]
-for animal in animals:
-    print("I like", animal)
+# Access the first element (counting starts from 0!)
+print(crops[0])  # Output: Carrot
 
-# Numeric loop
-for i in range(5):
-    print("Number:", i)`}
-                />
-            </section>
+# Add a new element
+crops.append("Cactus")`}
+                    />
+                </div>
 
-            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
-                <h2
-                    class="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
-                >
-                    {
-                        t({
-                            zh: "7. While循环 (While Loops)",
-                            en: "7. While Loops",
-                            de: "7. While-Schleifen",
-                        })
-                    }
-                </h2>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">
-                    {
-                        t({
-                            zh: "While循环在条件为真时重复执行代码块。这是《The Farmer Was Replaced》中最重要的循环结构：",
-                            en: "While loops repeat code blocks while the condition is true. This is the most important loop structure in The Farmer Was Replaced:",
-                            de: "While-Schleifen wiederholen Codeblöcke, solange die Bedingung wahr ist. Dies ist die wichtigste Schleifenstruktur in The Farmer Was Replaced:",
-                        })
-                    }
-                </p>
-
-                <Code
-                    lang={"python"}
-                    class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
-                    code={`# Basic while loop
-count = 0
-while count < 5:
-    print("Count:", count)
-    count = count + 1
-
-# Infinite loop (common in games)
-while True:
-    # Get the next action
-    action = get_next_action()
-    if action == "Stop":
-        break
-    execute_action(action)`}
-                />
-            </section>
-
-            <section class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8">
-                <h2
-                    class="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
-                >
-                    {t({ zh: "8. 函数 (Functions)", en: "8. Functions", de: "8. Funktionen" })}
-                </h2>
-                <p class="text-gray-700 dark:text-gray-300 mb-4">
-                    {
-                        t({
-                            zh: "函数是可重用的代码块，用于执行特定任务：",
-                            en: "Functions are reusable code blocks that perform specific tasks:",
-                            de: "Funktionen sind wiederverwendbare Codeblöcke, die spezifische Aufgaben ausführen:",
-                        })
-                    }
-                </p>
-
-                <Code
-                    lang={"python"}
-                    class:list={[" p-4 rounded-lg font-mono text-sm mb-4"]}
-                    code={`# Define function
-def greet(name):
-    return "Hello, " + name + "!"
-
-# Call function
-message = greet("Xiao Ming")
-print(message)
-
-# Function with multiple parameters
-def calculate_area(length, width):
-    return length * width
-
-area = calculate_area(5, 3)
-print("Area:", area)`}
+                <InteractiveQuiz
+                    question={{
+                        zh: "如果 `my_list = [10, 20, 30]`，`my_list[1]` 的值是多少？",
+                        en: "If `my_list = [10, 20, 30]`, what is the value of `my_list[1]`?",
+                        de: "Was ist der Wert von `my_list[1]`, wenn `my_list = [10, 20, 30]` ist?"
+                    }}
+                    options={[
+                        { id: "a", text: { zh: "10", en: "10", de: "10" } },
+                        { id: "b", text: { zh: "20", en: "20", de: "20" } },
+                        { id: "c", text: { zh: "30", en: "30", de: "30" } }
+                    ]}
+                    correctId="b"
+                    explanation={{
+                        zh: "Python 列表索引从 0 开始。所以 [0] 是第一个，[1] 是第二个。",
+                        en: "Python list indices start at 0. So [0] is the first, [1] is the second.",
+                        de: "Python-Listenindizes beginnen bei 0. [0] ist also das erste, [1] das zweite Element."
+                    }}
                 />
             </section>
         </div>
 
+        <!-- Essential Knowledge Section -->
         <section
-            class="mt-16 p-8 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800"
+            class="mt-24 p-10 bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-3xl border border-green-100 dark:border-green-800/50 shadow-xl"
         >
             <h2
-                class="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
+                class="text-3xl font-bold text-gray-900 dark:text-white mb-8 flex items-center gap-3"
             >
-                {t({ zh: "游戏要求", en: "Game Requirements", de: "Spielanforderungen" })}
+                <span class="text-4xl">🚀</span>
+                {t({ zh: "想玩游戏前必会的基本知识", en: "Essential Knowledge Before Playing", de: "Unerlässliches Wissen vor dem Spielen" })}
             </h2>
-            <p class="text-gray-700 dark:text-gray-300 mb-4">
-                {
-                    t({
-                        zh: "要开始游玩《The Farmer Was Replaced》，你需要掌握以下核心概念：",
-                        en: "To start playing The Farmer Was Replaced, you need to master these core concepts:",
-                        de: "Um The Farmer Was Replaced zu spielen, musst du diese Kernkonzepte beherrschen:",
-                    })
-                }
-            </p>
 
-            <ul
-                class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300 mb-6"
-            >
-                <li>
-                    {
-                        t({
-                            zh: "变量的创建和使用",
-                            en: "Creating and using variables",
-                            de: "Erstellen und Verwenden von Variablen",
-                        })
-                    }
-                </li>
-                <li>
-                    {
-                        t({
-                            zh: "基本数据类型（字符串、数字、布尔值）",
-                            en: "Basic data types (strings, numbers, booleans)",
-                            de: "Grundlegende Datentypen (Zeichenketten, Zahlen, boolesche Werte)",
-                        })
-                    }
-                </li>
-                <li>
-                    {
-                        t({
-                            zh: "条件判断（if语句）",
-                            en: "Conditional statements (if statements)",
-                            de: "Bedingte Anweisungen (if-Anweisungen)",
-                        })
-                    }
-                </li>
-                <li>
-                    {t({ zh: "列表的基本操作", en: "Basic list operations", de: "Grundlegende Listenoperationen" })}
-                </li>
-                <li>{t({ zh: "While循环的使用", en: "Using while loops", de: "Verwenden von While-Schleifen" })}</li>
-                <li>
-                    {
-                        t({
-                            zh: "函数的定义和调用",
-                            en: "Defining and calling functions",
-                            de: "Definieren und Aufrufen von Funktionen",
-                        })
-                    }
-                </li>
-            </ul>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-green-700 dark:text-green-400">{t({ zh: "编程核心", en: "Coding Core", de: "Programmier-Kern" })}</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span>{t({ zh: "变量：知道如何存储和修改数据", en: "Variables: Store and modify data", de: "Variablen: Daten speichern und ändern" })}</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span>{t({ zh: "逻辑：理解 if/else 是如何改变流程的", en: "Logic: Understand how if/else changes flow", de: "Logik: Verstehen, wie if/else den Ablauf ändert" })}</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span>{t({ zh: "循环：特别是 while True 这种持续性操作", en: "Loops: Especially persistent operations like while True", de: "Schleifen: Besonders dauerhafte Operationen wie while True" })}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-blue-700 dark:text-blue-400">{t({ zh: "游戏技巧", en: "Game Tips", de: "Spiel-Tipps" })}</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-500 font-bold">✓</span>
+                            <span>{t({ zh: "函数：学会使用内置函数如 harvest() 和 move()", en: "Functions: Learn to use built-in functions like harvest() and move()", de: "Funktionen: Lerne die Verwendung integrierter Funktionen wie harvest() und move()" })}</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-500 font-bold">✓</span>
+                            <span>{t({ zh: "缩进：行首空格不对程序就会报错", en: "Indentation: Program will error if leading spaces are wrong", de: "Einrückung: Das Programm meldet einen Fehler, wenn die führenden Leerzeichen falsch sind" })}</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-blue-500 font-bold">✓</span>
+                            <span>{t({ zh: "调试：看明白控制台里的报错信息", en: "Debugging: Understand error messages in the console", de: "Debugging: Fehlermeldungen in der Konsole verstehen" })}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-            <div id="utterances-container" class="my-10"></div>
-
-            <div class="text-center">
-                <a
-                    href={getRelativeLocaleUrl(locale, "/")}
-                    class="inline-block px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-200"
-                >
-                    {t({ zh: "返回首页", en: "Back to Home", de: "Zurück zur Startseite" })}
-                </a>
+            <div class="mt-12 text-center">
+                <p class="text-gray-600 dark:text-gray-400 mb-6">
+                    {t({ zh: "准备好开始你的农场自动化之旅了吗？", en: "Ready to start your farm automation journey?", de: "Bereit für deine Farmautomatisierung?" })}
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a
+                        href={getRelativeLocaleUrl(locale, "/")}
+                        class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg shadow-green-500/20"
+                    >
+                        {t({ zh: "前往代码中心", en: "Go to Code Hub", de: "Zum Code-Center" })}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </a>
+                </div>
             </div>
         </section>
+
+        <!-- Comments Section -->
+        <div class="mt-20">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                {t({ zh: "有问题或心得？欢迎在下方讨论！", en: "Questions or tips? Join the discussion below!", de: "Fragen oder Tipps? Diskutiere unten mit!" })}
+            </h3>
+            <div id="utterances-container" class="rounded-2xl overflow-hidden bg-gray-50 dark:bg-transparent p-4"></div>
+        </div>
     </div>
 </Layout>
+
+<style>
+    /* Add smooth scrolling for anchor links */
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
