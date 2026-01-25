@@ -119,18 +119,16 @@ const description = {
     while x!=get_pos_x() or y!=get_pos_y():
         if(get_pos_x()<x):
             move(East)
-        else:
+        elif(get_pos_x()>x):
             move(West)
         if(get_pos_y()<y):
             move(North)
-        else:
+        elif(get_pos_y()>y):
             move(South)
 
 def reverse(dir):
-    if(dir == West): return East
-    if(dir == East): return West
-    if(dir == North): return South
-    if(dir == South): return North`} />
+    opposite = {West:East, East:West, North:South, South:North}
+    return opposite[dir]`} />
             </div>
 
             <div class="mb-12 bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
@@ -186,11 +184,11 @@ if(y!=0 and down != None and current<down):
     while x!=get_pos_x() or y!=get_pos_y():
         if(get_pos_x()<x):
             move(East)
-        else:
+        elif(get_pos_x()>x):
             move(West)
         if(get_pos_y()<y):
             move(North)
-        else:
+        elif(get_pos_y()>y):
             move(South)
 
 def plantCactus():
@@ -199,10 +197,8 @@ def plantCactus():
     plant(Entities.Cactus)  
 
 def reverse(dir):
-    if(dir == West): return East
-    if(dir == East): return West
-    if(dir == North): return South
-    if(dir == South): return North
+    opposite = {West:East, East:West, North:South, South:North}
+    return opposite[dir]
 
 def cactusProject(size=3):
     while True:
@@ -256,6 +252,7 @@ def cactusProject(size=3):
                 if(i!=size-1):
                     move(vdir)
                 dir=reverse(dir)
+            vdir = reverse(vdir)
         
         # 3. Harvesting Phase (Once sorted)
         back()
