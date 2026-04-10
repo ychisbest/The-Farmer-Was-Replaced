@@ -1,0 +1,76 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "@/layouts/BaseLayout.astro";
+import { SITE_TITLE } from "@/consts";
+import { LOCALES_SETTING, DEFAULT_LOCALE_SETTING } from "@/locales";
+import partnerLinks from "../../../links.json";
+import { useTranslations, type Lang } from "@/i18n";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return Object.keys(LOCALES_SETTING).map((lang) => {
+    if (lang !== DEFAULT_LOCALE_SETTING) {
+      return {
+        params: { lang },
+      };
+    }
+
+    return {
+      params: { lang: undefined },
+    };
+  });
+};
+
+type PartnerLink = {
+  html: string;
+};
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const links = partnerLinks as PartnerLink[];
+
+const title = {
+  en: "Partner Links",
+  zh: "友情链接",
+  de: "Partnerlinks",
+};
+
+const description = {
+  en: `Partner links published on ${SITE_TITLE}.`,
+  zh: `${SITE_TITLE} 收录的友情链接页面。`,
+  de: `Partnerlinks, die auf ${SITE_TITLE} veroeffentlicht werden.`,
+};
+---
+
+<Layout title={title} description={description}>
+  <section class="max-w-3xl mx-auto px-4 py-10 space-y-8">
+    <header class="space-y-4">
+      <h1 class="text-3xl font-bold">
+        {t({ en: "Partner Links", zh: "友情链接", de: "Partnerlinks" })}
+      </h1>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        {
+          t({
+            en: "This page collects all partner links assigned specifically to this project.",
+            zh: "这个页面收录了仅属于本站项目的全部友情链接。",
+            de: "Diese Seite sammelt alle Partnerlinks, die speziell diesem Projekt zugeordnet sind.",
+          })
+        }
+      </p>
+    </header>
+
+    <div class="space-y-4">
+      {
+        links.map((link, index) => (
+          <article class="rounded-2xl border border-neutral-200 bg-white p-6 dark:border-neutral-700 dark:bg-neutral-800/60">
+            <p class="mb-3 text-xs uppercase tracking-[0.18em] text-neutral-400">
+              Link {index + 1}
+            </p>
+            <div
+              class="leading-8 text-neutral-700 dark:text-neutral-300 [&_a]:font-semibold [&_a]:text-emerald-600 dark:[&_a]:text-emerald-400 [&_a]:underline-offset-4 [&_a]:hover:underline"
+              set:html={link.html}
+            />
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
