@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test:guide": "node scripts/check-dinosaur-guide.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",

@@ -50,6 +50,11 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
           {t({ en: "Sunflower", zh: "向日葵", de: "Sonnenblume" })}
         </a>
         </li>
+        <li>
+        <a href={getRelativeLocaleUrl(locale, "/codes/dinosaur-code")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+          {t({ en: "Dinosaur", zh: "恐龙", de: "Dino" })}
+        </a>
+        </li>
       </ul>
       </div>
       <div>

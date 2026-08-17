@@ -1,0 +1,279 @@
+---
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+import { useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/BaseLayout.astro";
+import CodeBlock from "@/components/CodeBlock.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { Image } from "astro:assets";
+import AdNative from "@/components/AdNative.astro";
+import RelatedGuides from "@/components/RelatedGuides.astro";
+import dinoHatFarm from "@/assets/dinoHatFarm.jpg";
+import dinoTailApple from "@/assets/dinoTailApple.jpg";
+import dinoBonesHarvest from "@/assets/dinoBonesHarvest.jpg";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+
+export const getStaticPaths = async () => {
+	const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+		if (lang !== DEFAULT_LOCALE_SETTING) {
+			return { params: { lang: lang } };
+		}
+		return { params: { lang: undefined } };
+	});
+	return paths;
+};
+
+const title = {
+	en: "Dinosaur Hat Guide — Grow a Tail, Then Take Bones",
+	zh: "恐龙帽教学 — 先长尾巴，再摘帽子收骨头",
+	de: "Dinosaurier-Hut — Schwanz wachsen, dann Knochen ernten",
+};
+
+const description = {
+	en: "Learn The Farmer Was Replaced dinosaur hat step by step: put the hat on, eat apples, avoid your tail, measure the next apple, then change hats to get n squared bones.",
+	zh: "一步步学编程农场恐龙帽：戴上帽子、吃苹果、躲开自己的尾巴、用 measure 看下一颗苹果，再换帽子收下 n 的平方块骨头。",
+	de: "Dinosaurier-Hut Schritt für Schritt: Hut aufsetzen, Äpfel essen, den Schwanz meiden, den nächsten Apfel messen, Hut wechseln für n² Knochen.",
+};
+---
+
+<Layout title={title} description={description}>
+	<div class="max-w-4xl mx-auto px-4">
+		<section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
+			<h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
+				{
+					t({
+						en: "Dinosaur hat: think like a snake, not like a farmer",
+						zh: "恐龙帽：把它当成贪吃蛇，不要当成普通收割",
+						de: "Dinosaurier-Hut: denk wie eine Schlange, nicht wie ein Bauer",
+					})
+				}
+			</h1>
+			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+				{
+					t({
+						en: "The dinosaur hat is not a crop script. You put it on, apples appear if you can pay cactus, each apple grows a tail behind you, and you only get bones when you take the hat off. Read the idea first. Copy the long script last, if at all.",
+						zh: "恐龙帽不是种地脚本。戴上它，有仙人掌就能刷出苹果；每吃一颗，身后多一节尾巴；只有摘掉帽子才会变成骨头。先把规则看懂，完整脚本放在最后，可复制也可自己拼。",
+						de: "Der Dinosaurier-Hut ist kein Ernte-Skript. Hut auf, Äpfel gegen Kaktus, jeder Apfel verlängert den Schwanz, Knochen gibt es erst beim Absetzen. Erst die Idee, dann optional das ganze Skript.",
+					})
+				}
+			</p>
+		</section>
+
+		<AdNative />
+
+		<section class="py-10">
+			<h2 class="text-2xl font-bold mb-4 text-emerald-800 dark:text-emerald-300">
+				{t({ en: "Step 1 — Put the hat on", zh: "第 1 步 — 先把帽子戴上", de: "Schritt 1 — Hut aufsetzen" })}
+			</h2>
+			<p class="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+				{
+					t({
+						en: "Nothing dinosaur-related happens until the drone wears the hat. One function, one hat name. After this line, if you have enough cactus, the game buys an apple and puts it under the drone.",
+						zh: "不戴帽子，什么恐龙规则都不会生效。一个函数，一个帽子名字。执行这一行后，如果你仙人掌够，游戏会买一颗苹果，放在无人机脚下。",
+						de: "Ohne Hut passiert nichts. Eine Funktion, ein Hutname. Danach kauft das Spiel bei genug Kaktus einen Apfel und legt ihn unter die Drohne.",
+					})
+				}
+			</p>
+			<Image
+				src={dinoHatFarm}
+				alt={t({
+					en: "Drone wearing a felt dinosaur hat over a small farm grid with one red apple",
+					zh: "戴着毡布恐龙帽的无人机，停在小农田上方，地上有一颗红苹果",
+					de: "Drohne mit Filz-Dinosaurierhut über einem kleinen Feld, ein roter Apfel liegt auf einer Kachel",
+				})}
+				class="w-full rounded-2xl shadow-lg mb-6"
+			/>
+			<CodeBlock code={`change_hat(Hats.Dinosaur_Hat)`} />
+			<p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+				{
+					t({
+						en: "Only one drone can wear this hat. clear() also puts the straw hat back on and wipes the farm.",
+						zh: "整场只有一顶恐龙帽，只有一台无人机戴得上。clear() 会把帽子换回草帽，并清空农田。",
+						de: "Nur eine Drohne kann den Hut tragen. clear() setzt den Strohhut zurück und leert den Hof.",
+					})
+				}
+			</p>
+		</section>
+
+		<section class="py-10 border-t border-gray-100 dark:border-gray-800">
+			<h2 class="text-2xl font-bold mb-4 text-emerald-800 dark:text-emerald-300">
+				{t({ en: "Step 2 — Why cactus matters", zh: "第 2 步 — 为什么要有仙人掌", de: "Schritt 2 — Warum Kaktus zählt" })}
+			</h2>
+			<p class="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+				{
+					t({
+						en: "The apple is not planted with plant(). The game spends cactus from your inventory. If you have none, no apple appears and there is nothing to chase. Check the count before you start a long run.",
+						zh: "苹果不是 plant() 种出来的。游戏会从背包里扣仙人掌。仙人掌为 0 时，不会出现苹果，后面的追逐也无从谈起。开跑前先看一眼数量。",
+						de: "Der Apfel wird nicht mit plant() gesetzt. Das Spiel bezahlt ihn mit Kaktus aus dem Inventar. Ohne Kaktus erscheint kein Apfel.",
+					})
+				}
+			</p>
+			<CodeBlock
+				code={`if num_items(Items.Cactus) == 0:
+    print("need cactus before the hat is useful")`}
+			/>
+		</section>
+
+		<section class="py-10 border-t border-gray-100 dark:border-gray-800">
+			<h2 class="text-2xl font-bold mb-4 text-emerald-800 dark:text-emerald-300">
+				{t({ en: "Step 3 — Move once to eat, not to harvest", zh: "第 3 步 — 再移动一格才是吃，不是 harvest", de: "Schritt 3 — Ein weiterer Zug frisst, harvest nicht" })}
+			</h2>
+			<p class="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+				{
+					t({
+						en: "Standing on the apple is not enough. The next successful move eats it and adds one tail tile on the square you just left. harvest() is the wrong tool here. If you can afford it, a new apple is placed on a random empty tile. A planted crop on that tile blocks the spawn.",
+						zh: "站在苹果上还没吃掉。下一次成功的 move 才会吃掉它，并在你刚离开的格子留下一节尾巴。这里不要用 harvest()。仙人掌还够的话，新苹果会刷在随机空格；那一格如果已经种了东西，苹果刷不出来。",
+						de: "Auf dem Apfel stehen reicht nicht. Der nächste erfolgreiche move frisst ihn und legt ein Schwanzstück auf das verlassene Feld. harvest() ist hier falsch.",
+					})
+				}
+			</p>
+			<Image
+				src={dinoTailApple}
+				alt={t({
+					en: "Same drone with a short felt dinosaur tail, reaching toward a red apple on the grid",
+					zh: "同一台无人机拖着短短的毡布恐龙尾巴，朝格子上的红苹果移动",
+					de: "Dieselbe Drohne mit kurzem Filzschwanz, ein roter Apfel liegt voraus",
+				})}
+				class="w-full rounded-2xl shadow-lg mb-6"
+			/>
+			<CodeBlock
+				code={`# hat is on, apple is under the drone
+move(East)
+# that move ate the apple and grew the first tail tile`}
+			/>
+		</section>
+
+		<section class="py-10 border-t border-gray-100 dark:border-gray-800">
+			<h2 class="text-2xl font-bold mb-4 text-emerald-800 dark:text-emerald-300">
+				{t({ en: "Step 4 — Your tail is a wall", zh: "第 4 步 — 尾巴就是墙", de: "Schritt 4 — Der Schwanz ist eine Wand" })}
+			</h2>
+			<p class="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+				{
+					t({
+						en: "move() returns False if the next tile is your own tail. The last tail piece slides away as you move, so you may step onto that one tile. With the dinosaur hat on, the drone also cannot wrap around the farm edge. When the tail fills the whole farm, every move fails — that is how you know it is fully grown.",
+						zh: "下一格是自己的尾巴时，move() 返回 False。最后一节尾巴会在你移动时让开，所以可以踩那一格。戴着恐龙帽时，无人机也不能从农田边缘绕到对面。尾巴铺满整块地时，所有方向都走不动——这就说明长满了。",
+						de: "move() ist False auf dem eigenen Schwanz. Das letzte Stück weicht beim Zug aus. Mit dem Hut gibt es kein Umwickeln am Feldrand. Ist der Hof voll, schlagen alle Züge fehl.",
+					})
+				}
+			</p>
+			<CodeBlock
+				code={`if can_move(North):
+    move(North)
+else:
+    print("blocked by tail or the farm edge")`}
+			/>
+		</section>
+
+		<section class="py-10 border-t border-gray-100 dark:border-gray-800">
+			<h2 class="text-2xl font-bold mb-4 text-emerald-800 dark:text-emerald-300">
+				{t({ en: "Step 5 — Ask the apple where the next one is", zh: "第 5 步 — 站在苹果上问下一颗在哪", de: "Schritt 5 — Den Apfel nach dem nächsten fragen" })}
+			</h2>
+			<p class="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+				{
+					t({
+						en: "measure() on an apple returns a pair: the coordinates of the next apple. Do this while you are still standing on the current apple, before you move. After you eat, walk toward those two numbers. When you arrive, measure again.",
+						zh: "对苹果调用 measure() 会返回一对坐标，也就是下一颗苹果的位置。要在还站在当前这颗上、还没移动时调用。吃掉之后，朝这两个数字走。走到了再 measure 一次。",
+						de: "measure() auf einem Apfel liefert das nächste Apfel-Paar. Messen, solange du noch darauf stehst, dann dorthin laufen, dann erneut messen.",
+					})
+				}
+			</p>
+			<CodeBlock
+				code={`next_x, next_y = measure()
+print(next_x, next_y)`}
+			/>
+		</section>
+
+		<section class="py-10 border-t border-gray-100 dark:border-gray-800">
+			<h2 class="text-2xl font-bold mb-4 text-emerald-800 dark:text-emerald-300">
+				{t({ en: "Step 6 — Bones only when the hat comes off", zh: "第 6 步 — 摘掉帽子才变成骨头", de: "Schritt 6 — Knochen erst beim Absetzen" })}
+			</h2>
+			<p class="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+				{
+					t({
+						en: "Switch to any other hat and the tail is harvested. You get n squared bones, where n is tail length: 1, 4, 9, 16, … A length-16 tail is 256 bones. You do not harvest the tail with harvest().",
+						zh: "换成任意其他帽子，尾巴会被收走。骨头数量是尾巴长度 n 的平方：1、4、9、16……长度为 16 就是 256 块。不要对尾巴调用 harvest()。",
+						de: "Ein anderer Hut erntet den Schwanz. Du bekommst n² Knochen. Länge 16 ergibt 256. Nicht harvest() auf den Schwanz.",
+					})
+				}
+			</p>
+			<Image
+				src={dinoBonesHarvest}
+				alt={t({
+					en: "Drone back in a straw hat, dinosaur hat on a crate, a pile of bones on the farm",
+					zh: "无人机重新戴上草帽，恐龙帽放在木箱上，田里有一堆骨头",
+					de: "Drohne mit Strohhut, Dinosaurierhut auf einer Kiste, Knochenhaufen auf dem Feld",
+				})}
+				class="w-full rounded-2xl shadow-lg mb-6"
+			/>
+			<CodeBlock
+				code={`change_hat(Hats.Straw_Hat)
+# tail is gone; inventory gained n**2 Items.Bone`}
+			/>
+		</section>
+
+		<section class="py-10 border-t border-gray-100 dark:border-gray-800">
+			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+				{t({ en: "Optional: one small practice farm", zh: "可选：先在小农田上练", de: "Optional: erst auf einem kleinen Hof üben" })}
+			</h2>
+			<p class="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+				{
+					t({
+						en: "A full-size farm takes a long time to fill and you may not need that many bones. set_world_size() shrinks the grid (minimum 3) and also clears it. The effect ends when the program stops. Below is a practice loop that only uses ideas from the steps above: shrink, hat on, measure, walk, stop when blocked, hat off.",
+						zh: "铺满整块大地很慢，而且你未必需要那么多骨头。set_world_size() 会缩小网格（最小 3）并清空农田。程序结束时效果消失。下面这段练习循环只用到上面讲过的事：缩小、戴帽、测量、走过去、走不动就停、摘帽。",
+						de: "Ein voller Hof dauert lange. set_world_size() verkleinert das Raster (mindestens 3) und leert es. Das folgende Übungsloop nutzt nur die Schritte oben.",
+					})
+				}
+			</p>
+			<CodeBlock
+				height="max-h-[640px]"
+				code={`set_world_size(5)
+clear()
+change_hat(Hats.Dinosaur_Hat)
+
+def walk_to(x, y):
+    while get_pos_x() != x or get_pos_y() != y:
+        if get_pos_x() < x:
+            if not move(East):
+                return False
+        elif get_pos_x() > x:
+            if not move(West):
+                return False
+        elif get_pos_y() < y:
+            if not move(North):
+                return False
+        else:
+            if not move(South):
+                return False
+    return True
+
+while True:
+    nxt = measure()
+    if nxt == None:
+        break
+    next_x, next_y = nxt
+    if not walk_to(next_x, next_y):
+        break
+
+change_hat(Hats.Straw_Hat)`}
+			/>
+			<p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
+				{
+					t({
+						en: "This is a teaching path, not a leaderboard path. It will bump its own tail on purpose so you can see the stop. Wear the hat only after the farm is empty so apples can spawn.",
+						zh: "这是教学路线，不是冲榜路线。它迟早会撞上自己的尾巴，好让你看到停止条件。农田清空后再戴帽子，苹果才有空位刷出来。",
+						de: "Ein Lehrpfad, keine Bestzeit. Er läuft absichtlich in den eigenen Schwanz. Hof leeren, dann den Hut aufsetzen.",
+					})
+				}
+			</p>
+		</section>
+
+		<RelatedGuides current="/codes/dinosaur-code" />
+		<div class="text-center py-6">
+			<a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
+				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite" })}
+			</a>
+		</div>
+		<div id="utterances-container" class="my-10"></div>
+	</div>
+</Layout>
