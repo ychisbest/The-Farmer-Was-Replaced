@@ -56,10 +56,11 @@ must(
 	"tiny hat snippet must appear before the optional full practice loop",
 );
 
-for (const file of ["dinoHatFarm.jpg", "dinoTailApple.jpg", "dinoBonesHarvest.jpg"]) {
-	must(existsSync(join(root, "src/assets", file)), `missing asset ${file}`);
-	must(source.includes(file.replace(".jpg", "")), `page does not import ${file}`);
-}
+must(existsSync(join(root, "src/assets/dinoHatFarm.jpg")), "missing asset dinoHatFarm.jpg");
+must((source.match(/<Image/g) || []).length === 1, "page must show exactly one image");
+must(source.includes("dinoHatFarm"), "page does not import dinoHatFarm");
+must(!source.includes("dinoTailApple"), "removed dinoTailApple is still referenced");
+must(!source.includes("dinoBonesHarvest"), "removed dinoBonesHarvest is still referenced");
 
 const used = new Set();
 for (const name of wikiNames) {
@@ -94,7 +95,9 @@ for (const [label, path] of Object.entries(navFiles)) {
 const distPage = join(root, "dist/codes/dinosaur-code/index.html");
 if (existsSync(distPage)) {
 	const html = readFileSync(distPage, "utf8");
-	must(/dinoHatFarm|dinoTailApple|dinoBonesHarvest/.test(html), "built HTML has no dinosaur image URL");
+	const imgHits = html.match(/dinoHatFarm/g) || [];
+	must(imgHits.length >= 1, "built HTML has no dinosaur image URL");
+	must(!/dinoTailApple|dinoBonesHarvest/.test(html), "built HTML still references extra dinosaur images");
 	must((html.match(/<h2/g) || []).length >= 6, "built HTML missing teaching headings");
 	const homeHtml = join(root, "dist/index.html");
 	if (existsSync(homeHtml)) {
@@ -113,5 +116,5 @@ if (failures.length) {
 }
 console.log("PASS");
 console.log("wiki-backed names used:", [...used].sort().join(", "));
-console.log("images referenced in source: dinoHatFarm, dinoTailApple, dinoBonesHarvest");
+console.log("images referenced in source: dinoHatFarm (single)");
 console.log("nav: header, footer, home, related");

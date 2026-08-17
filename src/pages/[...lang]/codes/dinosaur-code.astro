@@ -8,8 +8,6 @@ import { Image } from "astro:assets";
 import AdNative from "@/components/AdNative.astro";
 import RelatedGuides from "@/components/RelatedGuides.astro";
 import dinoHatFarm from "@/assets/dinoHatFarm.jpg";
-import dinoTailApple from "@/assets/dinoTailApple.jpg";
-import dinoBonesHarvest from "@/assets/dinoBonesHarvest.jpg";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -60,6 +58,18 @@ const description = {
 			</p>
 		</section>
 
+		<figure class="py-8">
+			<Image
+				src={dinoHatFarm}
+				alt={t({
+					en: "Hand-drawn cartoon of a drone in a dinosaur hat above a farm grid with one apple",
+					zh: "手绘卡通：戴恐龙帽的无人机停在农田格子上方，地上有一颗苹果",
+					de: "Handgezeichnete Karikatur: Drohne mit Dinosaurierhut über einem Feld, ein Apfel liegt unten",
+				})}
+				class="w-full rounded-2xl shadow-md"
+			/>
+		</figure>
+
 		<AdNative />
 
 		<section class="py-10">
@@ -75,15 +85,6 @@ const description = {
 					})
 				}
 			</p>
-			<Image
-				src={dinoHatFarm}
-				alt={t({
-					en: "Drone wearing a felt dinosaur hat over a small farm grid with one red apple",
-					zh: "戴着毡布恐龙帽的无人机，停在小农田上方，地上有一颗红苹果",
-					de: "Drohne mit Filz-Dinosaurierhut über einem kleinen Feld, ein roter Apfel liegt auf einer Kachel",
-				})}
-				class="w-full rounded-2xl shadow-lg mb-6"
-			/>
 			<CodeBlock code={`change_hat(Hats.Dinosaur_Hat)`} />
 			<p class="mt-4 text-sm text-gray-500 dark:text-gray-400">
 				{
@@ -128,15 +129,6 @@ const description = {
 					})
 				}
 			</p>
-			<Image
-				src={dinoTailApple}
-				alt={t({
-					en: "Same drone with a short felt dinosaur tail, reaching toward a red apple on the grid",
-					zh: "同一台无人机拖着短短的毡布恐龙尾巴，朝格子上的红苹果移动",
-					de: "Dieselbe Drohne mit kurzem Filzschwanz, ein roter Apfel liegt voraus",
-				})}
-				class="w-full rounded-2xl shadow-lg mb-6"
-			/>
 			<CodeBlock
 				code={`# hat is on, apple is under the drone
 move(East)
@@ -197,15 +189,6 @@ print(next_x, next_y)`}
 					})
 				}
 			</p>
-			<Image
-				src={dinoBonesHarvest}
-				alt={t({
-					en: "Drone back in a straw hat, dinosaur hat on a crate, a pile of bones on the farm",
-					zh: "无人机重新戴上草帽，恐龙帽放在木箱上，田里有一堆骨头",
-					de: "Drohne mit Strohhut, Dinosaurierhut auf einer Kiste, Knochenhaufen auf dem Feld",
-				})}
-				class="w-full rounded-2xl shadow-lg mb-6"
-			/>
 			<CodeBlock
 				code={`change_hat(Hats.Straw_Hat)
 # tail is gone; inventory gained n**2 Items.Bone`}
