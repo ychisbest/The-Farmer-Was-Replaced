@@ -22,8 +22,25 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
             de: "The Farmer Was Replaced",
           })}
         </a>
-        <div class="hidden md:flex items-center gap-6">
-
+        <div class="hidden lg:flex items-center gap-5 text-sm font-medium">
+          <a href={getRelativeLocaleUrl(locale, "/tutorial")} class="text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white">
+            {t({ en: "Tutorial", zh: "教程", de: "Tutorial" })}
+          </a>
+          <a href={getRelativeLocaleUrl(locale, "/basic-codes")} class="text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white">
+            {t({ en: "Codes", zh: "代码", de: "Codes" })}
+          </a>
+          <a href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")} class="text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white">
+            {t({ en: "Pumpkin", zh: "南瓜", de: "Kürbis" })}
+          </a>
+          <a href={getRelativeLocaleUrl(locale, "/codes/cactus-code")} class="text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white">
+            {t({ en: "Cactus", zh: "仙人掌", de: "Kaktus" })}
+          </a>
+          <a href={getRelativeLocaleUrl(locale, "/codes/sunflower-code")} class="text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white">
+            {t({ en: "Sunflower", zh: "向日葵", de: "Sonnenblume" })}
+          </a>
+          <a href={getRelativeLocaleUrl(locale, "/codes/maze-code")} class="text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white">
+            {t({ en: "Maze", zh: "迷宫", de: "Labyrinth" })}
+          </a>
         </div>
       </div>
       <div class="flex items-center gap-3">

@@ -1,0 +1,62 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslations, type Lang } from "@/i18n";
+import { DEFAULT_LOCALE_SETTING } from "@/locales";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+const { current = "" } = Astro.props;
+
+const items = [
+	{
+		href: "/basic-codes",
+		label: t({ en: "Basic codes", zh: "基础代码", de: "Basis-Codes" }),
+	},
+	{
+		href: "/tutorial",
+		label: t({ en: "Beginner tutorial", zh: "新手教程", de: "Anfänger-Tutorial" }),
+	},
+	{
+		href: "/codes/pumpkin-code",
+		label: t({ en: "Pumpkin code", zh: "南瓜代码", de: "Kürbis-Code" }),
+	},
+	{
+		href: "/codes/cactus-code",
+		label: t({ en: "Cactus sorting", zh: "仙人掌排序", de: "Kaktus-Sortierung" }),
+	},
+	{
+		href: "/codes/sunflower-code",
+		label: t({ en: "Sunflower code", zh: "向日葵代码", de: "Sonnenblumen-Code" }),
+	},
+	{
+		href: "/codes/maze-code",
+		label: t({ en: "Maze code", zh: "迷宫代码", de: "Labyrinth-Code" }),
+	},
+].filter((item) => item.href !== current);
+---
+
+<nav class="py-8 border-t border-neutral-200 dark:border-neutral-700">
+	<h2 class="text-lg font-bold mb-4 text-center text-gray-900 dark:text-white">
+		{
+			t({
+				en: "More The Farmer Was Replaced codes",
+				zh: "更多编程农场代码",
+				de: "Weitere The Farmer Was Replaced Codes",
+			})
+		}
+	</h2>
+	<ul class="flex flex-wrap justify-center gap-3">
+		{
+			items.map((item) => (
+				<li>
+					<a
+						href={getRelativeLocaleUrl(locale, item.href)}
+						class="inline-block px-4 py-2 rounded-full bg-gray-100 hover:bg-green-100 dark:bg-gray-800 dark:hover:bg-green-900/40 text-sm font-medium text-gray-700 dark:text-gray-200 transition"
+					>
+						{item.label}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</nav>

@@ -1,0 +1,214 @@
+---
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+import { useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/BaseLayout.astro";
+import CodeBlock from "@/components/CodeBlock.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import AdNative from "@/components/AdNative.astro";
+import RelatedGuides from "@/components/RelatedGuides.astro";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+
+export const getStaticPaths = async () => {
+	const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+		if (lang !== DEFAULT_LOCALE_SETTING) {
+			return { params: { lang: lang } };
+		}
+		return { params: { lang: undefined } };
+	});
+	return paths;
+};
+
+const title = {
+	en: "Sunflower Code — Harvest Max Petals Only",
+	zh: "向日葵代码 — 只收瓣数最多的那朵",
+	de: "Sonnenblumen-Code — Nur die Blume mit den meisten Blütenblättern",
+};
+
+const description = {
+	en: "The Farmer Was Replaced sunflower code: plant a field, measure() petals, harvest only the current max. Harvesting a smaller flower can wipe the rest.",
+	zh: "编程农场向日葵代码：先种满、用 measure() 量瓣数，只收当前最多的那朵。收错一朵可能毁掉整片田。",
+	de: "The Farmer Was Replaced Sonnenblumen-Code: Feld pflanzen, Blütenblätter messen, nur das aktuelle Maximum ernten.",
+};
+---
+
+<Layout title={title} description={description}>
+	<div class="max-w-4xl mx-auto px-4">
+		<section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
+			<h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
+				{
+					t({
+						en: "Sunflower Code: Only Harvest the Highest Petal Count",
+						zh: "向日葵代码：只收瓣数最高的那朵",
+						de: "Sonnenblumen-Code: Nur die höchste Blütenzahl ernten",
+					})
+				}
+			</h1>
+			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+				{
+					t({
+						en: "Sunflowers drop Power. The bonus comes from harvesting the flower that currently has the most petals. If you harvest a smaller one first, the rest of the field can be destroyed.",
+						zh: "向日葵产出 Power。奖励来自收割当前瓣数最多的那朵。如果先收了瓣数更少的，整片田可能被毁掉。",
+						de: "Sonnenblumen geben Power. Der Bonus kommt nur, wenn du die Blume mit den meisten Blütenblättern erntest.",
+					})
+				}
+			</p>
+		</section>
+
+		<AdNative />
+
+		<section class="py-10 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+			<h2 class="text-2xl font-bold text-yellow-700 dark:text-yellow-400">
+				{
+					t({
+						en: "How sunflowers actually work",
+						zh: "向日葵的真实规则",
+						de: "So funktionieren Sonnenblumen wirklich",
+					})
+				}
+			</h2>
+			<ul>
+				<li>
+					{
+						t({
+							en: "Plant on soil. Check `get_ground_type() != Grounds.Soil` then `till()`. Current game strings call the default ground Grassland; older notes said Turf. Either way, till until it is Soil.",
+							zh: "种在耕过的土上。判断 `get_ground_type() != Grounds.Soil` 再 `till()`。当前游戏字符串把默认地面叫 Grassland，旧资料写成 Turf。不管叫什么，翻到 Soil 即可。",
+							de: "Auf Soil pflanzen. `till()`, bis `Grounds.Soil` erreicht ist. Der Standardboden heißt jetzt Grassland, ältere Texte sagten Turf.",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "`measure()` on a grown sunflower returns its petal count (commonly 7 to 15).",
+							zh: "对长成的向日葵调用 `measure()`，得到瓣数（常见是 7 到 15）。",
+							de: "`measure()` liefert die Anzahl der Blütenblätter (meist 7 bis 15).",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "Harvest only the current maximum. Then measure again — the next max may be a different tile.",
+							zh: "只收当前最大值。收完再量一遍，下一朵最高的可能在别的格子。",
+							de: "Ernte nur das aktuelle Maximum. Danach neu messen.",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "Do not harvest every ready flower in a simple loop. That is the mistake most copy-paste scripts make.",
+							zh: "不要用普通循环把所有成熟的花一收而光。很多复制粘贴脚本就错在这里。",
+							de: "Ernte nicht einfach jede reife Blume in einer Schleife. Das ist der häufigste Fehler.",
+						})
+					}
+				</li>
+			</ul>
+		</section>
+
+		<section class="py-6">
+			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+				{t({ en: "Working sunflower script", zh: "能跑的向日葵脚本", de: "Funktionierendes Sonnenblumen-Skript" })}
+			</h2>
+			<p class="mb-4 text-gray-600 dark:text-gray-400">
+				{
+					t({
+						en: "Plant the field, scan every tile, harvest only the best flower, repeat until the field is empty, then replant.",
+						zh: "先种满，扫一遍格子，只收最好的那朵，重复到田空，再种下一轮。",
+						de: "Feld pflanzen, alle Felder scannen, nur die beste Blume ernten, wiederholen.",
+					})
+				}
+			</p>
+			<CodeBlock
+				height="max-h-[700px]"
+				code={`def go_to(x, y):
+    while get_pos_x() != x:
+        if get_pos_x() < x:
+            move(East)
+        else:
+            move(West)
+    while get_pos_y() != y:
+        if get_pos_y() < y:
+            move(North)
+        else:
+            move(South)
+
+def plant_field():
+    size = get_world_size()
+    for y in range(size):
+        for x in range(size):
+            go_to(x, y)
+            if get_ground_type() != Grounds.Soil:
+                till()
+            if can_harvest():
+                harvest()
+            if get_entity_type() != Entities.Sunflower:
+                plant(Entities.Sunflower)
+
+def harvest_current_max():
+    size = get_world_size()
+    best = 0
+    bx = -1
+    by = -1
+    found = False
+    for y in range(size):
+        for x in range(size):
+            go_to(x, y)
+            if get_entity_type() == Entities.Sunflower and can_harvest():
+                petals = measure()
+                if (not found) or petals > best:
+                    best = petals
+                    bx = x
+                    by = y
+                    found = True
+    if not found:
+        return False
+    go_to(bx, by)
+    harvest()
+    return True
+
+clear()
+while True:
+    plant_field()
+    while harvest_current_max():
+        pass`}
+			/>
+		</section>
+
+		<section class="py-8 bg-yellow-50 dark:bg-yellow-900/20 rounded-2xl border border-yellow-100 dark:border-yellow-800 p-6 mb-8">
+			<h3 class="text-xl font-bold mb-3 text-yellow-800 dark:text-yellow-300">
+				{t({ en: "If this script does nothing", zh: "如果脚本看起来没反应", de: "Wenn das Skript nichts tut" })}
+			</h3>
+			<ul class="space-y-2 text-yellow-900 dark:text-yellow-100">
+				<li>
+					{
+						t({
+							en: "Unlock sunflowers and wait until they finish growing before the first harvest.",
+							zh: "先解锁向日葵，等花长成再开始收。",
+							de: "Sonnenblumen erst freischalten und wachsen lassen.",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "Need more Power? Keep the field full so the max-petal bonus keeps triggering.",
+							zh: "想多刷 Power，就保持整田都有花，让最高瓣数奖励一直触发。",
+							de: "Für mehr Power das Feld voll halten, damit der Bonus weiter auslöst.",
+						})
+					}
+				</li>
+			</ul>
+		</section>
+
+		<RelatedGuides current="/codes/sunflower-code" />
+		<div class="text-center py-6">
+			<a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
+				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite" })}
+			</a>
+		</div>
+		<div id="utterances-container" class="my-10"></div>
+	</div>
+</Layout>

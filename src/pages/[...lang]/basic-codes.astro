@@ -7,6 +7,7 @@ import CodeAnalysis from "@/components/CodeAnalysis.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { images } from "@/lib/images";
 import AdNative from "@/components/AdNative.astro";
+import RelatedGuides from "@/components/RelatedGuides.astro";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -25,15 +26,15 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-    en: "Code Examples",
-    zh: "代码示例",
-    de: "Codebeispiele",
+    en: "Codes — Copy-Paste Harvest, Tree, Carrot Scripts",
+    zh: "代码 — 收割、树木、胡萝卜可复制脚本",
+    de: "Codes — Ernte-, Baum- und Karotten-Skripte",
 };
 
 const description = {
-    en: "Complete code examples for The Farmer Was Replaced game with detailed explanations and multilingual support.",
-    zh: "编程农场游戏完整代码示例，包含详细解释和多语言支持。",
-    de: "Vollständige Codebeispiele für das The Farmer Was Replaced Spiel mit detaillierten Erklärungen und mehrsprachiger Unterstützung.",
+    en: "Copy-paste The Farmer Was Replaced codes: auto harvest, tree checkerboard, carrot planting, watering. Till until Grounds.Soil.",
+    zh: "可复制的编程农场代码：自动收割、树木棋盘、胡萝卜、浇水。翻地直到 Grounds.Soil。",
+    de: "Kopierbare Codes: Ernte, Bäume, Karotten, Gießen. Pflügen bis Grounds.Soil.",
 };
 ---
 
@@ -847,144 +848,54 @@ while True:
             <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
                 {
                     t({
-                        en: "Sunflower optimization strategy, only harvest high-energy flowers.",
-                        zh: "向日葵优化策略，只收获高能量的花。",
-                        de: "Sonnenblumen-Optimierungsstrategie, nur hochenergetische Blumen ernten.",
+                        en: "Harvest only the flower with the most petals. Then scan again. Full explanation:",
+                        zh: "只收瓣数最多的那朵，然后再扫一遍。完整说明：",
+                        de: "Nur die Blume mit den meisten Blütenblättern ernten, dann neu scannen. Erklärung:",
                     })
                 }
+                <a
+                    class="text-blue-600 underline ml-1"
+                    href={getRelativeLocaleUrl(locale, "/codes/sunflower-code")}
+                >
+                    {t({ en: "sunflower code page", zh: "向日葵代码页", de: "Sonnenblumen-Code" })}
+                </a>
             </p>
             <CodeBlock
-                code={t({
-                    en: `# Sunflower Energy Optimization - Advanced measurement and selection
-# This script demonstrates loops, arrays, and optimization algorithms
+                code={`def go_to(x, y):
+    while get_pos_x() != x:
+        if get_pos_x() < x:
+            move(East)
+        else:
+            move(West)
+    while get_pos_y() != y:
+        if get_pos_y() < y:
+            move(North)
+        else:
+            move(South)
 
-# PHASE 1: Plant and measure all sunflowers across the farm
-sunflowers = []  # Array to store energy measurements
-world_size = get_world_size()
-
-# Plant sunflowers on every tile and measure their energy
-for i in range(world_size * world_size):
-    # Prepare soil if needed
-    if get_ground_type() == Grounds.Turf:
-        till()
-
-    # Plant sunflower (trade for seeds if we don't have any)
-    if num_items(Items.Sunflower_Seed) > 0 or trade(Items.Sunflower_Seed):
-        plant(Entities.Sunflower)
-
-    # Measure energy if sunflower is planted
-    if get_entity_type() == Entities.Sunflower:
-        energy = measure()  # Get sunflower's energy value
-        sunflowers.append(energy)  # Store in our array
-
-    # Move to next tile in row-major order
-    move(East)
-    if get_pos_x() == 0:  # Reached end of row
-        move(North)  # Move to next row
-
-# PHASE 2: Find the sunflower with highest energy
-max_val = 0
-max_index = 0
-# Iterate through all measurements to find maximum
-for i in range(len(sunflowers)):
-    if sunflowers[i] > max_val:
-        max_val = sunflowers[i]  # Update max value
-        max_index = i  # Remember position of best sunflower
-
-# PHASE 3: Move to and harvest the optimal sunflower
-# (In a real implementation, you'd need movement logic to go to max_index position)
-# For now, we'll assume we're at the right position
-if measure() == max_val:  # Double-check we're at the right flower
-    if can_harvest():
-        harvest()  # Harvest the highest-energy sunflower`,
-                    zh: `# 向日葵能量优化 - 高级测量和选择
-# 这个脚本演示循环、数组和优化算法
-
-# 第一阶段：在农场种植并测量所有向日葵
-sunflowers = []  # 数组存储能量测量值
-world_size = get_world_size()
-
-# 在每个格子种植向日葵并测量其能量
-for i in range(world_size * world_size):
-    # 需要时准备土壤
-    if get_ground_type() == Grounds.Turf:
-        till()
-
-    # 种植向日葵（如果没有种子就交易获取）
-    if num_items(Items.Sunflower_Seed) > 0 or trade(Items.Sunflower_Seed):
-        plant(Entities.Sunflower)
-
-    # 如果种植了向日葵就测量能量
-    if get_entity_type() == Entities.Sunflower:
-        energy = measure()  # 获取向日葵的能量值
-        sunflowers.append(energy)  # 存储到我们的数组中
-
-    # 以行主序移动到下一个格子
-    move(East)
-    if get_pos_x() == 0:  # 到达行末尾
-        move(North)  # 移动到下一行
-
-# 第二阶段：找到能量最高的向日葵
-max_val = 0
-max_index = 0
-# 遍历所有测量值找到最大值
-for i in range(len(sunflowers)):
-    if sunflowers[i] > max_val:
-        max_val = sunflowers[i]  # 更新最大值
-        max_index = i  # 记住最佳向日葵的位置
-
-# 第三阶段：移动到并收获最优向日葵
-# （在实际实现中，你需要移动逻辑到达max_index位置）
-# 现在，我们假设我们在正确的位置
-if measure() == max_val:  # 再次确认我们在正确的花朵位置
-    if can_harvest():
-        harvest()  # 收获能量最高的向日葵`,
-                    de: `# Sonnenblumen-Energieoptimierung - Fortgeschrittene Messung und Auswahl
-# Dieses Skript demonstriert Schleifen, Arrays und Optimierungsalgorithmen
-
-# PHASE 1: Alle Sonnenblumen auf der Farm pflanzen und messen
-sunflowers = []  # Array zur Speicherung der Energiemessungen
-world_size = get_world_size()
-
-# Sonnenblumen auf jedem Feld pflanzen und Energie messen
-for i in range(world_size * world_size):
-    # Boden vorbereiten falls nötig
-    if get_ground_type() == Grounds.Turf:
-        till()
-
-    # Sonnenblume pflanzen (für Samen handeln wenn wir keine haben)
-    if num_items(Items.Sunflower_Seed) > 0 or trade(Items.Sunflower_Seed):
-        plant(Entities.Sunflower)
-
-    # Energie messen wenn Sonnenblume gepflanzt wurde
-    if get_entity_type() == Entities.Sunflower:
-        energy = measure()  # Sonnenblumen-Energie-Wert abrufen
-        sunflowers.append(energy)  # In unserem Array speichern
-
-    # Zum nächsten Feld in zeilenweiser Reihenfolge bewegen
-    move(East)
-    if get_pos_x() == 0:  # Ende der Reihe erreicht
-        move(North)  # Zur nächsten Reihe bewegen
-
-# PHASE 2: Die Sonnenblume mit höchster Energie finden
-max_val = 0
-max_index = 0
-# Alle Messungen durchlaufen um Maximum zu finden
-for i in range(len(sunflowers)):
-    if sunflowers[i] > max_val:
-        max_val = sunflowers[i]  # Max-Wert aktualisieren
-        max_index = i  # Position der besten Sonnenblume merken
-
-# PHASE 3: Zur optimalen Sonnenblume bewegen und ernten
-# (In einer realen Implementierung bräuchte man Bewegungslogik zur max_index Position)
-# Für jetzt nehmen wir an wir sind an der richtigen Position
-if measure() == max_val:  # Doppelte Überprüfung dass wir bei der richtigen Blume sind
-    if can_harvest():
-        harvest()  # Höchstenergetische Sonnenblume ernten`,
-                })}
+size = get_world_size()
+best = 0
+bx = 0
+by = 0
+found = False
+for y in range(size):
+    for x in range(size):
+        go_to(x, y)
+        if get_entity_type() == Entities.Sunflower and can_harvest():
+            petals = measure()
+            if (not found) or petals > best:
+                best = petals
+                bx = x
+                by = y
+                found = True
+if found:
+    go_to(bx, by)
+    harvest()`}
                 height="max-h-[380px]"
             />
         </section>
+
+        <RelatedGuides current="/basic-codes" />
 
         <div id="utterances-container" class="my-10"></div>
 

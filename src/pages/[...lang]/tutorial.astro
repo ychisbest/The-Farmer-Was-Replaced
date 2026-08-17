@@ -6,6 +6,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import CodeBlock from "@/components/CodeBlock.astro";
 import InteractiveQuiz from "@/components/InteractiveQuiz.astro";
 import AdNative from "@/components/AdNative.astro";
+import RelatedGuides from "@/components/RelatedGuides.astro";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -24,15 +25,15 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-    en: "Complete Python Tutorial for The Farmer Was Replaced - Master Automation",
-    zh: "编程农场完整 Python 教程 - 掌握自动化编程",
-    de: "Vollständiges Python-Tutorial für The Farmer Was Replaced - Meistere die Automatisierung",
+    en: "Tutorial — Beginner Guide to Variables, Loops, Functions",
+    zh: "教程 — 变量、循环、函数入门",
+    de: "Tutorial — Variablen, Schleifen, Funktionen für Anfänger",
 };
 
 const description = {
-    en: "Learn Python from scratch with interactive quizzes. Perfect guide for mastering The Farmer Was Replaced farm automation.",
-    zh: "通过交互式问答从零学习 Python。掌握编程农场自动化任务的完美指南。",
-    de: "Lerne Python von Grund auf mit interaktiven Quizfragen. Der perfekte Leitfaden zur Beherrschung der Farmautomatisierung in The Farmer Was Replaced.",
+    en: "Beginner The Farmer Was Replaced tutorial: variables, loops, functions, and quizzes. The language is Python-like, not full Python.",
+    zh: "编程农场新手教程：变量、循环、函数和练习。游戏语言接近 Python，但不是完整 Python。",
+    de: "Anfänger-Tutorial: Variablen, Schleifen, Funktionen. Die Sprache ist Python-ähnlich, nicht volles Python.",
 };
 ---
 
@@ -401,7 +402,7 @@ crops.append("Cactus")`}
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <a
-                        href={getRelativeLocaleUrl(locale, "/")}
+                        href={getRelativeLocaleUrl(locale, "/basic-codes")}
                         class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg shadow-green-500/20"
                     >
                         {t({ zh: "前往代码中心", en: "Go to Code Hub", de: "Zum Code-Center" })}
@@ -412,6 +413,8 @@ crops.append("Cactus")`}
                 </div>
             </div>
         </section>
+
+        <RelatedGuides current="/tutorial" />
 
         <!-- Comments Section -->
         <div class="mt-20">

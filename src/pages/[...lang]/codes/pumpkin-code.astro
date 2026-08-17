@@ -7,6 +7,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import { images } from "@/lib/images";
 import { Image } from "astro:assets";
 import AdNative from "@/components/AdNative.astro";
+import RelatedGuides from "@/components/RelatedGuides.astro";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -23,15 +24,15 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-    en: "Pumpkin Mega-Harvest Algorithm - The Farmer Was Replaced",
-    zh: "南瓜巨大化自动化算法详解 - 编程农场",
-    de: "Kürbis-Mega-Ernte-Algorithmus - The Farmer Was Replaced",
+    en: "Pumpkin Code — Giant Pumpkin, Don't Harvest Early",
+    zh: "南瓜代码 — 巨大南瓜，别提前收",
+    de: "Kürbis-Code — Riesenkürbis, nicht zu früh ernten",
 };
 
 const description = {
-    en: "Learn how to automate giant pumpkin farming. This script handles replanting, coordinate tracking, and mega-crop optimization.",
-    zh: "学习如何自动化种植巨大南瓜。本脚本包含补种逻辑、坐标追踪以及巨大化作物优化策略。",
-    de: "Lernen Sie, wie man den Anbau von Riesenkürbissen automatisiert. Dieses Skript behandelt das Nachpflanzen und die Optimierung.",
+    en: "The Farmer Was Replaced pumpkin code: about 1 in 5 pumpkins die. Track dead tiles, replant, and harvest only when the whole grid is ready or the giant pumpkin collapses.",
+    zh: "编程农场南瓜代码：大约五分之一的南瓜会枯死。记下枯死格子补种，整田长齐再收，提前收巨大南瓜会碎。",
+    de: "Kürbis-Code: Etwa jeder fünfte Kürbis stirbt. Tote Felder nachpflanzen und erst ernten, wenn das Raster voll ist.",
 };
 ---
 
@@ -56,6 +57,17 @@ const description = {
         </section>
 
         <AdNative />
+
+        <section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+            <h2 class="text-2xl font-bold text-orange-700 dark:text-orange-400">
+                {t({ en: "Pumpkin rules people miss", zh: "最容易漏看的南瓜规则", de: "Kürbis-Regeln, die oft fehlen" })}
+            </h2>
+            <ul>
+                <li>{t({ en: "About 1 in 5 pumpkins die when they grow up and leave a Dead Pumpkin. Dead tiles break the giant pumpkin.", zh: "大约五分之一的南瓜长大时会枯死，留下 Dead Pumpkin。有枯死格，巨大南瓜就合不成。", de: "Etwa jeder fünfte Kürbis stirbt und hinterlässt einen Dead Pumpkin." })}</li>
+                <li>{t({ en: "Adjacent fully grown pumpkins fuse. Harvest too early and the giant crop collapses into small pumpkins.", zh: "相邻的成熟南瓜会融合。提前收割，巨大南瓜会碎成小南瓜。", de: "Benachbarte reife Kürbisse verschmelzen. Zu frühes Ernten zerstört den Riesenkürbis." })}</li>
+                <li>{t({ en: "Plant on soil (`till()`). Water speeds growth but does not stop the 1-in-5 deaths — you still need a replant loop.", zh: "种在翻过的土上。浇水能加快生长，但挡不住五分之一枯死，所以还是要补种循环。", de: "Auf Boden pflanzen. Wasser beschleunigt das Wachstum, verhindert aber keine Tode." })}</li>
+            </ul>
+        </section>
 
         <section class="py-10 grid md:grid-cols-2 gap-8 items-center">
             <div class="order-2 md:order-1">
@@ -331,6 +343,7 @@ pumpProject()`}
             </ul>
         </section>
 
+        <RelatedGuides current="/codes/pumpkin-code" />
         <section class="py-8 border-t border-neutral-200 dark:border-neutral-700">
             <div class="flex justify-center">
                 <a href={getRelativeLocaleUrl(locale, "/")} class="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full transition text-gray-700 dark:text-gray-300 font-medium">

@@ -1,0 +1,163 @@
+---
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+import { useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/BaseLayout.astro";
+import CodeBlock from "@/components/CodeBlock.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import AdNative from "@/components/AdNative.astro";
+import RelatedGuides from "@/components/RelatedGuides.astro";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+
+export const getStaticPaths = async () => {
+	const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+		if (lang !== DEFAULT_LOCALE_SETTING) {
+			return { params: { lang: lang } };
+		}
+		return { params: { lang: undefined } };
+	});
+	return paths;
+};
+
+const title = {
+	en: "Maze Code — Wall Follower Treasure Hunt",
+	zh: "迷宫代码 — 沿墙走找到宝箱",
+	de: "Labyrinth-Code — Schatz mit Wandfolger finden",
+};
+
+const description = {
+	en: "The Farmer Was Replaced maze code: spawn a hedge maze with Weird Substance, follow the left wall, harvest only the treasure. Do not harvest hedges.",
+	zh: "编程农场迷宫代码：用奇怪物质把灌木变成树篱迷宫，左手扶墙走到宝箱，只收宝箱，别收树篱。",
+	de: "The Farmer Was Replaced Labyrinth-Code: Irrgarten erzeugen, linke Wand folgen, nur den Schatz ernten.",
+};
+---
+
+<Layout title={title} description={description}>
+	<div class="max-w-4xl mx-auto px-4">
+		<section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
+			<h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
+				{
+					t({
+						en: "Maze Code: Left-Wall Follower",
+						zh: "迷宫代码：左手扶墙法",
+						de: "Labyrinth-Code: Linke-Wand-Regel",
+					})
+				}
+			</h1>
+			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+				{
+					t({
+						en: "A first maze has no loops. Keep your left hand on the wall and you will pass every corridor, including the treasure.",
+						zh: "第一次生成的迷宫没有环。左手一直扶着墙走，就能走过每条走廊，宝箱也在路上。",
+						de: "Ein frisches Labyrinth hat keine Schleifen. Folgst du der linken Wand, triffst du den Schatz.",
+					})
+				}
+			</p>
+		</section>
+
+		<AdNative />
+
+		<section class="py-10 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+			<h2 class="text-2xl font-bold text-purple-700 dark:text-purple-300">
+				{t({ en: "Maze rules that break most scripts", zh: "最容易写错的迷宫规则", de: "Regeln, an denen die meisten Skripte scheitern" })}
+			</h2>
+			<ul>
+				<li>
+					{
+						t({
+							en: "Stand on a bush and call `use_item(Items.Weird_Substance, n)` to grow an n×n hedge maze. Fertilizer on plants is how you get Weird Substance.",
+							zh: "站在灌木上调用 `use_item(Items.Weird_Substance, n)`，会长出 n×n 的树篱迷宫。奇怪物质来自给植物施肥。",
+							de: "Auf einem Busch `use_item(Items.Weird_Substance, n)` erzeugt ein n×n-Labyrinth.",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "`harvest()` on the treasure gives gold equal to the maze area (5×5 → 25). Harvest anything else and the whole maze vanishes.",
+							zh: "对宝箱 `harvest()` 得到的金币等于迷宫面积（5×5 是 25）。收在别的格子上，整座迷宫会消失。",
+							de: "`harvest()` auf dem Schatz gibt Gold gleich der Fläche. Überall sonst verschwindet das Labyrinth.",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "`get_entity_type()` is `Entities.Treasure` on the chest and `Entities.Hedge` on walls you cannot fly over.",
+							zh: "宝箱上 `get_entity_type()` 是 `Entities.Treasure`，树篱是 `Entities.Hedge`，无人机飞不过去。",
+							de: "Schatz = `Entities.Treasure`, Hecke = `Entities.Hedge`.",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "`move()` returns False when a wall blocks you. `can_move(direction)` checks without moving. `measure()` anywhere in the maze returns the treasure coordinates.",
+							zh: "撞墙时 `move()` 返回 False。`can_move(direction)` 只检查不移动。在迷宫里任意位置 `measure()` 会返回宝箱坐标。",
+							de: "`move()` ist False an Wänden. `measure()` liefert die Schatzkoordinaten.",
+						})
+					}
+				</li>
+			</ul>
+		</section>
+
+		<section class="py-6">
+			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+				{t({ en: "Spawn a maze, then walk the left wall", zh: "生成迷宫，然后左手扶墙", de: "Labyrinth erzeugen, dann links folgen" })}
+			</h2>
+			<CodeBlock
+				height="max-h-[700px]"
+				code={`def spawn_maze():
+    if get_ground_type() != Grounds.Soil:
+        till()
+    harvest()
+    plant(Entities.Bush)
+    size = get_world_size()
+    use_item(Items.Weird_Substance, size)
+
+def solve_maze():
+    dirs = [North, East, South, West]
+    facing = 0
+    while get_entity_type() != Entities.Treasure:
+        left = (facing - 1) % 4
+        if can_move(dirs[left]):
+            facing = left
+            move(dirs[facing])
+        elif can_move(dirs[facing]):
+            move(dirs[facing])
+        else:
+            facing = (facing + 1) % 4
+    harvest()
+
+clear()
+while True:
+    spawn_maze()
+    solve_maze()`}
+			/>
+		</section>
+
+		<section class="py-8 bg-purple-50 dark:bg-purple-900/20 rounded-2xl border border-purple-100 dark:border-purple-800 p-6 mb-8">
+			<h3 class="text-xl font-bold mb-3 text-purple-800 dark:text-purple-300">
+				{t({ en: "After the first maze", zh: "第一次通关之后", de: "Nach dem ersten Labyrinth" })}
+			</h3>
+			<p class="text-purple-900 dark:text-purple-100">
+				{
+					t({
+						en: "Reusing Weird Substance on the treasure moves the chest and can punch holes in walls. Those mazes have loops, so a plain wall follower can circle forever. For leaderboard runs, use `measure()` to walk toward the chest instead of hugging walls.",
+						zh: "在宝箱上再使用奇怪物质，宝箱会换位置，墙也可能被打出缺口。那种迷宫有环，单纯扶墙可能永远转圈。冲榜时用 `measure()` 朝宝箱走，别死扶墙。",
+						de: "Wiederverwendete Labyrinthe können Schleifen haben. Für Bestzeiten mit `measure()` direkt zum Schatz laufen.",
+					})
+				}
+			</p>
+		</section>
+
+		<RelatedGuides current="/codes/maze-code" />
+		<div class="text-center py-6">
+			<a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
+				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite" })}
+			</a>
+		</div>
+		<div id="utterances-container" class="my-10"></div>
+	</div>
+</Layout>

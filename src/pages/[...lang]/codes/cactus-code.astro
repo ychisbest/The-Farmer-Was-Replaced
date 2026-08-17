@@ -7,6 +7,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import { images } from "@/lib/images";
 import { Image } from "astro:assets";
 import AdNative from "@/components/AdNative.astro";
+import RelatedGuides from "@/components/RelatedGuides.astro";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -23,15 +24,15 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-    en: "Cactus Sorting Algorithm - The Farmer Was Replaced",
-    zh: "仙人掌冒泡排序算法详解 - 编程农场",
-    de: "Kaktus-Sortieralgorithmus - The Farmer Was Replaced",
+    en: "Cactus Code & Sorting — n² Harvest Explained",
+    zh: "仙人掌代码与排序 — 一次收 n² 个",
+    de: "Kaktus-Code & Sortierung — n²-Ernte erklärt",
 };
 
 const description = {
-    en: "Learn how to implement a 2D Bubble Sort algorithm to automate cactus harvesting. Detailed tutorial with Python code explanation.",
-    zh: "学习如何实现二维冒泡排序算法来自动化收获仙人掌。包含详细的 Python 代码原理解析。",
-    de: "Lernen Sie, wie man einen 2D-Blasensortieralgorithmus implementiert, um die Kaktusernte zu automatisieren. Detailliertes Tutorial.",
+    en: "The Farmer Was Replaced cactus code: measure sizes 0–9, swap until North/East neighbors are larger, then harvest the whole sorted square for n squared cactus.",
+    zh: "编程农场仙人掌代码：大小是 0–9，换到北侧和东侧都不更小，再收割整片，产量是 n 的平方。",
+    de: "Kaktus-Code: Größen 0–9 messen, nach Norden/Osten sortieren, dann das Quadrat ernten und n² Kakteen bekommen.",
 };
 ---
 
@@ -56,6 +57,18 @@ const description = {
         </section>
 
         <AdNative />
+
+        <section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+            <h2 class="text-2xl font-bold text-green-700 dark:text-green-400">
+                {t({ en: "Cactus rules (this is why sorting matters)", zh: "仙人掌规则（为什么必须排序）", de: "Kaktus-Regeln (warum Sortieren zählt)" })}
+            </h2>
+            <ul>
+                <li>{t({ en: "Sizes are 0–9. Read them with `measure()` or `measure(East)`.", zh: "大小是 0–9。用 `measure()` 或 `measure(East)` 读取。", de: "Größen sind 0–9. Mit `measure()` lesen." })}</li>
+                <li>{t({ en: "A cactus is sorted when every grown neighbor to the North and East is >= it, and every grown neighbor to the South and West is <= it.", zh: "北侧和东侧的邻居都 >= 自己，南侧和西侧的邻居都 <= 自己，才算排好。", de: "Norden/Osten >=, Süden/Westen <= bedeutet sortiert." })}</li>
+                <li>{t({ en: "Unsorted grown cacti look brown; sorted ones turn green.", zh: "排好前是棕色，排好后变绿。", de: "Unsortiert braun, sortiert grün." })}</li>
+                <li>{t({ en: "Harvest one sorted cactus and the harvest spreads through the connected sorted square. You get n**2 cactus, not n.", zh: "收一棵排好的，整片连着的有序方块会一起被收。产量是 n 的平方，不是 n。", de: "Eine sortierte Ernte greift auf das Quadrat über. Du bekommst n**2, nicht n." })}</li>
+            </ul>
+        </section>
 
         <section class="py-10 grid md:grid-cols-2 gap-8 items-center">
             <div class="order-2 md:order-1">
@@ -299,6 +312,7 @@ cactusProject(6)`}
             </ul>
         </section>
 
+        <RelatedGuides current="/codes/cactus-code" />
         <section class="py-8 border-t border-neutral-200 dark:border-neutral-700">
             <div class="flex justify-center">
                 <a href={getRelativeLocaleUrl(locale, "/")} class="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full transition text-gray-700 dark:text-gray-300 font-medium">

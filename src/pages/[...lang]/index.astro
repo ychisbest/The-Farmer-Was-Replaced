@@ -35,15 +35,15 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-    en: "The Farmer Was Replaced: Ultimate Guide, Wiki & Scripts",
-    zh: "编程农场 (The Farmer Was Replaced) 中文终极指南与脚本站",
-    de: "The Farmer Was Replaced: Ultimativer Guide, Wiki & Skripte",
+    en: "Codes, Guide & Scripts (Pumpkin, Cactus, Sunflower)",
+    zh: "代码、攻略与脚本（南瓜 / 仙人掌 / 向日葵）",
+    de: "Codes, Guide & Skripte (Kürbis, Kaktus, Sonnenblume)",
 };
 
 const description = {
-    en: "Master Python automation in 'The Farmer Was Replaced'. Browse our extensive collection of farming scripts, optimization algorithms, and beginner-friendly tutorials.",
-    zh: "精通《编程农场》的 Python 自动化。浏览我们海量的农场脚本、优化算法和新手友好的教程。",
-    de: "Meistere Python-Automatisierung in 'The Farmer Was Replaced'. Durchstöbere unsere umfangreiche Sammlung von Farm-Skripten, Optimierungsalgorithmen und anfängerfreundlichen Tutorials.",
+    en: "Copy-paste pumpkin, cactus, sunflower and maze codes for The Farmer Was Replaced. Steam desktop game — not available online or on mobile.",
+    zh: "南瓜、仙人掌、向日葵、迷宫可复制代码。编程农场是 Steam 电脑游戏，没有网页版和手机版。",
+    de: "Kürbis-, Kaktus-, Sonnenblumen- und Labyrinth-Codes zum Kopieren. Steam-PC-Spiel — nicht online oder mobil.",
 };
 ---
 
@@ -337,40 +337,100 @@ const description = {
                 </p>
             </a>
 
-            {
-                /* 这里的 href 设置为 javascript:void(0) 防止跳转，cursor-default 去掉手型鼠标 */
-            }
             <a
-                href="javascript:void(0)"
-                class="group p-8 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-700 cursor-default transition-all duration-300 text-center"
+                href={getRelativeLocaleUrl(locale, "/codes/sunflower-code")}
+                class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-yellow-100 dark:border-yellow-900/30 hover:border-yellow-400 dark:hover:border-yellow-500 hover:shadow-lg transition-all duration-300 text-center"
             >
                 <div
-                    class="w-14 h-14 bg-gray-100 dark:bg-gray-700 text-gray-400 rounded-xl flex items-center justify-center mx-auto mb-6"
+                    class="w-14 h-14 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition"
                 >
-                    {/* 图标改为施工或等待 */}
-                    <span class="text-2xl">🚧</span>
+                    <span class="text-2xl">🌻</span>
                 </div>
                 <h3
-                    class="font-bold text-lg text-gray-500 dark:text-gray-400 mb-2"
+                    class="font-bold text-lg text-gray-900 dark:text-white mb-2"
                 >
-                    {/* 标题：更多教程 */}
                     {
                         t({
-                            zh: "更多教程",
-                            en: "More Tutorials",
-                            de: "Mehr Tutorials",
+                            zh: "向日葵脚本",
+                            en: "Sunflower Script",
+                            de: "Sonnenblumen-Skript",
                         })
                     }
                 </h3>
                 <p
-                    class="text-sm text-gray-400 dark:text-gray-500 leading-relaxed"
+                    class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
                 >
-                    {/* 描述：正在编辑中 */}
                     {
                         t({
-                            zh: "代码教程正在编辑中...",
-                            en: "Editing in progress...",
-                            de: "Wird bearbeitet...",
+                            zh: "只收瓣数最高的那朵",
+                            en: "Harvest max petals only",
+                            de: "Nur maximale Blütenzahl",
+                        })
+                    }
+                </p>
+            </a>
+        </div>
+        <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+            <a
+                href={getRelativeLocaleUrl(locale, "/codes/maze-code")}
+                class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-purple-100 dark:border-purple-900/30 hover:border-purple-400 dark:hover:border-purple-500 hover:shadow-lg transition-all duration-300 text-center"
+            >
+                <div
+                    class="w-14 h-14 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition"
+                >
+                    <span class="text-2xl">🧭</span>
+                </div>
+                <h3
+                    class="font-bold text-lg text-gray-900 dark:text-white mb-2"
+                >
+                    {
+                        t({
+                            zh: "迷宫脚本",
+                            en: "Maze Script",
+                            de: "Labyrinth-Skript",
+                        })
+                    }
+                </h3>
+                <p
+                    class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
+                >
+                    {
+                        t({
+                            zh: "左手扶墙找宝箱",
+                            en: "Left-wall treasure hunt",
+                            de: "Linke Wand zum Schatz",
+                        })
+                    }
+                </p>
+            </a>
+            <a
+                href={getRelativeLocaleUrl(locale, "/tutorial")}
+                class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-blue-100 dark:border-blue-900/30 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg transition-all duration-300 text-center"
+            >
+                <div
+                    class="w-14 h-14 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition"
+                >
+                    <span class="text-2xl">📘</span>
+                </div>
+                <h3
+                    class="font-bold text-lg text-gray-900 dark:text-white mb-2"
+                >
+                    {
+                        t({
+                            zh: "新手教程",
+                            en: "Beginner Tutorial",
+                            de: "Anfänger-Tutorial",
+                        })
+                    }
+                </h3>
+                <p
+                    class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
+                >
+                    {
+                        t({
+                            zh: "循环、变量、函数",
+                            en: "Loops, variables, functions",
+                            de: "Schleifen, Variablen, Funktionen",
                         })
                     }
                 </p>
@@ -402,9 +462,9 @@ const description = {
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white">
                         {
                             t({
-                                zh: "真正的 Python 环境",
-                                en: "Real Python Environment",
-                                de: "Echte Python-Umgebung",
+                                zh: "类 Python 的编程语言",
+                                en: "Python-like language, not full Python",
+                                de: "Python-ähnliche Sprache, nicht volles Python",
                             })
                         }
                     </h3>
@@ -412,9 +472,9 @@ const description = {
                 <p>
                     {
                         t({
-                            zh: "这就不仅仅是一个游戏。你在游戏中编写的每一行代码都是真实的 Python 语法。你将学习变量、循环、函数以及复杂的数据结构，这些技能可以直接应用到现实世界的软件开发中。",
-                            en: "This isn't just a game. Every line of code you write is real Python syntax. You will learn variables, loops, functions, and complex data structures—skills directly applicable to real-world software development.",
-                            de: "Das ist nicht nur ein Spiel. Jede Codezeile ist echte Python-Syntax. Du lernst Variablen, Schleifen, Funktionen und komplexe Datenstrukturen – Fähigkeiten für die reale Softwareentwicklung.",
+                            zh: "游戏用的是自定义解释器，语法接近 Python（循环、变量、函数、列表），但不是完整 CPython：没有标准库，部分写法会报错。学会的是编程思路，不能把脚本原样贴进电脑上的 Python。",
+                            en: "The game uses a custom interpreter with Python-like syntax (loops, variables, functions, lists). It is not full CPython — no standard library, and some Python features fail. You learn programming ideas; you cannot paste these scripts into desktop Python unchanged.",
+                            de: "Das Spiel nutzt einen eigenen Interpreter mit Python-ähnlicher Syntax. Es ist nicht volles CPython. Du lernst Denkweisen, nicht Desktop-Python.",
                         })
                     }
                 </p>
