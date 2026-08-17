@@ -6,6 +6,7 @@ import CodeBlock from "@/components/CodeBlock.astro";
 import CodeAnalysis from "@/components/CodeAnalysis.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { images } from "@/lib/images";
+import AdNative from "@/components/AdNative.astro";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -75,6 +76,8 @@ const description = {
                 </a>
             </div>
         </section>
+
+        <AdNative />
 
         <!-- Example 1: Basic Auto Harvest -->
         <section class="mb-12">

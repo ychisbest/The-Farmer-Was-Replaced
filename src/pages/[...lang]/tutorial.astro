@@ -5,6 +5,7 @@ import Layout from "@/layouts/BaseLayout.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import CodeBlock from "@/components/CodeBlock.astro";
 import InteractiveQuiz from "@/components/InteractiveQuiz.astro";
+import AdNative from "@/components/AdNative.astro";
 
 const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
@@ -52,6 +53,8 @@ const description = {
                 }
             </p>
         </div>
+
+        <AdNative />
 
         <div class="space-y-24">
             <!-- Section 1: Variables -->

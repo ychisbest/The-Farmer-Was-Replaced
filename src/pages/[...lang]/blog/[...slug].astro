@@ -5,6 +5,7 @@ import { DEFAULT_LOCALE_SETTING } from "@/locales";
 import Layout from "@/layouts/BaseLayout.astro";
 import { getFileNameFromPath, getLangFromPath } from "@/common";
 import { Image } from 'astro:assets';
+import AdNative from "@/components/AdNative.astro";
 
 
 export async function getStaticPaths() {
@@ -37,6 +38,7 @@ const { Content } = await render(post);
 
 <Layout title={post.data.title} description={post.data.description}>
 	<h1 class="text-lg font-bold text-center mb-4">{post.data.title}</h1>
+	<AdNative />
 	<article class="prose lg:prose-sm mx-auto prose-invert dark:prose-invert text-gray-600 dark:text-neutral-400">
 		{post.data.image && (
 			<Image src={post.data.image} alt={post.data.title} class="mx-auto mb-6 rounded max-h-64 w-auto" />
