@@ -1,0 +1,56 @@
+---
+import Layout from "@/layouts/BaseLayout.astro";
+import { SITE_TITLE } from "@/consts";
+import { LOCALES_SETTING, DEFAULT_LOCALE_SETTING } from "@/locales";
+import { useTranslations, type Lang } from "@/i18n";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+
+export const getStaticPaths = async () => {
+    const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+        if (lang !== DEFAULT_LOCALE_SETTING) {
+            return {
+                params: { lang: lang },
+            };
+        } else {
+            return { params: { lang: undefined } };
+        }
+    });
+
+    return paths;
+};
+
+const title = {
+    en: "About",
+    zh: "关于本站",
+    de: "Über uns",
+};
+
+const description = {
+    en: `About ${SITE_TITLE}: independent guides and copy-paste codes for the Steam game The Farmer Was Replaced.`,
+    zh: `关于 ${SITE_TITLE}：独立整理的《编程农场》攻略与可复制代码。`,
+    de: `Über ${SITE_TITLE}: unabhängige Guides und Codes zum Kopieren für The Farmer Was Replaced.`,
+};
+---
+
+<Layout title={title} description={description}>
+    <section class="max-w-2xl mx-auto px-4 py-10 space-y-6">
+        <h1 class="text-3xl font-bold mb-4">
+            {t({ en: "About this site", zh: "关于本站", de: "Über diese Website" })}
+        </h1>
+        <p class="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+            {t({
+                en: "thefarmerwasreplaced.com is an independent fan site. We collect guides and copy-paste Python codes for The Farmer Was Replaced, a Steam desktop game about automating a farm.",
+                zh: "thefarmerwasreplaced.com 是独立爱好者站点，整理《编程农场》（The Farmer Was Replaced）的攻略和可复制 Python 代码。这是 Steam 电脑游戏。",
+                de: "thefarmerwasreplaced.com ist eine unabhängige Fan-Seite mit Guides und Python-Codes zum Kopieren für The Farmer Was Replaced, ein Steam-PC-Spiel.",
+            })}
+        </p>
+        <p class="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+            {t({
+                en: "We are not the game developer. For the official store page, use Steam. For questions about this website, open the GitHub repository linked in the footer.",
+                zh: "本站不是游戏开发者。官方页面请走 Steam。网站问题请通过页脚的 GitHub 仓库联系。",
+                de: "Wir sind nicht der Spieleentwickler. Die offizielle Store-Seite ist Steam. Fragen zur Website bitte über das GitHub-Repository in der Fußzeile.",
+            })}
+        </p>
+    </section>
+</Layout>

@@ -4,7 +4,8 @@
 import { SITE_TITLE } from "../consts";
 import FallbackImage from "../assets/og.png";
 import type { ImageMetadata } from "astro";
-import { useTranslations, type Lang } from "@/i18n";
+import { LOCALES, DEFAULT_LOCALE, useTranslations, type Lang } from "@/i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 interface Props {
 	title: string;
@@ -26,6 +27,51 @@ const keywords = {
 
 // Additional meta tags for enhanced SEO
 const currentLocale = Astro.currentLocale || "en";
+const hreflangByLang: Record<string, string> = {
+	en: "en",
+	zh: "zh-CN",
+	de: "de",
+};
+const unprefixedPath =
+	Astro.url.pathname.replace(/^\/(zh|de)(?=\/|$)/, "") || "/";
+const localeAlternates = Object.keys(LOCALES).map((lang) => {
+	const path = getRelativeLocaleUrl(lang, unprefixedPath);
+	return {
+		lang,
+		hreflang: hreflangByLang[lang] ?? lang,
+		href: new URL(path, Astro.site).href,
+	};
+});
+const xDefaultHref =
+	localeAlternates.find((item) => item.lang === DEFAULT_LOCALE)?.href ??
+	new URL(unprefixedPath, Astro.site).href;
+const siteOrigin = Astro.site?.href ?? "https://thefarmerwasreplaced.com/";
+const logoUrl = new URL("/web-app-manifest-512x512.png", siteOrigin).href;
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	name: SITE_TITLE,
+	description:
+		"Learn Python programming through gamified farming automation. Complete code examples, tutorials, and educational resources for The Farmer Was Replaced game.",
+	url: siteOrigin,
+	publisher: {
+		"@type": "Organization",
+		name: SITE_TITLE,
+		url: siteOrigin,
+		logo: logoUrl,
+	},
+	inLanguage: ["en", "zh-CN", "de"],
+};
+const organizationSchema = {
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	name: SITE_TITLE,
+	description:
+		"Educational programming guides and copy-paste codes for The Farmer Was Replaced.",
+	url: siteOrigin,
+	logo: logoUrl,
+	sameAs: ["https://store.steampowered.com/app/2060160/_/"],
+};
 ---
 
 <!-- Global Metadata -->
@@ -53,48 +99,11 @@ const currentLocale = Astro.currentLocale || "en";
 
 <!-- Hreflang Tags for International SEO -->
 {
-	currentLocale === "en" && (
-		<link rel="alternate" hreflang="en" href={canonicalURL} />
-	)
+	localeAlternates.map((item) => (
+		<link rel="alternate" hreflang={item.hreflang} href={item.href} />
+	))
 }
-{
-	currentLocale === "en" && (
-		<link
-			rel="alternate"
-			hreflang="zh"
-			href={
-				new URL(
-					Astro.url.pathname.replace(/^\//, "/zh/"),
-					Astro.url.origin,
-				)
-			}
-		/>
-	)
-}
-{
-	currentLocale === "zh" && (
-		<link rel="alternate" hreflang="zh" href={canonicalURL} />
-	)
-}
-{
-	currentLocale === "zh" && (
-		<link
-			rel="alternate"
-			hreflang="en"
-			href={
-				new URL(
-					Astro.url.pathname.replace(/^\/zh\//, "/"),
-					Astro.url.origin,
-				)
-			}
-		/>
-	)
-}
-<link
-	rel="alternate"
-	hreflang="x-default"
-	href={new URL(Astro.url.pathname.replace(/^\/zh\//, "/"), Astro.url.origin)}
-/>
+<link rel="alternate" hreflang="x-default" href={xDefaultHref} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -132,7 +141,9 @@ const currentLocale = Astro.currentLocale || "en";
 <meta property="og:site_name" content="The Farmer Was Replaced" />
 <meta
 	property="og:locale"
-	content={currentLocale === "zh" ? "zh_CN" : "en_US"}
+	content={
+		currentLocale === "zh" ? "zh_CN" : currentLocale === "de" ? "de_DE" : "en_US"
+	}
 />
 <meta property="og:type" content="website" />
 <meta property="og:updated_time" content={new Date().toISOString()} />
@@ -188,48 +199,5 @@ const currentLocale = Astro.currentLocale || "en";
 </script>
 
 <!-- Structured Data for SEO -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "{SITE_TITLE}",
-  "description": "Learn Python programming through gamified farming automation. Complete code examples, tutorials, and educational resources for The Farmer Was Replaced game.",
-  "url": "{Astro.site}",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "{Astro.site}search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "The Farmer Was Replaced",
-    "url": "{Astro.site}"
-  },
-  "educationalUse": "instructionalMaterial",
-  "learningResourceType": "interactive game tutorial",
-  "teaches": "Python programming",
-  "inLanguage": ["en", "zh", "de"]
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
-  "name": "The Farmer Was Replaced",
-  "description": "Educational programming game that teaches Python through farming automation",
-  "url": "{Astro.site}",
-  "sameAs": [
-    "https://store.steampowered.com/app/2060160/_/"
-  ],
-  "educationalCredentialAwarded": "Python Programming Skills",
-  "hasEducationalUse": "Programming Education",
-  "teaches": [
-    "Python Variables",
-    "Control Structures",
-    "Functions",
-    "Algorithms",
-    "Problem Solving"
-  ]
-}
-</script>
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />

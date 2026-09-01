@@ -68,6 +68,11 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
         </a>
         </li>
         <li>
+        <a href={getRelativeLocaleUrl(locale, "/about")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
+          {t({ en: "About", zh: "关于", de: "Über uns" })}
+        </a>
+        </li>
+        <li>
         <a href={getRelativeLocaleUrl(locale, "/terms")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
           {t({ en: "Terms", zh: "使用条款", de: "Nutzungsbedingungen" })}
         </a>
