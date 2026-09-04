@@ -1,12 +1,31 @@
 ---
 ---
 
-<aside class="ad-native my-8 w-full max-w-4xl mx-auto min-h-[90px] flex justify-center overflow-hidden" aria-label="Advertisement">
-	<script
-		is:inline
-		async="async"
-		data-cfasync="false"
-		src="https://pl30884533.effectivecpmnetwork.com/b1cc5426fa303af1c313c4d3ee76938f/invoke.js"
-	></script>
-	<div id="container-b1cc5426fa303af1c313c4d3ee76938f"></div>
+<aside
+	class="ad-native my-8 w-full max-w-4xl mx-auto min-h-[90px] flex justify-center overflow-hidden relative z-[1]"
+	data-ad-native
+	aria-label="Advertisement"
+>
+	<div class="ad-native-box w-full"></div>
 </aside>
+<script is:inline>
+	(function () {
+		var root = document.currentScript && document.currentScript.previousElementSibling;
+		if (!root || !root.hasAttribute("data-ad-native")) return;
+		if (window.__farmerAdNativeLoaded) {
+			root.hidden = true;
+			root.style.display = "none";
+			return;
+		}
+		window.__farmerAdNativeLoaded = true;
+		var box = root.querySelector(".ad-native-box");
+		if (!box) return;
+		box.id = "container-b1cc5426fa303af1c313c4d3ee76938f";
+		var s = document.createElement("script");
+		s.async = true;
+		s.setAttribute("data-cfasync", "false");
+		s.src =
+			"https://pl30884533.effectivecpmnetwork.com/b1cc5426fa303af1c313c4d3ee76938f/invoke.js";
+		root.appendChild(s);
+	})();
+</script>
