@@ -11,6 +11,7 @@ import logo from "@/assets/geminiHero.png";
 
 import CollapsibleText from "@/components/CollapsibleText.astro";
 import AdNative from "@/components/AdNative.astro";
+import { getFileNameFromPath } from "@/common";
 
 // --- Data Fetching Logic ---
 const t = useTranslations(Astro.currentLocale as Lang);
@@ -18,8 +19,16 @@ const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
 
 // 获取最新发布的 3 篇文章
 const allPosts = await getCollection("blog");
+const localePrefixes = Object.keys(LOCALES_SETTING).map((code) => code + "/");
 const recentPosts = allPosts
-    .filter((post) => post.data.title.startsWith(locale + "/"))
+    .filter((post) => {
+        const title = post.data.title;
+        if (title.startsWith(locale + "/")) return true;
+        const hasLocalePrefix = localePrefixes.some((prefix) =>
+            title.startsWith(prefix),
+        );
+        return locale === DEFAULT_LOCALE_SETTING && !hasLocalePrefix;
+    })
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .slice(0, 3);
 
@@ -187,7 +196,7 @@ const description = {
                                 <a
                                     href={getRelativeLocaleUrl(
                                         locale,
-                                        `/blog/${post.data.title.split("/").pop()}`,
+                                        `/blog/${getFileNameFromPath(post.filePath)}`,
                                     )}
                                     class="hover:text-green-700 dark:hover:text-green-400 transition"
                                 >
@@ -204,7 +213,7 @@ const description = {
                                 <a
                                     href={getRelativeLocaleUrl(
                                         locale,
-                                        `/blog/${post.data.title.split("/").pop()}`,
+                                        `/blog/${getFileNameFromPath(post.filePath)}`,
                                     )}
                                     class="text-sm font-bold text-green-600 hover:text-green-800 dark:text-green-400 transition"
                                 >

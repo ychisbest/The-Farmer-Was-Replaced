@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import { render } from "astro:content";
-import { DEFAULT_LOCALE_SETTING } from "@/locales";
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
 import Layout from "@/layouts/BaseLayout.astro";
 import { getFileNameFromPath, getLangFromPath } from "@/common";
 import { Image } from 'astro:assets';
@@ -10,18 +10,21 @@ import AdNative from "@/components/AdNative.astro";
 
 export async function getStaticPaths() {
 	const posts: CollectionEntry<"blog">[] = (await getCollection("blog"));
+	const localeKeys = Object.keys(LOCALES_SETTING);
 
 	const paths = posts.flatMap((post) => {
+		const slug = getFileNameFromPath(post.filePath);
+		const langFromPath = getLangFromPath(post.filePath);
 
-		if(getLangFromPath(post.filePath) !== DEFAULT_LOCALE_SETTING) {
+		if (localeKeys.includes(langFromPath) && langFromPath !== DEFAULT_LOCALE_SETTING) {
 			return [{
-				params: { slug: getFileNameFromPath(post.filePath), lang: getLangFromPath(post.filePath) },
+				params: { slug, lang: langFromPath },
 				props: post,
 			}];
 		}
 
 		return [{
-			params: { slug: getFileNameFromPath(post.filePath) },
+			params: { slug },
 			props: post,
 		}];
 	});
