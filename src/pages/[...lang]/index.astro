@@ -380,6 +380,38 @@ const description = {
         </div>
         <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
             <a
+                href={getRelativeLocaleUrl(locale, "/codes/tree-code")}
+                class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-teal-100 dark:border-teal-900/30 hover:border-teal-400 dark:hover:border-teal-500 hover:shadow-lg transition-all duration-300 text-center"
+            >
+                <div
+                    class="w-14 h-14 bg-teal-50 dark:bg-teal-900/20 text-teal-600 dark:text-teal-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition"
+                >
+                    <span class="text-2xl">🌳</span>
+                </div>
+                <h3
+                    class="font-bold text-lg text-gray-900 dark:text-white mb-2"
+                >
+                    {
+                        t({
+                            zh: "树木脚本",
+                            en: "Tree Script",
+                            de: "Baum-Skript",
+                        })
+                    }
+                </h3>
+                <p
+                    class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
+                >
+                    {
+                        t({
+                            zh: "棋盘格木头农场",
+                            en: "Checkerboard wood farm",
+                            de: "Schachbrett-Holzfarm",
+                        })
+                    }
+                </p>
+            </a>
+            <a
                 href={getRelativeLocaleUrl(locale, "/codes/maze-code")}
                 class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-purple-100 dark:border-purple-900/30 hover:border-purple-400 dark:hover:border-purple-500 hover:shadow-lg transition-all duration-300 text-center"
             >

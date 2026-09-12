@@ -1,0 +1,346 @@
+---
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+import { useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/BaseLayout.astro";
+import CodeBlock from "@/components/CodeBlock.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import AdNative from "@/components/AdNative.astro";
+import RelatedGuides from "@/components/RelatedGuides.astro";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+
+export const getStaticPaths = async () => {
+    const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+        if (lang !== DEFAULT_LOCALE_SETTING) {
+            return { params: { lang: lang } };
+        } else {
+            return { params: { lang: undefined } };
+        }
+    });
+    return paths;
+};
+
+const title = {
+    en: "Tree Code — Checkerboard Wood Farm, Don't Plant Adjacent",
+    zh: "树木代码 — 棋盘格木头农场，不要相邻种植",
+    de: "Baum-Code — Schachbrett-Holzfarm, nicht nebeneinander pflanzen",
+};
+
+const description = {
+    en: "The Farmer Was Replaced tree code: trees yield 5 wood, but each North/East/South/West neighbor doubles grow time. Plant trees where (x + y) % 2 == 0, bushes on the other color.",
+    zh: "编程农场树木代码：树产 5 木头，但东南西北每多一棵相邻的树，生长时间就翻倍。在 (x + y) % 2 == 0 的格子种树，另一色种灌木。",
+    de: "Baum-Code: Bäume geben 5 Holz, jeder Nachbar verdoppelt die Wachstumszeit. Bäume auf (x + y) % 2 == 0, Büsche auf der anderen Farbe.",
+};
+---
+
+<Layout title={title} description={description}>
+    <div class="max-w-4xl mx-auto px-4">
+        <section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
+            <h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
+                {t({
+                    en: "The Farmer Was Replaced Tree Code — Checkerboard Wood Farm",
+                    zh: "编程农场树木代码 — 棋盘格木头农场",
+                    de: "The Farmer Was Replaced Baum-Code — Schachbrett-Holzfarm",
+                })}
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                {t({
+                    en: "Trees drop 5 wood — better than bushes — but they hate sharing an edge. Each adjacent tree doubles grow time. Four neighbors is 16× slower. The in-game hint is `% 2`.",
+                    zh: "树每次产 5 木头，比灌木划算，但讨厌贴边。东南西北每多一棵相邻的树，生长时间就翻倍；四个邻居是 16 倍。游戏提示用的是 `% 2`。",
+                    de: "Bäume geben 5 Holz — mehr als Büsche — mögen aber keine Kanten-Nachbarn. Jeder Nachbar verdoppelt die Zeit; 4 Nachbarn = 16× langsamer. Der Spielhinweis ist `% 2`.",
+                })}
+            </p>
+        </section>
+
+        <AdNative />
+
+        <section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+            <h2 class="text-2xl font-bold text-green-700 dark:text-green-400">
+                {t({
+                    en: "Tree rules (this is why adjacency hurts)",
+                    zh: "树木规则（为什么不能贴着种）",
+                    de: "Baum-Regeln (warum Nachbarn schaden)",
+                })}
+            </h2>
+            <ul>
+                <li>
+                    {t({
+                        en: "A grown tree yields 5 wood. Bushes give less, so trees are the wood crop once you unlock them.",
+                        zh: "长成的树产 5 木头。灌木更少，所以解锁树木后木头主要靠树。",
+                        de: "Ein reifer Baum gibt 5 Holz. Büsche geben weniger.",
+                    })}
+                </li>
+                <li>
+                    {t({
+                        en: "You can plant on grass or soil. `till()` is optional for trees.",
+                        zh: "草地或耕地都能种。树木不强制 `till()`。",
+                        de: "Pflanzen auf Gras oder Boden. `till()` ist optional.",
+                    })}
+                </li>
+                <li>
+                    {t({
+                        en: "Only North, East, South, and West count. Each of those neighboring trees **doubles** grow time. 1 neighbor = 2×, 2 = 4×, 3 = 8×, 4 = 16×.",
+                        zh: "只算东、南、西、北。每多一棵贴边的树，生长时间就 **翻倍**：1 邻 2 倍，2 邻 4 倍，3 邻 8 倍，4 邻 16 倍。",
+                        de: "Nur Norden, Osten, Süden, Westen. Jeder solche Nachbar **verdoppelt** die Zeit: 1 = 2×, 2 = 4×, 3 = 8×, 4 = 16×.",
+                    })}
+                </li>
+                <li>
+                    {t({
+                        en: "Diagonals do not count. A checkerboard has trees touching only on corners.",
+                        zh: "对角线不算。棋盘格上的树只在角上挨着。",
+                        de: "Diagonalen zählen nicht. Im Schachbrett berühren sich Bäume nur an Ecken.",
+                    })}
+                </li>
+            </ul>
+        </section>
+
+        <section class="py-10 grid md:grid-cols-2 gap-8 items-center">
+            <div class="order-2 md:order-1">
+                <h2 class="text-2xl font-bold mb-4 text-green-700 dark:text-green-400">
+                    {t({
+                        en: "Why a checkerboard, not a solid tree field",
+                        zh: "为什么用棋盘格，而不是整田种树",
+                        de: "Warum Schachbrett, nicht ein volles Baumfeld",
+                    })}
+                </h2>
+                <div class="prose dark:prose-invert text-gray-700 dark:text-gray-300 space-y-4">
+                    <p>
+                        {t({
+                            en: "If you fill every tile with trees, the middle of the farm is surrounded on four sides and grows 16× slower. Wood per second collapses even though every tile is a tree.",
+                            zh: "如果每个格子都种树，田中间四面都是邻居，生长慢 16 倍。格子全是树，每秒木头反而更少。",
+                            de: "Ein volles Baumfeld umgibt die Mitte mit 4 Nachbarn — 16× langsamer. Die Holz/Sekunde bricht ein.",
+                        })}
+                    </p>
+                    <p>
+                        {t({
+                            en: "Plant trees where `(x + y) % 2 == 0` (or the odd color — both work). Put bushes on the other color so those tiles still produce. The in-game hint uses `% 2`.",
+                            zh: "在 `(x + y) % 2 == 0` 的格子种树（种奇数格也可以）。另一色种灌木，格子不会闲着。游戏提示用的就是 `% 2`。",
+                            de: "Bäume auf `(x + y) % 2 == 0` (oder die andere Farbe). Büsche auf den Rest. Der Hinweis im Spiel nutzt `% 2`.",
+                        })}
+                    </p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>
+                            <strong>{t({ en: "Read:", zh: "读坐标：", de: "Lesen:" })}</strong>
+                            {t({
+                                en: "`get_pos_x()` and `get_pos_y()`.",
+                                zh: "`get_pos_x()` 和 `get_pos_y()`。",
+                                de: "`get_pos_x()` und `get_pos_y()`.",
+                            })}
+                        </li>
+                        <li>
+                            <strong>{t({ en: "Split:", zh: "分色：", de: "Teilen:" })}</strong>
+                            {t({
+                                en: "Even sum → `plant(Entities.Tree)`. Odd sum → `plant(Entities.Bush)`.",
+                                zh: "和为偶数 → `plant(Entities.Tree)`。奇数 → `plant(Entities.Bush)`。",
+                                de: "Gerade Summe → `plant(Entities.Tree)`. Ungerade → `plant(Entities.Bush)`.",
+                            })}
+                        </li>
+                        <li>
+                            <strong>{t({ en: "Cycle:", zh: "循环：", de: "Zyklus:" })}</strong>
+                            {t({
+                                en: "`can_harvest()` then `harvest()`, plant, `move`.",
+                                zh: "`can_harvest()` 再 `harvest()`，种植，然后 `move`。",
+                                de: "`can_harvest()` dann `harvest()`, pflanzen, `move`.",
+                            })}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="order-1 md:order-2">
+                <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-2xl border border-green-100 dark:border-green-800">
+                    <p class="text-center text-sm font-medium text-green-800 dark:text-green-200 mb-3">
+                        {t({
+                            en: "Even tiles = trees, odd tiles = bushes",
+                            zh: "偶数格种树，奇数格种灌木",
+                            de: "Gerade = Bäume, ungerade = Büsche",
+                        })}
+                    </p>
+                    <div class="grid grid-cols-4 gap-1 max-w-[220px] mx-auto" aria-hidden="true">
+                        {
+                            Array.from({ length: 16 }, (_, i) => {
+                                const x = i % 4;
+                                const y = Math.floor(i / 4);
+                                const tree = (x + y) % 2 === 0;
+                                return (
+                                    <div
+                                        class:list={[
+                                            "aspect-square rounded-md flex items-center justify-center text-lg border",
+                                            tree
+                                                ? "bg-white border-green-300 dark:bg-green-950 dark:border-green-700"
+                                                : "bg-lime-100 border-lime-200 dark:bg-lime-950/40 dark:border-lime-800",
+                                        ]}
+                                    >
+                                        {tree ? "🌳" : "🌿"}
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-10">
+            <h2 class="text-2xl font-bold mb-8 text-center">
+                {t({
+                    en: "Copy-paste tree + bush script",
+                    zh: "可复制的树木 + 灌木脚本",
+                    de: "Baum- und Busch-Skript zum Kopieren",
+                })}
+            </h2>
+
+            <div class="mb-12 bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                    <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Step 1</span>
+                    {t({ en: "The `% 2` test", zh: "`% 2` 判断", de: "Der `% 2`-Test" })}
+                </h3>
+                <p class="mb-4 text-gray-600 dark:text-gray-400">
+                    {t({
+                        en: "Same color as the in-game hint. Swap `== 0` and `== 1` if you want trees on the other squares.",
+                        zh: "和游戏提示同一套颜色。想把树换到另一色，把 `== 0` 和 `== 1` 对调即可。",
+                        de: "Wie der Spielhinweis. `== 0` und `== 1` tauschen, um die andere Farbe zu nutzen.",
+                    })}
+                </p>
+                <CodeBlock
+                    code={`x = get_pos_x()
+y = get_pos_y()
+
+if (x + y) % 2 == 0:
+    plant(Entities.Tree)
+else:
+    plant(Entities.Bush)`}
+                />
+            </div>
+
+            <div class="mb-4 bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+                    <span class="bg-lime-100 text-lime-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-lime-900 dark:text-lime-300">Step 2</span>
+                    {t({ en: "Scan, harvest, plant, move", zh: "扫田、收割、种植、移动", de: "Scannen, ernten, pflanzen, bewegen" })}
+                </h3>
+                <p class="mb-4 text-gray-600 dark:text-gray-400">
+                    {t({
+                        en: "Harvest if ready, then plant the right crop for this color, then walk the grid. Repeat forever.",
+                        zh: "能收就收，再按格子颜色种植，然后走完整张田。一直循环。",
+                        de: "Ernten wenn bereit, dann die passende Pflanze, dann das Raster ablaufen.",
+                    })}
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-bold">
+                    {t({
+                        en: "Complete source code",
+                        zh: "完整源代码",
+                        de: "Vollständiger Quellcode",
+                    })}
+                </h2>
+                <span class="text-sm text-gray-500 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
+                    Python
+                </span>
+            </div>
+
+            <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-green-600 to-lime-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                <div class="relative">
+                    <CodeBlock
+                        height="max-h-[800px]"
+                        code={`def go_to(x, y):
+    while get_pos_x() != x:
+        if get_pos_x() < x:
+            move(East)
+        else:
+            move(West)
+    while get_pos_y() != y:
+        if get_pos_y() < y:
+            move(North)
+        else:
+            move(South)
+
+clear()
+while True:
+    size = get_world_size()
+    for y in range(size):
+        for x in range(size):
+            go_to(x, y)
+            if can_harvest():
+                harvest()
+            if (x + y) % 2 == 0:
+                plant(Entities.Tree)
+            else:
+                plant(Entities.Bush)`}
+                    />
+                </div>
+            </div>
+        </section>
+
+        <section class="py-8 bg-green-50 dark:bg-green-900/20 rounded-2xl border border-green-100 dark:border-green-800 p-6 mb-12">
+            <h3 class="text-xl font-bold mb-4 text-green-800 dark:text-green-300">
+                {t({
+                    en: "Optional watering",
+                    zh: "可选：浇水",
+                    de: "Optional: Gießen",
+                })}
+            </h3>
+            <p class="mb-4 text-green-900 dark:text-green-100">
+                {t({
+                    en: "Water speeds growth. It does not cancel the adjacency penalty — a tree with four neighbors is still 16× slower, just 16× slower on wet soil. Add this after `plant(...)`.",
+                    zh: "浇水能加快生长，但消不掉相邻惩罚：四个邻居仍然是 16 倍，只是湿土上的 16 倍。写在 `plant(...)` 后面即可。",
+                    de: "Wasser beschleunigt das Wachstum, hebt die Nachbar-Strafe aber nicht auf. Nach `plant(...)` einfügen.",
+                })}
+            </p>
+            <CodeBlock
+                code={`if get_water() < 0.75:
+    use_item(Items.Water_Tank)`}
+            />
+        </section>
+
+        <section class="py-8 mb-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+                {t({
+                    en: "Next: pumpkins, then polyculture",
+                    zh: "下一步：南瓜，然后是多元种植",
+                    de: "Als Nächstes: Kürbisse, dann Polykultur",
+                })}
+            </h2>
+            <p>
+                {t({
+                    en: "When wood is stable, unlock pumpkins. About 1 in 5 die; harvest the giant crop only when the whole grid is ready.",
+                    zh: "木头稳定后去解锁南瓜。大约五分之一会枯死；整田长齐再收巨大南瓜。",
+                    de: "Ist Holz stabil, Kürbisse freischalten. Etwa jeder fünfte stirbt; erst ernten, wenn das Raster voll ist.",
+                })}
+                <a
+                    class="text-green-700 dark:text-green-400 underline ml-1"
+                    href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")}
+                >
+                    {t({ en: "Pumpkin code", zh: "南瓜代码", de: "Kürbis-Code" })}
+                </a>
+            </p>
+            <p>
+                {t({
+                    en: "Polyculture comes later. `get_companion()` tells you which crop the current plant wants as a neighbor. That is a different layout than this checkerboard — do not mix the two ideas.",
+                    zh: "多元种植是更后面的机制。`get_companion()` 会告诉你当前作物想要哪种邻居。那是另一套布局，不要和这套棋盘格混用。",
+                    de: "Polykultur kommt später. `get_companion()` sagt, welche Nachbarpflanze gewünscht ist. Das ist ein anderes Layout als dieses Schachbrett.",
+                })}
+            </p>
+        </section>
+
+        <RelatedGuides current="/codes/tree-code" />
+        <section class="py-8 border-t border-neutral-200 dark:border-neutral-700">
+            <div class="flex justify-center">
+                <a href={getRelativeLocaleUrl(locale, "/")} class="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full transition text-gray-700 dark:text-gray-300 font-medium">
+                    <span>←</span>
+                    {t({
+                        en: "Back to Home",
+                        zh: "返回主页",
+                        de: "Zurück zur Startseite",
+                    })}
+                </a>
+            </div>
+        </section>
+
+        <div id="utterances-container" class="my-10"></div>
+    </div>
+</Layout>

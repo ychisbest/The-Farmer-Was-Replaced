@@ -356,11 +356,17 @@ while True:
             <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
                 {
                     t({
-                        en: "Trees need checkerboard planting to avoid adjacency.",
-                        zh: "树木需要棋盘格种植以避免相邻。",
-                        de: "Bäume benötigen schachbrettartiges Pflanzen, um Benachbarte zu vermeiden.",
+                        en: "Trees need checkerboard planting to avoid adjacency. Dedicated walkthrough:",
+                        zh: "树木需要棋盘格种植以避免相邻。完整说明：",
+                        de: "Bäume benötigen schachbrettartiges Pflanzen, um Nachbarn zu vermeiden. Ausführlich:",
                     })
                 }
+                <a
+                    class="text-blue-600 underline ml-1"
+                    href={getRelativeLocaleUrl(locale, "/codes/tree-code")}
+                >
+                    {t({ en: "tree code page", zh: "树木代码页", de: "Baum-Code-Seite" })}
+                </a>
             </p>
             <CodeBlock
                 code={t({
