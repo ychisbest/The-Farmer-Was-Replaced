@@ -104,9 +104,9 @@ const description = {
                     >
                         {
                             t({
-                                zh: "开始学习 Python",
-                                en: "Start Learning Python",
-                                de: "Python lernen starten",
+                                zh: "看攻略，先复制脚本",
+                                en: "Read the guide",
+                                de: "Guide lesen",
                             })
                         }
                     </a>
@@ -407,6 +407,38 @@ const description = {
                             zh: "棋盘格木头农场",
                             en: "Checkerboard wood farm",
                             de: "Schachbrett-Holzfarm",
+                        })
+                    }
+                </p>
+            </a>
+            <a
+                href={getRelativeLocaleUrl(locale, "/codes/carrot-code")}
+                class="group p-8 bg-white dark:bg-gray-800 rounded-2xl border-2 border-orange-100 dark:border-orange-900/30 hover:border-orange-400 dark:hover:border-orange-500 hover:shadow-lg transition-all duration-300 text-center"
+            >
+                <div
+                    class="w-14 h-14 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition"
+                >
+                    <span class="text-2xl">🥕</span>
+                </div>
+                <h3
+                    class="font-bold text-lg text-gray-900 dark:text-white mb-2"
+                >
+                    {
+                        t({
+                            zh: "胡萝卜脚本",
+                            en: "Carrot Script",
+                            de: "Karotten-Skript",
+                        })
+                    }
+                </h3>
+                <p
+                    class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
+                >
+                    {
+                        t({
+                            zh: "翻地、买种子、种植",
+                            en: "Till, buy seeds, plant",
+                            de: "Pflügen, Samen, pflanzen",
                         })
                     }
                 </p>

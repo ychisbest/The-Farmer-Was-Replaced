@@ -26,15 +26,15 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-    en: "Codes — Copy-Paste Harvest, Tree, Carrot Scripts",
-    zh: "代码 — 收割、树木、胡萝卜可复制脚本",
-    de: "Codes — Ernte-, Baum- und Karotten-Skripte",
+    en: "Code — Copy-Paste Harvest Scripts",
+    zh: "代码 — 可复制收割脚本",
+    de: "Code — Ernte-Skripte zum Kopieren",
 };
 
 const description = {
-    en: "Copy-paste The Farmer Was Replaced codes: auto harvest, tree checkerboard, carrot planting, watering. Till until Grounds.Soil.",
-    zh: "可复制的编程农场代码：自动收割、树木棋盘、胡萝卜、浇水。翻地直到 Grounds.Soil。",
-    de: "Kopierbare Codes: Ernte, Bäume, Karotten, Gießen. Pflügen bis Grounds.Soil.",
+    en: "The Farmer Was Replaced code: copy-paste auto harvest, then tree, carrot, and watering scripts. Till until Grounds.Soil.",
+    zh: "编程农场代码：先复制自动收割，再看树木、胡萝卜和浇水。翻地直到 Grounds.Soil。",
+    de: "The Farmer Was Replaced Code: Auto-Ernte, Bäume, Karotten, Gießen. Pflügen bis Grounds.Soil.",
 };
 ---
 
@@ -45,9 +45,9 @@ const description = {
             <h1 class="text-3xl font-bold mb-6 text-center">
                 {
                     t({
-                        en: "The Farmer Was Replaced - Code Examples",
-                        zh: "编程农场 - 代码示例",
-                        de: "The Farmer Was Replaced - Codebeispiele",
+                        en: "The Farmer Was Replaced Code — Copy-Paste Harvest Scripts",
+                        zh: "编程农场代码 — 可复制收割脚本",
+                        de: "The Farmer Was Replaced Code — Ernte-Skripte zum Kopieren",
                     })
                 }
             </h1>
@@ -56,11 +56,17 @@ const description = {
             >
                 {
                     t({
-                        en: "Complete code examples from the game with detailed explanations. Copy and paste these codes directly into your game to improve your farming automation skills.",
-                        zh: "游戏完整代码示例，包含详细解释。直接复制粘贴这些代码到游戏中，提升你的农场自动化技能。",
-                        de: "Vollständige Codebeispiele aus dem Spiel mit detaillierten Erklärungen. Kopieren und fügen Sie diese Codes direkt in Ihr Spiel ein, um Ihre Fähigkeiten in der Farmautomatisierung zu verbessern.",
+                        en: "Paste the first script below to start harvesting. Then use the tree, carrot, and watering examples. Dedicated carrot walkthrough:",
+                        zh: "先粘贴下面第一段，开始收割。树木、胡萝卜、浇水在后面。胡萝卜完整页：",
+                        de: "Das erste Skript unten einfügen. Danach Bäume, Karotten, Gießen. Karotten-Anleitung:",
                     })
                 }
+                <a
+                    class="text-blue-600 underline ml-1"
+                    href={getRelativeLocaleUrl(locale, "/codes/carrot-code")}
+                >
+                    {t({ en: "carrot code page", zh: "胡萝卜代码页", de: "Karotten-Code-Seite" })}
+                </a>
             </p>
             <div class="text-center mb-8">
                 <a

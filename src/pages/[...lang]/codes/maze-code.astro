@@ -21,9 +21,9 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-	en: "Maze Code — Wall Follower Treasure Hunt",
-	zh: "迷宫代码 — 沿墙走找到宝箱",
-	de: "Labyrinth-Code — Schatz mit Wandfolger finden",
+	en: "Maze Code — Spawn Hedges, Follow the Left Wall",
+	zh: "迷宫代码 — 生成树篱，左手扶墙",
+	de: "Labyrinth-Code — Hecken erzeugen, links folgen",
 };
 
 const description = {
@@ -39,18 +39,18 @@ const description = {
 			<h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
 				{
 					t({
-						en: "Maze Code: Left-Wall Follower",
-						zh: "迷宫代码：左手扶墙法",
-						de: "Labyrinth-Code: Linke-Wand-Regel",
+						en: "The Farmer Was Replaced Maze Code — Left-Wall Follower",
+						zh: "编程农场迷宫代码 — 左手扶墙",
+						de: "The Farmer Was Replaced Labyrinth-Code — Linke-Wand-Regel",
 					})
 				}
 			</h1>
 			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
 				{
 					t({
-						en: "A first maze has no loops. Keep your left hand on the wall and you will pass every corridor, including the treasure.",
-						zh: "第一次生成的迷宫没有环。左手一直扶着墙走，就能走过每条走廊，宝箱也在路上。",
-						de: "Ein frisches Labyrinth hat keine Schleifen. Folgst du der linken Wand, triffst du den Schatz.",
+						en: "Paste the script below. A fresh maze has no loops: keep your left hand on the wall and you will hit the treasure. Harvest only the chest.",
+						zh: "先粘贴下面的脚本。新迷宫没有环：左手扶墙就能走到宝箱。只收宝箱，别收树篱。",
+						de: "Skript unten einfügen. Ein frisches Labyrinth hat keine Schleifen. Nur den Schatz ernten.",
 					})
 				}
 			</p>
@@ -58,9 +58,44 @@ const description = {
 
 		<AdNative />
 
+		<section class="py-6">
+			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+				{t({ en: "Copy-paste: spawn a maze, then walk the left wall", zh: "复制：生成迷宫，然后左手扶墙", de: "Kopieren: Labyrinth erzeugen, dann links folgen" })}
+			</h2>
+			<CodeBlock
+				height="max-h-[700px]"
+				code={`def spawn_maze():
+    if get_ground_type() != Grounds.Soil:
+        till()
+    harvest()
+    plant(Entities.Bush)
+    size = get_world_size()
+    use_item(Items.Weird_Substance, size)
+
+def solve_maze():
+    dirs = [North, East, South, West]
+    facing = 0
+    while get_entity_type() != Entities.Treasure:
+        left = (facing - 1) % 4
+        if can_move(dirs[left]):
+            facing = left
+            move(dirs[facing])
+        elif can_move(dirs[facing]):
+            move(dirs[facing])
+        else:
+            facing = (facing + 1) % 4
+    harvest()
+
+clear()
+while True:
+    spawn_maze()
+    solve_maze()`}
+			/>
+		</section>
+
 		<section class="py-10 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
 			<h2 class="text-2xl font-bold text-purple-700 dark:text-purple-300">
-				{t({ en: "Maze rules that break most scripts", zh: "最容易写错的迷宫规则", de: "Regeln, an denen die meisten Skripte scheitern" })}
+				{t({ en: "Why wall-follower scripts spin in circles", zh: "扶墙脚本为什么会转圈", de: "Warum Wandfolger im Kreis laufen" })}
 			</h2>
 			<ul>
 				<li>
@@ -100,41 +135,6 @@ const description = {
 					}
 				</li>
 			</ul>
-		</section>
-
-		<section class="py-6">
-			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-				{t({ en: "Spawn a maze, then walk the left wall", zh: "生成迷宫，然后左手扶墙", de: "Labyrinth erzeugen, dann links folgen" })}
-			</h2>
-			<CodeBlock
-				height="max-h-[700px]"
-				code={`def spawn_maze():
-    if get_ground_type() != Grounds.Soil:
-        till()
-    harvest()
-    plant(Entities.Bush)
-    size = get_world_size()
-    use_item(Items.Weird_Substance, size)
-
-def solve_maze():
-    dirs = [North, East, South, West]
-    facing = 0
-    while get_entity_type() != Entities.Treasure:
-        left = (facing - 1) % 4
-        if can_move(dirs[left]):
-            facing = left
-            move(dirs[facing])
-        elif can_move(dirs[facing]):
-            move(dirs[facing])
-        else:
-            facing = (facing + 1) % 4
-    harvest()
-
-clear()
-while True:
-    spawn_maze()
-    solve_maze()`}
-			/>
 		</section>
 
 		<section class="py-8 bg-purple-50 dark:bg-purple-900/20 rounded-2xl border border-purple-100 dark:border-purple-800 p-6 mb-8">

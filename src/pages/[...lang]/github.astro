@@ -1,0 +1,137 @@
+---
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+import { useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/BaseLayout.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import AdNative from "@/components/AdNative.astro";
+import RelatedGuides from "@/components/RelatedGuides.astro";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+
+export const getStaticPaths = async () => {
+	const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+		if (lang !== DEFAULT_LOCALE_SETTING) {
+			return { params: { lang: lang } };
+		}
+		return { params: { lang: undefined } };
+	});
+	return paths;
+};
+
+const title = {
+	en: "GitHub — Community Script Collections",
+	zh: "GitHub — 社区脚本合集",
+	de: "GitHub — Community-Skriptsammlungen",
+};
+
+const description = {
+	en: "The Farmer Was Replaced GitHub repos: beginner copy-paste pages on this site, then community collections for multi-drone and leaderboard scripts. We do not paste GPL source here.",
+	zh: "编程农场 GitHub：本站是入门可复制页。多无人机和冲榜脚本去社区仓库。这里不粘贴 GPL 源码。",
+	de: "The Farmer Was Replaced GitHub: Anfänger-Skripte hier, Community-Repos für Multi-Drohne. Kein GPL-Quelltext auf dieser Seite.",
+};
+
+const repos = [
+	{
+		href: "https://github.com/Flekay/The-Farmer-Was-Replaced",
+		name: "Flekay/The-Farmer-Was-Replaced",
+		note: {
+			en: "Largest strategy collection (GPL-3.0). Open it on GitHub; do not copy the files onto an ad site.",
+			zh: "最大的策略合集（GPL-3.0）。在 GitHub 打开。不要把文件贴到广告站。",
+			de: "Größte Strategiesammlung (GPL-3.0). Auf GitHub öffnen, nicht hierher kopieren.",
+		},
+	},
+	{
+		href: "https://github.com/Gungnirrr/The-Farmer-Was-Replaced",
+		name: "Gungnirrr/The-Farmer-Was-Replaced",
+		note: {
+			en: "Single-drone and multi-drone scripts with a Chinese/English README, including carrot and pumpkin variants.",
+			zh: "单无人机和多无人机，中英 README，含胡萝卜和南瓜变体。",
+			de: "Einzel- und Multi-Drohnen-Skripte, README auf Chinesisch/Englisch.",
+		},
+	},
+	{
+		href: "https://steamcommunity.com/sharedfiles/filedetails/?id=3719505315",
+		name: "Steam guide: Master achievements",
+		note: {
+			en: "Updated September 2026. Per-crop rates for pumpkin, cactus, maze gold, and full automation. Copyright stays with the author.",
+			zh: "2026 年 9 月更新。南瓜、仙人掌、迷宫金和全自动产量。版权在作者。",
+			de: "Stand September 2026. Raten pro Kultur. Urheberrecht beim Autor.",
+		},
+	},
+	{
+		href: "https://thefarmerwasreplaced.wiki.gg/",
+		name: "wiki.gg",
+		note: {
+			en: "Mechanics: cactus sort order, sunflower petals, get_companion(). Use this for rules, not for copy-paste farms.",
+			zh: "机制：仙人掌排序、向日葵花瓣、get_companion()。看规则，不看农场脚本。",
+			de: "Mechaniken: Kaktus-Sortierung, Sonnenblumen, get_companion().",
+		},
+	},
+];
+---
+
+<Layout title={title} description={description}>
+	<div class="max-w-4xl mx-auto px-4">
+		<section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
+			<h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
+				{
+					t({
+						en: "The Farmer Was Replaced GitHub — Script Collections",
+						zh: "编程农场 GitHub — 脚本合集",
+						de: "The Farmer Was Replaced GitHub — Skriptsammlungen",
+					})
+				}
+			</h1>
+			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+				{
+					t({
+						en: "Start on this site (carrot, pumpkin, cactus, maze). Open GitHub when you want multi-drone or leaderboard scripts. Those repos are not hosted here.",
+						zh: "先用本站胡萝卜、南瓜、仙人掌、迷宫页。要多无人机或冲榜再开 GitHub。那些仓库不托管在本站。",
+						de: "Zuerst die Seiten hier. GitHub für Multi-Drohne und Bestzeiten. Die Repos liegen nicht auf dieser Domain.",
+					})
+				}
+			</p>
+		</section>
+
+		<AdNative />
+
+		<ul class="py-10 space-y-6">
+			{
+				repos.map((repo) => (
+					<li class="p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+						<a
+							href={repo.href}
+							class="text-lg font-bold text-green-700 dark:text-green-400 hover:underline break-all"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{repo.name}
+						</a>
+						<p class="mt-2 text-gray-600 dark:text-gray-300">{t(repo.note)}</p>
+					</li>
+				))
+			}
+		</ul>
+
+		<p class="text-sm text-gray-500 dark:text-gray-400 mb-8">
+			{
+				t({
+					en: "Beginner copy-paste pages on this site:",
+					zh: "本站入门可复制页：",
+					de: "Anfänger-Seiten auf dieser Site:",
+				})
+			}
+			<a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/carrot-code")}>carrot</a>
+			<span> · </span>
+			<a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")}>pumpkin</a>
+			<span> · </span>
+			<a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/cactus-code")}>cactus</a>
+			<span> · </span>
+			<a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/maze-code")}>maze</a>
+		</p>
+
+		<RelatedGuides current="/github" />
+		<div id="utterances-container" class="my-10"></div>
+	</div>
+</Layout>

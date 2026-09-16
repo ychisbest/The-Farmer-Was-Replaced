@@ -25,15 +25,15 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-    en: "Tutorial — Beginner Guide to Variables, Loops, Functions",
-    zh: "教程 — 变量、循环、函数入门",
-    de: "Tutorial — Variablen, Schleifen, Funktionen für Anfänger",
+    en: "Guide — First Copy-Paste Script, Then Loops",
+    zh: "攻略 — 先复制一段能跑的脚本，再学循环",
+    de: "Guide — Erst ein Skript einfügen, dann Schleifen",
 };
 
 const description = {
-    en: "Beginner The Farmer Was Replaced tutorial: variables, loops, functions, and quizzes. The language is Python-like, not full Python.",
-    zh: "编程农场新手教程：变量、循环、函数和练习。游戏语言接近 Python，但不是完整 Python。",
-    de: "Anfänger-Tutorial: Variablen, Schleifen, Funktionen. Die Sprache ist Python-ähnlich, nicht volles Python.",
+    en: "The Farmer Was Replaced guide: paste a harvest loop, then learn variables, if, and while. The language looks like Python but is not full Python.",
+    zh: "编程农场攻略：先粘贴一段收割循环，再学变量、if 和 while。语言长得像 Python，但不是完整 Python。",
+    de: "The Farmer Was Replaced Guide: Ernte-Schleife einfügen, dann Variablen, if und while. Sieht aus wie Python, ist es aber nicht ganz.",
 };
 ---
 
@@ -42,18 +42,41 @@ const description = {
         <!-- Hero Section -->
         <div class="text-center mb-16">
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
-                {t({ zh: "Python 编程：从入门到农场大亨", en: "Python Programming: From Zero to Farm Tycoon", de: "Python-Programmierung: Vom Anfänger zum Farm-Tycoon" })}
+                {t({ zh: "编程农场攻略：先复制这段，无人机就会收割", en: "The Farmer Was Replaced Guide — Paste This First", de: "The Farmer Was Replaced Guide — zuerst einfügen" })}
             </h1>
             <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
                 {
                     t({
-                        zh: "在《The Farmer Was Replaced》中，代码就是你的农具。本教程将教你编写高效自动化脚本所需的一切 Python 基础知识。",
-                        en: "In The Farmer Was Replaced, code is your tool. This tutorial teaches you all the Python basics needed to write efficient automation scripts.",
-                        de: "In The Farmer Was Replaced ist Code dein Werkzeug. Dieses Tutorial lehrt dich alle Python-Grundlagen, die du zum Schreiben effizienter Automatisierungsskripte benötigst.",
+                        zh: "搜 guide 的人要的是能跑的脚本，不是 Python 课。把下面这段贴进游戏，再往下看循环和 if。",
+                        en: "If you searched for a guide, you need a script that runs — not a Python course. Paste the block below, then read loops and if.",
+                        de: "Wer nach einem Guide sucht, braucht ein laufendes Skript, keinen Python-Kurs. Block unten einfügen, dann Schleifen und if lesen.",
                     })
                 }
             </p>
         </div>
+
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                {t({ en: "Copy-paste: harvest forever", zh: "复制这段：一直收割", de: "Kopieren: dauernd ernten" })}
+            </h2>
+            <CodeBlock
+                code={`while True:
+    if can_harvest():
+        harvest()
+    move(East)
+    if get_pos_x() == 0:
+        move(North)`}
+            />
+            <p class="mt-4 text-gray-600 dark:text-gray-400">
+                {
+                    t({
+                        en: "This is not full Python. `harvest()` and `move()` are game commands. After it runs, the sections below explain why `while True` never stops.",
+                        zh: "这不是完整 Python。`harvest()` 和 `move()` 是游戏命令。跑起来之后，下面才解释为什么 `while True` 不会停。",
+                        de: "Das ist kein volles Python. `harvest()` und `move()` sind Spielbefehle.",
+                    })
+                }
+            </p>
+        </section>
 
         <AdNative />
 

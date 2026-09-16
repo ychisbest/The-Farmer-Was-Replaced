@@ -1,0 +1,166 @@
+---
+import { DEFAULT_LOCALE_SETTING, LOCALES_SETTING } from "@/locales";
+import { useTranslations, type Lang } from "@/i18n";
+import Layout from "@/layouts/BaseLayout.astro";
+import CodeBlock from "@/components/CodeBlock.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import AdNative from "@/components/AdNative.astro";
+import RelatedGuides from "@/components/RelatedGuides.astro";
+
+const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
+
+export const getStaticPaths = async () => {
+	const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+		if (lang !== DEFAULT_LOCALE_SETTING) {
+			return { params: { lang: lang } };
+		}
+		return { params: { lang: undefined } };
+	});
+	return paths;
+};
+
+const title = {
+	en: "Carrot Code — Till Soil, Buy Seeds, Plant, Water",
+	zh: "胡萝卜代码 — 翻地、买种子、种植、浇水",
+	de: "Karotten-Code — Pflügen, Samen kaufen, pflanzen, gießen",
+};
+
+const description = {
+	en: "The Farmer Was Replaced carrot code: till until Grounds.Soil, trade for Carrot_Seed, plant, water if get_water() is low. Copy-paste the loop below.",
+	zh: "编程农场胡萝卜代码：翻到 Grounds.Soil，买 Carrot_Seed，种植，get_water() 低就浇水。下面这段可直接粘贴。",
+	de: "The Farmer Was Replaced Karotten-Code: Boden pflügen, Samen handeln, pflanzen, gießen.",
+};
+---
+
+<Layout title={title} description={description}>
+	<div class="max-w-4xl mx-auto px-4">
+		<section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
+			<h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
+				{
+					t({
+						en: "The Farmer Was Replaced Carrot Code — Till, Buy Seeds, Plant",
+						zh: "编程农场胡萝卜代码 — 翻地、买种子、种植",
+						de: "The Farmer Was Replaced Karotten-Code — pflügen, Samen, pflanzen",
+					})
+				}
+			</h1>
+			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+				{
+					t({
+						en: "Carrots are the first crop that costs resources. Grass is free. Carrots need tilled soil and seeds you buy with hay. Paste the script, then read why `till()` matters.",
+						zh: "胡萝卜是第一种要花钱的作物。草是免费的。胡萝卜要耕地，种子用干草买。先粘贴脚本，再看为什么必须 `till()`。",
+						de: "Karotten sind die erste Kultur, die Ressourcen kostet. Gras ist gratis. Karotten brauchen gepflügten Boden und Samen für Heu.",
+					})
+				}
+			</p>
+		</section>
+
+		<AdNative />
+
+		<section class="py-6">
+			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+				{t({ en: "Copy-paste carrot loop", zh: "复制这段胡萝卜循环", de: "Karotten-Schleife kopieren" })}
+			</h2>
+			<CodeBlock
+				height="max-h-[520px]"
+				code={`while True:
+    if can_harvest():
+        harvest()
+
+    if get_ground_type() != Grounds.Soil:
+        till()
+
+    if num_items(Items.Carrot_Seed) < 1:
+        trade(Items.Carrot_Seed)
+
+    if get_water() < 0.75:
+        if num_items(Items.Water_Tank) < 1:
+            trade(Items.Empty_Tank)
+        if num_items(Items.Water_Tank) > 0:
+            use_item(Items.Water_Tank)
+
+    plant(Entities.Carrot)
+    move(East)
+    if get_pos_x() == get_world_size() - 1:
+        move(North)`}
+			/>
+		</section>
+
+		<section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+			<h2 class="text-2xl font-bold text-orange-700 dark:text-orange-300">
+				{t({ en: "Carrot rules that break most scripts", zh: "最容易写错的胡萝卜规则", de: "Regeln, an denen Karotten-Skripte scheitern" })}
+			</h2>
+			<ul>
+				<li>
+					{
+						t({
+							en: "`plant(Entities.Carrot)` fails on grass. Call `till()` until `get_ground_type() == Grounds.Soil`. Older notes said Turf; the current ground string is Grassland or Soil.",
+							zh: "草地上 `plant(Entities.Carrot)` 会失败。翻到 `get_ground_type() == Grounds.Soil`。旧笔记写成 Turf，现在是 Grassland 或 Soil。",
+							de: "`plant(Entities.Carrot)` scheitert auf Gras. `till()` bis `Grounds.Soil`.",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "Seeds are `Items.Carrot_Seed`. Buy them with `trade(Items.Carrot_Seed)` when hay is high enough. If trade does nothing, farm grass first.",
+							zh: "种子是 `Items.Carrot_Seed`。干草够了用 `trade(Items.Carrot_Seed)` 买。买不动就先割草。",
+							de: "Samen sind `Items.Carrot_Seed`. Mit Heu `trade()`n. Sonst erst Gras farmen.",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "`get_water()` is 0 to 1. Watering can speed growth several times. Skip the water block if you have not unlocked tanks yet.",
+							zh: "`get_water()` 是 0 到 1。浇水能加速好几倍。还没解锁水箱就把浇水那段删掉。",
+							de: "`get_water()` ist 0 bis 1. Gießen beschleunigt. Ohne Tanks den Wasserblock weglassen.",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "Companion planting (`get_companion()`) comes later. This page is the beginner loop. Do not mix trees next to every carrot until you unlock polyculture.",
+							zh: "伴生 `get_companion()` 是后面的内容。本页只给出门循环。没解锁混种前，不要在每棵胡萝卜旁边乱种树。",
+							de: "Begleitpflanzen (`get_companion()`) kommen später. Diese Seite ist die Anfänger-Schleife.",
+						})
+					}
+				</li>
+			</ul>
+		</section>
+
+		<section class="py-8 bg-orange-50 dark:bg-orange-900/20 rounded-2xl border border-orange-100 dark:border-orange-800 p-6 mb-8">
+			<h3 class="text-xl font-bold mb-3 text-orange-800 dark:text-orange-300">
+				{t({ en: "After this script works", zh: "这段能跑之后", de: "Wenn das Skript läuft" })}
+			</h3>
+			<p class="text-orange-900 dark:text-orange-100">
+				{
+					t({
+						en: "Pumpkins also need soil and seeds, but they merge and about 1 in 5 die. Trees need a checkerboard so they are not adjacent. Use those pages next — do not keep expanding this loop into a mega-script.",
+						zh: "南瓜也要耕地和种子，但会合并，大约五分之一枯死。树木要棋盘格，不能贴边。下一页看那些，别把这段循环堆成全能脚本。",
+						de: "Kürbisse brauchen auch Boden, sterben aber teils. Bäume brauchen ein Schachbrett. Als Nächstes diese Seiten, nicht diese Schleife aufblasen.",
+					})
+				}
+			</p>
+			<p class="mt-3">
+				<a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")}>
+					{t({ en: "pumpkin code", zh: "南瓜代码", de: "Kürbis-Code" })}
+				</a>
+				<span class="mx-2">·</span>
+				<a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/tree-code")}>
+					{t({ en: "tree code", zh: "树木代码", de: "Baum-Code" })}
+				</a>
+			</p>
+		</section>
+
+		<RelatedGuides current="/codes/carrot-code" />
+		<div class="text-center py-6">
+			<a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
+				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite" })}
+			</a>
+		</div>
+		<div id="utterances-container" class="my-10"></div>
+	</div>
+</Layout>
