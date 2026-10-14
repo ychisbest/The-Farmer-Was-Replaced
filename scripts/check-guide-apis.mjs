@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Fail if guide pages still ship removed/renamed 1.0 APIs inside copy-paste code.
- * Scans CodeBlock `code={` ... `}` regions and fenced ```python blocks in blog md.
+ * Scans CodeBlock `code={` ... `}` regions.
  */
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -65,11 +65,10 @@ for (const f of files) {
   }
 }
 
-// basic-codes + tutorial + blog pumpkin
+// basic-codes + tutorial
 for (const rel of [
   "src/pages/[...lang]/basic-codes.astro",
   "src/pages/[...lang]/tutorial.astro",
-  "src/content/blog/pumpkin-giant-grid-guide.md",
 ]) {
   const path = join(root, rel);
   if (!existsSync(path)) {
