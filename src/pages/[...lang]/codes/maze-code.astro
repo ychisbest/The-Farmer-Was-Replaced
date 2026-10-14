@@ -139,17 +139,37 @@ while True:
 
 		<section class="py-8 bg-purple-50 dark:bg-purple-900/20 rounded-2xl border border-purple-100 dark:border-purple-800 p-6 mb-8">
 			<h3 class="text-xl font-bold mb-3 text-purple-800 dark:text-purple-300">
-				{t({ en: "After the first maze", zh: "第一次通关之后", de: "Nach dem ersten Labyrinth" })}
+				{t({ en: "After the first maze (Sep 2026 community notes)", zh: "第一次通关之后（2026年9月社区共识）", de: "Nach dem ersten Labyrinth (Community Sep 2026)" })}
 			</h3>
-			<p class="text-purple-900 dark:text-purple-100">
-				{
-					t({
-						en: "Reusing Weird Substance on the treasure moves the chest and can punch holes in walls. Those mazes have loops, so a plain wall follower can circle forever. For leaderboard runs, use `measure()` to walk toward the chest instead of hugging walls.",
-						zh: "在宝箱上再使用奇怪物质，宝箱会换位置，墙也可能被打出缺口。那种迷宫有环，单纯扶墙可能永远转圈。冲榜时用 `measure()` 朝宝箱走，别死扶墙。",
-						de: "Wiederverwendete Labyrinthe können Schleifen haben. Für Bestzeiten mit `measure()` direkt zum Schatz laufen.",
-					})
-				}
-			</p>
+			<ul class="space-y-3 text-purple-900 dark:text-purple-100 list-disc pl-5">
+				<li>
+					{
+						t({
+							en: "Beginner script above = left-wall follower on a **fresh** maze (no loops). It is still the right teaching path.",
+							zh: "上面的入门脚本 = 在**新**迷宫上手扶墙（无环）。教学路径仍然正确。",
+							de: "Das Anfänger-Skript oben gilt für frische Labyrinthe ohne Schleifen.",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "Reusing Weird Substance on the treasure moves the chest and can punch holes in walls. Those mazes have loops — plain wall-following is **outdated** there and can circle forever. Use `measure()` toward the chest, or treat visited tiles as walls.",
+							zh: "在宝箱上再使用奇怪物质，宝箱会换位，墙也可能破洞。那种迷宫有环——单纯扶墙在这里已**过时**，可能永远转圈。用 `measure()` 朝宝箱走，或把走过的格子当墙。",
+							de: "Wiederverwendete Labyrinthe haben Schleifen. Wandfolger ist dort veraltet. Mit `measure()` zum Schatz oder besuchte Felder als Wand behandeln.",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "Multi-drone leaderboard pattern (Reddit Sep 2026): pack the 32×32 farm with many smaller mazes (one per drone) so each drone solves a short maze instead of one huge one. Mean area is still 32 — gold scales with area solved, but small mazes finish faster with simple solvers.",
+							zh: "多无人机冲榜（Reddit 2026-09）：把 32×32 拆成许多更小的迷宫（每架无人机一块），短迷宫用简单求解器更快。面积均值仍是 32——金币跟面积走，但小迷宫更快清完。",
+							de: "Multi-Drohne (Reddit Sep 2026): 32×32 in viele kleine Labyrinthe teilen — ein Drohnen-Sektor pro Labyrinth.",
+						})
+					}
+				</li>
+			</ul>
 		</section>
 
 		<RelatedGuides current="/codes/maze-code" />

@@ -179,7 +179,7 @@ while True:
 
 		<section class="py-8 bg-yellow-50 dark:bg-yellow-900/20 rounded-2xl border border-yellow-100 dark:border-yellow-800 p-6 mb-8">
 			<h3 class="text-xl font-bold mb-3 text-yellow-800 dark:text-yellow-300">
-				{t({ en: "If this script does nothing", zh: "如果脚本看起来没反应", de: "Wenn das Skript nichts tut" })}
+				{t({ en: "If this script does nothing / multi-drone note", zh: "脚本没反应 / 多无人机说明", de: "Wenn nichts passiert / Multi-Drohne" })}
 			</h3>
 			<ul class="space-y-2 text-yellow-900 dark:text-yellow-100">
 				<li>
@@ -197,6 +197,15 @@ while True:
 							en: "Need more Power? Keep the field full so the max-petal bonus keeps triggering.",
 							zh: "想多刷 Power，就保持整田都有花，让最高瓣数奖励一直触发。",
 							de: "Für mehr Power das Feld voll halten, damit der Bonus weiter auslöst.",
+						})
+					}
+				</li>
+				<li>
+					{
+						t({
+							en: "Multi-drone (Reddit Sep 2026): drones do **not** share state. A common pattern is still “each pass harvest whatever is currently the max petals” — you do not need a shared petal dictionary across drones.",
+							zh: "多无人机（Reddit 2026-09）：无人机之间**没有共享状态**。常见做法仍是“每一趟只收当前瓣数最高的”——不必跨机共享瓣数字典。",
+							de: "Multi-Drohne (Reddit Sep 2026): keine gemeinsame State. Jeder Durchlauf erntet das aktuelle Maximum.",
 						})
 					}
 				</li>

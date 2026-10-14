@@ -50,9 +50,9 @@ const title = {
 };
 
 const description = {
-    en: "Copy-paste pumpkin, cactus, sunflower and maze codes for The Farmer Was Replaced. Steam desktop game — not available online or on mobile.",
-    zh: "南瓜、仙人掌、向日葵、迷宫可复制代码。编程农场是 Steam 电脑游戏，没有网页版和手机版。",
-    de: "Kürbis-, Kaktus-, Sonnenblumen- und Labyrinth-Codes zum Kopieren. Steam-PC-Spiel — nicht online oder mobil.",
+    en: "Copy-paste pumpkin, cactus, sunflower and maze codes for The Farmer Was Replaced. Steam desktop (Windows & macOS). DLC The Miner Was Replaced: Nov 2, 2026.",
+    zh: "南瓜、仙人掌、向日葵、迷宫可复制代码。Steam 电脑游戏（Windows / macOS）。DLC《The Miner Was Replaced》2026-11-02。",
+    de: "Kürbis-, Kaktus-, Sonnenblumen- und Labyrinth-Codes. Steam-PC (Windows & macOS). DLC The Miner Was Replaced: 2.11.2026.",
 };
 ---
 
@@ -89,9 +89,9 @@ const description = {
                 >
                     {
                         t({
-                            zh: "在这里复制《编程农场》The Farmer Was Replaced codes：南瓜、仙人掌、向日葵和迷宫脚本。这是 Steam 电脑游戏，没有网页版和手机版。无论你是编程新手还是在优化效率，都能找到可用的 Python 代码。",
-                            en: "Copy-paste The Farmer Was Replaced codes for pumpkin, cactus, sunflower and maze. This is a Steam desktop game — not available online or on mobile. Beginners and players optimizing farms will find the Python scripts here.",
-                            de: "The Farmer Was Replaced Codes zum Kopieren: Kürbis, Kaktus, Sonnenblume und Labyrinth. Steam-PC-Spiel — nicht online oder mobil. Anfänger und Optimierer finden hier die Python-Skripte.",
+                            zh: "在这里复制《编程农场》南瓜、仙人掌、向日葵和迷宫脚本。Steam 电脑游戏（Windows / macOS 原生；Linux / Deck 走 Proton），没有网页版和手机版。DLC《The Miner Was Replaced》将于 2026-11-02 发售。",
+                            en: "Copy-paste The Farmer Was Replaced codes for pumpkin, cactus, sunflower and maze. Steam desktop (Windows & macOS native; Linux/Deck via Proton) — not online or mobile. DLC The Miner Was Replaced launches November 2, 2026.",
+                            de: "The Farmer Was Replaced Codes: Kürbis, Kaktus, Sonnenblume, Labyrinth. Steam-PC (Windows & macOS nativ; Linux/Deck via Proton). DLC The Miner Was Replaced erscheint am 2.11.2026.",
                         })
                     }
                 </p>
@@ -144,6 +144,47 @@ const description = {
             </div>
         </div>
     </section>
+
+
+<section class="px-4 pt-10">
+    <div class="max-w-6xl mx-auto rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20 p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+            <p class="text-sm font-bold uppercase tracking-wide text-amber-700 dark:text-amber-300 mb-1">
+                {t({ en: "News · Sep 2026", zh: "新闻 · 2026年9月", de: "News · Sep 2026" })}
+            </p>
+            <h2 class="text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white mb-2">
+                {t({
+                    en: "DLC The Miner Was Replaced — November 2, 2026",
+                    zh: "DLC《The Miner Was Replaced》— 2026年11月2日",
+                    de: "DLC The Miner Was Replaced — 2. November 2026",
+                })}
+            </h2>
+            <p class="text-gray-700 dark:text-gray-300 max-w-3xl">
+                {t({
+                    en: "Official Steam announcement: leave the farm for underground mining — coal, quartz, mushrooms, dynamite, rice on clay, and a Minesweeper-style puzzle in a new unlock tree. Wishlist on Steam; playtest signup is on the base-game / DLC pages.",
+                    zh: "Steam 官宣：离开农场进入地下采矿——煤、石英、蘑菇、炸药、黏土种稻，以及扫雷式谜题和新解锁树。可在 Steam 加入愿望单；试玩报名见本体 / DLC 页面。",
+                    de: "Steam-Ankündigung: Untertage-Bergbau mit neuen Ressourcen und Programmier-Herausforderungen. Auf Steam wishlisten; Playtest über die Steam-Seiten.",
+                })}
+            </p>
+        </div>
+        <div class="flex flex-wrap gap-3 shrink-0">
+            <a
+                href="https://store.steampowered.com/app/4521700/The_Miner_Was_Replaced/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-5 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-xl font-bold shadow-sm"
+            >
+                {t({ en: "Steam DLC", zh: "Steam DLC", de: "Steam-DLC" })}
+            </a>
+            <a
+                href="/blog/miner-was-replaced-dlc-nov-2026/"
+                class="px-5 py-3 bg-white dark:bg-gray-800 border border-amber-300 dark:border-amber-700 text-amber-900 dark:text-amber-100 rounded-xl font-bold"
+            >
+                {t({ en: "Read notes", zh: "阅读说明", de: "Notizen lesen" })}
+            </a>
+        </div>
+    </div>
+</section>
 
 {
     recentPosts.length > 0 && (

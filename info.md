@@ -2,7 +2,7 @@
 
 ## 游戏概述
 
-[translate:The Farmer Was Replaced] 是一款由瑞士独立游戏开发者 [translate:Timon Herzog] 开发的编程农场自动化游戏。该游戏于2023年2月10日开始早期访问，并在2025年10月10日正式发布1.0版本。游戏通过[translate:Unity]引擎制作，目前仅支持[translate:Windows]平台。
+[translate:The Farmer Was Replaced] 是一款由瑞士独立游戏开发者 [translate:Timon Herzog] 开发的编程农场自动化游戏。该游戏于2023年2月10日开始早期访问，并在2025年10月10日正式发布1.0版本。游戏通过[translate:Unity]引擎制作。Steam 官方原生支持 [translate:Windows] 与 [translate:macOS]；[translate:Linux] / Steam Deck 可通过 Proton 游玩（Deck 评级 Playable）。DLC《[translate:The Miner Was Replaced]》计划于 2026-11-02 发售。
 
 这款游戏的核心理念是让玩家使用类似[translate:Python]的编程语言来编程一个无人机，自动化执行各种农场任务。游戏不是传统的关卡模式，而是采用连续进展系统，玩家通过收集资源来解锁新技术，逐步扩展和优化自己的农场。
 
