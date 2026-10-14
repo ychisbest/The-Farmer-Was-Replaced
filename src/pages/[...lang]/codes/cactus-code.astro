@@ -4,8 +4,6 @@ import { useTranslations, type Lang } from "@/i18n";
 import Layout from "@/layouts/BaseLayout.astro";
 import CodeBlock from "@/components/CodeBlock.astro";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { images } from "@/lib/images";
-import { Image } from "astro:assets";
 import AdNative from "@/components/AdNative.astro";
 import RelatedGuides from "@/components/RelatedGuides.astro";
 
@@ -13,334 +11,156 @@ const t = useTranslations(Astro.currentLocale as Lang);
 const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
 
 export const getStaticPaths = async () => {
-    const paths = Object.keys(LOCALES_SETTING).map((lang) => {
-        if (lang !== DEFAULT_LOCALE_SETTING) {
-            return { params: { lang: lang } };
-        } else {
-            return { params: { lang: undefined } };
-        }
-    });
-    return paths;
+	const paths = Object.keys(LOCALES_SETTING).map((lang) => {
+		if (lang !== DEFAULT_LOCALE_SETTING) {
+			return { params: { lang: lang } };
+		}
+		return { params: { lang: undefined } };
+	});
+	return paths;
 };
 
 const title = {
-    en: "Cactus Code & Sorting — n² Harvest Explained",
-    zh: "仙人掌代码与排序 — 一次收 n² 个",
-    de: "Kaktus-Code & Sortierung — n²-Ernte erklärt",
+	en: "Cactus Code & Sorting — n² Harvest Explained",
+	zh: "仙人掌代码与排序 — 一次收 n² 个",
+	de: "Kaktus-Code & Sortierung — n²-Ernte erklärt",
 };
 
 const description = {
-    en: "The Farmer Was Replaced cactus code: measure sizes 0–9, swap until North/East neighbors are larger, then harvest the whole sorted square for n squared cactus.",
-    zh: "编程农场仙人掌代码：大小是 0–9，换到北侧和东侧都不更小，再收割整片，产量是 n 的平方。",
-    de: "Kaktus-Code: Größen 0–9 messen, nach Norden/Osten sortieren, dann das Quadrat ernten und n² Kakteen bekommen.",
+	en: "The Farmer Was Replaced cactus code for 1.0+: measure sizes 0–9, swap until sorted (N/E ≥, S/W ≤), harvest once for n² cactus.",
+	zh: "编程农场 1.0+ 仙人掌：大小 0–9，swap 排到北东 ≥、南西 ≤，收一次得 n²。",
+	de: "Kaktus-Code 1.0+: Größen 0–9, sortieren, einmal ernten für n².",
 };
 ---
 
 <Layout title={title} description={description}>
-    <div class="max-w-4xl mx-auto px-4">
-        
-        <section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
-            <h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
-                {t({
-                    en: "Mastering Cactus Automation: 2D Bubble Sort",
-                    zh: "精通仙人掌自动化：二维冒泡排序",
-                    de: "Meisterung der Kaktus-Automatisierung: 2D-Blasensortierung"
-                })}
-            </h1>
-            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                {t({
-                    en: "Cactus farming is unique because sorting them by size can yield better rewards. This guide explains how to apply the classic Bubble Sort algorithm to your farm grid.",
-                    zh: "仙人掌种植非常独特，因为按大小排序可以获得更好的奖励或满足关卡要求。本指南将解释如何将经典的“冒泡排序”算法应用到你的农场网格中。",
-                    de: "Der Kaktusanbau ist einzigartig, da das Sortieren nach Größe bessere Belohnungen bringen kann. Dieser Leitfaden erklärt, wie man Bubble Sort anwendet."
-                })}
-            </p>
-        </section>
-
-        <AdNative />
-
-        <section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
-            <h2 class="text-2xl font-bold text-green-700 dark:text-green-400">
-                {t({ en: "Cactus rules (this is why sorting matters)", zh: "仙人掌规则（为什么必须排序）", de: "Kaktus-Regeln (warum Sortieren zählt)" })}
-            </h2>
-            <ul>
-                <li>{t({ en: "Sizes are 0–9. Read them with `measure()` or `measure(East)`.", zh: "大小是 0–9。用 `measure()` 或 `measure(East)` 读取。", de: "Größen sind 0–9. Mit `measure()` lesen." })}</li>
-                <li>{t({ en: "A cactus is sorted when every grown neighbor to the North and East is >= it, and every grown neighbor to the South and West is <= it.", zh: "北侧和东侧的邻居都 >= 自己，南侧和西侧的邻居都 <= 自己，才算排好。", de: "Norden/Osten >=, Süden/Westen <= bedeutet sortiert." })}</li>
-                <li>{t({ en: "Unsorted grown cacti look brown; sorted ones turn green.", zh: "排好前是棕色，排好后变绿。", de: "Unsortiert braun, sortiert grün." })}</li>
-                <li>{t({ en: "Harvest one sorted cactus and the harvest spreads through the connected sorted square. You get n**2 cactus, not n.", zh: "收一棵排好的，整片连着的有序方块会一起被收。产量是 n 的平方，不是 n。", de: "Eine sortierte Ernte greift auf das Quadrat über. Du bekommst n**2, nicht n." })}</li>
-            </ul>
-        </section>
-
-        <section class="py-10 grid md:grid-cols-2 gap-8 items-center">
-            <div class="order-2 md:order-1">
-                <h2 class="text-2xl font-bold mb-4 text-green-700 dark:text-green-400">
-                    {t({
-                        en: "The Strategy",
-                        zh: "核心策略",
-                        de: "Die Strategie"
-                    })}
-                </h2>
-                <div class="prose dark:prose-invert text-gray-700 dark:text-gray-300 space-y-4">
-                    <p>
-                        {t({
-                            en: "Unlike other crops, simply harvesting cacti isn't enough. We need to measure them and swap their positions until they are perfectly ordered.",
-                            zh: "与其他作物不同，仅仅收获仙人掌是不够的。我们需要测量它们的大小，并不断交换它们的位置，直到它们被完美地排列。",
-                            de: "Im Gegensatz zu anderen Pflanzen reicht das bloße Ernten von Kakteen nicht aus. Wir müssen sie messen und tauschen."
-                        })}
-                    </p>
-                    <ul class="list-disc pl-5 space-y-2">
-                        <li>
-                            <strong>{t({ zh: "测量 (Measure):", en: "Measure:", de: "Messen:" })}</strong> 
-                            {t({ zh: "比较当前位置与相邻位置（右侧和下方）的仙人掌大小。", en: "Compare current cactus size with neighbors.", de: "Vergleiche aktuelle Kaktusgröße mit Nachbarn." })}
-                        </li>
-                        <li>
-                            <strong>{t({ zh: "交换 (Swap):", en: "Swap:", de: "Tauschen:" })}</strong> 
-                            {t({ zh: "如果当前仙人掌比邻居大，则交换位置。", en: "If current is larger than neighbor, swap them.", de: "Wenn der aktuelle größer ist, tausche sie." })}
-                        </li>
-                        <li>
-                            <strong>{t({ zh: "重复 (Repeat):", en: "Repeat:", de: "Wiederholen:" })}</strong> 
-                            {t({ zh: "在整个网格上重复此过程，直到没有需要交换的为止。", en: "Repeat across the grid until no swaps are needed.", de: "Wiederhole dies über das Raster." })}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="order-1 md:order-2">
-                <div class="bg-gray-100 dark:bg-gray-800 p-2 rounded-2xl shadow-lg rotate-1 hover:rotate-0 transition duration-500">
-                    <Image class="rounded-xl w-full" alt="Cactus Sorting Visualization" src={images[4]} />
-                </div>
-            </div>
-        </section>
-
-        <section class="py-10">
-            <h2 class="text-2xl font-bold mb-8 text-center">
-                {t({
-                    en: "Step-by-Step Code Analysis",
-                    zh: "代码分步解析",
-                    de: "Schritt-für-Schritt Code-Analyse"
-                })}
-            </h2>
-
-            <div class="mb-12 bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
-                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
-                    <span class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Step 1</span>
-                    {t({ zh: "智能导航与方向控制", en: "Smart Navigation & Direction", de: "Intelligente Navigation" })}
-                </h3>
-                <p class="mb-4 text-gray-600 dark:text-gray-400">
-                    {t({
-                        zh: "在排序之前，我们需要一些辅助函数来帮助无人机回到原点 (`back`) 以及处理方向的反转 (`reverse`)。",
-                        en: "Before sorting, we need helper functions to return the drone to origin (`back`) and handle direction reversal (`reverse`).",
-                        de: "Vor dem Sortieren benötigen wir Hilfsfunktionen."
-                    })}
-                </p>
-                <CodeBlock code={`def back(x=0,y=0):
-    while x!=get_pos_x() or y!=get_pos_y():
-        if(get_pos_x()<x):
-            move(East)
-        else:
-            move(West)
-        if(get_pos_y()<y):
-            move(North)
-        else:
-            move(South)
-
-def reverse(dir):
-    if(dir == West): return East
-    if(dir == East): return West
-    if(dir == North): return South
-    if(dir == South): return North`} />
-            </div>
-
-            <div class="mb-12 bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
-                <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
-                    <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Step 2</span>
-                    {t({ zh: "核心排序逻辑 (Bubble Sort)", en: "Core Sorting Logic", de: "Kern-Sortierlogik" })}
-                </h3>
-                <p class="mb-4 text-gray-600 dark:text-gray-400">
-                    {t({
-                        zh: "这是代码的大脑部分。它不仅检查水平方向 (`East`/`West`)，还检查垂直方向 (`North`/`South`)。如果发现顺序错误，就调用 `swap()`。",
-                        en: "This is the brain of the code. It checks not just horizontally but also vertically. If the order is wrong, it calls `swap()`.",
-                        de: "Das ist das Gehirn des Codes. Es prüft horizontal und vertikal."
-                    })}
-                </p>
-                <CodeBlock code={`# ... inside the loop
-current=measure()
-neighbor=measure(dir)
-down=measure(South)
-up=measure(North)
-
-# Swap Horizontal (水平交换)
-if(x!=size-1 and neighbor!=None and dir==East and current>neighbor):
-    swap(East)
-    sorted=False # Mark as not fully sorted yet
-
-# Swap Vertical (垂直交换)
-if(y!=0 and down != None and current<down):
-    swap(South)
-    vsorted=False`} />
-            </div>
-        </section>
-
-        <section class="mb-16">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-2xl font-bold">
-                    {t({
-                        en: "Complete Source Code",
-                        zh: "完整源代码",
-                        de: "Vollständiger Quellcode"
-                    })}
-                </h2>
-                <span class="text-sm text-gray-500 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
-                    Python
-                </span>
-            </div>
-            
-            <div class="relative group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-green-600 to-blue-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-                <div class="relative">
-                    <CodeBlock
-                        height="max-h-[800px]"
-                        code={`def back(x=0,y=0):
-    while x!=get_pos_x() or y!=get_pos_y():
-        if(get_pos_x()<x):
-            move(East)
-        else:
-            move(West)
-        if(get_pos_y()<y):
-            move(North)
-        else:
-            move(South)
-
-def plantCactus():
-    if get_ground_type()==Grounds.Grassland:
-        till()
-    plant(Entities.Cactus)  
-
-def reverse(dir):
-    if(dir == West): return East
-    if(dir == East): return West
-    if(dir == North): return South
-    if(dir == South): return North
-
-def cactusProject(size=3):
-    while True:
-        dir=East
-        vdir=North
-        sorted=False
-        vsorted=False
-        
-        # 1. Planting Phase
-        for i in range(size):
-            for j in range(size):
-                plantCactus()
-                if(j!=size-1):
-                    move(dir)
-            if(i!=size-1):
-                move(vdir)
-            dir=reverse(dir)
-        vdir=reverse(vdir)
-        
-        # 2. Sorting Phase
-        while not sorted or not vsorted:
-            sorted=True
-            vsorted=True
-            for i in range(size):
-                for j in range(size):
-                    x=get_pos_x()
-                    y=get_pos_y()
-                    current=measure()
-                    neighbor=measure(dir)
-                    down=measure(South)
-                    up=measure(North)
-                    
-                    # Logic to swap East/West
-                    if(x!=size-1 and neighbor!=None and dir==East and current>neighbor):
-                        swap(East)
-                        sorted=False
-                    if(x!=0 and neighbor!=None and dir==West and current<neighbor):
-                        swap(West)
-                        sorted=False
-                        
-                    # Logic to swap North/South
-                    if(y!=0 and down != None and current<down):
-                        swap(South)
-                        vsorted=False
-                    if(y!=size-1 and up != None and current>up):
-                        swap(North)
-                        vsorted=False
-                        
-                    if(j!=size-1):
-                        move(dir)
-                if(i!=size-1):
-                    move(vdir)
-                dir=reverse(dir)
-        
-        # 3. Harvesting Phase (Once sorted)
-        back()
-        harvest()
-        
-clear()
-# Change '6' to your grid size
-cactusProject(6)`}
-                    />
-                </div>
-            </div>
-        </section>
-
-        <section class="py-8 bg-green-50 dark:bg-green-900/20 rounded-2xl border border-green-100 dark:border-green-800 p-6 mb-12">
-            <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-green-800 dark:text-green-300">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-                {t({ zh: "优化建议", en: "Optimization Tips", de: "Optimierungstipps" })}
-            </h3>
-            <ul class="space-y-2 text-green-900 dark:text-green-100">
-                <li class="flex items-start gap-2">
-                    <span class="font-bold">•</span>
-                    {t({
-                        zh: "确保传入 `cactusProject(size)` 的 size 参数与你的土地大小一致，否则无人机会撞墙。",
-                        en: "Ensure the `size` parameter matches your actual land size to avoid drone crashes.",
-                        de: "Stellen Sie sicher, dass der Parameter `size` mit der tatsächlichen Landgröße übereinstimmt."
-                    })}
-                </li>
-                <li class="flex items-start gap-2">
-                    <span class="font-bold">•</span>
-                    {t({
-                        zh: "这个算法在大型网格（如 10x10）上可能会变慢，这是冒泡排序的特性。",
-                        en: "This algorithm might be slow on large grids (e.g., 10x10) due to the nature of Bubble Sort.",
-                        de: "Dieser Algorithmus könnte auf großen Rastern langsam sein."
-                    })}
-                </li>
-            </ul>
-        </section>
-
-        		<section class="py-8 bg-green-50 dark:bg-green-900/20 rounded-2xl border border-green-100 dark:border-green-800 p-6 mb-8">
-			<h3 class="text-xl font-bold mb-3 text-green-800 dark:text-green-300">
-				{t({ en: "Still current (Oct 2026)", zh: "仍适用（2026年10月）", de: "Weiterhin aktuell (Okt 2026)" })}
-			</h3>
-			<p class="text-green-900 dark:text-green-100">
-				{
-					t({
-						en: "No public crop-balance patch notes between the Sep 9 DLC announcement and Oct 14. Sorting sizes 0–9 then harvesting for n² remains the community baseline. Multi-drone scans appear in GitHub collections (Thorrdu / Flekay), not on this beginner page.",
-						zh: "自 9 月 9 日 DLC 官宣到 10 月 14 日，没有公开的作物平衡补丁说明。先把 0–9 排好再收、产量 n²，仍是社区基线。多无人机扫描见 GitHub 合集（Thorrdu / Flekay），不在本入门页。",
-						de: "Keine öffentlichen Balance-Notes seit der DLC-Ankündigung. Sortieren 0–9, dann n² bleibt Basis. Multi-Drohne auf GitHub.",
-					})
-				}
+	<div class="max-w-4xl mx-auto px-4">
+		<section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
+			<h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
+				{t({
+					en: "The Farmer Was Replaced Cactus Code — Sort, Then n² Harvest",
+					zh: "编程农场仙人掌代码 — 先排序，再一次收 n²",
+					de: "The Farmer Was Replaced Kaktus-Code — sortieren, dann n²",
+				})}
+			</h1>
+			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+				{t({
+					en: "Rewritten for 1.0+. Cacti have sizes 0–9. When every neighbor is grown and in sorted order, harvesting one cactus harvests the whole connected sorted square for n² cactus.",
+					zh: "按 1.0+ 重写。仙人掌大小 0–9。邻居都长成且有序时，收一棵会连锁收割整片有序方块，产量 n²。",
+					de: "Neu für 1.0+. Größen 0–9. Sortiertes Quadrat → n² beim Ernten.",
+				})}
 			</p>
 		</section>
 
+		<AdNative />
+
+		<section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+			<h2 class="text-2xl font-bold text-green-700 dark:text-green-400">
+				{t({ en: "Sorted order (wiki definition)", zh: "有序定义（wiki）", de: "Sortierregel (Wiki)" })}
+			</h2>
+			<ul>
+				<li>{t({ en: "Plant on soil. Planting costs pumpkins (`get_cost(Entities.Cactus)`).", zh: "种在土上。种植消耗南瓜。", de: "Auf Soil. Kostet Kürbisse." })}</li>
+				<li>{t({ en: "`measure()` → size in 0…9. `measure(East)` reads the neighbor without moving.", zh: "`measure()` → 0…9。`measure(East)` 读邻居，不用移动。", de: "`measure()` / `measure(East)`." })}</li>
+				<li>{t({ en: "Sorted iff every grown N/E neighbor is ≥ this cactus, and every grown S/W neighbor is ≤ this cactus.", zh: "有序：北/东邻居（已长成）都 ≥ 自己，南/西都 ≤ 自己。", de: "N/O ≥, S/W ≤." })}</li>
+				<li>{t({ en: "Unsorted grown cacti look brown; sorted turn green. Harvest spreads only through fully grown sorted neighbors → payout `n**2`.", zh: "未排好呈棕色，排好变绿。连锁只穿过已长成且有序的邻居 → 产量 `n**2`。", de: "Braun unsortiert, grün sortiert. Auszahlung n²." })}</li>
+				<li>{t({ en: "`swap(direction)` swaps this tile with the neighbor.", zh: "`swap(direction)` 与邻居交换。", de: "`swap(direction)` tauscht." })}</li>
+			</ul>
+		</section>
+
+		<section class="py-6">
+			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+				{t({ en: "Teaching script: plant → wait → bubble toward NE → harvest", zh: "教学脚本：种 → 等长成 → 向东北冒泡 → 收", de: "Lehrskript: pflanzen → warten → nach NO bubblen → ernten" })}
+			</h2>
+			<p class="mb-4 text-gray-600 dark:text-gray-400">
+				{t({
+					en: "Bubble sort is easy to read, not the fastest. Wait until every cactus can harvest before swapping — sorting unfinished tiles wastes swaps.",
+					zh: "冒泡好懂，不是最快。等全部能收再交换——对未长成的格子 swap 浪费 ticks。",
+					de: "Bubble Sort ist klar, nicht schnell. Erst warten bis alles erntebereit.",
+				})}
+			</p>
+			<CodeBlock
+				height="max-h-[800px]"
+				code={`def go_to(x, y):
+	while get_pos_x() != x:
+		if get_pos_x() < x:
+			move(East)
+		else:
+			move(West)
+	while get_pos_y() != y:
+		if get_pos_y() < y:
+			move(North)
+		else:
+			move(South)
+
+def plant_all():
+	size = get_world_size()
+	for y in range(size):
+		for x in range(size):
+			go_to(x, y)
+			if get_ground_type() != Grounds.Soil:
+				till()
+			plant(Entities.Cactus)
+
+def wait_until_grown():
+	size = get_world_size()
+	ready = False
+	while not ready:
+		ready = True
+		for y in range(size):
+			for x in range(size):
+				go_to(x, y)
+				if get_entity_type() != Entities.Cactus or not can_harvest():
+					ready = False
+
+def bubble_sort_once():
+	# Push larger sizes toward North/East
+	size = get_world_size()
+	swapped = False
+	for y in range(size):
+		for x in range(size):
+			go_to(x, y)
+			here = measure()
+			if x < size - 1:
+				east = measure(East)
+				if east != None and here > east:
+					swap(East)
+					swapped = True
+					here = measure()
+			if y < size - 1:
+				north = measure(North)
+				if north != None and here > north:
+					swap(North)
+					swapped = True
+	return swapped
+
+clear()
+while True:
+	plant_all()
+	wait_until_grown()
+	while bubble_sort_once():
+		pass
+	go_to(0, 0)
+	harvest()`}
+			/>
+		</section>
+
+		<section class="py-8 bg-green-50 dark:bg-green-900/20 rounded-2xl border border-green-100 dark:border-green-800 p-6 mb-8">
+			<h3 class="text-xl font-bold mb-3 text-green-800 dark:text-green-300">
+				{t({ en: "Multi-drone / speed notes", zh: "多无人机 / 速度说明", de: "Multi-Drohne / Tempo" })}
+			</h3>
+			<ul class="space-y-2 text-green-900 dark:text-green-100 list-disc pl-5">
+				<li>{t({ en: "Bubble sort on 32×32 is slow (many passes). Faster sorts live in community GitHub collections — this page stays readable.", zh: "32×32 冒泡很慢。更快排序见社区 GitHub——本页保持可读。", de: "Bubble auf 32×32 ist langsam. Schnellere Sorten auf GitHub." })}</li>
+				<li>{t({ en: "Drones do not share memory. Parallel sorts need careful tile ownership or you double-swap the same edge.", zh: "无人机不共享内存。并行排序要划清格子，否则同一条边会被换两次。", de: "Keine Shared Memory — Kachel-Besitz klären." })}</li>
+				<li>{t({ en: "Leaderboard cactus target factors as 32 perfect full-farm harvests of n² with n = 1024.", zh: "排行榜仙人掌目标 ≈ 32 次满田完美 n²（n=1024）。", de: "Leaderboard ≈ 32 volle n²-Ernten." })}</li>
+			</ul>
+		</section>
+
 		<RelatedGuides current="/codes/cactus-code" />
-        <section class="py-8 border-t border-neutral-200 dark:border-neutral-700">
-            <div class="flex justify-center">
-                <a href={getRelativeLocaleUrl(locale, "/")} class="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full transition text-gray-700 dark:text-gray-300 font-medium">
-                    <span>←</span>
-                    {t({
-                        en: "Back to Home",
-                        zh: "返回主页",
-                        de: "Zurück zur Startseite"
-                    })}
-                </a>
-            </div>
-        </section>
-        
-        <div id="utterances-container" class="my-10"></div>
-    </div>
+		<div class="text-center py-6">
+			<a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
+				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite" })}
+			</a>
+		</div>
+		<div id="utterances-container" class="my-10"></div>
+	</div>
 </Layout>

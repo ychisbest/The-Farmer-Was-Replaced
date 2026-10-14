@@ -93,6 +93,18 @@ const description = {
             </p>
         </section>
 
+
+        <section class="mb-10 rounded-2xl border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-900/20 p-5">
+            <h2 class="text-lg font-bold mb-2 text-sky-900 dark:text-sky-100">
+                {t({ en: "1.0 API gotchas (read before copy-pasting old scripts)", zh: "1.0 API 雷区（复制旧脚本前先看）", de: "1.0-API-Fallen" })}
+            </h2>
+            <ul class="list-disc pl-5 space-y-1 text-sky-900 dark:text-sky-100 text-sm">
+                <li>{t({ en: "`trade()` removed. No `Carrot_Seed` / `Water_Tank` — planting spends inventory; water with `use_item(Items.Water)`.", zh: "`trade()` 已移除。无 `Carrot_Seed` / `Water_Tank`——种植扣背包；浇水 `use_item(Items.Water)`。", de: "`trade()` weg. Kein Carrot_Seed/Water_Tank. `use_item(Items.Water)`." })}</li>
+                <li>{t({ en: "`Grounds.Turf` → `Grounds.Grassland`. `set_farm_size` → `set_world_size`.", zh: "`Grounds.Turf` → `Grassland`。`set_farm_size` → `set_world_size`。", de: "Turf→Grassland. set_farm_size→set_world_size." })}</li>
+                <li>{t({ en: "Megafarm drones do not share globals. Prefer `quick_print()` over `print()` in loops (print costs 1s).", zh: "多无人机不共享全局。循环用 `quick_print()`，别用 `print()`（耗时 1 秒）。", de: "Keine Shared Globals. `quick_print()` statt `print()`." })}</li>
+            </ul>
+        </section>
+
         <AdNative />
 
         <div class="space-y-24">

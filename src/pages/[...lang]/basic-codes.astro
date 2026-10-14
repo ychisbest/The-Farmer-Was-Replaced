@@ -269,9 +269,7 @@ while True:
         # Check if ground is soil, if not, till it
         if get_ground_type() != Grounds.Soil:
             till()
-        # Ensure we have carrot seeds before planting
-        if num_items(Items.Carrot_Seed) < 1:
-            trade(Items.Carrot_Seed)  # Buy seeds if needed
+        # plant() spends hay+wood automatically (1.0; seed shop removed)
         plant(Entities.Carrot)
 
     # Move to next column
@@ -301,9 +299,7 @@ while True:
         # 检查地面是否为土壤，如果不是就耕作
         if get_ground_type() != Grounds.Soil:
             till()
-        # 确保有胡萝卜种子再种植
-        if num_items(Items.Carrot_Seed) < 1:
-            trade(Items.Carrot_Seed)  # 需要时购买种子
+        # plant() 自动扣干草+木头（1.0 已无种子商店）
         plant(Entities.Carrot)
 
     # 移动到下一列
@@ -333,9 +329,7 @@ while True:
         # Überprüfen ob Boden Erde ist, falls nicht, umpflügen
         if get_ground_type() != Grounds.Soil:
             till()
-        # Sicherstellen, dass wir Karottensamen haben
-        if num_items(Items.Carrot_Seed) < 1:
-            trade(Items.Carrot_Seed)  # Samen kaufen falls nötig
+        # plant() zieht Heu+Holz automatisch (1.0; kein Samenhandel)
         plant(Entities.Carrot)
 
     # Zur nächsten Spalte bewegen
@@ -490,7 +484,7 @@ while True:
 
     # Resource-based planting strategy with priorities:
 
-    # PRIORITY 1: Ensure hay supply (essential for trading and feeding)
+    # PRIORITY 1: Ensure hay supply (needed for planting carrots and unlocks)
     if num_items(Items.Hay) < 500:
         # Don't plant anything - let grass grow naturally for free hay
         pass  # No action needed
@@ -500,13 +494,11 @@ while True:
         # Plant bushes to generate wood
         plant(Entities.Bush)
 
-    # PRIORITY 3: Build carrot reserves (for food and advanced trading)
+    # PRIORITY 3: Build carrot reserves (for unlocks that cost carrots)
     elif num_items(Items.Carrot) < 200:
         # Plant carrots (requires soil preparation)
         if get_ground_type() != Grounds.Soil:
             till()  # Prepare soil if needed
-        if num_items(Items.Carrot_Seed) == 0:
-            trade(Items.Carrot_Seed)  # Buy seeds if we don't have any
         plant(Entities.Carrot)
 
     # Move to next tile in systematic pattern
@@ -525,7 +517,7 @@ while True:
 
     # 基于资源的种植策略，按优先级排序：
 
-    # 优先级1：确保干草供应（交易和喂养必需品）
+    # 优先级1：确保干草供应（种胡萝卜与解锁所需）
     if num_items(Items.Hay) < 500:
         # 什么都不种 - 让草自然生长获得免费干草
         pass  # 无需操作
@@ -535,13 +527,11 @@ while True:
         # 种植灌木生成木材
         plant(Entities.Bush)
 
-    # 优先级3：建立胡萝卜储备（食物和高级交易）
+    # 优先级3：建立胡萝卜储备（消耗胡萝卜的解锁）
     elif num_items(Items.Carrot) < 200:
         # 种植胡萝卜（需要土壤准备）
         if get_ground_type() != Grounds.Soil:
             till()  # 需要时准备土壤
-        if num_items(Items.Carrot_Seed) == 0:
-            trade(Items.Carrot_Seed)  # 如果没有种子就购买
         plant(Entities.Carrot)
 
     # 以系统化模式移动到下一个格子
@@ -560,7 +550,7 @@ while True:
 
     # Ressourcenbasierte Pflanzstrategie mit Prioritäten:
 
-    # PRIORITÄT 1: Heuvorrat sicherstellen (essenziell für Handel und Fütterung)
+    # PRIORITÄT 1: Heuvorrat sicherstellen (für Karotten und Unlocks)
     if num_items(Items.Hay) < 500:
         # Nichts pflanzen - Gras natürlich wachsen lassen für kostenloses Heu
         pass  # Keine Aktion nötig
@@ -570,13 +560,11 @@ while True:
         # Büsche pflanzen um Holz zu erzeugen
         plant(Entities.Bush)
 
-    # PRIORITÄT 3: Karottenreserven aufbauen (für Nahrung und fortgeschrittenen Handel)
+    # PRIORITÄT 3: Karottenreserven aufbauen (für Karotten-Unlocks)
     elif num_items(Items.Carrot) < 200:
         # Karotten pflanzen (erfordert Bodenbearbeitung)
         if get_ground_type() != Grounds.Soil:
             till()  # Boden vorbereiten falls nötig
-        if num_items(Items.Carrot_Seed) == 0:
-            trade(Items.Carrot_Seed)  # Samen kaufen wenn wir keine haben
         plant(Entities.Carrot)
 
     # Zum nächsten Feld in systematischem Muster bewegen
@@ -611,19 +599,16 @@ while True:
             <CodeBlock
                 code={t({
                     en: `# Auto Watering System - Advanced crop acceleration
-# Maintains water tanks and accelerates crop growth up to 5x speed
+# Uses Items.Water and accelerates crop growth up to 5x speed
 while True:
-    # WATER MANAGEMENT: Ensure adequate water supply
-    # Water tanks are essential for speeding up crop growth
-    if num_items(Items.Water_Tank) < 100:
-        # Trade for empty tanks if we don't have enough
-        trade(Items.Empty_Tank)
+    # WATER: Items.Water accrues automatically (no trade)
+    # Water accrues every 10s; use_item(Items.Water) speeds growth
 
     # WATER APPLICATION: Use water when crops need it
     # get_water() returns hydration level (0.0 to 1.0)
     # 0.75 means crops are 75% hydrated - water when below this
     if get_water() < 0.75:
-        use_item(Items.Water_Tank)  # Apply water to current tile
+        use_item(Items.Water)  # 1.0 watering API
 
     # HARVEST: Always check for mature crops first
     if can_harvest():
@@ -633,29 +618,24 @@ while True:
     # Prepare soil if needed (carrots require tilled soil)
     if get_ground_type() != Grounds.Soil:
         till()  # Convert turf/grass to soil
-    # Ensure we have seeds before planting
-    if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)  # Purchase seeds if needed
-    plant(Entities.Carrot)  # Plant carrot seeds
+    # Planting spends hay+wood from inventory
+    plant(Entities.Carrot)  # Plant carrot (costs hay+wood)
 
     # MOVEMENT: Continue systematic traversal
     move(East)
     if get_pos_x() == get_world_size() - 1:
         move(North)`,
                     zh: `# 自动浇水系统 - 高级作物加速
-# 维持水箱供应，将作物生长速度加速至5倍
+# 用 Items.Water，将作物生长速度加速至5倍
 while True:
-    # 水资源管理：确保充足的水供应
-    # 水箱对于加速作物生长至关重要
-    if num_items(Items.Water_Tank) < 100:
-        # 如果没有足够的空水箱就交易获取
-        trade(Items.Empty_Tank)
+    # 浇水：Items.Water 自动积累（无 trade）
+    # 水每10秒自动获得；use_item(Items.Water) 加速生长
 
     # 水分应用：作物需要时使用水
     # get_water() 返回水分水平（0.0到1.0）
     # 0.75意味着作物水分达75% - 低于此值时浇水
     if get_water() < 0.75:
-        use_item(Items.Water_Tank)  # 对当前格子应用水
+        use_item(Items.Water)  # 1.0 浇水 API
 
     # 收获：总是先检查成熟的作物
     if can_harvest():
@@ -665,29 +645,24 @@ while True:
     # 需要时准备土壤（胡萝卜需要耕作过的土壤）
     if get_ground_type() != Grounds.Soil:
         till()  # 将草地转换为土壤
-    # 确保种植前有种子
-    if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)  # 需要时购买种子
-    plant(Entities.Carrot)  # 种植胡萝卜种子
+    # 种植从背包扣干草+木头
+    plant(Entities.Carrot)  # 种植胡萝卜（扣干草+木头）
 
     # 移动：继续系统化遍历
     move(East)
     if get_pos_x() == get_world_size() - 1:
         move(North)`,
                     de: `# Automatisches Bewässerungssystem - Fortgeschrittene Pflanzenbeschleunigung
-# Hält Wassertanks bereit und beschleunigt Pflanzenwachstum bis zu 5-fach
+# Nutzt Items.Water und beschleunigt Pflanzenwachstum bis zu 5-fach
 while True:
-    # WASSERMANAGEMENT: Ausreichende Wasserversorgung sicherstellen
-    # Wassertanks sind essenziell für die Beschleunigung des Pflanzenwachstums
-    if num_items(Items.Water_Tank) < 100:
-        # Für leere Tanks handeln wenn wir nicht genug haben
-        trade(Items.Empty_Tank)
+    # WASSER: Items.Water kommt automatisch (kein trade)
+    # Wasser alle 10s; use_item(Items.Water)
 
     # WASSERANWENDUNG: Wasser verwenden wenn Pflanzen es brauchen
     # get_water() gibt Hydrationslevel zurück (0.0 bis 1.0)
     # 0.75 bedeutet Pflanzen sind 75% hydriert - Wasser wenn darunter
     if get_water() < 0.75:
-        use_item(Items.Water_Tank)  # Wasser auf aktuelles Feld anwenden
+        use_item(Items.Water)  # 1.0: Items.Water
 
     # ERNTE: Immer zuerst nach reifen Pflanzen suchen
     if can_harvest():
@@ -697,10 +672,8 @@ while True:
     # Boden vorbereiten falls nötig (Karotten benötigen umgegrabenen Boden)
     if get_ground_type() != Grounds.Soil:
         till()  # Rasen/Gras in Erde umwandeln
-    # Sicherstellen dass wir Samen haben bevor wir pflanzen
-    if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)  # Samen kaufen falls nötig
-    plant(Entities.Carrot)  # Karottensamen pflanzen
+    # Pflanzen zieht Heu+Holz aus dem Inventar
+    plant(Entities.Carrot)  # Karotte pflanzen (Heu+Holz)
 
     # BEWEGUNG: Systematische Traversierung fortsetzen
     move(East)
@@ -752,8 +725,6 @@ def plant_carrot():
     if get_ground_type() != Grounds.Soil:
         till()  # Prepare soil if needed
     # Ensure we have carrot seeds
-    if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)  # Buy seeds if we don't have any
     # Plant the carrot
     plant(Entities.Carrot)
 
@@ -788,8 +759,6 @@ def plant_carrot():
     if get_ground_type() != Grounds.Soil:
         till()  # 需要时准备土壤
     # 确保有胡萝卜种子
-    if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)  # 如果没有就购买种子
     # 种植胡萝卜
     plant(Entities.Carrot)
 
@@ -824,8 +793,6 @@ def plant_carrot():
     if get_ground_type() != Grounds.Soil:
         till()  # Boden vorbereiten falls nötig
     # Sicherstellen dass wir Karottensamen haben
-    if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)  # Samen kaufen wenn wir keine haben
     # Karotte pflanzen
     plant(Entities.Carrot)
 

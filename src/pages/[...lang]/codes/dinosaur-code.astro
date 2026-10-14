@@ -251,7 +251,19 @@ change_hat(Hats.Straw_Hat)`}
 			</p>
 		</section>
 
-				<section class="py-8 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl border border-emerald-100 dark:border-emerald-800 p-6 mb-8">
+		
+		<section class="py-8 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl border border-emerald-100 dark:border-emerald-800 p-6 mb-8">
+			<h3 class="text-xl font-bold mb-3 text-emerald-800 dark:text-emerald-300">
+				{t({ en: "1.0 hat cost (wiki)", zh: "1.0 帽子代价（wiki）", de: "1.0 Hut-Kosten (Wiki)" })}
+			</h3>
+			<ul class="space-y-2 text-emerald-900 dark:text-emerald-100 list-disc pl-5">
+				<li>{t({ en: "With the dinosaur hat on, `move()` costs **400** ticks instead of 200. Each apple eaten reduces that by 3% (rounded down).", zh: "戴恐龙帽时 `move()` 要 **400** ticks（平时 200）。每吃一颗苹果减少 3%（向下取整）。", de: "Mit Hut: move() = 400 Ticks. Pro Apfel −3%." })}</li>
+				<li>{t({ en: "Only one drone can wear the hat. No farm-edge wrap while wearing it.", zh: "整场只有一架机能戴。戴帽时不能绕地图边缘。", de: "Nur eine Drohne. Kein Rand-Wrap." })}</li>
+				<li>{t({ en: "`print()` costs a full second — use `quick_print()` in loops.", zh: "循环里别用 `print()`（整秒）；用 `quick_print()`。", de: "`quick_print()` statt `print()` in Schleifen." })}</li>
+			</ul>
+		</section>
+
+		<section class="py-8 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl border border-emerald-100 dark:border-emerald-800 p-6 mb-8">
 			<h3 class="text-xl font-bold mb-3 text-emerald-800 dark:text-emerald-300">
 				{t({ en: "Still current (Oct 2026)", zh: "仍适用（2026年10月）", de: "Weiterhin aktuell (Okt 2026)" })}
 			</h3>

@@ -293,7 +293,7 @@ while True:
             </p>
             <CodeBlock
                 code={`if get_water() < 0.75:
-    use_item(Items.Water_Tank)`}
+    use_item(Items.Water)`}
             />
         </section>
 
@@ -323,6 +323,20 @@ while True:
                     en: "Polyculture comes later. `get_companion()` tells you which crop the current plant wants as a neighbor. That is a different layout than this checkerboard — do not mix the two ideas.",
                     zh: "多元种植是更后面的机制。`get_companion()` 会告诉你当前作物想要哪种邻居。那是另一套布局，不要和这套棋盘格混用。",
                     de: "Polykultur kommt später. `get_companion()` sagt, welche Nachbarpflanze gewünscht ist. Das ist ein anderes Layout als dieses Schachbrett.",
+                })}
+            </p>
+        </section>
+
+
+        <section class="py-8 bg-green-50 dark:bg-green-900/20 rounded-2xl border border-green-100 dark:border-green-800 p-6 mb-8">
+            <h3 class="text-xl font-bold mb-3 text-green-800 dark:text-green-300">
+                {t({ en: "1.0 multi-drone note", zh: "1.0 多无人机说明", de: "1.0 Multi-Drohne" })}
+            </h3>
+            <p class="text-green-900 dark:text-green-100">
+                {t({
+                    en: "After Megafarm, give each drone a column strip. Drones do not share globals. Water with `use_item(Items.Water)` — `Items.Water_Tank` and `trade()` were removed.",
+                    zh: "解锁 Megafarm 后按列分给各无人机。不共享全局。浇水用 `use_item(Items.Water)`——`Water_Tank` 与 `trade()` 已移除。",
+                    de: "Nach Megafarm Spalten teilen. Gießen mit Items.Water. Water_Tank und trade() entfernt.",
                 })}
             </p>
         </section>

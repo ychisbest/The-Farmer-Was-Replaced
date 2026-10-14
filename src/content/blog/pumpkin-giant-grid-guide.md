@@ -1,156 +1,112 @@
 ---
 title: "The Ultimate Pumpkin Guide in The Farmer Was Replaced: Giant 32x32 Grid Automation & Rot Prevention"
-description: "Master pumpkin farming in The Farmer Was Replaced. Learn the exact algorithm and Python code to grow giant merged pumpkins, synchronize growth rates, and prevent crop decay on 4x4 up to 32x32 grids."
+description: "Current 1.0+ pumpkin rules: 20% Dead_Pumpkin, yield n³ then 6n², track bad tiles, plant over dead, multi-drone sectors. Copy-paste teaching script included."
 date: 2026-09-04
+updatedDate: 2026-10-14
 ---
 
-In *The Farmer Was Replaced*, pumpkins are the first major turning point in your programming journey. Unlike simple crops like grass or bushes that you can mindlessly harvest in a snake-pattern loop, pumpkins introduce a complex, high-stakes mechanic: **spatial merging** and **crop decay**.
+In *The Farmer Was Replaced* (1.0+), pumpkins are the first crop where a naive harvest loop fails. Adjacent fully grown pumpkins **merge** into one giant pumpkin. About **20%** die at ripeness and leave `Entities.Dead_Pumpkin`, which blocks the merge until you plant over them.
 
-If you plant pumpkins naively, individual plants will mature at uneven intervals, wither, and rot into unusable dead vegetation before their neighbors finish growing. However, if you master synchronous cultivation, your entire grid—whether it is a modest 4x4 starter plot or a colossal 32x32 endgame empire—will fuse into a single **Mega Pumpkin**, yielding astronomical quantities of resources.
+This post was rewritten on **2026-10-14** against the wiki Pumpkins / Watering pages and the current Steam build line. Older versions of this article talked about a “rot timer” and invented helpers like `set_position` — those were wrong for 1.0.
 
-In this guide, we break down the mechanics, explain the growth mathematics, and provide a battle-tested, copy-pasteable Python script to automate giant pumpkin farming with 100% rot prevention.
+## Rules that matter
 
-## How Pumpkin Mechanics Work: Merging vs. Rotting
+1. **Soil + cost.** `till()` to `Grounds.Soil`. Planting spends carrots (`get_cost(Entities.Pumpkin)`).
+2. **Death.** ~1 in 5 becomes `Entities.Dead_Pumpkin`. `can_harvest()` is always `False` on dead tiles. Planting anything on that tile clears the dead pumpkin (wiki) — you do not need to harvest it.
+3. **Yield.** Side length 1–5 pays **n³**. From **6×6** up, pay **6·n²** (32×32 → 6,144). Harvest before the full square merges and you only get small clusters.
+4. **Water.** `use_item(Items.Water)` — the old `Items.Water_Tank` / `trade()` economy is gone. Water speeds growth up to 5×; it does **not** stop deaths.
+5. **Fertilizer.** `use_item(Items.Fertilizer)` cuts ~2s off a living plant’s remaining grow time and infects it. Prefer fertilizing the **new** plant after replanting, not as a substitute for planting over dead tiles.
 
-To write an effective algorithm, you must understand the rules the game engine enforces:
-
-1. **The Fusion Trigger**: When adjacent pumpkin plants reach maturity simultaneously, they merge into a single, larger composite entity (e.g., 2x2, 4x4, or 32x32).
-2. **Super-Linear Returns**: The resource payout of a merged pumpkin scales exponentially. Harvesting one unified 8x8 pumpkin yields vastly more resources than harvesting 64 individual 1x1 pumpkins.
-3. **The Decay Timer (The Rotting Trap)**: A fully grown single pumpkin has an internal timer. If adjacent tiles have not matured in time to merge with it, the pumpkin rots. A rotten pumpkin prevents adjacent tiles from merging and must be replanted immediately.
-4. **Growth Variance**: By default, crops have natural randomness in their growth ticks. If tile `(0, 0)` grows fast while `(0, 1)` lags behind, `(0, 0)` risks rotting before `(0, 1)` ever finishes.
-
-## The Rot-Prevention Algorithm: The Two-Pass Strategy
-
-The secret to reliable mega-pumpkins is a **two-phase continuous surveillance loop**:
+## Algorithm: plant → track bad tiles → patch → harvest
 
 ```
-[Phase 1: Clear & Seed] --> Till soil, fertilize/water if needed, and plant Entities.Pumpkin everywhere.
-                                     │
-                                     ▼
-[Phase 2: Growth Sentinel] <── Re-plant any rotten / dead tiles immediately.
-        │
-        ├─► Are ALL tiles part of one giant merged entity?
-        │      NO  ──► Keep monitoring, water slow tiles, replant rot.
-        │      YES ──► Harvest giant pumpkin!
-        ▼
-[Repeat Cycle]
+Phase 1: Till + plant every tile once (and water if you can).
+Phase 2: Scan; collect coordinates that are empty, Dead_Pumpkin, or not can_harvest().
+Phase 3: Fly only to those coordinates; plant over bad tiles; wait on unripe live pumpkins.
+Phase 4: When the bad list is empty, harvest() once (the giant merge should be ready).
+Repeat.
 ```
 
-### Key Detection Insights
-- `get_entity_type() == Entities.Pumpkin`: Verifies if a plant is currently occupying the soil.
-- `can_harvest()`: When called on a pumpkin, returns `True` only when it is mature.
-- Checking for decay: If a tile can be harvested but cannot merge because its neighbor is empty or immature, or if it turns into decay, the drone must instantly clear and reseed the tile.
+## Teaching script (single drone, verified APIs)
 
-## Full Python Script: Giant Pumpkin Farm Automation
-
-Below is the optimized, clean Python code designed specifically for the in-game interpreter of *The Farmer Was Replaced*. It adapts dynamically to any grid size (`get_world_size()`) and runs unattended indefinitely.
+Uses only wiki-backed names: `go_to` via `move`, `Grounds.Soil`, `Entities.Pumpkin`, `Entities.Dead_Pumpkin`, `Items.Water`. No `trade()`, no `set_position()`, no `Water_Tank`.
 
 ```python
-# ==============================================================================
-# The Farmer Was Replaced - Giant Pumpkin Automation Script
-# Optimized for any grid size (4x4, 8x8, 16x16, 32x32)
-# ==============================================================================
-
-def prepare_grid():
-    """Initial pass to clear existing debris and plant initial pumpkin seeds."""
-    world_size = get_world_size()
-    for x in range(world_size):
-        for y in range(world_size):
-            # Move to tile (x, y)
-            set_position(x, y)
-            
-            # Ensure ground is tilled
-            if get_ground_type() != Grounds.Soil:
-                till()
-                
-            # Clear foreign entities and plant pumpkin
-            if get_entity_type() != Entities.Pumpkin:
-                harvest()
-                plant(Entities.Pumpkin)
-                
-            # Keep water levels above 50% for synchronized growth
-            if get_water() < 0.5:
-                use_item(Items.Water)
-
-def set_position(target_x, target_y):
-    """Navigates drone directly to coordinate using toroidal wrap-around."""
-    world_size = get_world_size()
-    while get_pos_x() != target_x:
-        if (target_x - get_pos_x()) % world_size < world_size / 2:
+def go_to(x, y):
+    while get_pos_x() != x:
+        if get_pos_x() < x:
             move(East)
         else:
             move(West)
-    while get_pos_y() != target_y:
-        if (target_y - get_pos_y()) % world_size < world_size / 2:
+    while get_pos_y() != y:
+        if get_pos_y() < y:
             move(North)
         else:
             move(South)
 
-def grow_giant_pumpkin():
-    """Monitors grid, replanting decayed tiles until the mega-pumpkin forms."""
-    world_size = get_world_size()
-    
-    while True:
-        unmerged_tiles_found = False
-        
-        for x in range(world_size):
-            for y in range(world_size):
-                set_position(x, y)
-                
-                # If tile was destroyed by rot or missing, replant immediately
-                if get_entity_type() != Entities.Pumpkin:
-                    plant(Entities.Pumpkin)
-                    unmerged_tiles_found = True
-                    continue
-                
-                # Maintain moisture to reduce growth variance
-                if get_water() < 0.3:
-                    use_item(Items.Water)
-                
-                # If an individual plant can be harvested but hasn't fused into
-                # the global mega entity, we must keep cycling
-                # In game mechanics, when the entire field merges, (0,0) covers the whole grid!
-        
-        # Check if the entire field has successfully unified into one entity
-        set_position(0, 0)
-        if can_harvest():
-            # Harvest the mega pumpkin!
-            harvest()
-            # Replenish seeds across the grid for the next cycle
-            prepare_grid()
+def plant_full_field():
+    size = get_world_size()
+    for y in range(size):
+        for x in range(size):
+            go_to(x, y)
+            if get_ground_type() != Grounds.Soil:
+                till()
+            plant(Entities.Pumpkin)
+            if get_water() < 0.75:
+                use_item(Items.Water)
 
-# Start the automated cultivation
-prepare_grid()
+def collect_bad_tiles():
+    bad = []
+    size = get_world_size()
+    for y in range(size):
+        for x in range(size):
+            go_to(x, y)
+            ent = get_entity_type()
+            if ent == Entities.Dead_Pumpkin or ent != Entities.Pumpkin or not can_harvest():
+                bad.append([x, y])
+    return bad
+
+def patch_bad(bad):
+    while len(bad) > 0:
+        still_bad = []
+        for pos in bad:
+            x = pos[0]
+            y = pos[1]
+            go_to(x, y)
+            ent = get_entity_type()
+            if ent != Entities.Pumpkin:
+                if get_ground_type() != Grounds.Soil:
+                    till()
+                plant(Entities.Pumpkin)
+                still_bad.append([x, y])
+            elif not can_harvest():
+                still_bad.append([x, y])
+        bad = still_bad
+
+clear()
 while True:
-    grow_giant_pumpkin()
+    plant_full_field()
+    bad = collect_bad_tiles()
+    patch_bad(bad)
+    go_to(0, 0)
+    harvest()
 ```
 
-## Optimization & Tuning Tips
+## Multi-drone (Megafarm)
 
-### 1. Water Synchronization is Non-Negotiable
-Soil moisture accelerates growth speed. If one quadrant of your farm is bone-dry and another is well-watered, growth divergence spikes dramatically. Always inject a `get_water() < 0.4` check into your loop so that all seeds sprout at comparable rates.
+Drones **do not share globals**. Split columns or rectangles per drone. Sync phases with `spawn_drone` + `wait_for`. Community consensus (Sep–Oct 2026): keep a per-drone bad-tile list; water every tile on large grids.
 
-### 2. Fertilizer: When to Use It
-Once you unlock `Items.Fertilizer`, you can drastically cut the time required for a 32x32 field to mature. However, apply fertilizer evenly across the entire grid—never fertilize a single tile in isolation, or it will mature in seconds and rot before the rest of the field even reaches 20% growth.
+## FAQ
 
-### 3. Drone Speed Upgrades vs. Execution Stutter
-As your grid expands from 8x8 to 32x32, traversal takes more ticks. If your drone movement is slow, a tile on the far corner might rot before the drone loops back to inspect it. If you experience rot on large grids:
-- Upgrade your Drone Speed in the tech tree.
-- Prioritize column-by-column snake traversal (`move(North)` until edge, step `East`, then `move(South)`).
+**Why is my harvest tiny?**  
+Something failed to merge — usually a Dead_Pumpkin or an unripe tile. Do not harvest until every tile in the square is a live, harvestable pumpkin.
 
-## Frequently Asked Questions (FAQ)
+**Does this work on small farms?**  
+Yes. `get_world_size()` adapts. Aim for at least 6×6 when you can, so the 6n² multiplier applies.
 
-### Why does my pumpkin harvest only give a few hundred pumpkins instead of millions?
-If any single tile failed to merge prior to harvesting, you only harvested a cluster of smaller merged pumpkins instead of the global mega-pumpkin. Ensure your script checks that the entire world is covered by the single parent entity before triggering `harvest()`.
+## Related
 
-### How do I stop carrots or grass from invading my pumpkin field?
-If a pumpkin rots away and leaves bare soil, wild grass or weeds can sprout. The condition `if get_entity_type() != Entities.Pumpkin: harvest(); plant(Entities.Pumpkin)` in our script guarantees that foreign weeds are eradicated instantly.
-
-### Does this script work on early-game small grids?
-Yes! The script dynamically queries `get_world_size()`, meaning it works flawlessly on a 3x3 starter plot, an 8x8 mid-game grid, or the full 32x32 late-game layout without modifying a single line of code.
-
-## Related Guides & Code Repositories
-- [Stand-alone Pumpkin Code Snippet Library](/codes/pumpkin-code)
-- [Sunflower Petal Sorting & Energy Harvesting Guide](/codes/sunflower-code)
-- [2D Cactus Sorting Algorithms (Bubble vs. Insertion)](/codes/cactus-code)
-- [Beginner Python Automation Basics in The Farmer Was Replaced](/basic-codes)
+- [Pumpkin code page](/codes/pumpkin-code)
+- [Sunflower code](/codes/sunflower-code)
+- [Cactus sorting](/codes/cactus-code)
+- [Basic codes](/basic-codes)

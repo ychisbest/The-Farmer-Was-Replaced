@@ -27,9 +27,9 @@ const title = {
 };
 
 const description = {
-	en: "The Farmer Was Replaced maze code: spawn a hedge maze with Weird Substance, follow the left wall, harvest only the treasure. Do not harvest hedges.",
-	zh: "编程农场迷宫代码：用奇怪物质把灌木变成树篱迷宫，左手扶墙走到宝箱，只收宝箱，别收树篱。",
-	de: "The Farmer Was Replaced Labyrinth-Code: Irrgarten erzeugen, linke Wand folgen, nur den Schatz ernten.",
+	en: "The Farmer Was Replaced maze code for 1.0+: spawn with Weird Substance, left-wall on fresh mazes, measure() for treasure coords, many small mazes for multi-drone gold.",
+	zh: "编程农场 1.0+ 迷宫：奇怪物质生成；新迷宫左手扶墙；measure() 取宝箱坐标；多无人机用许多小迷宫刷金。",
+	de: "Labyrinth-Code 1.0+: Weird Substance, Linke Wand frisch, measure() zum Schatz, viele kleine Labyrinthe für Multi-Drohne.",
 };
 ---
 
@@ -37,138 +37,117 @@ const description = {
 	<div class="max-w-4xl mx-auto px-4">
 		<section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
 			<h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
-				{
-					t({
-						en: "The Farmer Was Replaced Maze Code — Left-Wall Follower",
-						zh: "编程农场迷宫代码 — 左手扶墙",
-						de: "The Farmer Was Replaced Labyrinth-Code — Linke-Wand-Regel",
-					})
-				}
+				{t({
+					en: "The Farmer Was Replaced Maze Code — Fresh Walls, Then Gold",
+					zh: "编程农场迷宫代码 — 新迷宫扶墙，再刷金币",
+					de: "The Farmer Was Replaced Labyrinth-Code — frische Wände, dann Gold",
+				})}
 			</h1>
 			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-				{
-					t({
-						en: "Paste the script below. A fresh maze has no loops: keep your left hand on the wall and you will hit the treasure. Harvest only the chest.",
-						zh: "先粘贴下面的脚本。新迷宫没有环：左手扶墙就能走到宝箱。只收宝箱，别收树篱。",
-						de: "Skript unten einfügen. Ein frisches Labyrinth hat keine Schleifen. Nur den Schatz ernten.",
-					})
-				}
+				{t({
+					en: "Rewritten for 1.0+. Fresh mazes have no loops — left-wall works. Reused mazes get loops; prefer `measure()` or many small mazes per drone.",
+					zh: "按 1.0+ 重写。新迷宫无环，左手扶墙可用。复用迷宫会出环；优先 `measure()`，或冲榜时每架无人机各解一座小迷宫。",
+					de: "Neu für 1.0+. Frische Labyrinthe ohne Schleifen. Wiederverwendung erzeugt Schleifen — measure() oder viele kleine Labyrinthe.",
+				})}
 			</p>
 		</section>
 
 		<AdNative />
 
+		<section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+			<h2 class="text-2xl font-bold text-purple-700 dark:text-purple-300">
+				{t({ en: "Maze rules in 1.0+", zh: "1.0+ 迷宫规则", de: "Labyrinth-Regeln in 1.0+" })}
+			</h2>
+			<ul>
+				<li>{t({ en: "Fertilize plants to earn `Items.Weird_Substance` (infected harvest pays half as substance).", zh: "给植物施肥赚 `Items.Weird_Substance`（感染收获一半变成奇怪物质）。", de: "Düngen → Weird_Substance (infizierte Ernte zahlt halb Substance)." })}</li>
+				<li>{t({ en: "On a bush: `use_item(Items.Weird_Substance, n)` grows an n×n hedge maze (without upgrades). With maze upgrades, substance needed roughly doubles per level — use `get_world_size() * 2**(num_unlocked(Unlocks.Mazes) - 1)` for a full-field maze.", zh: "站在灌木上 `use_item(Items.Weird_Substance, n)` 生成 n×n 迷宫（无升级时）。有迷宫升级时，物质需求约每级翻倍——满田可用 `get_world_size() * 2**(num_unlocked(Unlocks.Mazes) - 1)`。", de: "Busch + Weird_Substance → Labyrinth. Mit Upgrades grob verdoppeln." })}</li>
+				<li>{t({ en: "`harvest()` on `Entities.Treasure` → gold = area × maze upgrade. Harvest anything else → maze vanishes.", zh: "对 `Entities.Treasure` `harvest()` → 金币 = 面积 × 迷宫升级。收别处 → 迷宫消失。", de: "Nur Schatz ernten. Sonst verschwindet das Labyrinth." })}</li>
+				<li>{t({ en: "`measure()` **anywhere** in the maze returns treasure coordinates (1.0 change). `can_move(dir)` / failed `move()` = 1 tick wall probe.", zh: "迷宫内任意位置 `measure()` 返回宝箱坐标（1.0 起）。`can_move` / 失败的 `move` 只花 1 tick 探墙。", de: "`measure()` überall = Schatzkoordinaten." })}</li>
+				<li>{t({ en: "Reuse: Weird Substance on the treasure relocates it (up to 300×) and can punch wall holes → **loops**. Plain wall-follower is outdated there. Reuse does **not** pay more gold than spawn+harvest anew.", zh: "复用：对宝箱再用奇怪物质会换位（最多 300 次）并可能破墙 → **有环**。单纯扶墙在此已过时。复用**不会**比新建+收割更赚金。", de: "Wiederverwendung: Schleifen möglich, nicht mehr Gold." })}</li>
+			</ul>
+		</section>
+
 		<section class="py-6">
 			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-				{t({ en: "Copy-paste: spawn a maze, then walk the left wall", zh: "复制：生成迷宫，然后左手扶墙", de: "Kopieren: Labyrinth erzeugen, dann links folgen" })}
+				{t({ en: "Beginner: spawn fresh maze + left-wall", zh: "入门：生成新迷宫 + 左手扶墙", de: "Anfänger: frisches Labyrinth + linke Wand" })}
 			</h2>
 			<CodeBlock
-				height="max-h-[700px]"
+				height="max-h-[520px]"
 				code={`def spawn_maze():
-    if get_ground_type() != Grounds.Soil:
-        till()
-    harvest()
-    plant(Entities.Bush)
-    size = get_world_size()
-    use_item(Items.Weird_Substance, size)
+	if get_ground_type() != Grounds.Soil:
+		till()
+	harvest()
+	plant(Entities.Bush)
+	# Beginner (no / low maze upgrades): n = world size.
+	# With upgrades, wiki: world_size * 2**(num_unlocked(Unlocks.Mazes) - 1)
+	n = get_world_size()
+	use_item(Items.Weird_Substance, n)
 
-def solve_maze():
-    dirs = [North, East, South, West]
-    facing = 0
-    while get_entity_type() != Entities.Treasure:
-        left = (facing - 1) % 4
-        if can_move(dirs[left]):
-            facing = left
-            move(dirs[facing])
-        elif can_move(dirs[facing]):
-            move(dirs[facing])
-        else:
-            facing = (facing + 1) % 4
-    harvest()
+def solve_left_wall():
+	dirs = [North, East, South, West]
+	facing = 0
+	while get_entity_type() != Entities.Treasure:
+		left = (facing - 1) % 4
+		if can_move(dirs[left]):
+			facing = left
+			move(dirs[facing])
+		elif can_move(dirs[facing]):
+			move(dirs[facing])
+		else:
+			facing = (facing + 1) % 4
+	harvest()
 
 clear()
 while True:
-    spawn_maze()
-    solve_maze()`}
+	spawn_maze()
+	solve_left_wall()`}
 			/>
 		</section>
 
-		<section class="py-10 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
-			<h2 class="text-2xl font-bold text-purple-700 dark:text-purple-300">
-				{t({ en: "Why wall-follower scripts spin in circles", zh: "扶墙脚本为什么会转圈", de: "Warum Wandfolger im Kreis laufen" })}
+		<section class="py-6">
+			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+				{t({ en: "Better for reused / looped mazes: walk toward measure()", zh: "复用/有环迷宫：朝 measure() 坐标走", de: "Bei Schleifen: zu measure()-Koordinaten" })}
 			</h2>
-			<ul>
-				<li>
-					{
-						t({
-							en: "Stand on a bush and call `use_item(Items.Weird_Substance, n)` to grow an n×n hedge maze. Fertilizer on plants is how you get Weird Substance.",
-							zh: "站在灌木上调用 `use_item(Items.Weird_Substance, n)`，会长出 n×n 的树篱迷宫。奇怪物质来自给植物施肥。",
-							de: "Auf einem Busch `use_item(Items.Weird_Substance, n)` erzeugt ein n×n-Labyrinth.",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "`harvest()` on the treasure gives gold equal to the maze area (5×5 → 25). Harvest anything else and the whole maze vanishes.",
-							zh: "对宝箱 `harvest()` 得到的金币等于迷宫面积（5×5 是 25）。收在别的格子上，整座迷宫会消失。",
-							de: "`harvest()` auf dem Schatz gibt Gold gleich der Fläche. Überall sonst verschwindet das Labyrinth.",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "`get_entity_type()` is `Entities.Treasure` on the chest and `Entities.Hedge` on walls you cannot fly over.",
-							zh: "宝箱上 `get_entity_type()` 是 `Entities.Treasure`，树篱是 `Entities.Hedge`，无人机飞不过去。",
-							de: "Schatz = `Entities.Treasure`, Hecke = `Entities.Hedge`.",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "`move()` returns False when a wall blocks you. `can_move(direction)` checks without moving. `measure()` anywhere in the maze returns the treasure coordinates.",
-							zh: "撞墙时 `move()` 返回 False。`can_move(direction)` 只检查不移动。在迷宫里任意位置 `measure()` 会返回宝箱坐标。",
-							de: "`move()` ist False an Wänden. `measure()` liefert die Schatzkoordinaten.",
-						})
-					}
-				</li>
-			</ul>
+			<p class="mb-4 text-gray-600 dark:text-gray-400">
+				{t({
+					en: "Ask for treasure coords first, then path with wall checks. Still not optimal for leaderboard, but it stops infinite left-wall circles.",
+					zh: "先问宝箱坐标，再带撞墙检测地走过去。冲榜仍不够，但能避免扶墙转圈。",
+					de: "Erst Schatzkoordinaten, dann mit Wandchecks laufen.",
+				})}
+			</p>
+			<CodeBlock
+				height="max-h-[480px]"
+				code={`def go_toward(tx, ty):
+	# Greedy step with can_move — enough for teaching
+	while get_pos_x() != tx or get_pos_y() != ty:
+		if get_pos_x() < tx and can_move(East):
+			move(East)
+		elif get_pos_x() > tx and can_move(West):
+			move(West)
+		elif get_pos_y() < ty and can_move(North):
+			move(North)
+		elif get_pos_y() > ty and can_move(South):
+			move(South)
+		else:
+			# Blocked — spin with left-wall for a bit
+			return False
+	return True
+
+tx, ty = measure()
+go_toward(tx, ty)
+if get_entity_type() == Entities.Treasure:
+	harvest()`}
+			/>
 		</section>
 
 		<section class="py-8 bg-purple-50 dark:bg-purple-900/20 rounded-2xl border border-purple-100 dark:border-purple-800 p-6 mb-8">
 			<h3 class="text-xl font-bold mb-3 text-purple-800 dark:text-purple-300">
-				{t({ en: "After the first maze (Sep 2026 community notes)", zh: "第一次通关之后（2026年9月社区共识）", de: "Nach dem ersten Labyrinth (Community Sep 2026)" })}
+				{t({ en: "Multi-drone gold (Reddit Sep 2026)", zh: "多无人机刷金（Reddit 2026-09）", de: "Multi-Drohne Gold (Reddit Sep 2026)" })}
 			</h3>
-			<ul class="space-y-3 text-purple-900 dark:text-purple-100 list-disc pl-5">
-				<li>
-					{
-						t({
-							en: "Beginner script above = left-wall follower on a **fresh** maze (no loops). It is still the right teaching path.",
-							zh: "上面的入门脚本 = 在**新**迷宫上手扶墙（无环）。教学路径仍然正确。",
-							de: "Das Anfänger-Skript oben gilt für frische Labyrinthe ohne Schleifen.",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "Reusing Weird Substance on the treasure moves the chest and can punch holes in walls. Those mazes have loops — plain wall-following is **outdated** there and can circle forever. Use `measure()` toward the chest, or treat visited tiles as walls.",
-							zh: "在宝箱上再使用奇怪物质，宝箱会换位，墙也可能破洞。那种迷宫有环——单纯扶墙在这里已**过时**，可能永远转圈。用 `measure()` 朝宝箱走，或把走过的格子当墙。",
-							de: "Wiederverwendete Labyrinthe haben Schleifen. Wandfolger ist dort veraltet. Mit `measure()` zum Schatz oder besuchte Felder als Wand behandeln.",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "Multi-drone leaderboard pattern (Reddit Sep 2026): pack the 32×32 farm with many smaller mazes (one per drone) so each drone solves a short maze instead of one huge one. Mean area is still 32 — gold scales with area solved, but small mazes finish faster with simple solvers.",
-							zh: "多无人机冲榜（Reddit 2026-09）：把 32×32 拆成许多更小的迷宫（每架无人机一块），短迷宫用简单求解器更快。面积均值仍是 32——金币跟面积走，但小迷宫更快清完。",
-							de: "Multi-Drohne (Reddit Sep 2026): 32×32 in viele kleine Labyrinthe teilen — ein Drohnen-Sektor pro Labyrinth.",
-						})
-					}
-				</li>
+			<ul class="space-y-2 text-purple-900 dark:text-purple-100 list-disc pl-5">
+				<li>{t({ en: "Usually faster: pack the 32×32 farm with **many small mazes** (e.g. 32× 5×5) — one drone each — than one huge maze with 32 drones.", zh: "通常更快：把 32×32 拆成**许多小迷宫**（如 32 个 5×5），每架无人机一座，而不是 32 机挤进一座超大迷宫。", de: "Viele kleine Labyrinthe schlagen ein großes mit 32 Drohnen." })}</li>
+				<li>{t({ en: "Branching drones at junctions (spawn on every exit, die on dead ends) looks great but cannot parallelize as many mazes — use for fun, not max gold/s.", zh: "路口分叉生成子机（死胡同自杀）很炫，但没法并行很多迷宫——娱乐用，不是最高金/秒。", de: "Verzweigungs-Drohnen sind hübsch, nicht maximal gold/s." })}</li>
+				<li>{t({ en: "Leaderboard Maze target ≈ 301 treasures × fully upgraded 32×32 gold — reuse 300 times **or** spawn fresh; community cheese prefers many short mazes.", zh: "排行榜迷宫目标 ≈ 301 次宝箱 × 满升级 32×32 金币——可复用 300 次**或**新建；社区捷径偏向许多短迷宫。", de: "Leaderboard ≈ 301 Schätze × volles 32×32." })}</li>
 			</ul>
 		</section>
 

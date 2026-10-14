@@ -27,9 +27,9 @@ const title = {
 };
 
 const description = {
-	en: "The Farmer Was Replaced sunflower code: plant a field, measure() petals, harvest only the current max. Harvesting a smaller flower can wipe the rest.",
-	zh: "编程农场向日葵代码：先种满、用 measure() 量瓣数，只收当前最多的那朵。收错一朵可能毁掉整片田。",
-	de: "The Farmer Was Replaced Sonnenblumen-Code: Feld pflanzen, Blütenblätter messen, nur das aktuelle Maximum ernten.",
+	en: "The Farmer Was Replaced sunflower code for 1.0+: measure petals 7–15, keep 10+ flowers for the 8× Power bonus, harvest only the current max. Multi-drone sync tips included.",
+	zh: "编程农场 1.0+ 向日葵：瓣数 7–15，保持 ≥10 朵才有 8× Power，只收当前最高瓣。含多无人机同步思路。",
+	de: "Sonnenblumen-Code 1.0+: Blüten 7–15, ≥10 Blumen für 8× Power, nur das Maximum ernten. Multi-Drohne inkl.",
 };
 ---
 
@@ -37,22 +37,18 @@ const description = {
 	<div class="max-w-4xl mx-auto px-4">
 		<section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
 			<h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
-				{
-					t({
-						en: "The Farmer Was Replaced Sunflower Code — Harvest Max Petals Only",
-						zh: "编程农场向日葵代码 — 只收瓣数最多的那朵",
-						de: "The Farmer Was Replaced Sonnenblumen-Code — nur maximale Blütenzahl",
-					})
-				}
+				{t({
+					en: "The Farmer Was Replaced Sunflower Code — Max Petals, Then Power",
+					zh: "编程农场向日葵代码 — 先找最高瓣，再刷 Power",
+					de: "The Farmer Was Replaced Sonnenblumen-Code — Maximum, dann Power",
+				})}
 			</h1>
 			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-				{
-					t({
-						en: "Sunflowers drop Power. The bonus comes from harvesting the flower that currently has the most petals. If you harvest a smaller one first, the rest of the field can be destroyed.",
-						zh: "向日葵产出 Power。奖励来自收割当前瓣数最多的那朵。如果先收了瓣数更少的，整片田可能被毁掉。",
-						de: "Sonnenblumen geben Power. Der Bonus kommt nur, wenn du die Blume mit den meisten Blütenblättern erntest.",
-					})
-				}
+				{t({
+					en: "Rewritten for 1.0+. Sunflowers pay Power. The 8× bonus only fires when you harvest the current max-petal flower while at least 10 sunflowers are on the farm. Harvest a smaller one and you lose the bonus for that harvest and the next.",
+					zh: "按 1.0+ 重写。向日葵产 Power。只有田间至少 10 朵、且你收的是当前瓣数最高的那朵，才有 8× 奖励。收错一朵，这一次和下一次都会丢奖励。",
+					de: "Neu für 1.0+. 8×-Bonus nur bei aktuellem Maximum und ≥10 Sonnenblumen. Falsche Ernte kostet diesen und den nächsten Bonus.",
+				})}
 			</p>
 		</section>
 
@@ -60,155 +56,87 @@ const description = {
 
 		<section class="py-10 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
 			<h2 class="text-2xl font-bold text-yellow-700 dark:text-yellow-400">
-				{
-					t({
-						en: "How sunflowers actually work",
-						zh: "向日葵的真实规则",
-						de: "So funktionieren Sonnenblumen wirklich",
-					})
-				}
+				{t({ en: "How sunflowers work in 1.0+", zh: "1.0+ 向日葵规则", de: "Sonnenblumen in 1.0+" })}
 			</h2>
 			<ul>
-				<li>
-					{
-						t({
-							en: "Plant on soil. Check `get_ground_type() != Grounds.Soil` then `till()`. Current game strings call the default ground Grassland; older notes said Turf. Either way, till until it is Soil.",
-							zh: "种在耕过的土上。判断 `get_ground_type() != Grounds.Soil` 再 `till()`。当前游戏字符串把默认地面叫 Grassland，旧资料写成 Turf。不管叫什么，翻到 Soil 即可。",
-							de: "Auf Soil pflanzen. `till()`, bis `Grounds.Soil` erreicht ist. Der Standardboden heißt jetzt Grassland, ältere Texte sagten Turf.",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "`measure()` on a grown sunflower returns its petal count (commonly 7 to 15).",
-							zh: "对长成的向日葵调用 `measure()`，得到瓣数（常见是 7 到 15）。",
-							de: "`measure()` liefert die Anzahl der Blütenblätter (meist 7 bis 15).",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "Harvest only the current maximum. Then measure again — the next max may be a different tile.",
-							zh: "只收当前最大值。收完再量一遍，下一朵最高的可能在别的格子。",
-							de: "Ernte nur das aktuelle Maximum. Danach neu messen.",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "Do not harvest every ready flower in a simple loop. That is the mistake most copy-paste scripts make.",
-							zh: "不要用普通循环把所有成熟的花一收而光。很多复制粘贴脚本就错在这里。",
-							de: "Ernte nicht einfach jede reife Blume in einer Schleife. Das ist der häufigste Fehler.",
-						})
-					}
-				</li>
+				<li>{t({ en: "Plant on soil (`till()` → `Grounds.Soil`). Planting costs carrots.", zh: "种在耕过的土上。种植消耗胡萝卜。", de: "Auf Soil pflanzen. Kostet Karotten." })}</li>
+				<li>{t({ en: "`measure()` returns petal count **7–15** (works even before fully grown).", zh: "`measure()` 返回瓣数 **7–15**（未完全成熟也能量）。", de: "`measure()` liefert 7–15 Blütenblätter." })}</li>
+				<li>{t({ en: "Harvest the largest petal count while **≥10** sunflowers exist → **8×** Power. Wrong flower → no bonus this time **and** next harvest.", zh: "田间 **≥10** 朵时收最高瓣 → **8×** Power。收错 → 这次**和**下次都没加成。", de: "Bei ≥10 Blumen das Maximum → 8×. Falsch → Bonus diesmal und nächstes Mal weg." })}</li>
+				<li>{t({ en: "Do **not** harvest every ready flower in a simple loop — that is the most common copy-paste mistake.", zh: "**不要**用普通循环把成熟花一收而光——这是最常见的复制粘贴错误。", de: "Nicht jede reife Blume in einer Schleife ernten." })}</li>
 			</ul>
 		</section>
 
 		<section class="py-6">
 			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-				{t({ en: "Working sunflower script", zh: "能跑的向日葵脚本", de: "Funktionierendes Sonnenblumen-Skript" })}
+				{t({ en: "Single-drone: plant, then harvest current max", zh: "单机：种满，再只收当前最高瓣", de: "Eine Drohne: pflanzen, dann aktuelles Maximum" })}
 			</h2>
-			<p class="mb-4 text-gray-600 dark:text-gray-400">
-				{
-					t({
-						en: "Plant the field, scan every tile, harvest only the best flower, repeat until the field is empty, then replant.",
-						zh: "先种满，扫一遍格子，只收最好的那朵，重复到田空，再种下一轮。",
-						de: "Feld pflanzen, alle Felder scannen, nur die beste Blume ernten, wiederholen.",
-					})
-				}
-			</p>
 			<CodeBlock
 				height="max-h-[700px]"
 				code={`def go_to(x, y):
-    while get_pos_x() != x:
-        if get_pos_x() < x:
-            move(East)
-        else:
-            move(West)
-    while get_pos_y() != y:
-        if get_pos_y() < y:
-            move(North)
-        else:
-            move(South)
+	while get_pos_x() != x:
+		if get_pos_x() < x:
+			move(East)
+		else:
+			move(West)
+	while get_pos_y() != y:
+		if get_pos_y() < y:
+			move(North)
+		else:
+			move(South)
 
 def plant_field():
-    size = get_world_size()
-    for y in range(size):
-        for x in range(size):
-            go_to(x, y)
-            if get_ground_type() != Grounds.Soil:
-                till()
-            if can_harvest():
-                harvest()
-            if get_entity_type() != Entities.Sunflower:
-                plant(Entities.Sunflower)
+	size = get_world_size()
+	for y in range(size):
+		for x in range(size):
+			go_to(x, y)
+			if get_ground_type() != Grounds.Soil:
+				till()
+			if can_harvest():
+				harvest()
+			if get_entity_type() != Entities.Sunflower:
+				plant(Entities.Sunflower)
+			if get_water() < 0.75:
+				use_item(Items.Water)
 
 def harvest_current_max():
-    size = get_world_size()
-    best = 0
-    bx = -1
-    by = -1
-    found = False
-    for y in range(size):
-        for x in range(size):
-            go_to(x, y)
-            if get_entity_type() == Entities.Sunflower and can_harvest():
-                petals = measure()
-                if (not found) or petals > best:
-                    best = petals
-                    bx = x
-                    by = y
-                    found = True
-    if not found:
-        return False
-    go_to(bx, by)
-    harvest()
-    return True
+	size = get_world_size()
+	best = 0
+	bx = -1
+	by = -1
+	found = False
+	for y in range(size):
+		for x in range(size):
+			go_to(x, y)
+			if get_entity_type() == Entities.Sunflower and can_harvest():
+				petals = measure()
+				if (not found) or petals > best:
+					best = petals
+					bx = x
+					by = y
+					found = True
+	if not found:
+		return False
+	go_to(bx, by)
+	harvest()
+	return True
 
 clear()
 while True:
-    plant_field()
-    while harvest_current_max():
-        pass`}
+	plant_field()
+	# Keep harvesting the current max until the field is empty
+	while harvest_current_max():
+		pass`}
 			/>
 		</section>
 
 		<section class="py-8 bg-yellow-50 dark:bg-yellow-900/20 rounded-2xl border border-yellow-100 dark:border-yellow-800 p-6 mb-8">
 			<h3 class="text-xl font-bold mb-3 text-yellow-800 dark:text-yellow-300">
-				{t({ en: "If this script does nothing / multi-drone note", zh: "脚本没反应 / 多无人机说明", de: "Wenn nichts passiert / Multi-Drohne" })}
+				{t({ en: "Multi-drone patterns (Reddit Sep 2026)", zh: "多无人机做法（Reddit 2026-09）", de: "Multi-Drohne (Reddit Sep 2026)" })}
 			</h3>
-			<ul class="space-y-2 text-yellow-900 dark:text-yellow-100">
-				<li>
-					{
-						t({
-							en: "Unlock sunflowers and wait until they finish growing before the first harvest.",
-							zh: "先解锁向日葵，等花长成再开始收。",
-							de: "Sonnenblumen erst freischalten und wachsen lassen.",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "Need more Power? Keep the field full so the max-petal bonus keeps triggering.",
-							zh: "想多刷 Power，就保持整田都有花，让最高瓣数奖励一直触发。",
-							de: "Für mehr Power das Feld voll halten, damit der Bonus weiter auslöst.",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "Multi-drone (Reddit Sep 2026): drones do **not** share state. A common pattern is still “each pass harvest whatever is currently the max petals” — you do not need a shared petal dictionary across drones.",
-							zh: "多无人机（Reddit 2026-09）：无人机之间**没有共享状态**。常见做法仍是“每一趟只收当前瓣数最高的”——不必跨机共享瓣数字典。",
-							de: "Multi-Drohne (Reddit Sep 2026): keine gemeinsame State. Jeder Durchlauf erntet das aktuelle Maximum.",
-						})
-					}
-				</li>
+			<ul class="space-y-3 text-yellow-900 dark:text-yellow-100 list-disc pl-5">
+				<li>{t({ en: "**No shared memory.** Spawned drones do not share globals. Collect petal maps by returning a list from each drone and reading it with `wait_for(handle)`.", zh: "**无共享内存。** 子无人机不共享全局。每架机返回瓣数列表，主无人机用 `wait_for(handle)` 收集。", de: "Kein Shared Memory. Rückgaben per `wait_for` sammeln." })}</li>
+				<li>{t({ en: "**Petal-tier sync:** spawn one drone per column; harvest only 15s, `wait_for` all, then 14s, then 13s… until the field is empty.", zh: "**按瓣数分层同步：** 每列一架机；只收 15 瓣 → `wait_for` 全部完成 → 再收 14 → 13… 直到清空。", de: "Blüten-Stufen: erst 15er, wait_for, dann 14er…" })}</li>
+				<li>{t({ en: "**Max-15 cheese:** plant, `measure()`, if petals are under 15, harvest+replant until every tile is 15, then harvest the whole field as maxes. Fast for Power, skips sorting.", zh: "**全 15 瓣套路：** 种下后 `measure()`，不足 15 就收掉重种，直到整田都是 15，再当最高瓣收。刷 Power 快，跳过排序。", de: "Max-15-Trick: nachpflanzen bis alles 15 ist." })}</li>
 			</ul>
 		</section>
 

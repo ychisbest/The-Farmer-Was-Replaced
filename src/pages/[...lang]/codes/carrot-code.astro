@@ -21,15 +21,15 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-	en: "Carrot Code — Till Soil, Buy Seeds, Plant, Water",
-	zh: "胡萝卜代码 — 翻地、买种子、种植、浇水",
-	de: "Karotten-Code — Pflügen, Samen kaufen, pflanzen, gießen",
+	en: "Carrot Code — Till Soil, Plant, Water",
+	zh: "胡萝卜代码 — 翻地、种植、浇水",
+	de: "Karotten-Code — Pflügen, pflanzen, gießen",
 };
 
 const description = {
-	en: "The Farmer Was Replaced carrot code: till until Grounds.Soil, trade for Carrot_Seed, plant, water if get_water() is low. Copy-paste the loop below.",
-	zh: "编程农场胡萝卜代码：翻到 Grounds.Soil，买 Carrot_Seed，种植，get_water() 低就浇水。下面这段可直接粘贴。",
-	de: "The Farmer Was Replaced Karotten-Code: Boden pflügen, Samen handeln, pflanzen, gießen.",
+	en: "The Farmer Was Replaced carrot code for 1.0+: till to Grounds.Soil, plant(Entities.Carrot) spends hay+wood automatically, water with Items.Water. trade() and Carrot_Seed are gone.",
+	zh: "编程农场 1.0+ 胡萝卜：翻到 Grounds.Soil，plant(Entities.Carrot) 自动扣干草+木头，用 Items.Water 浇水。trade() 与 Carrot_Seed 已移除。",
+	de: "Karotten-Code 1.0+: Soil pflügen, plant() zieht Heu+Holz, Items.Water. trade() und Carrot_Seed entfernt.",
 };
 ---
 
@@ -37,112 +37,83 @@ const description = {
 	<div class="max-w-4xl mx-auto px-4">
 		<section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
 			<h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
-				{
-					t({
-						en: "The Farmer Was Replaced Carrot Code — Till, Buy Seeds, Plant",
-						zh: "编程农场胡萝卜代码 — 翻地、买种子、种植",
-						de: "The Farmer Was Replaced Karotten-Code — pflügen, Samen, pflanzen",
-					})
-				}
+				{t({
+					en: "The Farmer Was Replaced Carrot Code — Till, Plant, Water",
+					zh: "编程农场胡萝卜代码 — 翻地、种植、浇水",
+					de: "The Farmer Was Replaced Karotten-Code — pflügen, pflanzen, gießen",
+				})}
 			</h1>
 			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-				{
-					t({
-						en: "Carrots are the first crop that costs resources. Grass is free. Carrots need tilled soil and seeds you buy with hay. Paste the script, then read why `till()` matters.",
-						zh: "胡萝卜是第一种要花钱的作物。草是免费的。胡萝卜要耕地，种子用干草买。先粘贴脚本，再看为什么必须 `till()`。",
-						de: "Karotten sind die erste Kultur, die Ressourcen kostet. Gras ist gratis. Karotten brauchen gepflügten Boden und Samen für Heu.",
-					})
-				}
+				{t({
+					en: "Rewritten for 1.0+. Carrots need tilled soil. There is no seed shop: `plant(Entities.Carrot)` spends hay and wood from inventory. `trade()` was removed from the game.",
+					zh: "按 1.0+ 重写。胡萝卜要耕地。没有种子商店：`plant(Entities.Carrot)` 直接扣背包里的干草和木头。`trade()` 已从游戏移除。",
+					de: "Neu für 1.0+. Karotten brauchen Soil. Kein Samenhandel: `plant()` zieht Heu und Holz. `trade()` entfernt.",
+				})}
 			</p>
 		</section>
 
 		<AdNative />
 
+		<section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+			<h2 class="text-2xl font-bold text-orange-700 dark:text-orange-300">
+				{t({ en: "1.0 carrot rules (outdated tips to ignore)", zh: "1.0 胡萝卜规则（别再用旧写法）", de: "1.0-Karotten-Regeln" })}
+			</h2>
+			<ul>
+				<li>{t({ en: "`plant(Entities.Carrot)` fails unless `get_ground_type() == Grounds.Soil`. Call `till()` on Grassland. Calling `till()` again turns Soil back to Grassland.", zh: "`get_ground_type() == Grounds.Soil` 才能种。草地上先 `till()`。再 `till()` 一次会把土翻回草地。", de: "Nur auf Soil pflanzen. `till()` auf Grassland." })}</li>
+				<li>{t({ en: "**No `Items.Carrot_Seed`.** Planting costs hay + wood automatically. Check with `get_cost(Entities.Carrot)` (amounts scale with carrot upgrades).", zh: "**没有 `Items.Carrot_Seed`。** 种植自动扣干草+木头。用 `get_cost(Entities.Carrot)` 查看（随胡萝卜升级缩放）。", de: "Kein Carrot_Seed. Kosten via `get_cost(Entities.Carrot)`." })}</li>
+				<li>{t({ en: "**No `trade()`.** Water accrues automatically every 10s. Water with `use_item(Items.Water)` (old name `Items.Water_Tank` was renamed).", zh: "**没有 `trade()`。** 水每 10 秒自动进包。浇水用 `use_item(Items.Water)`（旧名 `Water_Tank` 已改名）。", de: "Kein trade(). Gießen: `use_item(Items.Water)`." })}</li>
+				<li>{t({ en: "`get_water()` is 0–1. Growth scales up to 5× at water level 1. Skip watering until you unlock Watering.", zh: "`get_water()` 为 0–1。水位 1 时生长最高约 5×。未解锁浇水就删掉浇水段。", de: "`get_water()` 0–1, bis 5× Wachstum." })}</li>
+			</ul>
+		</section>
+
 		<section class="py-6">
 			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-				{t({ en: "Copy-paste carrot loop", zh: "复制这段胡萝卜循环", de: "Karotten-Schleife kopieren" })}
+				{t({ en: "Copy-paste carrot loop (verified 1.0 APIs)", zh: "可复制胡萝卜循环（已核对 1.0 API）", de: "Karotten-Schleife (geprüfte 1.0-APIs)" })}
 			</h2>
 			<CodeBlock
 				height="max-h-[520px]"
 				code={`while True:
-    if can_harvest():
-        harvest()
+	if can_harvest():
+		harvest()
 
-    if get_ground_type() != Grounds.Soil:
-        till()
+	if get_ground_type() != Grounds.Soil:
+		till()
 
-    if num_items(Items.Carrot_Seed) < 1:
-        trade(Items.Carrot_Seed)
+	# Optional: only plant if you can afford it
+	cost = get_cost(Entities.Carrot)
+	can_pay = True
+	for item in cost:
+		if num_items(item) < cost[item]:
+			can_pay = False
+	if can_pay:
+		plant(Entities.Carrot)
 
-    if get_water() < 0.75:
-        if num_items(Items.Water_Tank) < 1:
-            trade(Items.Empty_Tank)
-        if num_items(Items.Water_Tank) > 0:
-            use_item(Items.Water_Tank)
+	if get_water() < 0.75:
+		use_item(Items.Water)
 
-    plant(Entities.Carrot)
-    move(East)
-    if get_pos_x() == get_world_size() - 1:
-        move(North)`}
+	move(East)
+	if get_pos_x() == 0:
+		move(North)`}
 			/>
-		</section>
-
-		<section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
-			<h2 class="text-2xl font-bold text-orange-700 dark:text-orange-300">
-				{t({ en: "Carrot rules that break most scripts", zh: "最容易写错的胡萝卜规则", de: "Regeln, an denen Karotten-Skripte scheitern" })}
-			</h2>
-			<ul>
-				<li>
-					{
-						t({
-							en: "`plant(Entities.Carrot)` fails on grass. Call `till()` until `get_ground_type() == Grounds.Soil`. Older notes said Turf; the current ground string is Grassland or Soil.",
-							zh: "草地上 `plant(Entities.Carrot)` 会失败。翻到 `get_ground_type() == Grounds.Soil`。旧笔记写成 Turf，现在是 Grassland 或 Soil。",
-							de: "`plant(Entities.Carrot)` scheitert auf Gras. `till()` bis `Grounds.Soil`.",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "Seeds are `Items.Carrot_Seed`. Buy them with `trade(Items.Carrot_Seed)` when hay is high enough. If trade does nothing, farm grass first.",
-							zh: "种子是 `Items.Carrot_Seed`。干草够了用 `trade(Items.Carrot_Seed)` 买。买不动就先割草。",
-							de: "Samen sind `Items.Carrot_Seed`. Mit Heu `trade()`n. Sonst erst Gras farmen.",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "`get_water()` is 0 to 1. Watering can speed growth several times. Skip the water block if you have not unlocked tanks yet.",
-							zh: "`get_water()` 是 0 到 1。浇水能加速好几倍。还没解锁水箱就把浇水那段删掉。",
-							de: "`get_water()` ist 0 bis 1. Gießen beschleunigt. Ohne Tanks den Wasserblock weglassen.",
-						})
-					}
-				</li>
-				<li>
-					{
-						t({
-							en: "Companion planting (`get_companion()`) comes later. This page is the beginner loop. Do not mix trees next to every carrot until you unlock polyculture.",
-							zh: "伴生 `get_companion()` 是后面的内容。本页只给出门循环。没解锁混种前，不要在每棵胡萝卜旁边乱种树。",
-							de: "Begleitpflanzen (`get_companion()`) kommen später. Diese Seite ist die Anfänger-Schleife.",
-						})
-					}
-				</li>
-			</ul>
+			<p class="mt-3 text-sm text-gray-500 dark:text-gray-400">
+				{t({
+					en: "If `get_cost` / `Unlocks.Costs` is not unlocked yet, delete the cost block and call `plant(Entities.Carrot)` directly — it still spends hay+wood when you have them.",
+					zh: "若尚未解锁 `get_cost` / `Unlocks.Costs`，删掉 cost 判断，直接 `plant(Entities.Carrot)`——有资源时仍会扣干草+木头。",
+					de: "Ohne Costs-Unlock den cost-Block löschen und direkt plant() aufrufen.",
+				})}
+			</p>
 		</section>
 
 		<section class="py-8 bg-orange-50 dark:bg-orange-900/20 rounded-2xl border border-orange-100 dark:border-orange-800 p-6 mb-8">
 			<h3 class="text-xl font-bold mb-3 text-orange-800 dark:text-orange-300">
-				{t({ en: "After this script works", zh: "这段能跑之后", de: "Wenn das Skript läuft" })}
+				{t({ en: "Next crops", zh: "下一步作物", de: "Nächste Kulturen" })}
 			</h3>
 			<p class="text-orange-900 dark:text-orange-100">
-				{
-					t({
-						en: "Pumpkins also need soil and seeds, but they merge and about 1 in 5 die. Trees need a checkerboard so they are not adjacent. Use those pages next — do not keep expanding this loop into a mega-script.",
-						zh: "南瓜也要耕地和种子，但会合并，大约五分之一枯死。树木要棋盘格，不能贴边。下一页看那些，别把这段循环堆成全能脚本。",
-						de: "Kürbisse brauchen auch Boden, sterben aber teils. Bäume brauchen ein Schachbrett. Als Nächstes diese Seiten, nicht diese Schleife aufblasen.",
-					})
-				}
+				{t({
+					en: "Pumpkins also need soil and cost carrots to plant; ~20% die as Dead_Pumpkin. Trees need a checkerboard so neighbors do not double grow time.",
+					zh: "南瓜也要土，种植耗胡萝卜；约 20% 变成 Dead_Pumpkin。树木要棋盘格，否则邻居让生长翻倍。",
+					de: "Kürbisse brauchen Soil und Karotten; ~20% Dead_Pumpkin. Bäume brauchen Schachbrett.",
+				})}
 			</p>
 			<p class="mt-3">
 				<a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")}>

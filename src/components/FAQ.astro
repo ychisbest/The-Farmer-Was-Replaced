@@ -95,9 +95,9 @@ const faqs = [
       de: "Wo ist der Sonnenblumen-, Kürbis-, Kaktus-, Karotten-, Labyrinth- und Dino-Code?"
     }),
     answer: t({
-      en: "Sunflower: harvest only the current max petal count. Pumpkin: about 1 in 5 die — replant and wait for the full grid. Cactus: sort sizes 0–9 then harvest for n squared. Carrot: till to Grounds.Soil, buy seeds, plant, water. Maze: spawn with Weird Substance and follow the left wall. Dinosaur hat: eat apples, avoid your tail, change hats for n squared bones. Community collections are on the GitHub page. Links are in the header.",
-      zh: "向日葵：只收当前瓣数最多的那朵。南瓜：大约五分之一会枯死，补种并等整田长齐。仙人掌：把 0–9 排好再收，产量是 n 的平方。胡萝卜：翻到 Grounds.Soil，买种子，种植，浇水。迷宫：用奇怪物质生成，然后左手扶墙。恐龙帽：吃苹果、躲开尾巴，换帽子收下 n 的平方块骨头。社区合集在 GitHub 页。导航栏有入口。",
-      de: "Sonnenblume: nur das aktuelle Maximum. Kürbis: jeder fünfte stirbt. Kaktus: sortieren, dann n². Karotte: Boden pflügen, Samen kaufen. Labyrinth: links folgen. Dino-Hut: Äpfel essen. Community-Repos auf der GitHub-Seite."
+      en: "Sunflower: petals 7–15; harvest only the current max while ≥10 flowers for 8× Power. Pumpkin: ~20% Dead_Pumpkin — plant over dead tiles, harvest only when the full square merged (n³ then 6n²). Cactus: sort 0–9 (N/E ≥, S/W ≤) then harvest for n². Carrot: till to Soil; plant() spends hay+wood (no trade/Carrot_Seed). Maze: Weird Substance on a bush; left-wall on fresh mazes; measure() for treasure coords; multi-drone prefers many small mazes. Dinosaur: hat on, eat apples, unequip for n² bones. See header links / GitHub page.",
+      zh: "向日葵：瓣数 7–15；田间≥10 朵时只收当前最高瓣得 8× Power。南瓜：约 20% Dead_Pumpkin——在枯死格上补种，整方块合并再收（先 n³ 后 6n²）。仙人掌：0–9 排到北东≥南西≤再收得 n²。胡萝卜：翻到 Soil；plant() 直接扣干草+木头（无 trade/种子）。迷宫：奇怪物质点灌木；新迷宫扶墙；measure() 取宝箱；多机用许多小迷宫。恐龙：戴帽吃苹果，换帽得 n² 骨头。详见导航 / GitHub 页。",
+      de: "Sonnenblume: Max bei ≥10 für 8×. Kürbis: Dead_Pumpkin nachpflanzen, n³/6n². Kaktus: sortieren → n². Karotte: Soil, plant() ohne trade. Labyrinth: frisch links, sonst measure(); Multi = viele kleine. Dino: Hut, Äpfel, n² Knochen. GitHub-Seite."
     })
   },
   {
