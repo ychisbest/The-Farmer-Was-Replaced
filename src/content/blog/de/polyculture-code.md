@@ -1,6 +1,6 @@
 ---
-title: "Polyculture-Code – The Farmer Was Replaced (get_companion-Guide)"
-description: "Funktionierender Polyculture-Code für The Farmer Was Replaced. So arbeitet get_companion(), wo der Begleiter steht, und wie Heu, Holz und Karotten stark steigen."
+title: "Polykultur-Code – The Farmer Was Replaced (get_companion)"
+description: "Funktionierender Polykultur-Code für The Farmer Was Replaced. So arbeitet get_companion(), wo der Begleiter steht, und wie Heu, Holz und Karotten stark steigen."
 date: 2026-10-16
 ---
 

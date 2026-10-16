@@ -1,5 +1,5 @@
 ---
-title: "Weird Substance Code & Farm – The Farmer Was Replaced"
+title: "Weird Substance farmen – Code für The Farmer Was Replaced"
 description: "Weird Substance farmen: Dünger-Infektion, use_item, Starter-Loop und wie Labyrinthe es verbrauchen."
 date: 2026-10-16
 ---
