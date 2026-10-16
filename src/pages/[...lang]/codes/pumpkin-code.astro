@@ -21,15 +21,15 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-	en: "Pumpkin Code — Giant Pumpkin, Don't Harvest Early",
-	zh: "南瓜代码 — 巨大南瓜，别提前收",
-	de: "Kürbis-Code — Riesenkürbis, nicht zu früh ernten",
+	en: "Pumpkin Code — Giant Pumpkin, measure() Size Check, Don't Harvest Early",
+	zh: "南瓜代码 — 巨大南瓜、measure() 尺寸检查，别提前收",
+	de: "Kürbis-Code — Riesenkürbis, measure()-Größenprüfung, nicht zu früh ernten",
 };
 
 const description = {
-	en: "The Farmer Was Replaced pumpkin code for 1.0+: about 1 in 5 die. Track dead tiles, fertilize them, and harvest only when the full grid has merged (n³ then 6n²).",
-	zh: "编程农场 1.0+ 南瓜代码：约五分之一枯死。记下枯死格并施肥补种，整田合并后再收（小田 n³，6×6 起 6n²）。",
-	de: "Kürbis-Code für 1.0+: Jeder fünfte stirbt. Tote Felder tracken, düngen, erst ernten wenn das Raster fusioniert (n³, ab 6×6: 6n²).",
+	en: "The Farmer Was Replaced pumpkin code for 1.0+: patch dead tiles, use measure() to check pumpkin size on opposite corners, harvest only when the full grid merged (n³ then 6n²).",
+	zh: "编程农场 1.0+ 南瓜代码：补枯死格，用 measure() 对角检查南瓜尺寸，整田合并后再收（n³，后 6n²）。",
+	de: "Kürbis-Code 1.0+: tote Felder flicken, measure() an gegenüberliegenden Ecken prüfen, erst ernten wenn das Raster fusioniert (n³, dann 6n²).",
 };
 ---
 
@@ -174,6 +174,75 @@ while True:
 			/>
 		</section>
 
+
+		<section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+			<h2 class="text-2xl font-bold text-orange-700 dark:text-orange-400">
+				{t({
+					en: "How to check pumpkin size with measure() (pumpkin measure)",
+					zh: "用 measure() 检查南瓜尺寸（pumpkin measure）",
+					de: "Kürbisgröße mit measure() prüfen (pumpkin measure)",
+				})}
+			</h2>
+			<ul>
+				<li>{t({
+					en: "On pumpkins, `measure()` returns a stable ID for that merged pumpkin (same value on every tile of the same giant pumpkin).",
+					zh: "在南瓜上，`measure()` 返回该合并南瓜的稳定 ID（同一巨大南瓜的每格数值相同）。",
+					de: "Auf Kürbissen liefert `measure()` eine stabile ID derselben Fusion (gleicher Wert auf jedem Feld).",
+				})}</li>
+				<li>{t({
+					en: "To check if the **whole square field** has merged: measure one corner, measure the opposite corner; if the values match, harvest.",
+					zh: "检查**整块方形田**是否已合并：量一个角，再量对角；数值相同就可以收。",
+					de: "Ganze Quadratfläche fusioniert? Eine Ecke und die gegenüberliegende messen — gleiche Werte → ernten.",
+				})}</li>
+				<li>{t({
+					en: "Works reliably on **square** monocrop pumpkin fields. Rectangular mixed fields can merge in odd shapes — then keep using the bad-tile list.",
+					zh: "在**方形**纯南瓜田上很稳。矩形或混种田可能奇形合并——那时继续用坏格列表。",
+					de: "Zuverlässig auf **quadratischen** Monokultur-Feldern. Rechteck/Mix → weiter Bad-Tile-Liste nutzen.",
+				})}</li>
+				<li>{t({
+					en: "This answers searches for **pumpkin measure** and **how to check pumpkin size** without inventing a separate page.",
+					zh: "这样就能覆盖 **pumpkin measure** 和 **how to check pumpkin size** 的搜索，不必另开一页。",
+					de: "Deckt Suchen nach **pumpkin measure** und **how to check pumpkin size** ab.",
+				})}</li>
+			</ul>
+			<p class="mb-4">
+				{t({
+					en: "Example helper you can call after `patch_bad(...)`:",
+					zh: "在 `patch_bad(...)` 之后可调用的示例：",
+					de: "Beispiel-Hilfe nach `patch_bad(...)`:",
+				})}
+			</p>
+			<CodeBlock
+				height="max-h-[420px]"
+				code={`def pumpkin_fully_merged():
+	size = get_world_size()
+	go_to(0, 0)
+	if get_entity_type() != Entities.Pumpkin or not can_harvest():
+		return False
+	a = measure()
+	go_to(size - 1, size - 1)
+	if get_entity_type() != Entities.Pumpkin or not can_harvest():
+		return False
+	return measure() == a
+
+# After patch_bad(...):
+go_to(0, 0)
+if pumpkin_fully_merged():
+	harvest()`}
+			/>
+			<p class="mt-4">
+				{t({
+					en: "Scaling further with a drone fleet? See the ",
+					zh: "要用多无人机继续扩规模？看 ",
+					de: "Weiter skalieren mit Drohnenflotte? Siehe ",
+				})}
+				<a class="text-orange-700 dark:text-orange-400 underline" href={getRelativeLocaleUrl(locale, "/blog/multiple-drones")}>
+					{t({ en: "multiple drones", zh: "多无人机", de: "multiple drones" })}
+				</a>
+				{t({ en: " guide.", zh: " 指南。", de: "-Guide." })}
+			</p>
+		</section>
+
 		<section class="py-8 bg-orange-50 dark:bg-orange-900/20 rounded-2xl border border-orange-100 dark:border-orange-800 p-6 mb-8">
 			<h3 class="text-xl font-bold mb-3 text-orange-800 dark:text-orange-300">
 				{t({ en: "Multi-drone (Megafarm) — Sep–Oct 2026 consensus", zh: "多无人机（Megafarm）— 2026年9–10月共识", de: "Multi-Drohne — Konsens Sep–Okt 2026" })}
@@ -182,6 +251,12 @@ while True:
 				<li>{t({ en: "Drones do **not** share globals. Give each drone its own column range or rectangle; do not append to one shared bad-tile list from every drone.", zh: "无人机**不共享**全局变量。每架机分一段列或矩形；不要让所有机往同一个坏格列表里 append。", de: "Keine gemeinsamen Globals. Jede Drohne eigener Sektor." })}</li>
 				<li>{t({ en: "`spawn_drone(fn)` then `wait_for(handle)` to sync phases (plant → patch → harvest). Pattern: `if not spawn_drone(task): task()`.", zh: "`spawn_drone(fn)` 后用 `wait_for(handle)` 同步阶段（种→补→收）。常用：`if not spawn_drone(task): task()`。", de: "`spawn_drone` + `wait_for`. Muster: `if not spawn_drone(task): task()`." })}</li>
 				<li>{t({ en: "Leaderboard farms water every tile and keep the bad-tile loop tight — community posts report multi-million pumpkin/min with parallel sectors.", zh: "冲榜会每格浇水并收紧坏格循环——社区有多扇区并行冲到数百万南瓜/分钟的记录。", de: "Bestzeiten gießen jedes Feld und halten die Bad-Tile-Schleife eng." })}</li>
+				<li>
+					{t({ en: "Full Megafarm patterns: ", zh: "完整 Megafarm 写法：", de: "Volle Megafarm-Muster: " })}
+					<a class="underline" href={getRelativeLocaleUrl(locale, "/blog/multiple-drones")}>
+						{t({ en: "multiple drones guide", zh: "多无人机指南", de: "Multiple-Drones-Guide" })}
+					</a>
+				</li>
 			</ul>
 		</section>
 

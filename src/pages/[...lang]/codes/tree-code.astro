@@ -22,13 +22,13 @@ export const getStaticPaths = async () => {
 };
 
 const title = {
-    en: "Tree Code — Checkerboard Wood Farm, Don't Plant Adjacent",
-    zh: "树木代码 — 棋盘格木头农场，不要相邻种植",
-    de: "Baum-Code — Schachbrett-Holzfarm, nicht nebeneinander pflanzen",
+    en: "Tree Code – The Farmer Was Replaced Checkerboard Wood Script",
+    zh: "树木代码 – 编程农场棋盘格木头脚本",
+    de: "Baum-Code – The Farmer Was Replaced Schachbrett-Holzskript",
 };
 
 const description = {
-    en: "The Farmer Was Replaced tree code: trees yield 5 wood, but each North/East/South/West neighbor doubles grow time. Plant trees where (x + y) % 2 == 0, bushes on the other color.",
+    en: "Tree code for The Farmer Was Replaced: copy-paste checkerboard script. Trees yield 5 wood; each N/E/S/W neighbor doubles grow time. Plant trees on (x + y) % 2 == 0, bushes on the other color.",
     zh: "编程农场树木代码：树产 5 木头，但东南西北每多一棵相邻的树，生长时间就翻倍。在 (x + y) % 2 == 0 的格子种树，另一色种灌木。",
     de: "Baum-Code: Bäume geben 5 Holz, jeder Nachbar verdoppelt die Wachstumszeit. Bäume auf (x + y) % 2 == 0, Büsche auf der anderen Farbe.",
 };
@@ -39,9 +39,9 @@ const description = {
         <section class="py-10 text-center border-b border-gray-200 dark:border-gray-700">
             <h1 class="text-3xl md:text-4xl font-extrabold mb-6 text-gray-900 dark:text-white">
                 {t({
-                    en: "The Farmer Was Replaced Tree Code — Checkerboard Wood Farm",
+                    en: "Tree Code for The Farmer Was Replaced — Checkerboard Wood Farm",
                     zh: "编程农场树木代码 — 棋盘格木头农场",
-                    de: "The Farmer Was Replaced Baum-Code — Schachbrett-Holzfarm",
+                    de: "Baum-Code für The Farmer Was Replaced — Schachbrett-Holzfarm",
                 })}
             </h1>
             <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -49,6 +49,21 @@ const description = {
                     en: "Trees drop 5 wood — better than bushes — but they hate sharing an edge. Each adjacent tree doubles grow time. Four neighbors is 16× slower. The in-game hint is `% 2`.",
                     zh: "树每次产 5 木头，比灌木划算，但讨厌贴边。东南西北每多一棵相邻的树，生长时间就翻倍；四个邻居是 16 倍。游戏提示用的是 `% 2`。",
                     de: "Bäume geben 5 Holz — mehr als Büsche — mögen aber keine Kanten-Nachbarn. Jeder Nachbar verdoppelt die Zeit; 4 Nachbarn = 16× langsamer. Der Spielhinweis ist `% 2`.",
+                })}
+            </p>
+            <p class="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-4">
+                {t({
+                    en: "Looking for tree code? This page is the full checkerboard script. The ",
+                    zh: "在找树木代码？本页就是完整棋盘格脚本。",
+                    de: "Suchst du Tree Code? Hier ist das volle Schachbrett-Skript. Der ",
+                })}
+                <a class="text-green-700 dark:text-green-400 underline" href={getRelativeLocaleUrl(locale, "/basic-codes")}>
+                    {t({ en: "basic codes", zh: "基础代码", de: "Basis-Codes" })}
+                </a>
+                {t({
+                    en: " hub links here and to other crops.",
+                    zh: " 枢纽会链到本页和其他作物。",
+                    de: "-Hub verlinkt hierher und zu anderen Pflanzen.",
                 })}
             </p>
         </section>
@@ -184,9 +199,9 @@ const description = {
         <section class="py-10">
             <h2 class="text-2xl font-bold mb-8 text-center">
                 {t({
-                    en: "Copy-paste tree + bush script",
-                    zh: "可复制的树木 + 灌木脚本",
-                    de: "Baum- und Busch-Skript zum Kopieren",
+                    en: "Tree code copy-paste",
+                    zh: "树木代码复制粘贴",
+                    de: "Tree-Code zum Kopieren",
                 })}
             </h2>
 

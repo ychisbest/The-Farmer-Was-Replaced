@@ -68,13 +68,11 @@ const description = {
                 <p
                     class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto md:mx-0 leading-relaxed"
                 >
-                    {
-                        t({
-                            zh: "在这里复制《编程农场》南瓜、仙人掌、向日葵和迷宫脚本。Steam 电脑游戏（Windows / macOS 原生；Linux / Deck 走 Proton），没有网页版和手机版。DLC《The Miner Was Replaced》将于 2026-11-02 发售。",
-                            en: "Copy-paste The Farmer Was Replaced codes for pumpkin, cactus, sunflower and maze. Steam desktop (Windows & macOS native; Linux/Deck via Proton) — not online or mobile. DLC The Miner Was Replaced launches November 2, 2026.",
-                            de: "The Farmer Was Replaced Codes: Kürbis, Kaktus, Sonnenblume, Labyrinth. Steam-PC (Windows & macOS nativ; Linux/Deck via Proton). DLC The Miner Was Replaced erscheint am 2.11.2026.",
-                        })
-                    }
+                    <span set:html={t({
+                            zh: `在这里复制《编程农场》南瓜、仙人掌、向日葵和迷宫脚本。Steam 电脑游戏（Windows / macOS 原生；Linux / Deck 走 Proton），没有<a class="text-green-700 dark:text-green-400 underline" href="${getRelativeLocaleUrl(locale, "/blog/mobile-android-online")}">网页版和手机版</a>。DLC《The Miner Was Replaced》将于 2026-11-02 发售。`,
+                            en: `Copy-paste The Farmer Was Replaced codes for pumpkin, cactus, sunflower and maze. Steam desktop (Windows & macOS native; Linux/Deck via Proton) — not <a class="text-green-700 dark:text-green-400 underline" href="${getRelativeLocaleUrl(locale, "/blog/mobile-android-online")}">online or mobile</a>. DLC The Miner Was Replaced launches November 2, 2026.`,
+                            de: `The Farmer Was Replaced Codes: Kürbis, Kaktus, Sonnenblume, Labyrinth. Steam-PC (Windows & macOS nativ; Linux/Deck via Proton) — nicht <a class="text-green-700 dark:text-green-400 underline" href="${getRelativeLocaleUrl(locale, "/blog/mobile-android-online")}">online oder mobil</a>. DLC The Miner Was Replaced erscheint am 2.11.2026.`,
+                        })} />
                 </p>
                 <div
                     class="flex flex-wrap gap-4 justify-center md:justify-start pt-6"

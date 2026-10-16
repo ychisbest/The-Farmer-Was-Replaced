@@ -59,7 +59,12 @@ const description = {
 				{t({ en: "Maze rules in 1.0+", zh: "1.0+ 迷宫规则", de: "Labyrinth-Regeln in 1.0+" })}
 			</h2>
 			<ul>
-				<li>{t({ en: "Fertilize plants to earn `Items.Weird_Substance` (infected harvest pays half as substance).", zh: "给植物施肥赚 `Items.Weird_Substance`（感染收获一半变成奇怪物质）。", de: "Düngen → Weird_Substance (infizierte Ernte zahlt halb Substance)." })}</li>
+				<li>
+					{t({ en: "Fertilize plants to earn `Items.Weird_Substance` (infected harvest pays half as substance). Need a stockpile first? ", zh: "给植物施肥赚 `Items.Weird_Substance`（感染收获一半变成奇怪物质）。要先囤物质？", de: "Düngen → Weird_Substance (infizierte Ernte zahlt halb Substance). Vorrat aufbauen? " })}
+					<a class="underline" href={getRelativeLocaleUrl(locale, "/blog/weird-substance")}>
+						{t({ en: "farm Weird Substance first", zh: "先刷奇怪物质", de: "Weird Substance zuerst farmen" })}
+					</a>
+				</li>
 				<li>{t({ en: "On a bush: `use_item(Items.Weird_Substance, n)` grows an n×n hedge maze (without upgrades). With maze upgrades, substance needed roughly doubles per level — use `get_world_size() * 2**(num_unlocked(Unlocks.Mazes) - 1)` for a full-field maze.", zh: "站在灌木上 `use_item(Items.Weird_Substance, n)` 生成 n×n 迷宫（无升级时）。有迷宫升级时，物质需求约每级翻倍——满田可用 `get_world_size() * 2**(num_unlocked(Unlocks.Mazes) - 1)`。", de: "Busch + Weird_Substance → Labyrinth. Mit Upgrades grob verdoppeln." })}</li>
 				<li>{t({ en: "`harvest()` on `Entities.Treasure` → gold = area × maze upgrade. Harvest anything else → maze vanishes.", zh: "对 `Entities.Treasure` `harvest()` → 金币 = 面积 × 迷宫升级。收别处 → 迷宫消失。", de: "Nur Schatz ernten. Sonst verschwindet das Labyrinth." })}</li>
 				<li>{t({ en: "`measure()` **anywhere** in the maze returns treasure coordinates (1.0 change). `can_move(dir)` / failed `move()` = 1 tick wall probe.", zh: "迷宫内任意位置 `measure()` 返回宝箱坐标（1.0 起）。`can_move` / 失败的 `move` 只花 1 tick 探墙。", de: "`measure()` überall = Schatzkoordinaten." })}</li>

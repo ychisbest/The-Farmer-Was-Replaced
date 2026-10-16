@@ -91,7 +91,7 @@ Change `Entities.Tree` to `Entities.Bush`, `Entities.Carrot` or `Entities.Grass`
 
 ## Using polyculture with multiple drones
 
-Once you unlock more drones, the same dictionary still works. Each drone sweeps its own columns, and because `companions` is a shared global, a request logged by one drone can be fulfilled by whichever drone reaches that tile next. Give each drone a starting column and let it run the same `plant_tile()` logic.
+Once you unlock more drones, the same dictionary still works. Each drone sweeps its own columns, and because `companions` is a shared global, a request logged by one drone can be fulfilled by whichever drone reaches that tile next. Give each drone a starting column and let it run the same `plant_tile()` logic. For Megafarm unlock details, `spawn_drone`, and a copy-paste column pattern, see the [multiple drones](/blog/multiple-drones/) guide.
 
 ## Common mistakes
 

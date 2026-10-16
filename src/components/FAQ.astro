@@ -1,7 +1,10 @@
 ---
 import { useTranslations, type Lang } from "@/i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { DEFAULT_LOCALE_SETTING } from "@/locales";
 
 const t = useTranslations(Astro.currentLocale as Lang);
+const locale = Astro.currentLocale || DEFAULT_LOCALE_SETTING;
 
 const faqs = [
   {
@@ -86,7 +89,13 @@ const faqs = [
       en: "No. It is a Steam desktop game: Windows and macOS are native; Linux and Steam Deck run via Proton (Deck is Playable). There is no official browser, Android, or iOS version. This site is a guide with copy-paste scripts, not the game itself.",
       zh: "没有。这是 Steam 电脑游戏：Windows 与 macOS 原生；Linux / Steam Deck 走 Proton（Deck 为 Playable）。没有官方网页版、安卓或 iOS。本站只提供攻略和可复制脚本，不是游戏本体。",
       de: "Nein. Steam-PC-Spiel: Windows und macOS nativ; Linux und Steam Deck über Proton (Deck: Playable). Keine offizielle Browser-/Android-/iOS-Version. Diese Seite ist ein Guide, nicht das Spiel."
-    })
+    }),
+    linkHref: "/blog/mobile-android-online",
+    linkLabel: t({
+      en: "Full answer: mobile, Android, or online",
+      zh: "完整说明：手机、安卓或网页版",
+      de: "Ausführlich: mobile, Android oder online",
+    }),
   },
   {
     question: t({
@@ -185,6 +194,13 @@ const schema = {
                     
                     <div class="px-6 pb-6 sm:pl-20 text-gray-600 dark:text-gray-300 leading-relaxed text-base border-t border-transparent group-open:border-gray-100 dark:group-open:border-gray-700 pt-4">
                         {faq.answer}
+                        {faq.linkHref && (
+                            <p class="mt-3">
+                                <a class="text-green-700 dark:text-green-400 underline" href={getRelativeLocaleUrl(locale, faq.linkHref)}>
+                                    {faq.linkLabel}
+                                </a>
+                            </p>
+                        )}
                     </div>
                 </details>
             </div>

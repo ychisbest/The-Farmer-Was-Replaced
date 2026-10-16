@@ -365,7 +365,7 @@ while True:
                     class="text-blue-600 underline ml-1"
                     href={getRelativeLocaleUrl(locale, "/codes/tree-code")}
                 >
-                    {t({ en: "tree code page", zh: "树木代码页", de: "Baum-Code-Seite" })}
+                    {t({ en: "Tree code", zh: "树木代码", de: "Baum-Code" })}
                 </a>
             </p>
             <CodeBlock
@@ -895,6 +895,41 @@ if found:
                     {t({ en: "Polyculture code guide", zh: "多元种植代码指南", de: "Polykultur-Code-Guide" })}
                 </a>
             </p>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-8">
+                {t({ en: "More guides from this hub", zh: "本枢纽相关指南", de: "Weitere Guides von diesem Hub" })}
+            </h3>
+            <ul>
+                <li>
+                    <a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/tree-code")}>
+                        {t({ en: "Tree code", zh: "树木代码", de: "Baum-Code" })}
+                    </a>
+                    {t({ en: " — full checkerboard wood script.", zh: " — 完整棋盘格木头脚本。", de: " — volles Schachbrett-Holzskript." })}
+                </li>
+                <li>
+                    <a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")}>
+                        {t({ en: "Pumpkin code", zh: "南瓜代码", de: "Kürbis-Code" })}
+                    </a>
+                    {t({ en: " — dead tiles, merge yield, and measure() size check.", zh: " — 枯死格、合并产量与 measure() 尺寸检查。", de: " — tote Felder, Fusion und measure()-Check." })}
+                </li>
+                <li>
+                    <a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/blog/weird-substance")}>
+                        {t({ en: "Weird Substance farm", zh: "奇怪物质农场", de: "Weird-Substance-Farm" })}
+                    </a>
+                    {t({ en: " — stockpile before maze runs.", zh: " — 跑迷宫前先囤物质。", de: " — Vorrat vor Labyrinth-Läufen." })}
+                </li>
+                <li>
+                    <a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/blog/multiple-drones")}>
+                        {t({ en: "Multiple drones", zh: "多无人机", de: "Mehrere Drohnen" })}
+                    </a>
+                    {t({ en: " — Megafarm spawn_drone patterns.", zh: " — Megafarm 的 spawn_drone 写法。", de: " — Megafarm spawn_drone-Muster." })}
+                </li>
+                <li>
+                    <a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/blog/mobile-android-online")}>
+                        {t({ en: "Mobile / Android / Online", zh: "手机 / 安卓 / 网页", de: "Mobile / Android / Online" })}
+                    </a>
+                    {t({ en: " — where you can actually play.", zh: " — 实际能在哪玩。", de: " — wo du wirklich spielen kannst." })}
+                </li>
+            </ul>
         </section>
 
         <RelatedGuides current="/basic-codes" />
