@@ -874,6 +874,29 @@ if found:
             />
         </section>
 
+        <section class="py-8 mb-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+                {t({
+                    en: "Next: polyculture code",
+                    zh: "下一步：多元种植代码",
+                    de: "Als Nächstes: Polykultur-Code",
+                })}
+            </h2>
+            <p>
+                {t({
+                    en: "Once grass, wood and carrots are stable, unlock polyculture. `get_companion()` returns the companion crop and tile you need for a big yield bonus.",
+                    zh: "草、木头和胡萝卜稳定后，解锁多元种植。`get_companion()` 会返回你需要的伴生作物和格子，用来拿高倍产量。",
+                    de: "Sind Gras, Holz und Karotten stabil, Polykultur freischalten. `get_companion()` liefert Begleitpflanze und Feld für den Ertragsbonus.",
+                })}
+                <a
+                    class="text-blue-600 underline ml-1"
+                    href={getRelativeLocaleUrl(locale, "/blog/polyculture-code")}
+                >
+                    {t({ en: "Polyculture code guide", zh: "多元种植代码指南", de: "Polykultur-Code-Guide" })}
+                </a>
+            </p>
+        </section>
+
         <RelatedGuides current="/basic-codes" />
 
         <div id="utterances-container" class="my-10"></div>
