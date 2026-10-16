@@ -29,12 +29,14 @@ const title = {
     en: "Code — Copy-Paste Harvest Scripts",
     zh: "代码 — 可复制收割脚本",
     de: "Code — Ernte-Skripte zum Kopieren",
+    ru: "Готовые коды — скрипты для копирования",
 };
 
 const description = {
     en: "The Farmer Was Replaced code: copy-paste auto harvest, then tree, carrot, and watering scripts. Till until Grounds.Soil.",
     zh: "编程农场代码：先复制自动收割，再看树木、胡萝卜和浇水。翻地直到 Grounds.Soil。",
     de: "The Farmer Was Replaced Code: Auto-Ernte, Bäume, Karotten, Gießen. Pflügen bis Grounds.Soil.",
+    ru: "The Farmer Was Replaced готовые коды: автосбор, деревья, морковь и полив. Вспашка до Grounds.Soil.",
 };
 ---
 
@@ -48,6 +50,7 @@ const description = {
                         en: "The Farmer Was Replaced Code — Copy-Paste Harvest Scripts",
                         zh: "编程农场代码 — 可复制收割脚本",
                         de: "The Farmer Was Replaced Code — Ernte-Skripte zum Kopieren",
+                        ru: "The Farmer Was Replaced готовые коды — скрипты для копирования",
                     })
                 }
             </h1>
@@ -59,13 +62,15 @@ const description = {
                         en: "Paste the first script below to start harvesting. Then use the tree, carrot, and watering examples. Dedicated carrot walkthrough:",
                         zh: "先粘贴下面第一段，开始收割。树木、胡萝卜、浇水在后面。胡萝卜完整页：",
                         de: "Das erste Skript unten einfügen. Danach Bäume, Karotten, Gießen. Karotten-Anleitung:",
+                        ru: "Вставьте первый скрипт ниже, чтобы начать сбор. Дальше — деревья, морковь и полив. Отдельный гайд по моркови:",
                     })
                 }
                 <a
                     class="text-blue-600 underline ml-1"
                     href={getRelativeLocaleUrl(locale, "/codes/carrot-code")}
                 >
-                    {t({ en: "carrot code page", zh: "胡萝卜代码页", de: "Karotten-Code-Seite" })}
+                    {t({ en: "carrot code page", zh: "胡萝卜代码页", de: "Karotten-Code-Seite",
+ru: "страница кода моркови" })}
                 </a>
             </p>
             <div class="text-center mb-8">
@@ -78,6 +83,7 @@ const description = {
                             en: "← Back to Home",
                             zh: "← 返回主页",
                             de: "← Zurück zur Startseite",
+                            ru: "← На главную",
                         })
                     }
                 </a>
@@ -94,6 +100,7 @@ const description = {
                         en: "Example 1: Basic Auto Harvest",
                         zh: "示例1：基础自动收获",
                         de: "Beispiel 1: Grundlegende automatische Ernte",
+                        ru: "Пример 1: базовый автосбор",
                     })
                 }
             </h2>
@@ -103,6 +110,7 @@ const description = {
                         en: "The simplest automation script that continuously harvests mature grass.",
                         zh: "最简单的自动化脚本，持续收获成熟的草。",
                         de: "Das einfachste Automatisierungsskript, das kontinuierlich reifes Gras erntet.",
+                        ru: "Простейший скрипт автоматизации, который непрерывно собирает зрелую траву.",
                     })
                 }
             </p>
@@ -126,6 +134,12 @@ while True:
     if can_harvest():
         harvest()
     # Das Spiel pausiert automatisch zwischen den Iterationen`,
+                    ru: `# Basic Auto Harvest - The simplest automation script
+# This continuously checks and harvests mature crops
+while True:
+    if can_harvest():
+        harvest()
+    # The game will automatically pause between iterations`,
                 })}
                 image={images[2]}
                 height="max-h-[200px]"
@@ -150,6 +164,12 @@ while True:
     if can_harvest():
         harvest()
     # Das Spiel pausiert automatisch zwischen den Iterationen`,
+                    ru: `# Basic Auto Harvest - The simplest automation script
+# This continuously checks and harvests mature crops
+while True:
+    if can_harvest():
+        harvest()
+    # The game will automatically pause between iterations`,
                 })}
                 language="python"
             />
@@ -163,6 +183,7 @@ while True:
                         en: "Example 2: 3×3 Farm Auto Traversal",
                         zh: "示例2：3×3农场自动遍历",
                         de: "Beispiel 2: Automatischer 3×3-Farm-Durchlauf",
+                        ru: "Пример 2: автообход фермы 3×3",
                     })
                 }
             </h2>
@@ -172,6 +193,7 @@ while True:
                         en: "Automatically traverse all tiles and harvest.",
                         zh: "自动遍历所有方块并收获。",
                         de: "Automatisch alle Felder durchlaufen und ernten.",
+                        ru: "Автоматически обходите все клетки и собирайте урожай.",
                     })
                 }
             </p>
@@ -219,6 +241,20 @@ while True:
     # get_world_size() gibt die Größe deiner Farm zurück (normalerweise 3x3 oder 5x5)
     if get_pos_x() == get_world_size() - 1:
         move(North)`,
+                    ru: `# 3x3 Farm Auto Traversal - Systematic farming pattern
+# This script moves in a grid pattern to cover the entire farm
+while True:
+    # Always check for harvestable crops first
+    if can_harvest():
+        harvest()
+
+    # Move to the next tile (East direction)
+    move(East)
+
+    # When reaching the end of a row, move to the next row (North)
+    # get_world_size() returns the size of your farm (usually 3x3 or 5x5)
+    if get_pos_x() == get_world_size() - 1:
+        move(North)`,
                 })}
                 image={images[3]}
                 height="max-h-[250px]"
@@ -233,6 +269,7 @@ while True:
                         en: "Example 3: Multi-Crop Automation (Grass + Bush + Carrot)",
                         zh: "示例3：多作物自动化（草+灌木+胡萝卜）",
                         de: "Beispiel 3: Mehrfachfrucht-Automatisierung (Gras + Busch + Karotte)",
+                        ru: "Пример 3: Многокультурная автоматизация (трава + куст + морковь)",
                     })
                 }
             </h2>
@@ -242,6 +279,7 @@ while True:
                         en: "Plant different crops based on column position.",
                         zh: "根据列位置种植不同作物。",
                         de: "Verschiedene Früchte basierend auf der Spaltenposition anbauen.",
+                        ru: "Высаживайте различные культуры в зависимости от положения колонны.",
                     })
                 }
             </p>
@@ -337,6 +375,36 @@ while True:
     # Beim Erreichen des Zeilenendes zur nächsten Reihe bewegen
     if x == get_world_size() - 1:
         move(North)`,
+                    ru: `# Multi-Crop Automation - Different crops per column
+# Demonstrates conditional logic and resource management
+while True:
+    # Always harvest what's ready first
+    if can_harvest():
+        harvest()
+
+    # Get current position (x-coordinate)
+    x = get_pos_x()
+
+    # Column-based planting strategy:
+    if x == 0:
+        # Column 0: Let grass grow naturally (free resource)
+        pass  # No action needed
+    elif x == 1:
+        # Column 1: Plant bushes for wood
+        plant(Entities.Bush)
+    elif x == 2:
+        # Column 2: Plant carrots (requires soil preparation)
+        # Check if ground is soil, if not, till it
+        if get_ground_type() != Grounds.Soil:
+            till()
+        # plant() spends hay+wood automatically (1.0; seed shop removed)
+        plant(Entities.Carrot)
+
+    # Move to next column
+    move(East)
+    # When reaching end of row, move to next row
+    if x == get_world_size() - 1:
+        move(North)`,
                 })}
                 height="max-h-[300px]"
             />
@@ -350,6 +418,7 @@ while True:
                         en: "Example 4: Tree Checkerboard Planting",
                         zh: "示例4：树木棋盘格种植",
                         de: "Beispiel 4: Schachbrettartiges Pflanzen von Bäumen",
+                        ru: "Пример 4: Посадка древесной шахматной доски",
                     })
                 }
             </h2>
@@ -359,13 +428,15 @@ while True:
                         en: "Trees need checkerboard planting to avoid adjacency. Dedicated walkthrough:",
                         zh: "树木需要棋盘格种植以避免相邻。完整说明：",
                         de: "Bäume benötigen schachbrettartiges Pflanzen, um Nachbarn zu vermeiden. Ausführlich:",
+                        ru: "Деревьям нужна шахматная посадка, чтобы не стоять рядом. Отдельный гайд:",
                     })
                 }
                 <a
                     class="text-blue-600 underline ml-1"
                     href={getRelativeLocaleUrl(locale, "/codes/tree-code")}
                 >
-                    {t({ en: "Tree code", zh: "树木代码", de: "Baum-Code" })}
+                    {t({ en: "Tree code", zh: "树木代码", de: "Baum-Code",
+ru: "Код дерева" })}
                 </a>
             </p>
             <CodeBlock
@@ -445,6 +516,31 @@ while True:
     # Zur nächsten Reihe wechseln wenn Ende der aktuellen Reihe erreicht
     if x == get_world_size() - 1:
         move(North)`,
+                    ru: `# Checkerboard Planting Pattern - Space-efficient farming
+# Trees cannot be planted adjacent to each other, so use checkerboard pattern
+while True:
+    # Harvest any mature crops
+    if can_harvest():
+        harvest()
+
+    # Get current coordinates
+    x = get_pos_x()  # Current column (0, 1, 2, etc.)
+    y = get_pos_y()  # Current row (0, 1, 2, etc.)
+
+    # Checkerboard logic: Plant trees on "black squares", bushes on "white squares"
+    # This ensures no two trees are adjacent (trees need space to grow)
+    if (x % 2 == 0 and y % 2 == 0) or (x % 2 == 1 and y % 2 == 1):
+        # "Black squares" - plant trees
+        plant(Entities.Tree)
+    else:
+        # "White squares" - plant bushes
+        plant(Entities.Bush)
+
+    # Move to next tile
+    move(East)
+    # Wrap to next row when reaching end of current row
+    if x == get_world_size() - 1:
+        move(North)`,
                 })}
                 height="max-h-[280px]"
             />
@@ -458,6 +554,7 @@ while True:
                         en: "Example 5: Resource Priority Management",
                         zh: "示例5：资源优先级管理",
                         de: "Beispiel 5: Ressourcen-Prioritätsmanagement",
+                        ru: "Пример 5. Управление приоритетами ресурсов",
                     })
                 }
             </h2>
@@ -467,6 +564,7 @@ while True:
                         en: "Intelligent resource management, prioritize collecting scarce resources.",
                         zh: "智能资源管理，优先收集稀缺资源。",
                         de: "Intelligentes Ressourcenmanagement, Priorisierung der Sammlung knapper Ressourcen.",
+                        ru: "Интеллектуальное управление ресурсами, приоритет сбора дефицитных ресурсов.",
                     })
                 }
             </p>
@@ -571,6 +669,39 @@ while True:
     move(East)
     if x == get_world_size() - 1:
         move(North)`,
+                    ru: `# Resource Priority Management - Smart resource allocation
+# Automatically adjusts farming strategy based on current inventory levels
+while True:
+    # Always harvest first - this is our primary action
+    if can_harvest():
+        harvest()
+
+    # Get current position for planting decisions
+    x = get_pos_x()
+
+    # Resource-based planting strategy with priorities:
+
+    # PRIORITY 1: Ensure hay supply (needed for planting carrots and unlocks)
+    if num_items(Items.Hay) < 500:
+        # Don't plant anything - let grass grow naturally for free hay
+        pass  # No action needed
+
+    # PRIORITY 2: Maintain wood supply (needed for various upgrades)
+    elif num_items(Items.Wood) < 300:
+        # Plant bushes to generate wood
+        plant(Entities.Bush)
+
+    # PRIORITY 3: Build carrot reserves (for unlocks that cost carrots)
+    elif num_items(Items.Carrot) < 200:
+        # Plant carrots (requires soil preparation)
+        if get_ground_type() != Grounds.Soil:
+            till()  # Prepare soil if needed
+        plant(Entities.Carrot)
+
+    # Move to next tile in systematic pattern
+    move(East)
+    if x == get_world_size() - 1:
+        move(North)`,
                 })}
                 height="max-h-[320px]"
             />
@@ -584,6 +715,7 @@ while True:
                         en: "Example 6: Auto Watering System",
                         zh: "示例6：自动浇水系统",
                         de: "Beispiel 6: Automatisches Bewässerungssystem",
+                        ru: "Пример 6: Автоматическая система полива",
                     })
                 }
             </h2>
@@ -593,6 +725,7 @@ while True:
                         en: "Automated watering system, speeds up crop growth up to 5x.",
                         zh: "自动化浇水系统，加速作物生长至5倍速度。",
                         de: "Automatisiertes Bewässerungssystem, beschleunigt das Pflanzenwachstum bis zu 5-fach.",
+                        ru: "Автоматизированная система полива, ускоряет рост урожая до 5 раз.",
                     })
                 }
             </p>
@@ -679,6 +812,33 @@ while True:
     move(East)
     if get_pos_x() == get_world_size() - 1:
         move(North)`,
+                    ru: `# Auto Watering System - Advanced crop acceleration
+# Uses Items.Water and accelerates crop growth up to 5x speed
+while True:
+    # WATER: Items.Water accrues automatically (no trade)
+    # Water accrues every 10s; use_item(Items.Water) speeds growth
+
+    # WATER APPLICATION: Use water when crops need it
+    # get_water() returns hydration level (0.0 to 1.0)
+    # 0.75 means crops are 75% hydrated - water when below this
+    if get_water() < 0.75:
+        use_item(Items.Water)  # 1.0 watering API
+
+    # HARVEST: Always check for mature crops first
+    if can_harvest():
+        harvest()
+
+    # PLANTING: Maintain carrot crop cycle
+    # Prepare soil if needed (carrots require tilled soil)
+    if get_ground_type() != Grounds.Soil:
+        till()  # Convert turf/grass to soil
+    # Planting spends hay+wood from inventory
+    plant(Entities.Carrot)  # Plant carrot (costs hay+wood)
+
+    # MOVEMENT: Continue systematic traversal
+    move(East)
+    if get_pos_x() == get_world_size() - 1:
+        move(North)`,
                 })}
                 height="max-h-[340px]"
             />
@@ -692,6 +852,7 @@ while True:
                         en: "Example 7: Function Encapsulation",
                         zh: "示例7：函数封装",
                         de: "Beispiel 7: Funktionskapselung",
+                        ru: "Пример 7: Инкапсуляция функций",
                     })
                 }
             </h2>
@@ -701,6 +862,7 @@ while True:
                         en: "Use functions to make code clearer and more readable.",
                         zh: "使用函数使代码更清晰易读。",
                         de: "Funktionen verwenden, um Code klarer und lesbarer zu machen.",
+                        ru: "Используйте функции, чтобы сделать код более четким и читаемым.",
                     })
                 }
             </p>
@@ -808,6 +970,40 @@ while True:
 
     # Mit unserer Bewegungsfunktion zur nächsten Position bewegen
     move_to_next()  # Saubere, wiederverwendbare Bewegungslogik`,
+                    ru: `# Function Encapsulation - Code organization and reusability
+# Break down complex logic into reusable functions
+
+# FUNCTION: Handle movement to next tile in grid pattern
+def move_to_next():
+    """Move to the next tile, wrapping to next row when reaching end"""
+    x = get_pos_x()
+    move(East)  # Always try to move east first
+    # If we reached the end of current row, move north to next row
+    if x == get_world_size() - 1:
+        move(North)
+
+# FUNCTION: Handle carrot planting with all necessary preparations
+def plant_carrot():
+    """Plant a carrot with soil preparation and seed management"""
+    # Ensure we have proper soil for carrots
+    if get_ground_type() != Grounds.Soil:
+        till()  # Prepare soil if needed
+    # Ensure we have carrot seeds
+    # Plant the carrot
+    plant(Entities.Carrot)
+
+# MAIN PROGRAM: Clean, readable logic using our functions
+while True:
+    # Harvest any mature crops (always do this first)
+    if can_harvest():
+        harvest()
+
+    # Maintain carrot production if inventory is low
+    if num_items(Items.Carrot) < 100:
+        plant_carrot()  # Use our function for clean code
+
+    # Move to next position using our movement function
+    move_to_next()  # Clean, reusable movement logic`,
                 })}
                 height="max-h-[300px]"
             />
@@ -821,6 +1017,7 @@ while True:
                         en: "Example 8: Sunflower Energy Optimization",
                         zh: "示例8：向日葵能量优化",
                         de: "Beispiel 8: Sonnenblumen-Energieoptimierung",
+                        ru: "Пример 8: Оптимизация энергии подсолнечника",
                     })
                 }
             </h2>
@@ -830,13 +1027,15 @@ while True:
                         en: "Harvest only the flower with the most petals. Then scan again. Full explanation:",
                         zh: "只收瓣数最多的那朵，然后再扫一遍。完整说明：",
                         de: "Nur die Blume mit den meisten Blütenblättern ernten, dann neu scannen. Erklärung:",
+                        ru: "Собирайте только цветок с наибольшим количеством лепестков. Затем отсканируйте еще раз. Полное объяснение:",
                     })
                 }
                 <a
                     class="text-blue-600 underline ml-1"
                     href={getRelativeLocaleUrl(locale, "/codes/sunflower-code")}
                 >
-                    {t({ en: "sunflower code page", zh: "向日葵代码页", de: "Sonnenblumen-Code" })}
+                    {t({ en: "sunflower code page", zh: "向日葵代码页", de: "Sonnenblumen-Code",
+ru: "страница кода подсолнуха" })}
                 </a>
             </p>
             <CodeBlock
@@ -880,6 +1079,7 @@ if found:
                     en: "Next: polyculture code",
                     zh: "下一步：多元种植代码",
                     de: "Als Nächstes: Polykultur-Code",
+                    ru: "Далее: код поликультуры",
                 })}
             </h2>
             <p>
@@ -887,47 +1087,60 @@ if found:
                     en: "Once grass, wood and carrots are stable, unlock polyculture. `get_companion()` returns the companion crop and tile you need for a big yield bonus.",
                     zh: "草、木头和胡萝卜稳定后，解锁多元种植。`get_companion()` 会返回你需要的伴生作物和格子，用来拿高倍产量。",
                     de: "Sind Gras, Holz und Karotten stabil, Polykultur freischalten. `get_companion()` liefert Begleitpflanze und Feld für den Ertragsbonus.",
+                    ru: "Как только трава, древесина и морковь станут стабильными, разблокируйте поликультуру. `get_companion()` возвращает сопутствующий урожай и плитку, необходимые для получения большого бонуса урожая.",
                 })}
                 <a
                     class="text-blue-600 underline ml-1"
                     href={getRelativeLocaleUrl(locale, "/blog/polyculture-code")}
                 >
-                    {t({ en: "Polyculture code guide", zh: "多元种植代码指南", de: "Polykultur-Code-Guide" })}
+                    {t({ en: "Polyculture code guide", zh: "多元种植代码指南", de: "Polykultur-Code-Guide",
+ru: "Гайд по коду поликультуры" })}
                 </a>
             </p>
             <h3 class="text-xl font-bold text-gray-900 dark:text-white mt-8">
-                {t({ en: "More guides from this hub", zh: "本枢纽相关指南", de: "Weitere Guides von diesem Hub" })}
+                {t({ en: "More guides from this hub", zh: "本枢纽相关指南", de: "Weitere Guides von diesem Hub",
+ru: "Другие гайды из этого раздела" })}
             </h3>
             <ul>
                 <li>
                     <a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/tree-code")}>
-                        {t({ en: "Tree code", zh: "树木代码", de: "Baum-Code" })}
+                        {t({ en: "Tree code", zh: "树木代码", de: "Baum-Code",
+ru: "Код дерева" })}
                     </a>
-                    {t({ en: " — full checkerboard wood script.", zh: " — 完整棋盘格木头脚本。", de: " — volles Schachbrett-Holzskript." })}
+                    {t({ en: " — full checkerboard wood script.", zh: " — 完整棋盘格木头脚本。", de: " — volles Schachbrett-Holzskript.",
+ru: "— полный скрипт древесины шахматной доски." })}
                 </li>
                 <li>
                     <a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")}>
-                        {t({ en: "Pumpkin code", zh: "南瓜代码", de: "Kürbis-Code" })}
+                        {t({ en: "Pumpkin code", zh: "南瓜代码", de: "Kürbis-Code",
+ru: "Код тыквы" })}
                     </a>
-                    {t({ en: " — dead tiles, merge yield, and measure() size check.", zh: " — 枯死格、合并产量与 measure() 尺寸检查。", de: " — tote Felder, Fusion und measure()-Check." })}
+                    {t({ en: " — dead tiles, merge yield, and measure() size check.", zh: " — 枯死格、合并产量与 measure() 尺寸检查。", de: " — tote Felder, Fusion und measure()-Check.",
+ru: "— мертвые плитки, выход слияния и проверка размера measure()." })}
                 </li>
                 <li>
                     <a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/blog/weird-substance")}>
-                        {t({ en: "Weird Substance farm", zh: "奇怪物质农场", de: "Weird-Substance-Farm" })}
+                        {t({ en: "Weird Substance farm", zh: "奇怪物质农场", de: "Weird-Substance-Farm",
+ru: "Ферма странных веществ" })}
                     </a>
-                    {t({ en: " — stockpile before maze runs.", zh: " — 跑迷宫前先囤物质。", de: " — Vorrat vor Labyrinth-Läufen." })}
+                    {t({ en: " — stockpile before maze runs.", zh: " — 跑迷宫前先囤物质。", de: " — Vorrat vor Labyrinth-Läufen.",
+ru: "— складировать перед запуском лабиринта." })}
                 </li>
                 <li>
                     <a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/blog/multiple-drones")}>
-                        {t({ en: "Multiple drones", zh: "多无人机", de: "Mehrere Drohnen" })}
+                        {t({ en: "Multiple drones", zh: "多无人机", de: "Mehrere Drohnen",
+ru: "Несколько дронов" })}
                     </a>
-                    {t({ en: " — Megafarm spawn_drone patterns.", zh: " — Megafarm 的 spawn_drone 写法。", de: " — Megafarm spawn_drone-Muster." })}
+                    {t({ en: " — Megafarm spawn_drone patterns.", zh: " — Megafarm 的 spawn_drone 写法。", de: " — Megafarm spawn_drone-Muster.",
+ru: "— Узоры Megafarm spawn_drone." })}
                 </li>
                 <li>
                     <a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/blog/mobile-android-online")}>
-                        {t({ en: "Mobile / Android / Online", zh: "手机 / 安卓 / 网页", de: "Mobile / Android / Online" })}
+                        {t({ en: "Mobile / Android / Online", zh: "手机 / 安卓 / 网页", de: "Mobile / Android / Online",
+ru: "Мобильные / Android / Online" })}
                     </a>
-                    {t({ en: " — where you can actually play.", zh: " — 实际能在哪玩。", de: " — wo du wirklich spielen kannst." })}
+                    {t({ en: " — where you can actually play.", zh: " — 实际能在哪玩。", de: " — wo du wirklich spielen kannst.",
+ru: "— где можно поиграть." })}
                 </li>
             </ul>
         </section>
@@ -950,6 +1163,7 @@ if found:
                             en: "← Back to Home",
                             zh: "← 返回主页",
                             de: "← Zurück zur Startseite",
+                            ru: "← На главную",
                         })
                     }
                 </a>

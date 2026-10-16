@@ -24,12 +24,14 @@ const title = {
 	en: "Cactus Code & Sorting — n² Harvest Explained",
 	zh: "仙人掌代码与排序 — 一次收 n² 个",
 	de: "Kaktus-Code & Sortierung — n²-Ernte erklärt",
+	ru: "Код и сортировка кактусов — объяснение урожая n²",
 };
 
 const description = {
 	en: "The Farmer Was Replaced cactus code for 1.0+: measure sizes 0–9, swap until sorted (N/E ≥, S/W ≤), harvest once for n² cactus.",
 	zh: "编程农场 1.0+ 仙人掌：大小 0–9，swap 排到北东 ≥、南西 ≤，收一次得 n²。",
 	de: "Kaktus-Code 1.0+: Größen 0–9, sortieren, einmal ernten für n².",
+	ru: "The Farmer Was Replaced cactus code for 1.0+: measure sizes 0–9, swap until sorted (N/E ≥, S/W ≤), harvest once for n² cactus.",
 };
 ---
 
@@ -41,6 +43,7 @@ const description = {
 					en: "The Farmer Was Replaced Cactus Code — Sort, Then n² Harvest",
 					zh: "编程农场仙人掌代码 — 先排序，再一次收 n²",
 					de: "The Farmer Was Replaced Kaktus-Code — sortieren, dann n²",
+					ru: "Фермеру заменили код кактуса — сортировка, затем n² урожай",
 				})}
 			</h1>
 			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -48,6 +51,7 @@ const description = {
 					en: "Rewritten for 1.0+. Cacti have sizes 0–9. When every neighbor is grown and in sorted order, harvesting one cactus harvests the whole connected sorted square for n² cactus.",
 					zh: "按 1.0+ 重写。仙人掌大小 0–9。邻居都长成且有序时，收一棵会连锁收割整片有序方块，产量 n²。",
 					de: "Neu für 1.0+. Größen 0–9. Sortiertes Quadrat → n² beim Ernten.",
+					ru: "Переписано для 1.0+. Кактусы имеют размеры 0–9. Когда каждый сосед выращивается в упорядоченном порядке, сбор урожая одного кактуса собирает весь связанный отсортированный квадрат для n² кактуса.",
 				})}
 			</p>
 		</section>
@@ -56,26 +60,34 @@ const description = {
 
 		<section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
 			<h2 class="text-2xl font-bold text-green-700 dark:text-green-400">
-				{t({ en: "Sorted order (wiki definition)", zh: "有序定义（wiki）", de: "Sortierregel (Wiki)" })}
+				{t({ en: "Sorted order (wiki definition)", zh: "有序定义（wiki）", de: "Sortierregel (Wiki)",
+ru: "Порядок сортировки (определение вики)" })}
 			</h2>
 			<ul>
-				<li>{t({ en: "Plant on soil. Planting costs pumpkins (`get_cost(Entities.Cactus)`).", zh: "种在土上。种植消耗南瓜。", de: "Auf Soil. Kostet Kürbisse." })}</li>
-				<li>{t({ en: "`measure()` → size in 0…9. `measure(East)` reads the neighbor without moving.", zh: "`measure()` → 0…9。`measure(East)` 读邻居，不用移动。", de: "`measure()` / `measure(East)`." })}</li>
-				<li>{t({ en: "Sorted iff every grown N/E neighbor is ≥ this cactus, and every grown S/W neighbor is ≤ this cactus.", zh: "有序：北/东邻居（已长成）都 ≥ 自己，南/西都 ≤ 自己。", de: "N/O ≥, S/W ≤." })}</li>
-				<li>{t({ en: "Unsorted grown cacti look brown; sorted turn green. Harvest spreads only through fully grown sorted neighbors → payout `n**2`.", zh: "未排好呈棕色，排好变绿。连锁只穿过已长成且有序的邻居 → 产量 `n**2`。", de: "Braun unsortiert, grün sortiert. Auszahlung n²." })}</li>
-				<li>{t({ en: "`swap(direction)` swaps this tile with the neighbor.", zh: "`swap(direction)` 与邻居交换。", de: "`swap(direction)` tauscht." })}</li>
+				<li>{t({ en: "Plant on soil. Planting costs pumpkins (`get_cost(Entities.Cactus)`).", zh: "种在土上。种植消耗南瓜。", de: "Auf Soil. Kostet Kürbisse.",
+ru: "Растение на почве. Затраты на посадку тыквы (`get_cost(Entities.Cactus)`)." })}</li>
+				<li>{t({ en: "`measure()` → size in 0…9. `measure(East)` reads the neighbor without moving.", zh: "`measure()` → 0…9。`measure(East)` 读邻居，不用移动。", de: "`measure()` / `measure(East)`.",
+ru: "`measure()` → size in 0…9. `measure(East)` читает соседа, не двигаясь." })}</li>
+				<li>{t({ en: "Sorted iff every grown N/E neighbor is ≥ this cactus, and every grown S/W neighbor is ≤ this cactus.", zh: "有序：北/东邻居（已长成）都 ≥ 自己，南/西都 ≤ 自己。", de: "N/O ≥, S/W ≤.",
+ru: "Отсортировано, если каждый выращенный сосед N/E ≥ этот кактус, а каждый выращенный сосед S/W ≤ этот кактус." })}</li>
+				<li>{t({ en: "Unsorted grown cacti look brown; sorted turn green. Harvest spreads only through fully grown sorted neighbors → payout `n**2`.", zh: "未排好呈棕色，排好变绿。连锁只穿过已长成且有序的邻居 → 产量 `n**2`。", de: "Braun unsortiert, grün sortiert. Auszahlung n².",
+ru: "Несортированные выращенные кактусы выглядят коричневыми; отсортированные становятся зелеными. Урожай распространяется только через полностью отсортированную → выплату соседей «n**2»." })}</li>
+				<li>{t({ en: "`swap(direction)` swaps this tile with the neighbor.", zh: "`swap(direction)` 与邻居交换。", de: "`swap(direction)` tauscht.",
+ru: "`swap(direction)` меняет эту плитку с соседней." })}</li>
 			</ul>
 		</section>
 
 		<section class="py-6">
 			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-				{t({ en: "Teaching script: plant → wait → bubble toward NE → harvest", zh: "教学脚本：种 → 等长成 → 向东北冒泡 → 收", de: "Lehrskript: pflanzen → warten → nach NO bubblen → ernten" })}
+				{t({ en: "Teaching script: plant → wait → bubble toward NE → harvest", zh: "教学脚本：种 → 等长成 → 向东北冒泡 → 收", de: "Lehrskript: pflanzen → warten → nach NO bubblen → ernten",
+ru: "Сценарий обучения: → пузырь → ожидания растений к → урожаю NE" })}
 			</h2>
 			<p class="mb-4 text-gray-600 dark:text-gray-400">
 				{t({
 					en: "Bubble sort is easy to read, not the fastest. Wait until every cactus can harvest before swapping — sorting unfinished tiles wastes swaps.",
 					zh: "冒泡好懂，不是最快。等全部能收再交换——对未长成的格子 swap 浪费 ticks。",
 					de: "Bubble Sort ist klar, nicht schnell. Erst warten bis alles erntebereit.",
+					ru: "Сортировка пузырьков легко читается, а не самая быстрая. Подождите, пока каждый кактус сможет собрать урожай, прежде чем обмениваться — сортировать незавершенные отходы плитки.",
 				})}
 			</p>
 			<CodeBlock
@@ -146,19 +158,24 @@ while True:
 
 		<section class="py-8 bg-green-50 dark:bg-green-900/20 rounded-2xl border border-green-100 dark:border-green-800 p-6 mb-8">
 			<h3 class="text-xl font-bold mb-3 text-green-800 dark:text-green-300">
-				{t({ en: "Multi-drone / speed notes", zh: "多无人机 / 速度说明", de: "Multi-Drohne / Tempo" })}
+				{t({ en: "Multi-drone / speed notes", zh: "多无人机 / 速度说明", de: "Multi-Drohne / Tempo",
+ru: "Заметки о нескольких беспилотниках/ скорости" })}
 			</h3>
 			<ul class="space-y-2 text-green-900 dark:text-green-100 list-disc pl-5">
-				<li>{t({ en: "Bubble sort on 32×32 is slow (many passes). Faster sorts live in community GitHub collections — this page stays readable.", zh: "32×32 冒泡很慢。更快排序见社区 GitHub——本页保持可读。", de: "Bubble auf 32×32 ist langsam. Schnellere Sorten auf GitHub." })}</li>
-				<li>{t({ en: "Drones do not share memory. Parallel sorts need careful tile ownership or you double-swap the same edge.", zh: "无人机不共享内存。并行排序要划清格子，否则同一条边会被换两次。", de: "Keine Shared Memory — Kachel-Besitz klären." })}</li>
-				<li>{t({ en: "Leaderboard cactus target factors as 32 perfect full-farm harvests of n² with n = 1024.", zh: "排行榜仙人掌目标 ≈ 32 次满田完美 n²（n=1024）。", de: "Leaderboard ≈ 32 volle n²-Ernten." })}</li>
+				<li>{t({ en: "Bubble sort on 32×32 is slow (many passes). Faster sorts live in community GitHub collections — this page stays readable.", zh: "32×32 冒泡很慢。更快排序见社区 GitHub——本页保持可读。", de: "Bubble auf 32×32 ist langsam. Schnellere Sorten auf GitHub.",
+ru: "Сортировка пузырьков на 32×32 происходит медленно (много проходов). Более быстрые сортировки живут в коллекциях сообщества GitHub — эта страница остается читаемой." })}</li>
+				<li>{t({ en: "Drones do not share memory. Parallel sorts need careful tile ownership or you double-swap the same edge.", zh: "无人机不共享内存。并行排序要划清格子，否则同一条边会被换两次。", de: "Keine Shared Memory — Kachel-Besitz klären.",
+ru: "Дроны не делятся памятью. Параллельные сортировки требуют тщательного владения плиткой или двойной замены одного и того же края." })}</li>
+				<li>{t({ en: "Leaderboard cactus target factors as 32 perfect full-farm harvests of n² with n = 1024.", zh: "排行榜仙人掌目标 ≈ 32 次满田完美 n²（n=1024）。", de: "Leaderboard ≈ 32 volle n²-Ernten.",
+ru: "Целевые факторы кактуса в таблице лидеров - 32 идеальных урожая на полной ферме n² с n = 1024." })}</li>
 			</ul>
 		</section>
 
 		<RelatedGuides current="/codes/cactus-code" />
 		<div class="text-center py-6">
 			<a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
-				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite" })}
+				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite",
+ru: "← На главную" })}
 			</a>
 		</div>
 		<div id="utterances-container" class="my-10"></div>

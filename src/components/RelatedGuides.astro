@@ -10,59 +10,73 @@ const { current = "" } = Astro.props;
 const items = [
 	{
 		href: "/basic-codes",
-		label: t({ en: "Basic codes", zh: "基础代码", de: "Basis-Codes" }),
+		label: t({ en: "Basic codes", zh: "基础代码", de: "Basis-Codes",
+ru: "Основные коды" }),
 	},
 	{
 		href: "/tutorial",
-		label: t({ en: "Beginner tutorial", zh: "新手教程", de: "Anfänger-Tutorial" }),
+		label: t({ en: "Beginner tutorial", zh: "新手教程", de: "Anfänger-Tutorial",
+ru: "Руководство для начинающих" }),
 	},
 	{
 		href: "/codes/tree-code",
-		label: t({ en: "Tree code", zh: "树木代码", de: "Baum-Code" }),
+		label: t({ en: "Tree code", zh: "树木代码", de: "Baum-Code",
+ru: "Код дерева" }),
 	},
 	{
 		href: "/codes/carrot-code",
-		label: t({ en: "Carrot code", zh: "胡萝卜代码", de: "Karotten-Code" }),
+		label: t({ en: "Carrot code", zh: "胡萝卜代码", de: "Karotten-Code",
+ru: "Код моркови" }),
 	},
 	{
 		href: "/github",
-		label: t({ en: "GitHub scripts", zh: "GitHub 脚本", de: "GitHub-Skripte" }),
+		label: t({ en: "GitHub scripts", zh: "GitHub 脚本", de: "GitHub-Skripte",
+ru: "Скрипты GitHub" }),
 	},
 	{
 		href: "/codes/pumpkin-code",
-		label: t({ en: "Pumpkin code", zh: "南瓜代码", de: "Kürbis-Code" }),
+		label: t({ en: "Pumpkin code", zh: "南瓜代码", de: "Kürbis-Code",
+ru: "Код тыквы" }),
 	},
 	{
 		href: "/codes/cactus-code",
-		label: t({ en: "Cactus sorting", zh: "仙人掌排序", de: "Kaktus-Sortierung" }),
+		label: t({ en: "Cactus sorting", zh: "仙人掌排序", de: "Kaktus-Sortierung",
+ru: "Сортировка кактусов" }),
 	},
 	{
 		href: "/codes/sunflower-code",
-		label: t({ en: "Sunflower code", zh: "向日葵代码", de: "Sonnenblumen-Code" }),
+		label: t({ en: "Sunflower code", zh: "向日葵代码", de: "Sonnenblumen-Code",
+ru: "Код подсолнечника" }),
 	},
 	{
 		href: "/blog/polyculture-code",
-		label: t({ en: "Polyculture code", zh: "多元种植代码", de: "Polykultur-Code" }),
+		label: t({ en: "Polyculture code", zh: "多元种植代码", de: "Polykultur-Code",
+ru: "Код поликультуры" }),
 	},
 	{
 		href: "/blog/weird-substance",
-		label: t({ en: "Weird Substance", zh: "奇怪物质", de: "Weird Substance" }),
+		label: t({ en: "Weird Substance", zh: "奇怪物质", de: "Weird Substance",
+ru: "Странное вещество" }),
 	},
 	{
 		href: "/blog/multiple-drones",
-		label: t({ en: "Multiple drones", zh: "多无人机", de: "Mehrere Drohnen" }),
+		label: t({ en: "Multiple drones", zh: "多无人机", de: "Mehrere Drohnen",
+ru: "Несколько дронов" }),
 	},
 	{
 		href: "/blog/mobile-android-online",
-		label: t({ en: "Mobile / Android / Online", zh: "手机 / 安卓 / 网页", de: "Mobile / Android / Online" }),
+		label: t({ en: "Mobile / Android / Online", zh: "手机 / 安卓 / 网页", de: "Mobile / Android / Online",
+ru: "Мобильные / Android / Online" }),
 	},
 	{
 		href: "/codes/maze-code",
-		label: t({ en: "Maze code", zh: "迷宫代码", de: "Labyrinth-Code" }),
+		label: t({ en: "Maze code", zh: "迷宫代码", de: "Labyrinth-Code",
+ru: "Код лабиринта" }),
 	},
 	{
 		href: "/codes/dinosaur-code",
-		label: t({ en: "Dinosaur hat", zh: "恐龙帽", de: "Dinosaurier-Hut" }),
+		label: t({ en: "Dinosaur hat", zh: "恐龙帽", de: "Dinosaurier-Hut",
+ru: "Шляпа динозавра" }),
 	},
 ].filter((item) => item.href !== current);
 ---
@@ -74,6 +88,7 @@ const items = [
 				en: "More The Farmer Was Replaced codes",
 				zh: "更多编程农场代码",
 				de: "Weitere The Farmer Was Replaced Codes",
+				ru: "Еще Коды The Farmer Was Replaced",
 			})
 		}
 	</h2>

@@ -23,6 +23,7 @@ const t = useTranslations(Astro.currentLocale as Lang);
 const keywords = {
 	en: "programming game, learn Python, educational game, coding game, farm automation, Python tutorial, learn coding, educational technology, STEM education, coding for beginners",
 	zh: "编程游戏,学习Python,教育游戏,编程游戏,农场自动化,Python教程,学习编程,教育技术,STEM教育,编程入门",
+	ru: "игра программирование, Python, готовые коды, гайд, автоматизация фермы, коды, образовательная игра",
 };
 
 // Additional meta tags for enhanced SEO
@@ -31,9 +32,10 @@ const hreflangByLang: Record<string, string> = {
 	en: "en",
 	zh: "zh-CN",
 	de: "de",
+	ru: "ru",
 };
 const unprefixedPath =
-	Astro.url.pathname.replace(/^\/(zh|de)(?=\/|$)/, "") || "/";
+	Astro.url.pathname.replace(/^\/(zh|de|ru)(?=\/|$)/, "") || "/";
 const localeAlternates = Object.keys(LOCALES).map((lang) => {
 	const path = getRelativeLocaleUrl(lang, unprefixedPath);
 	return {
@@ -60,7 +62,7 @@ const websiteSchema = {
 		url: siteOrigin,
 		logo: logoUrl,
 	},
-	inLanguage: ["en", "zh-CN", "de"],
+	inLanguage: ["en", "zh-CN", "de", "ru"],
 };
 const organizationSchema = {
 	"@context": "https://schema.org",
@@ -142,7 +144,13 @@ const organizationSchema = {
 <meta
 	property="og:locale"
 	content={
-		currentLocale === "zh" ? "zh_CN" : currentLocale === "de" ? "de_DE" : "en_US"
+		currentLocale === "zh"
+			? "zh_CN"
+			: currentLocale === "de"
+				? "de_DE"
+				: currentLocale === "ru"
+					? "ru_RU"
+					: "en_US"
 	}
 />
 <meta property="og:type" content="website" />

@@ -24,7 +24,15 @@ const content = {
     p2: "Warum ist es der beste Weg zu lernen? Spaß ist der Schlüssel. Im Gegensatz zu trockenen Klassenzimmern integriert dieses Spiel das Programmieren in eine Farmsimulation. Du steuerst eine Drohne und schreibst Code, um Aufgaben zu optimieren – mit Schleifen für wiederholtes Bewässern oder If-Else-Anweisungen zur Überprüfung der Erntereife. Diese immersive Erfahrung macht das Lernen süchtig und vermeidet den Frust traditioneller Methoden. Spieler beherrschen unbewusst Variablen, Funktionen und Listen – Fähigkeiten, die für die reale Programmierung entscheidend sind.",
     p3: "Praxis trifft Theorie. Beginnend mit einfachen Befehlen führt das Spiel komplexe Herausforderungen ein, wie Rekursion zur Ressourcenoptimierung oder das Debuggen unerwarteter Probleme. Dies fördert die Problemlösungsfähigkeit, das Herzstück des Programmierens. Im Gegensatz zu Online-Kursen erhältst du sofortiges Feedback: Dein Code läuft und die Farm gedeiht; oder er scheitert und du musst debuggen. Dieser Trial-and-Error-Prozess baut intuitives Programmierverständnis weitaus besser auf als Vorlesungen.",
     p4: "Schließlich betont das Spiel das Automatisierungsdenken – Pythons Stärke in Data Science und KI. Du lernst, effiziente Skripte zu schreiben und reale Szenarien wie DevOps-Automatisierung zu simulieren. Mit einer starken Community auf Steam und Reddit, die Code und Strategien teilt, ist kollaboratives Lernen direkt eingebaut."
+  },
+  ru: {
+    summary: "Почему это лучший способ учить Python?",
+    p1: "В мире обучения коду традиционные методы часто скучны — бесконечные туториалы и сухие упражнения. «The Farmer Was Replaced» меняет правила. Игра от Timon Herzog (издатель Metaroot) даёт автоматизировать ферму Python-подобным кодом. Посадка, полив, сбор и торговля завязаны на ваши скрипты. Кастомный интерпретатор с синтаксисом, близким к Python, помогает новичкам освоить основы в игре.",
+    p2: "Почему это работает? Главное — интерес. Вместо сухой аудитории код встроен в фермерский симулятор. Вы управляете дроном, пишете циклы для полива и if-else для проверки зрелости. Так проще выучить переменные, функции и списки без ощущения «урока».",
+    p3: "Практика сразу встречается с теорией. С простых команд игра переходит к сложным задачам: рекурсия, отладка, распределение ресурсов. Мгновенная обратная связь: код сработал — ферма растёт; ошибка — правите. Это сильнее лекций.",
+    p4: "Наконец, игра качает мышление автоматизации — сильную сторону Python в данных и AI. Вы пишете эффективные скрипты и видите сообщество Steam/Reddit с разборами и готовыми кодами."
   }
+
 };
 
 const currentContent = content[Astro.currentLocale as keyof typeof content] || content.en;

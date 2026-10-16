@@ -45,7 +45,8 @@ const posts = blog
               t({
                 en: "Published on",
                 it: "Pubblicato il",
-                de: "Veröffentlicht am"
+                de: "Veröffentlicht am",
+                ru: "Опубликовано"
               })} {new Date(post.data.date).toLocaleDateString(toCodes(Object.keys(LOCALES_SETTING)), {
                 year: "numeric",
                 month: "long",

@@ -31,12 +31,14 @@ const title = {
   en: "Partner Links",
   zh: "友情链接",
   de: "Partnerlinks",
+  ru: "Ссылки на партнеров",
 };
 
 const description = {
   en: `Partner links published on ${SITE_TITLE}.`,
   zh: `${SITE_TITLE} 收录的友情链接页面。`,
   de: `Partnerlinks, die auf ${SITE_TITLE} veroeffentlicht werden.`,
+  ru: `Партнерские ссылки опубликованы на сайте ${SITE_TITLE}.`,
 };
 ---
 
@@ -44,7 +46,8 @@ const description = {
   <section class="max-w-3xl mx-auto px-4 py-10 space-y-8">
     <header class="space-y-4">
       <h1 class="text-3xl font-bold">
-        {t({ en: "Partner Links", zh: "友情链接", de: "Partnerlinks" })}
+        {t({ en: "Partner Links", zh: "友情链接", de: "Partnerlinks",
+ru: "Ссылки на партнеров" })}
       </h1>
       <p class="text-neutral-600 dark:text-neutral-400">
         {
@@ -52,6 +55,7 @@ const description = {
             en: "This page collects all partner links assigned specifically to this project.",
             zh: "这个页面收录了仅属于本站项目的全部友情链接。",
             de: "Diese Seite sammelt alle Partnerlinks, die speziell diesem Projekt zugeordnet sind.",
+            ru: "На этой странице собраны все партнерские ссылки, назначенные специально для этого проекта.",
           })
         }
       </p>

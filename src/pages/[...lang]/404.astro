@@ -23,11 +23,13 @@ export const getStaticPaths = async () => {
 const title = {
     en: "404 - Page Not Found",
     zh: "404 - 页面未找到",
+    ru: "404-Страница Не Найдена",
 };
 
 const description = {
     en: "The page you're looking for doesn't exist. Return to the homepage of The Farmer Was Replaced programming game aggregator.",
     zh: "您要查找的页面不存在。返回编程农场聚合器主页。",
+    ru: "Страница, которую вы ищете, не существует. Вернитесь на главную страницу агрегатора программных игр The Farmer Was Replaced.",
 };
 ---
 
@@ -48,6 +50,7 @@ const description = {
                     {
                         t({
                             zh: "页面未找到",
+                            ru: "Страница не найдена",
                             en: "Page Not Found",
                         })
                     }
@@ -58,6 +61,7 @@ const description = {
                 {
                     t({
                         zh: "哎呀！您要查找的页面似乎不存在。可能页面已被移动、删除或您输入了错误的地址。",
+                        ru: "Упс! Страница, которую вы ищете, кажется, исчезла. Возможно, он был перемещен, удален или вы ввели неправильный адрес.",
                         en: "Oops! The page you're looking for seems to have vanished. It might have been moved, deleted, or you might have typed the wrong address.",
                     })
                 }
@@ -71,6 +75,7 @@ const description = {
                     {
                         t({
                             zh: "返回首页",
+                            ru: "Вернуться на Главную",
                             en: "Return Home",
                         })
                     }
@@ -83,6 +88,7 @@ const description = {
                     {
                         t({
                             zh: "Python 基础",
+                            ru: "Основы Python",
                             en: "Python Basics",
                         })
                     }
@@ -98,6 +104,7 @@ const description = {
                 {
                     t({
                         zh: "您可能在寻找：",
+                        ru: "Возможно, вы ищете:",
                         en: "You might be looking for:",
                     })
                 }
@@ -112,6 +119,7 @@ const description = {
                         {
                             t({
                                 zh: "代码案例",
+                                ru: "Примеры кода",
                                 en: "Code Examples",
                             })
                         }
@@ -120,6 +128,7 @@ const description = {
                         {
                             t({
                                 zh: "查看游戏代码示例和解决方案",
+                                ru: "Посмотреть примеры и решения игрового кода",
                                 en: "View game code examples and solutions",
                             })
                         }
@@ -136,6 +145,7 @@ const description = {
                         {
                             t({
                                 zh: "Steam 商店",
+                                ru: "Паровой магазин",
                                 en: "Steam Store",
                             })
                         }
@@ -144,6 +154,7 @@ const description = {
                         {
                             t({
                                 zh: "在 Steam 上购买游戏",
+                                ru: "Купить игру в Steam",
                                 en: "Purchase the game on Steam",
                             })
                         }
@@ -160,6 +171,7 @@ const description = {
                 {
                     t({
                         zh: "如果问题仍然存在，请确保您访问的 URL 是正确的。",
+                        ru: "Если проблема не исчезнет, введите правильный URL-адрес.",
                         en: "If the problem persists, please make sure you've entered the correct URL.",
                     })
                 }

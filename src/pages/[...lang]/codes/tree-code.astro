@@ -25,12 +25,14 @@ const title = {
     en: "Tree Code – The Farmer Was Replaced Checkerboard Wood Script",
     zh: "树木代码 – 编程农场棋盘格木头脚本",
     de: "Baum-Code – The Farmer Was Replaced Schachbrett-Holzskript",
+    ru: "Код дерева — шахматный скрипт для The Farmer Was Replaced",
 };
 
 const description = {
     en: "Tree code for The Farmer Was Replaced: copy-paste checkerboard script. Trees yield 5 wood; each N/E/S/W neighbor doubles grow time. Plant trees on (x + y) % 2 == 0, bushes on the other color.",
     zh: "编程农场树木代码：树产 5 木头，但东南西北每多一棵相邻的树，生长时间就翻倍。在 (x + y) % 2 == 0 的格子种树，另一色种灌木。",
     de: "Baum-Code: Bäume geben 5 Holz, jeder Nachbar verdoppelt die Wachstumszeit. Bäume auf (x + y) % 2 == 0, Büsche auf der anderen Farbe.",
+    ru: "Код дерева для The Farmer Was Replaced: готовый шахматный скрипт. Дерево даёт 5 древесины; каждый сосед N/E/S/W удваивает рост. Деревья на (x + y) % 2 == 0, кусты на другом цвете.",
 };
 ---
 
@@ -42,6 +44,7 @@ const description = {
                     en: "Tree Code for The Farmer Was Replaced — Checkerboard Wood Farm",
                     zh: "编程农场树木代码 — 棋盘格木头农场",
                     de: "Baum-Code für The Farmer Was Replaced — Schachbrett-Holzfarm",
+                    ru: "Код дерева для фермера был заменен — Шахматная доска Деревянная ферма",
                 })}
             </h1>
             <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -49,6 +52,7 @@ const description = {
                     en: "Trees drop 5 wood — better than bushes — but they hate sharing an edge. Each adjacent tree doubles grow time. Four neighbors is 16× slower. The in-game hint is `% 2`.",
                     zh: "树每次产 5 木头，比灌木划算，但讨厌贴边。东南西北每多一棵相邻的树，生长时间就翻倍；四个邻居是 16 倍。游戏提示用的是 `% 2`。",
                     de: "Bäume geben 5 Holz — mehr als Büsche — mögen aber keine Kanten-Nachbarn. Jeder Nachbar verdoppelt die Zeit; 4 Nachbarn = 16× langsamer. Der Spielhinweis ist `% 2`.",
+                    ru: "Деревья сбрасывают 5 деревьев — лучше, чем кусты, — но они ненавидят разделять край. Каждое соседнее дерево удваивает время роста. Четыре соседа в 16раз медленнее. Внутриигровая подсказка `% 2`.",
                 })}
             </p>
             <p class="text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-4">
@@ -56,14 +60,17 @@ const description = {
                     en: "Looking for tree code? This page is the full checkerboard script. The ",
                     zh: "在找树木代码？本页就是完整棋盘格脚本。",
                     de: "Suchst du Tree Code? Hier ist das volle Schachbrett-Skript. Der ",
+                    ru: "Ищете код дерева? Эта страница является полным скриптом шахматной доски.",
                 })}
                 <a class="text-green-700 dark:text-green-400 underline" href={getRelativeLocaleUrl(locale, "/basic-codes")}>
-                    {t({ en: "basic codes", zh: "基础代码", de: "Basis-Codes" })}
+                    {t({ en: "basic codes", zh: "基础代码", de: "Basis-Codes",
+ru: "основные коды" })}
                 </a>
                 {t({
                     en: " hub links here and to other crops.",
                     zh: " 枢纽会链到本页和其他作物。",
                     de: "-Hub verlinkt hierher und zu anderen Pflanzen.",
+                    ru: "узловые связи здесь и с другими культурами.",
                 })}
             </p>
         </section>
@@ -76,6 +83,7 @@ const description = {
                     en: "Tree rules (this is why adjacency hurts)",
                     zh: "树木规则（为什么不能贴着种）",
                     de: "Baum-Regeln (warum Nachbarn schaden)",
+                    ru: "Правила дерева (вот почему болит смежность)",
                 })}
             </h2>
             <ul>
@@ -84,6 +92,7 @@ const description = {
                         en: "A grown tree yields 5 wood. Bushes give less, so trees are the wood crop once you unlock them.",
                         zh: "长成的树产 5 木头。灌木更少，所以解锁树木后木头主要靠树。",
                         de: "Ein reifer Baum gibt 5 Holz. Büsche geben weniger.",
+                        ru: "Выращенное дерево дает 5 древесины. Кусты дают меньше, поэтому деревья - это урожай древесины, как только вы их разблокируете.",
                     })}
                 </li>
                 <li>
@@ -91,6 +100,7 @@ const description = {
                         en: "You can plant on grass or soil. `till()` is optional for trees.",
                         zh: "草地或耕地都能种。树木不强制 `till()`。",
                         de: "Pflanzen auf Gras oder Boden. `till()` ist optional.",
+                        ru: "Вы можете сажать на траву или почву. `till()` не является обязательным для деревьев.",
                     })}
                 </li>
                 <li>
@@ -98,6 +108,7 @@ const description = {
                         en: "Only North, East, South, and West count. Each of those neighboring trees **doubles** grow time. 1 neighbor = 2×, 2 = 4×, 3 = 8×, 4 = 16×.",
                         zh: "只算东、南、西、北。每多一棵贴边的树，生长时间就 **翻倍**：1 邻 2 倍，2 邻 4 倍，3 邻 8 倍，4 邻 16 倍。",
                         de: "Nur Norden, Osten, Süden, Westen. Jeder solche Nachbar **verdoppelt** die Zeit: 1 = 2×, 2 = 4×, 3 = 8×, 4 = 16×.",
+                        ru: "Учитываются только север, восток, юг и запад. Каждое из этих соседних деревьев **удваивает** время роста. 1 сосед = 2×, 2 = 4×, 3 = 8×, 4 = 16×.",
                     })}
                 </li>
                 <li>
@@ -105,6 +116,7 @@ const description = {
                         en: "Diagonals do not count. A checkerboard has trees touching only on corners.",
                         zh: "对角线不算。棋盘格上的树只在角上挨着。",
                         de: "Diagonalen zählen nicht. Im Schachbrett berühren sich Bäume nur an Ecken.",
+                        ru: "Диагонали не учитываются. На шахматной доске деревья соприкасаются только по углам.",
                     })}
                 </li>
             </ul>
@@ -117,6 +129,7 @@ const description = {
                         en: "Why a checkerboard, not a solid tree field",
                         zh: "为什么用棋盘格，而不是整田种树",
                         de: "Warum Schachbrett, nicht ein volles Baumfeld",
+                        ru: "Почему шахматная доска, а не сплошное древовидное поле",
                     })}
                 </h2>
                 <div class="prose dark:prose-invert text-gray-700 dark:text-gray-300 space-y-4">
@@ -125,6 +138,7 @@ const description = {
                             en: "If you fill every tile with trees, the middle of the farm is surrounded on four sides and grows 16× slower. Wood per second collapses even though every tile is a tree.",
                             zh: "如果每个格子都种树，田中间四面都是邻居，生长慢 16 倍。格子全是树，每秒木头反而更少。",
                             de: "Ein volles Baumfeld umgibt die Mitte mit 4 Nachbarn — 16× langsamer. Die Holz/Sekunde bricht ein.",
+                            ru: "Если вы заполните каждую плитку деревьями, середина фермы окружена с четырех сторон и растет в 16раз медленнее. Дерево в секунду разрушается, хотя каждая плитка - это дерево.",
                         })}
                     </p>
                     <p>
@@ -132,31 +146,38 @@ const description = {
                             en: "Plant trees where `(x + y) % 2 == 0` (or the odd color — both work). Put bushes on the other color so those tiles still produce. The in-game hint uses `% 2`.",
                             zh: "在 `(x + y) % 2 == 0` 的格子种树（种奇数格也可以）。另一色种灌木，格子不会闲着。游戏提示用的就是 `% 2`。",
                             de: "Bäume auf `(x + y) % 2 == 0` (oder die andere Farbe). Büsche auf den Rest. Der Hinweis im Spiel nutzt `% 2`.",
+                            ru: "Посадите деревья, где `(x + y) % 2 == 0` (или нечетный цвет — оба работают). Положите кусты на другой цвет, чтобы эти плитки все еще производили. Внутриигровая подсказка использует `% 2`.",
                         })}
                     </p>
                     <ul class="list-disc pl-5 space-y-2">
                         <li>
-                            <strong>{t({ en: "Read:", zh: "读坐标：", de: "Lesen:" })}</strong>
+                            <strong>{t({ en: "Read:", zh: "读坐标：", de: "Lesen:",
+ru: "Прочитано:" })}</strong>
                             {t({
                                 en: "`get_pos_x()` and `get_pos_y()`.",
                                 zh: "`get_pos_x()` 和 `get_pos_y()`。",
                                 de: "`get_pos_x()` und `get_pos_y()`.",
+                                ru: "`get_pos_x()` и `get_pos_y()`.",
                             })}
                         </li>
                         <li>
-                            <strong>{t({ en: "Split:", zh: "分色：", de: "Teilen:" })}</strong>
+                            <strong>{t({ en: "Split:", zh: "分色：", de: "Teilen:",
+ru: "Деление:" })}</strong>
                             {t({
                                 en: "Even sum → `plant(Entities.Tree)`. Odd sum → `plant(Entities.Bush)`.",
                                 zh: "和为偶数 → `plant(Entities.Tree)`。奇数 → `plant(Entities.Bush)`。",
                                 de: "Gerade Summe → `plant(Entities.Tree)`. Ungerade → `plant(Entities.Bush)`.",
+                                ru: "Even sum → `plant(Entities.Tree)`. Нечетная сумма → `растение(Entities.Bush)`.",
                             })}
                         </li>
                         <li>
-                            <strong>{t({ en: "Cycle:", zh: "循环：", de: "Zyklus:" })}</strong>
+                            <strong>{t({ en: "Cycle:", zh: "循环：", de: "Zyklus:",
+ru: "Цикл:" })}</strong>
                             {t({
                                 en: "`can_harvest()` then `harvest()`, plant, `move`.",
                                 zh: "`can_harvest()` 再 `harvest()`，种植，然后 `move`。",
                                 de: "`can_harvest()` dann `harvest()`, pflanzen, `move`.",
+                                ru: "`can_harvest()`, затем `harvest()`, plant, `move`.",
                             })}
                         </li>
                     </ul>
@@ -169,6 +190,7 @@ const description = {
                             en: "Even tiles = trees, odd tiles = bushes",
                             zh: "偶数格种树，奇数格种灌木",
                             de: "Gerade = Bäume, ungerade = Büsche",
+                            ru: "Четные плитки = деревья, нечетные плитки = кусты",
                         })}
                     </p>
                     <div class="grid grid-cols-4 gap-1 max-w-[220px] mx-auto" aria-hidden="true">
@@ -202,19 +224,22 @@ const description = {
                     en: "Tree code copy-paste",
                     zh: "树木代码复制粘贴",
                     de: "Tree-Code zum Kopieren",
+                    ru: "Код дерева для копирования",
                 })}
             </h2>
 
             <div class="mb-12 bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
                 <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
                     <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Step 1</span>
-                    {t({ en: "The `% 2` test", zh: "`% 2` 判断", de: "Der `% 2`-Test" })}
+                    {t({ en: "The `% 2` test", zh: "`% 2` 判断", de: "Der `% 2`-Test",
+ru: "Тест `% 2`" })}
                 </h3>
                 <p class="mb-4 text-gray-600 dark:text-gray-400">
                     {t({
                         en: "Same color as the in-game hint. Swap `== 0` and `== 1` if you want trees on the other squares.",
                         zh: "和游戏提示同一套颜色。想把树换到另一色，把 `== 0` 和 `== 1` 对调即可。",
                         de: "Wie der Spielhinweis. `== 0` und `== 1` tauschen, um die andere Farbe zu nutzen.",
+                        ru: "Тот же цвет, что и внутриигровая подсказка. Поменяйте местами `== 0` и `== 1`, если вам нужны деревья на других квадратах.",
                     })}
                 </p>
                 <CodeBlock
@@ -231,13 +256,15 @@ else:
             <div class="mb-4 bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
                 <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
                     <span class="bg-lime-100 text-lime-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-lime-900 dark:text-lime-300">Step 2</span>
-                    {t({ en: "Scan, harvest, plant, move", zh: "扫田、收割、种植、移动", de: "Scannen, ernten, pflanzen, bewegen" })}
+                    {t({ en: "Scan, harvest, plant, move", zh: "扫田、收割、种植、移动", de: "Scannen, ernten, pflanzen, bewegen",
+ru: "Сканирование, сбор урожая, посадка, перемещение" })}
                 </h3>
                 <p class="mb-4 text-gray-600 dark:text-gray-400">
                     {t({
                         en: "Harvest if ready, then plant the right crop for this color, then walk the grid. Repeat forever.",
                         zh: "能收就收，再按格子颜色种植，然后走完整张田。一直循环。",
                         de: "Ernten wenn bereit, dann die passende Pflanze, dann das Raster ablaufen.",
+                        ru: "Собирайте урожай, если он готов, затем сажайте правильный урожай для этого цвета, затем ходите по сетке. Повторяйте вечно.",
                     })}
                 </p>
             </div>
@@ -250,6 +277,7 @@ else:
                         en: "Complete source code",
                         zh: "完整源代码",
                         de: "Vollständiger Quellcode",
+                        ru: "Полный исходный код",
                     })}
                 </h2>
                 <span class="text-sm text-gray-500 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
@@ -297,6 +325,7 @@ while True:
                     en: "Optional watering",
                     zh: "可选：浇水",
                     de: "Optional: Gießen",
+                    ru: "Дополнительный полив",
                 })}
             </h3>
             <p class="mb-4 text-green-900 dark:text-green-100">
@@ -304,6 +333,7 @@ while True:
                     en: "Water speeds growth. It does not cancel the adjacency penalty — a tree with four neighbors is still 16× slower, just 16× slower on wet soil. Add this after `plant(...)`.",
                     zh: "浇水能加快生长，但消不掉相邻惩罚：四个邻居仍然是 16 倍，只是湿土上的 16 倍。写在 `plant(...)` 后面即可。",
                     de: "Wasser beschleunigt das Wachstum, hebt die Nachbar-Strafe aber nicht auf. Nach `plant(...)` einfügen.",
+                    ru: "Вода ускоряет рост. Это не отменяет штраф за смежность — дерево с четырьмя соседями еще в 16раз медленнее, всего в 16раз медленнее на влажной почве. Добавьте это после «растение(...)».",
                 })}
             </p>
             <CodeBlock
@@ -318,6 +348,7 @@ while True:
                     en: "Next: pumpkins, then polyculture",
                     zh: "下一步：南瓜，然后是多元种植",
                     de: "Als Nächstes: Kürbisse, dann Polykultur",
+                    ru: "Далее: тыквы, затем поликультура",
                 })}
             </h2>
             <p>
@@ -325,12 +356,14 @@ while True:
                     en: "When wood is stable, unlock pumpkins. About 1 in 5 die; harvest the giant crop only when the whole grid is ready.",
                     zh: "木头稳定后去解锁南瓜。大约五分之一会枯死；整田长齐再收巨大南瓜。",
                     de: "Ist Holz stabil, Kürbisse freischalten. Etwa jeder fünfte stirbt; erst ernten, wenn das Raster voll ist.",
+                    ru: "Когда древесина стабильна, разблокируйте тыквы. Примерно 1 из 5 погибает; собирайте гигантский урожай только тогда, когда вся сетка будет готова.",
                 })}
                 <a
                     class="text-green-700 dark:text-green-400 underline ml-1"
                     href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")}
                 >
-                    {t({ en: "Pumpkin code", zh: "南瓜代码", de: "Kürbis-Code" })}
+                    {t({ en: "Pumpkin code", zh: "南瓜代码", de: "Kürbis-Code",
+ru: "Код тыквы" })}
                 </a>
             </p>
             <p>
@@ -338,12 +371,14 @@ while True:
                     en: "Polyculture comes later. `get_companion()` tells you which crop the current plant wants as a neighbor. That is a different layout than this checkerboard — do not mix the two ideas.",
                     zh: "多元种植是更后面的机制。`get_companion()` 会告诉你当前作物想要哪种邻居。那是另一套布局，不要和这套棋盘格混用。",
                     de: "Polykultur kommt später. `get_companion()` sagt, welche Nachbarpflanze gewünscht ist. Das ist ein anderes Layout als dieses Schachbrett.",
+                    ru: "Поликультура приходит позже. `get_companion()` говорит вам, какую культуру текущее растение хочет в качестве соседа. Это другой макет, чем эта шахматная доска — не смешивайте эти две идеи.",
                 })}
                 <a
                     class="text-green-700 dark:text-green-400 underline ml-1"
                     href={getRelativeLocaleUrl(locale, "/blog/polyculture-code")}
                 >
-                    {t({ en: "Polyculture code guide", zh: "多元种植代码指南", de: "Polykultur-Code-Guide" })}
+                    {t({ en: "Polyculture code guide", zh: "多元种植代码指南", de: "Polykultur-Code-Guide",
+ru: "Гайд по коду поликультуры" })}
                 </a>
             </p>
         </section>
@@ -351,13 +386,15 @@ while True:
 
         <section class="py-8 bg-green-50 dark:bg-green-900/20 rounded-2xl border border-green-100 dark:border-green-800 p-6 mb-8">
             <h3 class="text-xl font-bold mb-3 text-green-800 dark:text-green-300">
-                {t({ en: "1.0 multi-drone note", zh: "1.0 多无人机说明", de: "1.0 Multi-Drohne" })}
+                {t({ en: "1.0 multi-drone note", zh: "1.0 多无人机说明", de: "1.0 Multi-Drohne",
+ru: "1.0 заметка для нескольких дронов" })}
             </h3>
             <p class="text-green-900 dark:text-green-100">
                 {t({
                     en: "After Megafarm, give each drone a column strip. Drones do not share globals. Water with `use_item(Items.Water)` — `Items.Water_Tank` and `trade()` were removed.",
                     zh: "解锁 Megafarm 后按列分给各无人机。不共享全局。浇水用 `use_item(Items.Water)`——`Water_Tank` 与 `trade()` 已移除。",
                     de: "Nach Megafarm Spalten teilen. Gießen mit Items.Water. Water_Tank und trade() entfernt.",
+                    ru: "После Мегафермы дайте каждому дрону полоску колонны. Дроны не делятся глобалами. Вода с `use_item(Items.Water)` — `Items.Water_Tank` и `trade()` удалена.",
                 })}
             </p>
         </section>
@@ -371,6 +408,7 @@ while True:
                         en: "Back to Home",
                         zh: "返回主页",
                         de: "Zurück zur Startseite",
+                        ru: "Назад на главную",
                     })}
                 </a>
             </div>

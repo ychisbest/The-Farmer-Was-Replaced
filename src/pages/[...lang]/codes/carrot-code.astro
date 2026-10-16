@@ -24,12 +24,14 @@ const title = {
 	en: "Carrot Code — Till Soil, Plant, Water",
 	zh: "胡萝卜代码 — 翻地、种植、浇水",
 	de: "Karotten-Code — Pflügen, pflanzen, gießen",
+	ru: "Код моркови — почва, растение, вода",
 };
 
 const description = {
 	en: "The Farmer Was Replaced carrot code for 1.0+: till to Grounds.Soil, plant(Entities.Carrot) spends hay+wood automatically, water with Items.Water. trade() and Carrot_Seed are gone.",
 	zh: "编程农场 1.0+ 胡萝卜：翻到 Grounds.Soil，plant(Entities.Carrot) 自动扣干草+木头，用 Items.Water 浇水。trade() 与 Carrot_Seed 已移除。",
 	de: "Karotten-Code 1.0+: Soil pflügen, plant() zieht Heu+Holz, Items.Water. trade() und Carrot_Seed entfernt.",
+	ru: "The Farmer Was Replaced carrot code for 1.0+: till to Grounds.Soil, plant(Entities.Carrot) spends hay+wood automatically, water with Items.Water. trade() and Carrot_Seed are gone.",
 };
 ---
 
@@ -41,6 +43,7 @@ const description = {
 					en: "The Farmer Was Replaced Carrot Code — Till, Plant, Water",
 					zh: "编程农场胡萝卜代码 — 翻地、种植、浇水",
 					de: "The Farmer Was Replaced Karotten-Code — pflügen, pflanzen, gießen",
+					ru: "Фермеру заменили код моркови — почва, растение, вода",
 				})}
 			</h1>
 			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -48,6 +51,7 @@ const description = {
 					en: "Rewritten for 1.0+. Carrots need tilled soil. There is no seed shop: `plant(Entities.Carrot)` spends hay and wood from inventory. `trade()` was removed from the game.",
 					zh: "按 1.0+ 重写。胡萝卜要耕地。没有种子商店：`plant(Entities.Carrot)` 直接扣背包里的干草和木头。`trade()` 已从游戏移除。",
 					de: "Neu für 1.0+. Karotten brauchen Soil. Kein Samenhandel: `plant()` zieht Heu und Holz. `trade()` entfernt.",
+					ru: "Переписано для 1.0+. Морковь нуждается в обработанной почве. Нет магазина семян: «растение(Entities.Carrot)» тратит сено и древесину из инвентаря. «trade()» был удален из игры.",
 				})}
 			</p>
 		</section>
@@ -56,19 +60,25 @@ const description = {
 
 		<section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
 			<h2 class="text-2xl font-bold text-orange-700 dark:text-orange-300">
-				{t({ en: "1.0 carrot rules (outdated tips to ignore)", zh: "1.0 胡萝卜规则（别再用旧写法）", de: "1.0-Karotten-Regeln" })}
+				{t({ en: "1.0 carrot rules (outdated tips to ignore)", zh: "1.0 胡萝卜规则（别再用旧写法）", de: "1.0-Karotten-Regeln",
+ru: "1.0 морковные правила (устаревшие советы, которые нужно игнорировать)" })}
 			</h2>
 			<ul>
-				<li>{t({ en: "`plant(Entities.Carrot)` fails unless `get_ground_type() == Grounds.Soil`. Call `till()` on Grassland. Calling `till()` again turns Soil back to Grassland.", zh: "`get_ground_type() == Grounds.Soil` 才能种。草地上先 `till()`。再 `till()` 一次会把土翻回草地。", de: "Nur auf Soil pflanzen. `till()` auf Grassland." })}</li>
-				<li>{t({ en: "**No `Items.Carrot_Seed`.** Planting costs hay + wood automatically. Check with `get_cost(Entities.Carrot)` (amounts scale with carrot upgrades).", zh: "**没有 `Items.Carrot_Seed`。** 种植自动扣干草+木头。用 `get_cost(Entities.Carrot)` 查看（随胡萝卜升级缩放）。", de: "Kein Carrot_Seed. Kosten via `get_cost(Entities.Carrot)`." })}</li>
-				<li>{t({ en: "**No `trade()`.** Water accrues automatically every 10s. Water with `use_item(Items.Water)` (old name `Items.Water_Tank` was renamed).", zh: "**没有 `trade()`。** 水每 10 秒自动进包。浇水用 `use_item(Items.Water)`（旧名 `Water_Tank` 已改名）。", de: "Kein trade(). Gießen: `use_item(Items.Water)`." })}</li>
-				<li>{t({ en: "`get_water()` is 0–1. Growth scales up to 5× at water level 1. Skip watering until you unlock Watering.", zh: "`get_water()` 为 0–1。水位 1 时生长最高约 5×。未解锁浇水就删掉浇水段。", de: "`get_water()` 0–1, bis 5× Wachstum." })}</li>
+				<li>{t({ en: "`plant(Entities.Carrot)` fails unless `get_ground_type() == Grounds.Soil`. Call `till()` on Grassland. Calling `till()` again turns Soil back to Grassland.", zh: "`get_ground_type() == Grounds.Soil` 才能种。草地上先 `till()`。再 `till()` 一次会把土翻回草地。", de: "Nur auf Soil pflanzen. `till()` auf Grassland.",
+ru: "`plant(Entities.Carrot)` терпит неудачу, если `get_ground_type() == Grounds.Soil`. Вызовите `till()` на пастбище. Вызов «till()» снова превращает Почву обратно в Пастбища." })}</li>
+				<li>{t({ en: "**No `Items.Carrot_Seed`.** Planting costs hay + wood automatically. Check with `get_cost(Entities.Carrot)` (amounts scale with carrot upgrades).", zh: "**没有 `Items.Carrot_Seed`。** 种植自动扣干草+木头。用 `get_cost(Entities.Carrot)` 查看（随胡萝卜升级缩放）。", de: "Kein Carrot_Seed. Kosten via `get_cost(Entities.Carrot)`.",
+ru: "**Нет `Items.Carrot_Seed`.** Посадка стоит сено + дрова автоматически. Проверьте с помощью `get_cost(Entities.Carrot)` (суммы масштабируются с улучшением морковки)." })}</li>
+				<li>{t({ en: "**No `trade()`.** Water accrues automatically every 10s. Water with `use_item(Items.Water)` (old name `Items.Water_Tank` was renamed).", zh: "**没有 `trade()`。** 水每 10 秒自动进包。浇水用 `use_item(Items.Water)`（旧名 `Water_Tank` 已改名）。", de: "Kein trade(). Gießen: `use_item(Items.Water)`.",
+ru: "**Нет `trade()`.** Вода накапливается автоматически каждые 10 секунд. Вода с `use_item(Items.Water)` (старое название `Items.Water_Tank` было переименовано)." })}</li>
+				<li>{t({ en: "`get_water()` is 0–1. Growth scales up to 5× at water level 1. Skip watering until you unlock Watering.", zh: "`get_water()` 为 0–1。水位 1 时生长最高约 5×。未解锁浇水就删掉浇水段。", de: "`get_water()` 0–1, bis 5× Wachstum.",
+ru: "`get_water()` равно 0–1. Шкалы роста до 5× на уровне воды 1. Пропустите полив, пока не разблокируете полив." })}</li>
 			</ul>
 		</section>
 
 		<section class="py-6">
 			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-				{t({ en: "Copy-paste carrot loop (verified 1.0 APIs)", zh: "可复制胡萝卜循环（已核对 1.0 API）", de: "Karotten-Schleife (geprüfte 1.0-APIs)" })}
+				{t({ en: "Copy-paste carrot loop (verified 1.0 APIs)", zh: "可复制胡萝卜循环（已核对 1.0 API）", de: "Karotten-Schleife (geprüfte 1.0-APIs)",
+ru: "Копировально-пастовая морковная петля (проверенные 1.0 API)" })}
 			</h2>
 			<CodeBlock
 				height="max-h-[520px]"
@@ -100,28 +110,33 @@ const description = {
 					en: "If `get_cost` / `Unlocks.Costs` is not unlocked yet, delete the cost block and call `plant(Entities.Carrot)` directly — it still spends hay+wood when you have them.",
 					zh: "若尚未解锁 `get_cost` / `Unlocks.Costs`，删掉 cost 判断，直接 `plant(Entities.Carrot)`——有资源时仍会扣干草+木头。",
 					de: "Ohne Costs-Unlock den cost-Block löschen und direkt plant() aufrufen.",
+					ru: "Если «get_cost» / «Unlocks.Costs» еще не разблокирован, удалите блок затрат и вызовите «plant(Entities.Carrot)» напрямую — он по-прежнему расходует сено+дрова, когда они у вас есть.",
 				})}
 			</p>
 		</section>
 
 		<section class="py-8 bg-orange-50 dark:bg-orange-900/20 rounded-2xl border border-orange-100 dark:border-orange-800 p-6 mb-8">
 			<h3 class="text-xl font-bold mb-3 text-orange-800 dark:text-orange-300">
-				{t({ en: "Next crops", zh: "下一步作物", de: "Nächste Kulturen" })}
+				{t({ en: "Next crops", zh: "下一步作物", de: "Nächste Kulturen",
+ru: "Следующие культуры" })}
 			</h3>
 			<p class="text-orange-900 dark:text-orange-100">
 				{t({
 					en: "Pumpkins also need soil and cost carrots to plant; ~20% die as Dead_Pumpkin. Trees need a checkerboard so neighbors do not double grow time.",
 					zh: "南瓜也要土，种植耗胡萝卜；约 20% 变成 Dead_Pumpkin。树木要棋盘格，否则邻居让生长翻倍。",
 					de: "Kürbisse brauchen Soil und Karotten; ~20% Dead_Pumpkin. Bäume brauchen Schachbrett.",
+					ru: "Тыквы также нуждаются в почве и стоят моркови для посадки; ~20% умирают как Dead_Pumpkin. Деревьям нужна шахматная доска, чтобы соседи не удваивали время роста.",
 				})}
 			</p>
 			<p class="mt-3">
 				<a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")}>
-					{t({ en: "pumpkin code", zh: "南瓜代码", de: "Kürbis-Code" })}
+					{t({ en: "pumpkin code", zh: "南瓜代码", de: "Kürbis-Code",
+ru: "код тыквы" })}
 				</a>
 				<span class="mx-2">·</span>
 				<a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/tree-code")}>
-					{t({ en: "tree code", zh: "树木代码", de: "Baum-Code" })}
+					{t({ en: "tree code", zh: "树木代码", de: "Baum-Code",
+ru: "древовидный код" })}
 				</a>
 			</p>
 		</section>
@@ -129,7 +144,8 @@ const description = {
 		<RelatedGuides current="/codes/carrot-code" />
 		<div class="text-center py-6">
 			<a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
-				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite" })}
+				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite",
+ru: "← На главную" })}
 			</a>
 		</div>
 		<div id="utterances-container" class="my-10"></div>

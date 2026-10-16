@@ -32,9 +32,11 @@ const { image, alt = "", code = "" ,height="max-h-[350px]"} = Astro.props;
                     btn.textContent = originalText;
                 }, 2000);
             "
-            data-success={t({ zh: "已复制!", en: "Copied!" })}
+            data-success={t({ zh: "已复制!",
+ru: "Скопировано!", en: "Copied!" })}
         >
-            {t({ zh: "复制", en: "Copy" })}
+            {t({ zh: "复制",
+ru: "Копировать", en: "Copy" })}
         </button>
 
         <div class="rounded-b-xl overflow-hidden bg-[#282c34] shadow-2xl ring-1 ring-gray-900/5">

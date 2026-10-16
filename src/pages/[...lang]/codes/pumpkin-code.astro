@@ -24,12 +24,14 @@ const title = {
 	en: "Pumpkin Code — Giant Pumpkin, measure() Size Check, Don't Harvest Early",
 	zh: "南瓜代码 — 巨大南瓜、measure() 尺寸检查，别提前收",
 	de: "Kürbis-Code — Riesenkürbis, measure()-Größenprüfung, nicht zu früh ernten",
+	ru: "Код тыквы — гигантская тыква, проверка размера measure(), не собирайте рано",
 };
 
 const description = {
 	en: "The Farmer Was Replaced pumpkin code for 1.0+: patch dead tiles, use measure() to check pumpkin size on opposite corners, harvest only when the full grid merged (n³ then 6n²).",
 	zh: "编程农场 1.0+ 南瓜代码：补枯死格，用 measure() 对角检查南瓜尺寸，整田合并后再收（n³，后 6n²）。",
 	de: "Kürbis-Code 1.0+: tote Felder flicken, measure() an gegenüberliegenden Ecken prüfen, erst ernten wenn das Raster fusioniert (n³, dann 6n²).",
+	ru: "Код тыквы The Farmer Was Replaced 1.0+: чините мёртвые клетки, measure() по диагонали, собирайте только после слияния всей сетки (n³, затем 6n²).",
 };
 ---
 
@@ -41,6 +43,7 @@ const description = {
 					en: "The Farmer Was Replaced Pumpkin Code — Patch Dead Tiles, Then Harvest",
 					zh: "编程农场南瓜代码 — 先补枯死格，再收巨大南瓜",
 					de: "The Farmer Was Replaced Kürbis-Code — tote Felder flicken, dann ernten",
+					ru: "The Farmer был заменен на Pumpkin Code — Patch Dead Tiles, Then Harvest",
 				})}
 			</h1>
 			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -48,6 +51,7 @@ const description = {
 					en: "Written for the current 1.0+ build (multi-drone era). Pumpkins merge into one giant crop. A simple harvest loop collapses the merge. Track dead tiles, replant, and harvest only when every tile is a live pumpkin.",
 					zh: "按当前 1.0+（多无人机）机制重写。南瓜会合并成巨大作物；普通收割循环会拆掉合并。记下枯死格、补种，整田都是活南瓜再收。",
 					de: "Für den aktuellen 1.0+-Stand. Kürbisse fusionieren. Einfache Ernte-Schleifen zerstören die Fusion. Tote Felder tracken, nachpflanzen, erst ernten wenn alles lebendig ist.",
+					ru: "Написано для текущей сборки 1.0+ (эра нескольких дронов). Тыквы сливаются в один гигантский урожай. Простая петля сбора сворачивает слияние. Отслеживайте мертвые плитки, пересаживайте и собирайте урожай только тогда, когда каждая плитка - живая тыква.",
 				})}
 			</p>
 		</section>
@@ -56,20 +60,26 @@ const description = {
 
 		<section class="py-8 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
 			<h2 class="text-2xl font-bold text-orange-700 dark:text-orange-400">
-				{t({ en: "1.0 pumpkin rules (what changed vs old tips)", zh: "1.0 南瓜规则（和旧攻略差在哪）", de: "1.0-Kürbis-Regeln" })}
+				{t({ en: "1.0 pumpkin rules (what changed vs old tips)", zh: "1.0 南瓜规则（和旧攻略差在哪）", de: "1.0-Kürbis-Regeln",
+ru: "1.0 тыквенные правила (что изменилось по сравнению со старыми советами)" })}
 			</h2>
 			<ul>
-				<li>{t({ en: "Plant on soil: `till()` until `Grounds.Soil`. Planting spends carrots (check `get_cost(Entities.Pumpkin)`).", zh: "种在土上：`till()` 到 `Grounds.Soil`。种植消耗胡萝卜（用 `get_cost(Entities.Pumpkin)` 看花费）。", de: "Auf Soil pflanzen. Kosten mit `get_cost(Entities.Pumpkin)` prüfen." })}</li>
-				<li>{t({ en: "About 1 in 5 pumpkins die at ripeness and leave `Entities.Dead_Pumpkin`. `can_harvest()` is always False on a dead tile. Dead tiles block the giant merge.", zh: "约五分之一成熟时枯死，留下 `Entities.Dead_Pumpkin`。枯死格上 `can_harvest()` 永远是 False，并挡住巨大合并。", de: "Etwa jeder fünfte stirbt als Dead_Pumpkin und blockiert die Fusion." })}</li>
-				<li>{t({ en: "Fully grown adjacent pumpkins merge. Yield is **n³** for side length 1–5, then **6·n²** from 6×6 up (32×32 → 6,144). Harvest early and you only get small clusters.", zh: "相邻成熟南瓜会合并。边长 1–5 产量是 **n³**，从 6×6 起是 **6·n²**（32×32 → 6144）。提前收只剩小块。", de: "Ertrag: n³ für 1–5, ab 6×6: 6·n² (32×32 → 6144)." })}</li>
-				<li>{t({ en: "Water speeds growth (up to 5× at water level 1) but does **not** stop deaths. Planting anything on a dead pumpkin clears it (wiki). Optionally fertilize the **new** plant after replanting to cut 2s grow time.", zh: "浇水加速生长（水位 1 时最高约 5×），但**挡不住**枯死。在枯死格上种任何东西都会清掉它（wiki）。补种后可对**新苗**施肥，缩短约 2 秒生长。", de: "Wasser beschleunigt, verhindert aber keine Tode. Darüber pflanzen entfernt Dead Pumpkin (Wiki). Optional die neue Pflanze düngen (−2s)." })}</li>
+				<li>{t({ en: "Plant on soil: `till()` until `Grounds.Soil`. Planting spends carrots (check `get_cost(Entities.Pumpkin)`).", zh: "种在土上：`till()` 到 `Grounds.Soil`。种植消耗胡萝卜（用 `get_cost(Entities.Pumpkin)` 看花费）。", de: "Auf Soil pflanzen. Kosten mit `get_cost(Entities.Pumpkin)` prüfen.",
+ru: "Растение на почве: «till()» до «Grounds.Soil». Посадка тратит морковь (галочка `get_cost(Entities.Pumpkin)`)." })}</li>
+				<li>{t({ en: "About 1 in 5 pumpkins die at ripeness and leave `Entities.Dead_Pumpkin`. `can_harvest()` is always False on a dead tile. Dead tiles block the giant merge.", zh: "约五分之一成熟时枯死，留下 `Entities.Dead_Pumpkin`。枯死格上 `can_harvest()` 永远是 False，并挡住巨大合并。", de: "Etwa jeder fünfte stirbt als Dead_Pumpkin und blockiert die Fusion.",
+ru: "Примерно 1 из 5 тыкв умирает при созревании и оставляет «Entities.Dead_Pumpkin». «can_harvest()» всегда ложно на мертвой плитке. Мертвые плитки блокируют гигантское слияние." })}</li>
+				<li>{t({ en: "Fully grown adjacent pumpkins merge. Yield is **n³** for side length 1–5, then **6·n²** from 6×6 up (32×32 → 6,144). Harvest early and you only get small clusters.", zh: "相邻成熟南瓜会合并。边长 1–5 产量是 **n³**，从 6×6 起是 **6·n²**（32×32 → 6144）。提前收只剩小块。", de: "Ertrag: n³ für 1–5, ab 6×6: 6·n² (32×32 → 6144).",
+ru: "Полностью выращенные соседние тыквы сливаются. Выход составляет **n³** для длины стороны 1–5, затем **6·n²** от 6×6 до (32×32 → 6,144). Собирайте урожай рано, и вы получите только небольшие кластеры." })}</li>
+				<li>{t({ en: "Water speeds growth (up to 5× at water level 1) but does **not** stop deaths. Planting anything on a dead pumpkin clears it (wiki). Optionally fertilize the **new** plant after replanting to cut 2s grow time.", zh: "浇水加速生长（水位 1 时最高约 5×），但**挡不住**枯死。在枯死格上种任何东西都会清掉它（wiki）。补种后可对**新苗**施肥，缩短约 2 秒生长。", de: "Wasser beschleunigt, verhindert aber keine Tode. Darüber pflanzen entfernt Dead Pumpkin (Wiki). Optional die neue Pflanze düngen (−2s).",
+ru: "Вода ускоряет рост (до 5раз на уровне воды 1), но не останавливает смертность. Посадка чего-либо на мертвую тыкву очищает его (вики). Дополнительно удобрите * * новое * * растение после пересадки, чтобы сократить время роста на 2 секунды." })}</li>
 			</ul>
 		</section>
 
 		<section class="py-10 grid md:grid-cols-2 gap-8 items-center">
 			<div class="order-2 md:order-1">
 				<h2 class="text-2xl font-bold mb-4 text-orange-600 dark:text-orange-400">
-					{t({ en: "Strategy: plant → track bad tiles → patch → harvest", zh: "策略：种满 → 记坏格 → 只补坏格 → 再收", de: "Strategie: pflanzen → Bad-Tiles → flicken → ernten" })}
+					{t({ en: "Strategy: plant → track bad tiles → patch → harvest", zh: "策略：种满 → 记坏格 → 只补坏格 → 再收", de: "Strategie: pflanzen → Bad-Tiles → flicken → ernten",
+ru: "Стратегия: растение → трек плохая плитка → патч → урожай" })}
 				</h2>
 				<div class="prose dark:prose-invert text-gray-700 dark:text-gray-300 space-y-4">
 					<p>
@@ -77,13 +87,22 @@ const description = {
 							en: "Do not re-scan the whole farm forever. After the first pass, keep a list of coordinates that are empty, dead, or not yet harvestable. Only fly back to those tiles.",
 							zh: "不要永远全图扫描。第一遍之后，只保留空格、枯死、未成熟的坐标列表，无人机只飞回这些格子。",
 							de: "Nicht ewig das ganze Feld scannen. Nach dem ersten Pass nur leere/tote/unreife Koordinaten anfliegen.",
+							ru: "Не сканируйте всю ферму вечно. После первого прохода сохраните список координат, которые являются пустыми, мертвыми или еще не собираемыми. Возвращайтесь только к этим плиткам.",
 						})}
 					</p>
 					<ul class="list-disc pl-5 space-y-2">
-						<li><strong>{t({ en: "Plant:", zh: "种：", de: "Pflanzen:" })}</strong> {t({ en: "Till + plant every tile once.", zh: "每格翻土并种一次。", de: "Einmal pflügen und pflanzen." })}</li>
-						<li><strong>{t({ en: "Track:", zh: "记：", de: "Tracken:" })}</strong> {t({ en: "Append `[x, y]` when `not can_harvest()` or entity is Dead_Pumpkin.", zh: "`not can_harvest()` 或实体是 Dead_Pumpkin 时记下 `[x, y]`。", de: "`[x, y]` merken wenn nicht erntebereit." })}</li>
-						<li><strong>{t({ en: "Patch:", zh: "补：", de: "Flicken:" })}</strong> {t({ en: "Replant over dead/empty; optionally `use_item(Items.Fertilizer)` on the new plant.", zh: "在枯死/空格上补种；可对新苗 `use_item(Items.Fertilizer)`。", de: "Darüber pflanzen; optional neue Pflanze düngen." })}</li>
-						<li><strong>{t({ en: "Harvest:", zh: "收：", de: "Ernten:" })}</strong> {t({ en: "When the bad list is empty, `harvest()` once anywhere on the giant pumpkin.", zh: "坏格列表空了，在巨大南瓜任意一格 `harvest()` 一次即可。", de: "Liste leer → einmal harvest()." })}</li>
+						<li><strong>{t({ en: "Plant:", zh: "种：", de: "Pflanzen:",
+ru: "Завод" })}</strong> {t({ en: "Till + plant every tile once.", zh: "每格翻土并种一次。", de: "Einmal pflügen und pflanzen.",
+ru: "До + посадите каждую плитку один раз." })}</li>
+						<li><strong>{t({ en: "Track:", zh: "记：", de: "Tracken:",
+ru: "Трек:" })}</strong> {t({ en: "Append `[x, y]` when `not can_harvest()` or entity is Dead_Pumpkin.", zh: "`not can_harvest()` 或实体是 Dead_Pumpkin 时记下 `[x, y]`。", de: "`[x, y]` merken wenn nicht erntebereit.",
+ru: "Добавьте `[x, y]`, когда `not can_harvest()` или сущность Dead_Pumpkin." })}</li>
+						<li><strong>{t({ en: "Patch:", zh: "补：", de: "Flicken:",
+ru: "Патч:" })}</strong> {t({ en: "Replant over dead/empty; optionally `use_item(Items.Fertilizer)` on the new plant.", zh: "在枯死/空格上补种；可对新苗 `use_item(Items.Fertilizer)`。", de: "Darüber pflanzen; optional neue Pflanze düngen.",
+ru: "Пересадка через мертвый/пустой; опционально `use_item(Items.Fertilizer)` на новом заводе." })}</li>
+						<li><strong>{t({ en: "Harvest:", zh: "收：", de: "Ernten:",
+ru: "Сбор урожая:" })}</strong> {t({ en: "When the bad list is empty, `harvest()` once anywhere on the giant pumpkin.", zh: "坏格列表空了，在巨大南瓜任意一格 `harvest()` 一次即可。", de: "Liste leer → einmal harvest().",
+ru: "Когда плохой список пуст, «собрать урожай()» один раз в любом месте гигантской тыквы." })}</li>
 					</ul>
 				</div>
 			</div>
@@ -96,13 +115,15 @@ const description = {
 
 		<section class="py-6">
 			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-				{t({ en: "Teaching script (single drone)", zh: "教学脚本（单无人机）", de: "Lehrskript (eine Drohne)" })}
+				{t({ en: "Teaching script (single drone)", zh: "教学脚本（单无人机）", de: "Lehrskript (eine Drohne)",
+ru: "Сценарий обучения (один дрон)" })}
 			</h2>
 			<p class="mb-4 text-gray-600 dark:text-gray-400">
 				{t({
 					en: "Uses only documented APIs. No invented helpers. After Megafarm, split the farm into column/sector loops — see the multi-drone note below.",
 					zh: "只用文档里的 API。解锁 Megafarm 后按列/扇区拆分——见下方多无人机说明。",
 					de: "Nur dokumentierte APIs. Nach Megafarm Spalten/Sektoren teilen.",
+					ru: "Использует только документированные API. Никаких придуманных помощников. После Megafarm разделите ферму на петли колонн/секторов — см. примечание для нескольких дронов ниже.",
 				})}
 			</p>
 			<CodeBlock
@@ -181,6 +202,7 @@ while True:
 					en: "How to check pumpkin size with measure() (pumpkin measure)",
 					zh: "用 measure() 检查南瓜尺寸（pumpkin measure）",
 					de: "Kürbisgröße mit measure() prüfen (pumpkin measure)",
+					ru: "Как проверить размер тыквы с помощью меры() (тыквенная мера)",
 				})}
 			</h2>
 			<ul>
@@ -188,21 +210,25 @@ while True:
 					en: "On pumpkins, `measure()` returns a stable ID for that merged pumpkin (same value on every tile of the same giant pumpkin).",
 					zh: "在南瓜上，`measure()` 返回该合并南瓜的稳定 ID（同一巨大南瓜的每格数值相同）。",
 					de: "Auf Kürbissen liefert `measure()` eine stabile ID derselben Fusion (gleicher Wert auf jedem Feld).",
+					ru: "На тыквах «measure()» возвращает стабильный идентификатор для этой объединенной тыквы (одинаковое значение на каждой плитке одной и той же гигантской тыквы).",
 				})}</li>
 				<li>{t({
 					en: "To check if the **whole square field** has merged: measure one corner, measure the opposite corner; if the values match, harvest.",
 					zh: "检查**整块方形田**是否已合并：量一个角，再量对角；数值相同就可以收。",
 					de: "Ganze Quadratfläche fusioniert? Eine Ecke und die gegenüberliegende messen — gleiche Werte → ernten.",
+					ru: "Чтобы проверить, слилось ли **целое квадратное поле**: измерьте один угол, измерьте противоположный угол; если значения совпадают, соберите урожай.",
 				})}</li>
 				<li>{t({
 					en: "Works reliably on **square** monocrop pumpkin fields. Rectangular mixed fields can merge in odd shapes — then keep using the bad-tile list.",
 					zh: "在**方形**纯南瓜田上很稳。矩形或混种田可能奇形合并——那时继续用坏格列表。",
 					de: "Zuverlässig auf **quadratischen** Monokultur-Feldern. Rechteck/Mix → weiter Bad-Tile-Liste nutzen.",
+					ru: "Надежно работает на **квадратных** монокультурных тыквенных полях. Прямоугольные смешанные поля могут сливаться в нечетные фигуры — тогда продолжайте использовать список плохих плиток.",
 				})}</li>
 				<li>{t({
 					en: "This answers searches for **pumpkin measure** and **how to check pumpkin size** without inventing a separate page.",
 					zh: "这样就能覆盖 **pumpkin measure** 和 **how to check pumpkin size** 的搜索，不必另开一页。",
 					de: "Deckt Suchen nach **pumpkin measure** und **how to check pumpkin size** ab.",
+					ru: "Это ответы на поиск ** меры тыквы ** и **как проверить размер тыквы **, не придумывая отдельную страницу.",
 				})}</li>
 			</ul>
 			<p class="mb-4">
@@ -210,6 +236,7 @@ while True:
 					en: "Example helper you can call after `patch_bad(...)`:",
 					zh: "在 `patch_bad(...)` 之后可调用的示例：",
 					de: "Beispiel-Hilfe nach `patch_bad(...)`:",
+					ru: "Пример помощника, который вы можете вызвать после `patch_bad(...)`:",
 				})}
 			</p>
 			<CodeBlock
@@ -235,26 +262,35 @@ if pumpkin_fully_merged():
 					en: "Scaling further with a drone fleet? See the ",
 					zh: "要用多无人机继续扩规模？看 ",
 					de: "Weiter skalieren mit Drohnenflotte? Siehe ",
+					ru: "Дальнейшее масштабирование с помощью флота дронов? Смотрите",
 				})}
 				<a class="text-orange-700 dark:text-orange-400 underline" href={getRelativeLocaleUrl(locale, "/blog/multiple-drones")}>
-					{t({ en: "multiple drones", zh: "多无人机", de: "multiple drones" })}
+					{t({ en: "multiple drones", zh: "多无人机", de: "multiple drones",
+ru: "несколько дронов" })}
 				</a>
-				{t({ en: " guide.", zh: " 指南。", de: "-Guide." })}
+				{t({ en: " guide.", zh: " 指南。", de: "-Guide.",
+ru: "Гайд." })}
 			</p>
 		</section>
 
 		<section class="py-8 bg-orange-50 dark:bg-orange-900/20 rounded-2xl border border-orange-100 dark:border-orange-800 p-6 mb-8">
 			<h3 class="text-xl font-bold mb-3 text-orange-800 dark:text-orange-300">
-				{t({ en: "Multi-drone (Megafarm) — Sep–Oct 2026 consensus", zh: "多无人机（Megafarm）— 2026年9–10月共识", de: "Multi-Drohne — Konsens Sep–Okt 2026" })}
+				{t({ en: "Multi-drone (Megafarm) — Sep–Oct 2026 consensus", zh: "多无人机（Megafarm）— 2026年9–10月共识", de: "Multi-Drohne — Konsens Sep–Okt 2026",
+ru: "Multi-drone (Megafarm) — сентябрь-октябрь 2026 консенсус" })}
 			</h3>
 			<ul class="space-y-2 text-orange-900 dark:text-orange-100 list-disc pl-5">
-				<li>{t({ en: "Drones do **not** share globals. Give each drone its own column range or rectangle; do not append to one shared bad-tile list from every drone.", zh: "无人机**不共享**全局变量。每架机分一段列或矩形；不要让所有机往同一个坏格列表里 append。", de: "Keine gemeinsamen Globals. Jede Drohne eigener Sektor." })}</li>
-				<li>{t({ en: "`spawn_drone(fn)` then `wait_for(handle)` to sync phases (plant → patch → harvest). Pattern: `if not spawn_drone(task): task()`.", zh: "`spawn_drone(fn)` 后用 `wait_for(handle)` 同步阶段（种→补→收）。常用：`if not spawn_drone(task): task()`。", de: "`spawn_drone` + `wait_for`. Muster: `if not spawn_drone(task): task()`." })}</li>
-				<li>{t({ en: "Leaderboard farms water every tile and keep the bad-tile loop tight — community posts report multi-million pumpkin/min with parallel sectors.", zh: "冲榜会每格浇水并收紧坏格循环——社区有多扇区并行冲到数百万南瓜/分钟的记录。", de: "Bestzeiten gießen jedes Feld und halten die Bad-Tile-Schleife eng." })}</li>
+				<li>{t({ en: "Drones do **not** share globals. Give each drone its own column range or rectangle; do not append to one shared bad-tile list from every drone.", zh: "无人机**不共享**全局变量。每架机分一段列或矩形；不要让所有机往同一个坏格列表里 append。", de: "Keine gemeinsamen Globals. Jede Drohne eigener Sektor.",
+ru: "Дроны **не** делятся глобалами. Дайте каждому дрону свой собственный диапазон столбцов или прямоугольник; не добавляйте к одному общему списку бэд-тайлов от каждого дрона." })}</li>
+				<li>{t({ en: "`spawn_drone(fn)` then `wait_for(handle)` to sync phases (plant → patch → harvest). Pattern: `if not spawn_drone(task): task()`.", zh: "`spawn_drone(fn)` 后用 `wait_for(handle)` 同步阶段（种→补→收）。常用：`if not spawn_drone(task): task()`。", de: "`spawn_drone` + `wait_for`. Muster: `if not spawn_drone(task): task()`.",
+ru: "`spawn_drone(fn)` then `wait_for(handle)` to sync phases (plant → patch → harvest). Pattern: `if not spawn_drone(task): task()`." })}</li>
+				<li>{t({ en: "Leaderboard farms water every tile and keep the bad-tile loop tight — community posts report multi-million pumpkin/min with parallel sectors.", zh: "冲榜会每格浇水并收紧坏格循环——社区有多扇区并行冲到数百万南瓜/分钟的记录。", de: "Bestzeiten gießen jedes Feld und halten die Bad-Tile-Schleife eng.",
+ru: "Фермы-лидеры поливают каждую плитку и плотно затягивают петлю плохой плитки — посты в сообществе сообщают о многомиллионной тыкве/мин с параллельными секторами." })}</li>
 				<li>
-					{t({ en: "Full Megafarm patterns: ", zh: "完整 Megafarm 写法：", de: "Volle Megafarm-Muster: " })}
+					{t({ en: "Full Megafarm patterns: ", zh: "完整 Megafarm 写法：", de: "Volle Megafarm-Muster: ",
+ru: "Полные паттерны Megafarm:" })}
 					<a class="underline" href={getRelativeLocaleUrl(locale, "/blog/multiple-drones")}>
-						{t({ en: "multiple drones guide", zh: "多无人机指南", de: "Multiple-Drones-Guide" })}
+						{t({ en: "multiple drones guide", zh: "多无人机指南", de: "Multiple-Drones-Guide",
+ru: "руководство по нескольким дронам" })}
 					</a>
 				</li>
 			</ul>
@@ -263,7 +299,8 @@ if pumpkin_fully_merged():
 		<RelatedGuides current="/codes/pumpkin-code" />
 		<div class="text-center py-6">
 			<a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
-				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite" })}
+				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite",
+ru: "← На главную" })}
 			</a>
 		</div>
 		<div id="utterances-container" class="my-10"></div>

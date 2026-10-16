@@ -23,12 +23,14 @@ const title = {
 	en: "GitHub — Community Script Collections",
 	zh: "GitHub — 社区脚本合集",
 	de: "GitHub — Community-Skriptsammlungen",
+	ru: "GitHub — Коллекции скриптов сообщества",
 };
 
 const description = {
 	en: "The Farmer Was Replaced GitHub repos: beginner copy-paste pages on this site, then community collections for multi-drone and leaderboard scripts. We do not paste GPL source here.",
 	zh: "编程农场 GitHub：本站是入门可复制页。多无人机和冲榜脚本去社区仓库。这里不粘贴 GPL 源码。",
 	de: "The Farmer Was Replaced GitHub: Anfänger-Skripte hier, Community-Repos für Multi-Drohne. Kein GPL-Quelltext auf dieser Seite.",
+	ru: "Репозитории Farmer Was Replaced на GitHub: страницы копипаста для начинающих на этом сайте, а затем коллекции сообществ для сценариев с несколькими дронами и таблицами лидеров. Мы не вставляем сюда источник GPL.",
 };
 
 const repos = [
@@ -39,6 +41,7 @@ const repos = [
 			en: "Largest strategy collection (GPL-3.0). Open it on GitHub; do not copy the files onto an ad site.",
 			zh: "最大的策略合集（GPL-3.0）。在 GitHub 打开。不要把文件贴到广告站。",
 			de: "Größte Strategiesammlung (GPL-3.0). Auf GitHub öffnen, nicht hierher kopieren.",
+			ru: "Самая большая коллекция стратегий (GPL-3.0). Откройте его на GitHub; не копируйте файлы на рекламный сайт.",
 		},
 	},
 	{
@@ -48,6 +51,7 @@ const repos = [
 			en: "Single-drone and multi-drone scripts with a Chinese/English README, including carrot and pumpkin variants.",
 			zh: "单无人机和多无人机，中英 README，含胡萝卜和南瓜变体。",
 			de: "Einzel- und Multi-Drohnen-Skripte, README auf Chinesisch/Englisch.",
+			ru: "Сценарии с одним дроном и несколькими дронами с китайским/английским README, включая морковный и тыквенный варианты.",
 		},
 	},
 	{
@@ -57,6 +61,7 @@ const repos = [
 			en: "Reusable drone_grid helpers, sunflower / maze / cactus / bones modules. Good when you already have unlocks and want multi-drone scaffolding.",
 			zh: "可复用的 drone_grid、向日葵/迷宫/仙人掌/骨头模块。适合已解锁多无人机时搭骨架。",
 			de: "Wiederverwendbare drone_grid-Helfer und Module für Sonnenblume, Labyrinth, Kaktus, Knochen.",
+			ru: "Многоразовые модули drone_grid helpers, sunflower / maze / cactus /bone. Хорошо, когда у вас уже есть разблокировки и вам нужны многодронные леса.",
 		},
 	},
 	{
@@ -66,6 +71,7 @@ const repos = [
 			en: "Annotated end-game scripts and study notes (updated through Oct 2026). Learning-focused, not a GPL dump to mirror.",
 			zh: "带注释的终局脚本与学习笔记（至 2026-10 仍有更新）。偏学习，不要整站镜像。",
 			de: "Kommentierte Endgame-Skripte und Lernnotizen (Stand Okt 2026).",
+			ru: "Аннотированные сценарии эндшпиля и учебные заметки (обновлялись до октября 2026 года). Ориентирован на обучение, а не на дамп GPL для зеркального отображения.",
 		},
 	},
 	{
@@ -75,6 +81,7 @@ const repos = [
 			en: "Updated September 2026. Per-crop rates for pumpkin, cactus, maze gold, and full automation. Copyright stays with the author.",
 			zh: "2026 年 9 月更新。南瓜、仙人掌、迷宫金和全自动产量。版权在作者。",
 			de: "Stand September 2026. Raten pro Kultur. Urheberrecht beim Autor.",
+			ru: "Обновлено сентябрь 2026 г. Ставки на урожай тыквы, кактуса, лабиринтного золота и полная автоматизация. Авторское право остается за автором.",
 		},
 	},
 	{
@@ -84,6 +91,7 @@ const repos = [
 			en: "Releases November 2, 2026. Mining, new resources, Minesweeper-style challenge. Wishlist on Steam.",
 			zh: "2026-11-02 发售。采矿、新资源、扫雷式挑战。Steam 愿望单。",
 			de: "Erscheint am 2.11.2026. Bergbau, neue Ressourcen. Auf Steam wishlisten.",
+			ru: "Выпущен 2 ноября 2026 года. Добыча полезных ископаемых, новые ресурсы, вызов в стиле тральщика. Список желаний в Steam.",
 		},
 	},
 	{
@@ -93,6 +101,7 @@ const repos = [
 			en: "Mechanics: cactus sort order, sunflower petals, get_companion(). Use this for rules, not for copy-paste farms.",
 			zh: "机制：仙人掌排序、向日葵花瓣、get_companion()。看规则，不看农场脚本。",
 			de: "Mechaniken: Kaktus-Sortierung, Sonnenblumen, get_companion().",
+			ru: "Механика: порядок сортировки кактусов, лепестки подсолнечника, get_companion(). Используйте это для правил, а не для ферм копирования и вставки.",
 		},
 	},
 ];
@@ -107,6 +116,7 @@ const repos = [
 						en: "The Farmer Was Replaced GitHub — Script Collections",
 						zh: "编程农场 GitHub — 脚本合集",
 						de: "The Farmer Was Replaced GitHub — Skriptsammlungen",
+						ru: "The Farmer заменили на GitHub — Script Collections",
 					})
 				}
 			</h1>
@@ -116,6 +126,7 @@ const repos = [
 						en: "Start on this site (carrot, pumpkin, cactus, maze). Open GitHub when you want multi-drone or leaderboard scripts. Those repos are not hosted here.",
 						zh: "先用本站胡萝卜、南瓜、仙人掌、迷宫页。要多无人机或冲榜再开 GitHub。那些仓库不托管在本站。",
 						de: "Zuerst die Seiten hier. GitHub für Multi-Drohne und Bestzeiten. Die Repos liegen nicht auf dieser Domain.",
+						ru: "Начните с этого сайта (морковь, тыква, кактус, лабиринт). Откройте GitHub, если вам нужны скрипты для нескольких дронов или лидеров. Эти репозитории здесь не размещаются.",
 					})
 				}
 			</p>
@@ -147,6 +158,7 @@ const repos = [
 					en: "Beginner copy-paste pages on this site:",
 					zh: "本站入门可复制页：",
 					de: "Anfänger-Seiten auf dieser Site:",
+					ru: "Страницы копипаста для начинающих на этом сайте:",
 				})
 			}
 			<a class="text-blue-600 underline" href={getRelativeLocaleUrl(locale, "/codes/carrot-code")}>carrot</a>

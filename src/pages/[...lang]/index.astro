@@ -28,12 +28,14 @@ const title = {
     en: "Codes, Guide & Python Scripts",
     zh: "代码、攻略与 Python 脚本",
     de: "Codes, Guide und Skripte",
+    ru: "Готовые коды, гайд и Python-скрипты",
 };
 
 const description = {
     en: "Copy-paste pumpkin, cactus, sunflower and maze codes for The Farmer Was Replaced. Steam desktop (Windows & macOS). DLC The Miner Was Replaced: Nov 2, 2026.",
     zh: "南瓜、仙人掌、向日葵、迷宫可复制代码。Steam 电脑游戏（Windows / macOS）。DLC《The Miner Was Replaced》2026-11-02。",
     de: "Kürbis-, Kaktus-, Sonnenblumen- und Labyrinth-Codes. Steam-PC (Windows & macOS). DLC The Miner Was Replaced: 2.11.2026.",
+    ru: "Готовые коды тыквы, кактуса, подсолнуха и лабиринта для The Farmer Was Replaced. Steam (Windows и macOS). DLC The Miner Was Replaced: 2 ноября 2026.",
 };
 ---
 
@@ -53,6 +55,7 @@ const description = {
                             zh: "编程农场代码与攻略",
                             en: "The Farmer Was Replaced Codes",
                             de: "The Farmer Was Replaced Codes",
+                            ru: "The Farmer Was Replaced — готовые коды",
                         })
                     }
                     <span class="text-green-600 block mt-4">
@@ -61,6 +64,7 @@ const description = {
                                 zh: "南瓜、仙人掌、向日葵与迷宫脚本",
                                 en: "Pumpkin, cactus, sunflower & maze scripts",
                                 de: "Kürbis-, Kaktus-, Sonnenblumen- und Labyrinth-Skripte",
+                                ru: "Скрипты: тыква, кактус, подсолнух и лабиринт",
                             })
                         }
                     </span>
@@ -72,6 +76,7 @@ const description = {
                             zh: `在这里复制《编程农场》南瓜、仙人掌、向日葵和迷宫脚本。Steam 电脑游戏（Windows / macOS 原生；Linux / Deck 走 Proton），没有<a class="text-green-700 dark:text-green-400 underline" href="${getRelativeLocaleUrl(locale, "/blog/mobile-android-online")}">网页版和手机版</a>。DLC《The Miner Was Replaced》将于 2026-11-02 发售。`,
                             en: `Copy-paste The Farmer Was Replaced codes for pumpkin, cactus, sunflower and maze. Steam desktop (Windows & macOS native; Linux/Deck via Proton) — not <a class="text-green-700 dark:text-green-400 underline" href="${getRelativeLocaleUrl(locale, "/blog/mobile-android-online")}">online or mobile</a>. DLC The Miner Was Replaced launches November 2, 2026.`,
                             de: `The Farmer Was Replaced Codes: Kürbis, Kaktus, Sonnenblume, Labyrinth. Steam-PC (Windows & macOS nativ; Linux/Deck via Proton) — nicht <a class="text-green-700 dark:text-green-400 underline" href="${getRelativeLocaleUrl(locale, "/blog/mobile-android-online")}">online oder mobil</a>. DLC The Miner Was Replaced erscheint am 2.11.2026.`,
+                            ru: `Копипаст The Farmer Was Replaced коды для тыквы, кактуса, подсолнечника и лабиринта. Настольный компьютер Steam (родной для Windows и macOS; Linux/Deck через Proton) — не <a class="text-green-700 dark:text-green-400 underline" href="${getRelativeLocaleUrl(locale, "/blog/mobile-android-online")}">онлайн или мобильный</a>. DLC The Miner Was Replaced выйдет 2 ноября 2026 года.`,
                         })} />
                 </p>
                 <div
@@ -86,6 +91,7 @@ const description = {
                                 zh: "看攻略，先复制脚本",
                                 en: "Read the guide",
                                 de: "Guide lesen",
+                                ru: "Читать гайд",
                             })
                         }
                     </a>
@@ -98,6 +104,7 @@ const description = {
                                 zh: "浏览脚本库",
                                 en: "Browse Scripts",
                                 de: "Skripte durchsuchen",
+                                ru: "Смотреть скрипты",
                             })
                         }
                     </a>
@@ -129,13 +136,15 @@ const description = {
     <div class="max-w-6xl mx-auto rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20 p-6 md:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
             <p class="text-sm font-bold uppercase tracking-wide text-amber-700 dark:text-amber-300 mb-1">
-                {t({ en: "News · Sep 2026", zh: "新闻 · 2026年9月", de: "News · Sep 2026" })}
+                {t({ en: "News · Sep 2026", zh: "新闻 · 2026年9月", de: "News · Sep 2026",
+ru: "Новости · Сен 2026" })}
             </p>
             <h2 class="text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white mb-2">
                 {t({
                     en: "DLC The Miner Was Replaced — November 2, 2026",
                     zh: "DLC《The Miner Was Replaced》— 2026年11月2日",
                     de: "DLC The Miner Was Replaced — 2. November 2026",
+                    ru: "DLC The Miner Was Replaced — 2 ноября 2026 года",
                 })}
             </h2>
             <p class="text-gray-700 dark:text-gray-300 max-w-3xl">
@@ -143,6 +152,7 @@ const description = {
                     en: "Official Steam announcement: leave the farm for underground mining — coal, quartz, mushrooms, dynamite, rice on clay, and a Minesweeper-style puzzle in a new unlock tree. Wishlist on Steam; playtest signup is on the base-game / DLC pages.",
                     zh: "Steam 官宣：离开农场进入地下采矿——煤、石英、蘑菇、炸药、黏土种稻，以及扫雷式谜题和新解锁树。可在 Steam 加入愿望单；试玩报名见本体 / DLC 页面。",
                     de: "Steam-Ankündigung: Untertage-Bergbau mit neuen Ressourcen und Programmier-Herausforderungen. Auf Steam wishlisten; Playtest über die Steam-Seiten.",
+                    ru: "Официальное объявление Steam: покиньте ферму для подземной добычи угля, кварца, грибов, динамита, риса на глине и головоломки в стиле тральщика в новом дереве разблокировки. Список желаний в Steam; регистрация в playtest на страницах базовой игры / DLC.",
                 })}
             </p>
         </div>
@@ -153,7 +163,8 @@ const description = {
                 rel="noopener noreferrer"
                 class="px-5 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-xl font-bold shadow-sm"
             >
-                {t({ en: "Steam DLC", zh: "Steam DLC", de: "Steam-DLC" })}
+                {t({ en: "Steam DLC", zh: "Steam DLC", de: "Steam-DLC",
+ru: "Steam DLC" })}
             </a>
         </div>
     </div>
@@ -168,6 +179,7 @@ const description = {
                         zh: "热门自动化脚本库",
                         en: "Popular Automation Scripts",
                         de: "Beliebte Automatisierungsskripte",
+                        ru: "Популярные сценарии автоматизации",
                     })
                 }
             </h2>
@@ -177,6 +189,7 @@ const description = {
                         zh: "一键复制经过优化的 Python 代码，快速提升你的农场效率。从基础到高级，应有尽有。",
                         en: "Copy optimized Python code with one click to boost your farm efficiency. From basics to advanced.",
                         de: "Kopieren Sie optimierten Python-Code mit einem Klick, um Ihre Farm-Effizienz zu steigern. Von den Grundlagen bis zu Fortgeschrittenen.",
+                        ru: "Скопируйте оптимизированный код Python одним щелчком мыши, чтобы повысить эффективность вашей фермы. От базового до продвинутого.",
                     })
                 }
             </p>
@@ -195,7 +208,8 @@ const description = {
                 <h3
                     class="font-bold text-lg text-gray-900 dark:text-white mb-2"
                 >
-                    {t({ zh: "基础代码", en: "Basics", de: "Grundlagen" })}
+                    {t({ zh: "基础代码", en: "Basics", de: "Grundlagen",
+ru: "Основные характеристики" })}
                 </h3>
                 <p
                     class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
@@ -205,6 +219,7 @@ const description = {
                             zh: "循环与变量入门",
                             en: "Loops & Variables",
                             de: "Schleifen & Variablen",
+                            ru: "Циклы и переменные",
                         })
                     }
                 </p>
@@ -227,6 +242,7 @@ const description = {
                             zh: "仙人掌脚本",
                             en: "Cactus Script",
                             de: "Kaktus-Skript",
+                            ru: "Кактусовый скрипт",
                         })
                     }
                 </h3>
@@ -238,6 +254,7 @@ const description = {
                             zh: "网格种植策略",
                             en: "Grid Planting Strategy",
                             de: "Raster-Pflanzstrategie",
+                            ru: "Стратегия посадки сетки",
                         })
                     }
                 </p>
@@ -260,6 +277,7 @@ const description = {
                             zh: "南瓜脚本",
                             en: "Pumpkin Script",
                             de: "Kürbis-Skript",
+                            ru: "Тыквенный скрипт",
                         })
                     }
                 </h3>
@@ -271,6 +289,7 @@ const description = {
                             zh: "巨大化作物逻辑",
                             en: "Mega Crop Logic",
                             de: "Mega-Ernte-Logik",
+                            ru: "Mega Crop Logic",
                         })
                     }
                 </p>
@@ -293,6 +312,7 @@ const description = {
                             zh: "向日葵脚本",
                             en: "Sunflower Script",
                             de: "Sonnenblumen-Skript",
+                            ru: "Подсолнечный скрипт",
                         })
                     }
                 </h3>
@@ -304,6 +324,7 @@ const description = {
                             zh: "只收瓣数最高的那朵",
                             en: "Harvest max petals only",
                             de: "Nur maximale Blütenzahl",
+                            ru: "Только максимальный урожай лепестков",
                         })
                     }
                 </p>
@@ -327,6 +348,7 @@ const description = {
                             zh: "树木脚本",
                             en: "Tree Script",
                             de: "Baum-Skript",
+                            ru: "Сценарий дерева",
                         })
                     }
                 </h3>
@@ -338,6 +360,7 @@ const description = {
                             zh: "棋盘格木头农场",
                             en: "Checkerboard wood farm",
                             de: "Schachbrett-Holzfarm",
+                            ru: "Деревянная ферма шахматной доски",
                         })
                     }
                 </p>
@@ -359,6 +382,7 @@ const description = {
                             zh: "胡萝卜脚本",
                             en: "Carrot Script",
                             de: "Karotten-Skript",
+                            ru: "Морковный скрипт",
                         })
                     }
                 </h3>
@@ -370,6 +394,7 @@ const description = {
                             zh: "翻地、种植、浇水",
                             en: "Till, plant, water",
                             de: "Pflügen, Samen, pflanzen",
+                            ru: "Plant water...",
                         })
                     }
                 </p>
@@ -391,6 +416,7 @@ const description = {
                             zh: "迷宫脚本",
                             en: "Maze Script",
                             de: "Labyrinth-Skript",
+                            ru: "Сценарий лабиринта",
                         })
                     }
                 </h3>
@@ -402,6 +428,7 @@ const description = {
                             zh: "左手扶墙找宝箱",
                             en: "Left-wall treasure hunt",
                             de: "Linke Wand zum Schatz",
+                            ru: "Охота за сокровищами слева",
                         })
                     }
                 </p>
@@ -423,6 +450,7 @@ const description = {
                             zh: "恐龙帽教学",
                             en: "Dinosaur Hat",
                             de: "Dinosaurier-Hut",
+                            ru: "Шляпа динозавра",
                         })
                     }
                 </h3>
@@ -434,6 +462,7 @@ const description = {
                             zh: "先懂规则，再写追逐苹果",
                             en: "Learn the rules, then chase apples",
                             de: "Erst die Regeln, dann Äpfel jagen",
+                            ru: "Изучайте правила, а затем бегите за яблоками",
                         })
                     }
                 </p>
@@ -455,6 +484,7 @@ const description = {
                             zh: "新手教程",
                             en: "Beginner Tutorial",
                             de: "Anfänger-Tutorial",
+                            ru: "Руководство для начинающих",
                         })
                     }
                 </h3>
@@ -466,6 +496,7 @@ const description = {
                             zh: "循环、变量、函数",
                             en: "Loops, variables, functions",
                             de: "Schleifen, Variablen, Funktionen",
+                            ru: "Циклы, переменные, функции",
                         })
                     }
                 </p>
@@ -482,6 +513,7 @@ const description = {
                     zh: "为什么选择这个游戏学习编程？",
                     en: "Why Learn Coding with This Game?",
                     de: "Warum Programmieren mit diesem Spiel lernen?",
+                    ru: "Зачем изучать программирование с помощью этой игры?",
                 })
             }
         </h2>
@@ -500,6 +532,7 @@ const description = {
                                 zh: "类 Python 的编程语言",
                                 en: "Python-like language, not full Python",
                                 de: "Python-ähnliche Sprache, nicht volles Python",
+                                ru: "Python-подобный язык, не полный Python",
                             })
                         }
                     </h3>
@@ -510,6 +543,7 @@ const description = {
                             zh: "游戏用的是自定义解释器，语法接近 Python（循环、变量、函数、列表），但不是完整 CPython：没有标准库，部分写法会报错。学会的是编程思路，不能把脚本原样贴进电脑上的 Python。",
                             en: "The game uses a custom interpreter with Python-like syntax (loops, variables, functions, lists). It is not full CPython — no standard library, and some Python features fail. You learn programming ideas; you cannot paste these scripts into desktop Python unchanged.",
                             de: "Das Spiel nutzt einen eigenen Interpreter mit Python-ähnlicher Syntax. Es ist nicht volles CPython. Du lernst Denkweisen, nicht Desktop-Python.",
+                            ru: "В игре используется пользовательский интерпретатор с Python-подобным синтаксисом (циклы, переменные, функции, списки). Это не полный CPython — нет стандартной библиотеки, и некоторые функции Python терпят неудачу. Вы изучаете идеи программирования; вы не можете вставлять эти скрипты в настольный Python без изменений.",
                         })
                     }
                 </p>
@@ -525,6 +559,7 @@ const description = {
                                 zh: "可视化的算法反馈",
                                 en: "Visual Algorithm Feedback",
                                 de: "Visuelles Algorithmus-Feedback",
+                                ru: "Обратная связь по визуальному алгоритму",
                             })
                         }
                     </h3>
@@ -535,6 +570,7 @@ const description = {
                             zh: "通过控制无人机进行播种、浇水和收割，你可以立即看到代码运行的结果。这种即时反馈机制是理解抽象编程概念（如递归、路径查找算法）的最佳方式。",
                             en: "By controlling drones to plant, water, and harvest, you see the results of your code instantly. This immediate feedback loop is the best way to understand abstract programming concepts like recursion and pathfinding algorithms.",
                             de: "Indem du Drohnen zum Pflanzen, Bewässern und Ernten steuerst, siehst du sofort Ergebnisse. Dieses Feedback ist der beste Weg, um abstrakte Konzepte wie Rekursion und Pfadfindung zu verstehen.",
+                            ru: "Управляя дронами для посадки, полива и сбора урожая, вы мгновенно видите результаты своего кода. Этот цикл немедленной обратной связи - лучший способ понять абстрактные концепции программирования, такие как алгоритмы рекурсии и поиска пути.",
                         })
                     }
                 </p>
@@ -556,6 +592,7 @@ const description = {
                         zh: "准备好开始了吗？",
                         en: "Ready to start?",
                         de: "Bereit zu starten?",
+                        ru: "Готовы начать?",
                     })
                 }
             </h3>
@@ -565,6 +602,7 @@ const description = {
                         zh: "请前往 Steam 购买正版游戏支持开发者",
                         en: "Support the devs on Steam",
                         de: "Unterstütze die Entwickler auf Steam",
+                        ru: "Поддержка разработчиков в Steam",
                     })
                 }
             </p>

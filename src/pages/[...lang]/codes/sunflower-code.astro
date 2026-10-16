@@ -24,12 +24,14 @@ const title = {
 	en: "Sunflower Code — Harvest Max Petals Only",
 	zh: "向日葵代码 — 只收瓣数最多的那朵",
 	de: "Sonnenblumen-Code — Nur die Blume mit den meisten Blütenblättern",
+	ru: "Код подсолнечника — только максимальное количество лепестков урожая",
 };
 
 const description = {
 	en: "The Farmer Was Replaced sunflower code for 1.0+: measure petals 7–15, keep 10+ flowers for the 8× Power bonus, harvest only the current max. Multi-drone sync tips included.",
 	zh: "编程农场 1.0+ 向日葵：瓣数 7–15，保持 ≥10 朵才有 8× Power，只收当前最高瓣。含多无人机同步思路。",
 	de: "Sonnenblumen-Code 1.0+: Blüten 7–15, ≥10 Blumen für 8× Power, nur das Maximum ernten. Multi-Drohne inkl.",
+	ru: "The Farmer Was Replaced sunflower code for 1.0+: measure petals 7–15, keep 10+ flowers for the 8× Power bonus, harvest only the current max. Включены советы по синхронизации с несколькими беспилотными летательными аппаратами.",
 };
 ---
 
@@ -41,6 +43,7 @@ const description = {
 					en: "The Farmer Was Replaced Sunflower Code — Max Petals, Then Power",
 					zh: "编程农场向日葵代码 — 先找最高瓣，再刷 Power",
 					de: "The Farmer Was Replaced Sonnenblumen-Code — Maximum, dann Power",
+					ru: "Фермеру заменили код подсолнечника — максимальное количество лепестков, затем мощность",
 				})}
 			</h1>
 			<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -48,6 +51,7 @@ const description = {
 					en: "Rewritten for 1.0+. Sunflowers pay Power. The 8× bonus only fires when you harvest the current max-petal flower while at least 10 sunflowers are on the farm. Harvest a smaller one and you lose the bonus for that harvest and the next.",
 					zh: "按 1.0+ 重写。向日葵产 Power。只有田间至少 10 朵、且你收的是当前瓣数最高的那朵，才有 8× 奖励。收错一朵，这一次和下一次都会丢奖励。",
 					de: "Neu für 1.0+. 8×-Bonus nur bei aktuellem Maximum und ≥10 Sonnenblumen. Falsche Ernte kostet diesen und den nächsten Bonus.",
+					ru: "Переписано для 1.0+. Подсолнухи платят Power. 8-кратный бонус срабатывает только тогда, когда вы собираете текущий макс-лепестковый цветок, в то время как на ферме находится не менее 10 подсолнухов. Собирайте урожай поменьше, и вы потеряете бонус за этот урожай и следующий.",
 				})}
 			</p>
 		</section>
@@ -56,19 +60,25 @@ const description = {
 
 		<section class="py-10 prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
 			<h2 class="text-2xl font-bold text-yellow-700 dark:text-yellow-400">
-				{t({ en: "How sunflowers work in 1.0+", zh: "1.0+ 向日葵规则", de: "Sonnenblumen in 1.0+" })}
+				{t({ en: "How sunflowers work in 1.0+", zh: "1.0+ 向日葵规则", de: "Sonnenblumen in 1.0+",
+ru: "Как работают подсолнухи в версии 1.0+" })}
 			</h2>
 			<ul>
-				<li>{t({ en: "Plant on soil (`till()` → `Grounds.Soil`). Planting costs carrots.", zh: "种在耕过的土上。种植消耗胡萝卜。", de: "Auf Soil pflanzen. Kostet Karotten." })}</li>
-				<li>{t({ en: "`measure()` returns petal count **7–15** (works even before fully grown).", zh: "`measure()` 返回瓣数 **7–15**（未完全成熟也能量）。", de: "`measure()` liefert 7–15 Blütenblätter." })}</li>
-				<li>{t({ en: "Harvest the largest petal count while **≥10** sunflowers exist → **8×** Power. Wrong flower → no bonus this time **and** next harvest.", zh: "田间 **≥10** 朵时收最高瓣 → **8×** Power。收错 → 这次**和**下次都没加成。", de: "Bei ≥10 Blumen das Maximum → 8×. Falsch → Bonus diesmal und nächstes Mal weg." })}</li>
-				<li>{t({ en: "Do **not** harvest every ready flower in a simple loop — that is the most common copy-paste mistake.", zh: "**不要**用普通循环把成熟花一收而光——这是最常见的复制粘贴错误。", de: "Nicht jede reife Blume in einer Schleife ernten." })}</li>
+				<li>{t({ en: "Plant on soil (`till()` → `Grounds.Soil`). Planting costs carrots.", zh: "种在耕过的土上。种植消耗胡萝卜。", de: "Auf Soil pflanzen. Kostet Karotten.",
+ru: "Растение на почве (`till()` → `Грунты .Почва`). Посадка стоит моркови." })}</li>
+				<li>{t({ en: "`measure()` returns petal count **7–15** (works even before fully grown).", zh: "`measure()` 返回瓣数 **7–15**（未完全成熟也能量）。", de: "`measure()` liefert 7–15 Blütenblätter.",
+ru: "`measure()` возвращает количество лепестков **7–15** (работает даже до полного роста)." })}</li>
+				<li>{t({ en: "Harvest the largest petal count while **≥10** sunflowers exist → **8×** Power. Wrong flower → no bonus this time **and** next harvest.", zh: "田间 **≥10** 朵时收最高瓣 → **8×** Power。收错 → 这次**和**下次都没加成。", de: "Bei ≥10 Blumen das Maximum → 8×. Falsch → Bonus diesmal und nächstes Mal weg.",
+ru: "Собирайте наибольшее количество лепестков, пока существует **≥10** подсолнухов → **8×** Мощность. Не тот цветок → без бонуса на этот раз **и** следующий урожай." })}</li>
+				<li>{t({ en: "Do **not** harvest every ready flower in a simple loop — that is the most common copy-paste mistake.", zh: "**不要**用普通循环把成熟花一收而光——这是最常见的复制粘贴错误。", de: "Nicht jede reife Blume in einer Schleife ernten.",
+ru: "Не собирайте * *** все готовые цветы в простой петле — это самая распространенная ошибка копирования и вставки." })}</li>
 			</ul>
 		</section>
 
 		<section class="py-6">
 			<h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-				{t({ en: "Single-drone: plant, then harvest current max", zh: "单机：种满，再只收当前最高瓣", de: "Eine Drohne: pflanzen, dann aktuelles Maximum" })}
+				{t({ en: "Single-drone: plant, then harvest current max", zh: "单机：种满，再只收当前最高瓣", de: "Eine Drohne: pflanzen, dann aktuelles Maximum",
+ru: "Одиночный беспилотник: посадка, затем сбор тока макс." })}
 			</h2>
 			<CodeBlock
 				height="max-h-[700px]"
@@ -131,19 +141,24 @@ while True:
 
 		<section class="py-8 bg-yellow-50 dark:bg-yellow-900/20 rounded-2xl border border-yellow-100 dark:border-yellow-800 p-6 mb-8">
 			<h3 class="text-xl font-bold mb-3 text-yellow-800 dark:text-yellow-300">
-				{t({ en: "Multi-drone patterns (Reddit Sep 2026)", zh: "多无人机做法（Reddit 2026-09）", de: "Multi-Drohne (Reddit Sep 2026)" })}
+				{t({ en: "Multi-drone patterns (Reddit Sep 2026)", zh: "多无人机做法（Reddit 2026-09）", de: "Multi-Drohne (Reddit Sep 2026)",
+ru: "Шаблоны для нескольких дронов (Reddit, сентябрь 2026 г.)" })}
 			</h3>
 			<ul class="space-y-3 text-yellow-900 dark:text-yellow-100 list-disc pl-5">
-				<li>{t({ en: "**No shared memory.** Spawned drones do not share globals. Collect petal maps by returning a list from each drone and reading it with `wait_for(handle)`.", zh: "**无共享内存。** 子无人机不共享全局。每架机返回瓣数列表，主无人机用 `wait_for(handle)` 收集。", de: "Kein Shared Memory. Rückgaben per `wait_for` sammeln." })}</li>
-				<li>{t({ en: "**Petal-tier sync:** spawn one drone per column; harvest only 15s, `wait_for` all, then 14s, then 13s… until the field is empty.", zh: "**按瓣数分层同步：** 每列一架机；只收 15 瓣 → `wait_for` 全部完成 → 再收 14 → 13… 直到清空。", de: "Blüten-Stufen: erst 15er, wait_for, dann 14er…" })}</li>
-				<li>{t({ en: "**Max-15 cheese:** plant, `measure()`, if petals are under 15, harvest+replant until every tile is 15, then harvest the whole field as maxes. Fast for Power, skips sorting.", zh: "**全 15 瓣套路：** 种下后 `measure()`，不足 15 就收掉重种，直到整田都是 15，再当最高瓣收。刷 Power 快，跳过排序。", de: "Max-15-Trick: nachpflanzen bis alles 15 ist." })}</li>
+				<li>{t({ en: "**No shared memory.** Spawned drones do not share globals. Collect petal maps by returning a list from each drone and reading it with `wait_for(handle)`.", zh: "**无共享内存。** 子无人机不共享全局。每架机返回瓣数列表，主无人机用 `wait_for(handle)` 收集。", de: "Kein Shared Memory. Rückgaben per `wait_for` sammeln.",
+ru: "**Нет общей памяти.** У порожденных дронов нет общих глобалов. Собирайте карты лепестков, возвращая список от каждого дрона и читая его с помощью «wait_for(handle)»." })}</li>
+				<li>{t({ en: "**Petal-tier sync:** spawn one drone per column; harvest only 15s, `wait_for` all, then 14s, then 13s… until the field is empty.", zh: "**按瓣数分层同步：** 每列一架机；只收 15 瓣 → `wait_for` 全部完成 → 再收 14 → 13… 直到清空。", de: "Blüten-Stufen: erst 15er, wait_for, dann 14er…",
+ru: "**Синхронизация уровня лепестков:** порождает по одному дрону в колонне; собирайте только 15 с, «wait_for» все, затем 14 с, затем 13 с... пока поле не станет пустым." })}</li>
+				<li>{t({ en: "**Max-15 cheese:** plant, `measure()`, if petals are under 15, harvest+replant until every tile is 15, then harvest the whole field as maxes. Fast for Power, skips sorting.", zh: "**全 15 瓣套路：** 种下后 `measure()`，不足 15 就收掉重种，直到整田都是 15，再当最高瓣收。刷 Power 快，跳过排序。", de: "Max-15-Trick: nachpflanzen bis alles 15 ist.",
+ru: "**Max-15 cheese:** plant, `measure()`, if petals are under 15, harvest+rebant until every tile is 15, then harvest the whole field as maxes. Быстро для питания, пропускает сортировку." })}</li>
 			</ul>
 		</section>
 
 		<RelatedGuides current="/codes/sunflower-code" />
 		<div class="text-center py-6">
 			<a href={getRelativeLocaleUrl(locale, "/")} class="text-blue-500 hover:text-blue-700 underline">
-				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite" })}
+				{t({ en: "← Back to Home", zh: "← 返回主页", de: "← Zurück zur Startseite",
+ru: "← На главную" })}
 			</a>
 		</div>
 		<div id="utterances-container" class="my-10"></div>

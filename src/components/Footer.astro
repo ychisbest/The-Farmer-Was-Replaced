@@ -14,106 +14,126 @@ const path = Astro.url.pathname.replace(/^\/[a-z]{2}(?:-[A-Z]{2})?\//, "/");
     <div class="grid md:grid-cols-4 gap-8 mb-8">
       <div>
       <h3 class="font-bold text-lg mb-4 text-neutral-900 dark:text-white">
-        {t({ en: "The farmer was replaced", zh: "编程农场中文站", de: "The farmer was replaced" })}
+        {t({ en: "The farmer was replaced", zh: "编程农场中文站", de: "The farmer was replaced",
+ru: "Фермер был заменен" })}
       </h3>
       <p class="text-sm text-neutral-600 leading-relaxed dark:text-neutral-400">
-        {t({ en: "The Farmer Was Replaced game information, guides, and code sharing platform", zh: "编程农场游戏信息、指南和代码分享平台", de: "The Farmer Was Replaced Spielinformationen, Leitfäden und Code-Sharing-Plattform" })}
+        {t({ en: "The Farmer Was Replaced game information, guides, and code sharing platform", zh: "编程农场游戏信息、指南和代码分享平台", de: "The Farmer Was Replaced Spielinformationen, Leitfäden und Code-Sharing-Plattform",
+ru: "Информация об игре The Farmer Was Replaced, руководства и платформа для обмена кодом" })}
       </p>
       </div>
       <div>
       <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
-        {t({ en: "Quick Links", zh: "快速链接", de: "Schnelllinks" })}
+        {t({ en: "Quick Links", zh: "快速链接", de: "Schnelllinks",
+ru: "Ссылки для быстрого доступа" })}
       </h4>
       <ul class="space-y-2 text-sm">
         <li>
         <a href={getRelativeLocaleUrl(locale, "/")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Home", zh: "主页", de: "Startseite" })}
+          {t({ en: "Home", zh: "主页", de: "Startseite",
+ru: "Главная" })}
         </a>
         </li>
         <li>
         <a href={getRelativeLocaleUrl(locale, "/tutorial")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Python Basics", zh: "Python 基础", de: "Python-Grundlagen" })}
+          {t({ en: "Python Basics", zh: "Python 基础", de: "Python-Grundlagen",
+ru: "Основы Python" })}
         </a>
         </li>
         <li>
         <a href={getRelativeLocaleUrl(locale, "/basic-codes")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Codes", zh: "代码", de: "Codes" })}
+          {t({ en: "Codes", zh: "代码", de: "Codes",
+ru: "Коды" })}
         </a>
         </li>
         <li>
         <a href={getRelativeLocaleUrl(locale, "/codes/pumpkin-code")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Pumpkin", zh: "南瓜", de: "Kürbis" })}
+          {t({ en: "Pumpkin", zh: "南瓜", de: "Kürbis",
+ru: "Тыква" })}
         </a>
         </li>
         <li>
         <a href={getRelativeLocaleUrl(locale, "/codes/tree-code")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Tree", zh: "树木", de: "Baum" })}
+          {t({ en: "Tree", zh: "树木", de: "Baum",
+ru: "Дерево" })}
         </a>
         </li>
         <li>
         <a href={getRelativeLocaleUrl(locale, "/codes/sunflower-code")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Sunflower", zh: "向日葵", de: "Sonnenblume" })}
+          {t({ en: "Sunflower", zh: "向日葵", de: "Sonnenblume",
+ru: "Подсолнух" })}
         </a>
         </li>
         <li>
         <a href={getRelativeLocaleUrl(locale, "/codes/dinosaur-code")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Dinosaur", zh: "恐龙", de: "Dino" })}
+          {t({ en: "Dinosaur", zh: "恐龙", de: "Dino",
+ru: "Динозавр" })}
         </a>
         </li>
       </ul>
       </div>
       <div>
       <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
-        {t({ en: "Policy", zh: "网站政策", de: "Richtlinien" })}
+        {t({ en: "Policy", zh: "网站政策", de: "Richtlinien",
+ru: "Политика" })}
       </h4>
       <ul class="space-y-2 text-sm">
         <li>
         <a href={getRelativeLocaleUrl(locale, "/links")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Partner Links", zh: "友情链接", de: "Partnerlinks" })}
+          {t({ en: "Partner Links", zh: "友情链接", de: "Partnerlinks",
+ru: "Ссылки на партнеров" })}
         </a>
         </li>
         <li>
         <a href={getRelativeLocaleUrl(locale, "/about")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "About", zh: "关于", de: "Über uns" })}
+          {t({ en: "About", zh: "关于", de: "Über uns",
+ru: "О сайте" })}
         </a>
         </li>
         <li>
         <a href={getRelativeLocaleUrl(locale, "/terms")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Terms", zh: "使用条款", de: "Nutzungsbedingungen" })}
+          {t({ en: "Terms", zh: "使用条款", de: "Nutzungsbedingungen",
+ru: "Условия" })}
         </a>
         </li>
         <li>
         <a href={getRelativeLocaleUrl(locale, "/privacy")} class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Privacy", zh: "隐私政策", de: "Datenschutz" })}
+          {t({ en: "Privacy", zh: "隐私政策", de: "Datenschutz",
+ru: "Конфиденциальность" })}
         </a>
         </li>
       </ul>
       </div>
       <div>
       <h4 class="font-medium mb-4 text-neutral-900 dark:text-white">
-        {t({ en: "Community", zh: "社区", de: "Community" })}
+        {t({ en: "Community", zh: "社区", de: "Community",
+ru: "Сообщество" })}
       </h4>
       <ul class="space-y-2 text-sm">
         <li>
         <a href="https://github.com/ychisbest/The-Farmer-Was-Replaced" target="_blank" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "GitHub", zh: "GitHub", de: "GitHub" })}
+          {t({ en: "GitHub", zh: "GitHub", de: "GitHub",
+ru: "GitHub" })}
         </a>
         </li>
         <li>
         <a href="https://www.reddit.com/r/TheFarmerWasReplaced" target="_blank" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Reddit", zh: "Reddit", de: "Reddit" })}
+          {t({ en: "Reddit", zh: "Reddit", de: "Reddit",
+ru: "Reddit" })}
         </a>
         </li>
         <li>
         <a href="https://store.steampowered.com/app/2060160/_/" target="_blank" class="text-neutral-600 hover:text-neutral-900 transition-colors dark:text-neutral-400 dark:hover:text-white">
-          {t({ en: "Steam", zh: "Steam", de: "Steam" })}
+          {t({ en: "Steam", zh: "Steam", de: "Steam",
+ru: "Пар" })}
         </a>
         </li>
       </ul>
       </div>
     </div>
     <div class="pt-8 border-t border-neutral-200 text-center text-sm text-neutral-600 dark:border-neutral-700 dark:text-neutral-500">
-      <p>&copy; {today.getFullYear()} {t(SITE_TITLE)} {t({ en: "Game Information Site. All rights reserved.", de: "Spiel-Informationsseite. Alle Rechte vorbehalten." })}</p>
+      <p>&copy; {today.getFullYear()} {t(SITE_TITLE)} {t({ en: "Game Information Site. All rights reserved.", de: "Spiel-Informationsseite. Alle Rechte vorbehalten.",
+ru: "Сайт информации об игре. Все права защищены." })}</p>
     </div>
   </div>
 </footer>
