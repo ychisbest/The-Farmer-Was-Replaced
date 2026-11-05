@@ -1,70 +1,83 @@
 ---
-title: "Is The Farmer Was Replaced on Mobile, Android, or Online?"
-description: "No official Android, iOS, or browser version. The Farmer Was Replaced is a Steam desktop game (Windows, macOS; Linux and Steam Deck via Proton). Here's where you can play and what this site is."
+title: "The Farmer Was Replaced Mobile: Android, iOS, Mac and Online (2026)"
+description: "Yes, The Farmer Was Replaced is now on Android and iOS (since Nov 2, 2026), with a touch code keyboard and The Miner Was Replaced included. Mac is native on Steam. There is still no browser version."
 date: 2026-10-16
+updatedDate: 2026-11-05
 ---
 
-People searching for **The Farmer Was Replaced mobile**, **Android**, or **online** usually want one of three things: a phone version, a free browser game, or a way to play on Steam Deck. This page answers all three clearly so you do not waste time on fake APKs or lookalike sites.
+**Update, November 2, 2026:** The Farmer Was Replaced is now officially on **Android and iOS**. The mobile port is by Ateo, published by Metaroot, and it includes the first DLC, [The Miner Was Replaced](/blog/the-miner-was-replaced/). This page used to say "no mobile version" — that is no longer true.
 
 ## Short answer
 
 | Platform | Official? | Notes |
 |----------|-----------|--------|
+| Android | **Yes** (since Nov 2, 2026) | Google Play, touch code keyboard, DLC included |
+| iPhone / iPad | **Yes** (since Nov 2, 2026) | App Store, same features as Android |
 | Windows (Steam) | Yes | Native |
-| macOS (Steam) | Yes | Native |
-| Linux (Steam) | Yes | Via Proton |
-| Steam Deck | Playable | Official Steam Deck rating is Playable; typing code is awkward on the Deck keyboard |
-| Android / iOS | No | No official mobile app from the developer |
-| Browser / online | No | No official web version; this site is a guide, not the game |
+| macOS (Steam) | Yes | Native since the December 2025 update |
+| Linux / Steam Deck | Playable | Via Proton; a keyboard helps a lot |
+| Browser / online | **No** | No official web version; this site is a guide |
 
-There is **no** official The Farmer Was Replaced Android APK, Google Play listing from the developer, or free online flash/HTML5 port. Sites that claim otherwise are unrelated clones or unsafe downloads.
+## The Farmer Was Replaced on Android and iOS
 
-## Where to buy and play
+The official mobile site is [farmer.ateo.ch](https://farmer.ateo.ch/), which links to the [App Store](https://apps.apple.com/app/the-farmer-was-replaced/id6790322035) and [Google Play](https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced) listings. Install only from those two stores.
 
-Buy it on Steam under the title *The Farmer Was Replaced*. Install through the Steam client on a PC or Mac. On Linux and Steam Deck, Steam runs it through Proton. The Steam Deck compatibility label is **Playable**, but the game is built around writing code, so an external keyboard helps a lot.
+What the mobile version has:
 
-This website ([thefarmerwasreplaced.com](/)) is an independent guide with copy-paste scripts. It is not a hosted copy of the game and cannot run the drone simulator in your browser.
+- **Everything from the PC version**, rebuilt for phones and tablets: loops, variables, functions, lists, Megafarm (many drones in parallel), Simulation Mode, achievements and hats.
+- **A code keyboard made for touch.** Every symbol is on one screen, brackets and quotes come in pairs, and you swipe on any key to move the cursor.
+- **Bluetooth keyboard and mouse** support if you prefer real keys.
+- **The Miner Was Replaced included**: underground mining, 8 new resources, mushroom sorting, ruins and Minesweeper-style puzzles.
 
-## Why people search "mobile" and "online"
+Good to know before you buy:
 
-- The name sounds like a casual farm game, so phone players look for an app.
-- Coding-game fans search for an online IDE-style version.
-- Deck owners check if it runs without a PC.
+- **Steam and mobile are separate purchases.** Owning the game on Steam does not unlock the app.
+- Community members on the publisher's launch post mention a **free trial** on mobile; check the store listing on your device.
+- Early feedback: auto-paired brackets are handy, but deleting a single bracket can be fiddly. A Bluetooth keyboard fixes it.
+- Mobile support: farmer@ateo.ch.
 
-All of those searches land on our [homepage](/) today, which has almost no clicks. This dedicated page matches the question in the Title and H1 so search can show a direct answer.
+## The Farmer Was Replaced on Mac
 
-## What you can do instead on a phone
+The Steam version runs **natively on macOS** since the December 2025 update ("Now available on macOS"). You no longer need Porting Kit, Wine or CrossOver — older guides that recommend them are out of date. Buy and install it in the Mac Steam client like any other game.
 
-You cannot play the real game on Android or iOS. You *can*:
+## Is there an online version?
 
-- Read this site's [tutorial](/tutorial/) and [basic codes](/basic-codes/) on your phone before you sit down at a PC.
-- Watch Steam page screenshots and trailers on mobile, then play on desktop.
-- Bookmark scripts like [polyculture code](/blog/polyculture-code/), [pumpkin code](/codes/pumpkin-code/), and [tree code](/codes/tree-code/) to paste later.
+No. There is no official browser or HTML5 version. Sites that offer "The Farmer Was Replaced online" or unofficial APKs are clones or unsafe downloads. This website ([thefarmerwasreplaced.com](/)) is an independent guide with copy-paste scripts; it cannot run the drone simulator.
 
-## Steam Deck tips (if that is what you meant by mobile)
+## Coding on a phone: tips
 
-Steam marks the game Playable on Deck. Expect friction: the on-screen keyboard is slow for writing loops, and small UI text can be hard. Connect a Bluetooth keyboard if you can. For reading guides and copying scripts from this site, the Deck browser works fine.
+- Start with short programs: the classic first script is `while True:` → `if can_harvest(): harvest()` → `move(North)`.
+- Keep scripts small and use functions; scrolling long files on a phone is slow.
+- Use Simulation Mode to test a change before running it on your farm.
+- Copy our [basic codes](/basic-codes/), [pumpkin code](/codes/pumpkin-code/) or [maze code](/codes/maze-code/) on your phone and paste them into the app.
+
+## Steam Deck
+
+Steam rates the game Playable on Deck. The on-screen keyboard is slow for writing loops, so connect a Bluetooth keyboard if you can.
 
 ## FAQ
 
-**Is there a free online version of The Farmer Was Replaced?**  
-No official one. Anything claiming to be the full game in a browser is not the Steam title.
+**Is The Farmer Was Replaced on Android?**
+Yes. Since November 2, 2026 it is on Google Play, with the official link on farmer.ateo.ch.
 
-**Is The Farmer Was Replaced on Android?**  
-No official Android release. Do not install random APKs that reuse the name.
+**Can I play on iPhone or iPad?**
+Yes, the iOS version is on the App Store with the same touch keyboard.
 
-**Can I play on iPhone or iPad?**  
-No official iOS version.
+**Does the mobile version include The Miner Was Replaced?**
+Yes, the mining DLC content is included in the mobile version.
 
-**Is this website the game?**  
-No. It is a guide with codes and walkthroughs for the Steam game.
+**If I own it on Steam, do I get the mobile version for free?**
+No, they are separate purchases.
 
-**Where should I start after I buy it?**  
-Open the [guide / tutorial](/tutorial/), then move to [basic codes](/basic-codes/) and crop pages like [pumpkin](/codes/pumpkin-code/) and [tree](/codes/tree-code/).
+**Can I play The Farmer Was Replaced on Mac?**
+Yes, natively through Steam on macOS.
+
+**Is there a free online version?**
+No official one.
 
 ## Related pages
 
+- [The Miner Was Replaced (DLC) overview](/blog/the-miner-was-replaced/)
 - [Full guide (tutorial)](/tutorial/)
 - [Basic codes](/basic-codes/)
-- [Multiple drones (Megafarm)](/blog/multiple-drones/)
-- [Polyculture code](/blog/polyculture-code/)
+- [Use VS Code with The Farmer Was Replaced](/blog/vscode-external-editor/)

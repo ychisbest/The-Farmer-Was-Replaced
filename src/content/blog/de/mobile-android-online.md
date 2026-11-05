@@ -1,71 +1,54 @@
 ---
-title: "The Farmer Was Replaced auf Android, Handy oder online?"
-description: "Keine offizielle Android-, iOS- oder Browser-Version. The Farmer Was Replaced ist ein Steam-PC-Spiel (Windows, macOS; Linux/Deck via Proton). Wo spielen, was diese Seite ist."
+title: "The Farmer Was Replaced mobil: Android, iOS, Mac und online (2026)"
+description: "Ja, The Farmer Was Replaced gibt es seit 2.11.2026 offiziell für Android und iOS, mit Touch-Code-Tastatur und The Miner Was Replaced inklusive. Mac läuft nativ über Steam. Eine Browser-Version gibt es nicht."
 date: 2026-10-16
+updatedDate: 2026-11-05
 ---
 
-Wer **The Farmer Was Replaced mobile**, **Android** oder **online** sucht, will meist eines von dreien: eine Handy-App, ein kostenloses Browser-Spiel oder Steam-Deck-Tauglichkeit. Diese Seite beantwortet alle drei klar – ohne Fake-APKs und Klon-Seiten.
+**Update 2.11.2026:** The Farmer Was Replaced ist jetzt offiziell für **Android und iOS** erhältlich. Der Mobil-Port stammt von Ateo (Publisher: Metaroot) und enthält das erste DLC, [The Miner Was Replaced](/de/blog/the-miner-was-replaced/).
 
-## Kurze Antwort
+## Kurzantwort
 
-| Plattform | Offiziell? | Notes |
-|-----------|------------|-------|
+| Plattform | Offiziell? | Hinweise |
+|-----------|------------|----------|
+| Android | **Ja** (seit 2.11.2026) | Google Play, Touch-Code-Tastatur, DLC inklusive |
+| iPhone / iPad | **Ja** (seit 2.11.2026) | App Store |
 | Windows (Steam) | Ja | Nativ |
-| macOS (Steam) | Ja | Nativ |
-| Linux (Steam) | Ja | Via Proton |
-| Steam Deck | Playable | Offizielles Rating Playable; Code tippen auf der Deck-Tastatur ist mühsam |
-| Android / iOS | Nein | Keine offizielle Mobile-App vom Entwickler |
-| Browser / online | Nein | Keine offizielle Web-Version; diese Seite ist ein Guide, nicht das Spiel |
+| macOS (Steam) | Ja | Nativ seit dem Update im Dezember 2025 |
+| Linux / Steam Deck | Spielbar | Über Proton |
+| Browser / online | **Nein** | Keine offizielle Web-Version |
 
-Es gibt **kein** offizielles Android-APK, keinen Google-Play-Eintrag vom Entwickler und keinen kostenlosen Online-Port. Seiten, die das behaupten, sind Klone oder unsichere Downloads.
+## Android und iOS
 
-## Wo kaufen und spielen
+Offizielle Seite: [farmer.ateo.ch](https://farmer.ateo.ch/) mit Links zum [App Store](https://apps.apple.com/app/the-farmer-was-replaced/id6790322035) und zu [Google Play](https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced).
 
-Kaufe es auf Steam unter *The Farmer Was Replaced*. Installiere über den Steam-Client auf PC oder Mac. Auf Linux und Steam Deck läuft es über Proton. Das Deck-Label ist **Playable**, aber das Spiel dreht sich ums Codieren – eine externe Tastatur hilft enorm.
+- **Alles aus der PC-Version**: Schleifen, Variablen, Funktionen, Listen, Megafarm, Simulationsmodus, Erfolge und Hüte.
+- **Code-Tastatur für Touch**: alle Zeichen auf einem Bildschirm, Klammern und Anführungszeichen paarweise, Cursor per Wischen.
+- **Bluetooth-Tastatur und -Maus** werden unterstützt.
+- **The Miner Was Replaced inklusive.**
 
-Diese Website ([thefarmerwasreplaced.com](/de/)) ist ein unabhängiger Guide mit Copy-Paste-Skripten. Sie hostet nicht das Spiel und kann den Drohnen-Simulator nicht im Browser ausführen.
+Wichtig: **Steam und Mobil werden getrennt gekauft.** Laut Community gibt es auf Mobil eine Testversion; prüfe den Store-Eintrag. Support: farmer@ateo.ch.
 
-## Warum „mobile“ und „online“ gesucht werden
+## Mac
 
-- Der Name klingt nach Casual-Farm, also suchen Handy-Spieler eine App.
-- Coding-Fans wollen eine Online-IDE-Variante.
-- Deck-Besitzer prüfen, ob es ohne PC läuft.
+Die Steam-Version läuft seit Dezember 2025 **nativ auf macOS**. Porting Kit oder Wine sind nicht mehr nötig.
 
-Solche Suchen landen heute oft auf der [Startseite](/de/) mit kaum Klicks. Eine eigene Seite spiegelt die Frage in Title und H1 wider.
+## Online?
 
-## Was du am Handy stattdessen tun kannst
-
-Das echte Spiel läuft nicht auf Android oder iOS. Du kannst aber:
-
-- [Tutorial](/de/tutorial/) und [Basic Codes](/de/basic-codes/) am Handy lesen, bevor du am PC sitzt.
-- Steam-Screenshots und Trailer mobil ansehen, dann am Desktop spielen.
-- Skripte wie [Polyculture](/de/blog/polyculture-code/), [Kürbis](/de/codes/pumpkin-code/) und [Baum](/de/codes/tree-code/) speichern und später einfügen.
-
-## Steam-Deck-Tipps
-
-Steam markiert das Spiel als Playable. Reibung erwarten: Bildschirmtastatur ist langsam für Schleifen, kleine UI-Schrift schwer. Bluetooth-Tastatur hilft. Guides lesen und Skripte kopieren geht im Deck-Browser gut.
-
-## Download-Sicherheit
-
-Seiten mit „APK“, „Android-Mod“ oder „online gratis ohne Steam“ sind Risiko. Offizieller Kanal ist nur Steam. Zufällige APKs enthalten oft Malware und sind nicht das echte Spiel. Dieser Guide hostet und empfiehlt solche Dateien nicht.
-
-Prüfe Plattformen immer auf der Steam-Shopseite. Steht dort kein Android oder Browser – gibt es ihn nicht.
+Nein, es gibt keine offizielle Browser-Version. Seiten mit „online spielen“ oder inoffiziellen APKs sind Klone. Diese Seite ist ein unabhängiger Guide.
 
 ## FAQ
 
-**Gibt es eine kostenlose Online-Version?** Keine offizielle. Alles, was das volle Spiel im Browser behauptet, ist nicht der Steam-Titel.
+**Gibt es The Farmer Was Replaced für Android?** Ja, seit 2.11.2026 bei Google Play.
 
-**Gibt es The Farmer Was Replaced auf Android?** Kein offizielles Android-Release. Keine Zufalls-APKs mit dem Namen installieren.
+**Für iPhone/iPad?** Ja, im App Store.
 
-**iPhone oder iPad?** Keine offizielle iOS-Version.
+**Ist das DLC in der Mobil-Version enthalten?** Ja.
 
-**Ist diese Website das Spiel?** Nein. Guide mit Codes und Walkthroughs für das Steam-Spiel.
-
-**Wo starten nach dem Kauf?** [Guide / Tutorial](/de/tutorial/), dann [Basic Codes](/de/basic-codes/) und [Kürbis](/de/codes/pumpkin-code/) / [Baum](/de/codes/tree-code/).
+**Bekomme ich die App gratis, wenn ich es auf Steam habe?** Nein, separater Kauf.
 
 ## Verwandte Seiten
 
-- [Vollständiger Guide](/de/tutorial/)
-- [Basic Codes](/de/basic-codes/)
-- [Mehrere Drohnen (Megafarm)](/de/blog/multiple-drones/)
-- [Polyculture-Code](/de/blog/polyculture-code/)
+- [The Miner Was Replaced (DLC)](/de/blog/the-miner-was-replaced/)
+- [Tutorial](/de/tutorial/)
+- [VS Code als externer Editor](/de/blog/vscode-external-editor/)

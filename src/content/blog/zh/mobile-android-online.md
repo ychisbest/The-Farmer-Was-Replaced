@@ -1,79 +1,67 @@
 ---
-title: "编程农场有手机版、安卓或网页版吗？"
-description: "没有官方 Android、iOS 或浏览器版。《The Farmer Was Replaced》是 Steam 电脑游戏（Windows、macOS；Linux/Deck 走 Proton）。哪里能玩、本站是什么。"
+title: "编程农场手机版：安卓、iOS、Mac 与网页版说明（2026）"
+description: "编程农场（The Farmer Was Replaced）2026-11-02 起已上线官方安卓和 iOS 版，带触屏代码键盘，并内含 DLC《The Miner Was Replaced》。Mac 版在 Steam 原生支持。目前仍没有网页版。"
 date: 2026-10-16
+updatedDate: 2026-11-05
 ---
 
-搜 **编程农场手机版**、**安卓** 或 **在线** 的人通常想要三件事之一：手机应用、免费网页游戏，或 Steam Deck 能否玩。本页把三点说清楚，避免掉进假 APK 和山寨站。
+**2026-11-02 更新：** 编程农场已正式登陆 **安卓和 iOS**。手机版由 Ateo 移植、Metaroot 发行，并内含首个 DLC [《The Miner Was Replaced》](/zh/blog/the-miner-was-replaced/)。本页以前写的“没有手机版”已经不成立。
 
-## 简短结论
+## 简短回答
 
 | 平台 | 官方？ | 说明 |
 |------|--------|------|
-| Windows (Steam) | 是 | 原生 |
-| macOS (Steam) | 是 | 原生 |
-| Linux (Steam) | 是 | 经 Proton |
-| Steam Deck | Playable | 官方评级 Playable；Deck 虚拟键盘写代码很别扭 |
-| Android / iOS | 否 | 开发者无官方手机应用 |
-| 浏览器 / 在线 | 否 | 无官方网页版；本站是攻略，不是游戏本身 |
+| 安卓 | **有**（2026-11-02 起） | Google Play，触屏代码键盘，含 DLC |
+| iPhone / iPad | **有**（2026-11-02 起） | App Store，功能与安卓相同 |
+| Windows（Steam） | 有 | 原生 |
+| macOS（Steam） | 有 | 2025 年 12 月更新起原生 |
+| Linux / Steam Deck | 可玩 | 通过 Proton；建议外接键盘 |
+| 网页版 / 在线 | **没有** | 没有官方网页版，本站是攻略 |
 
-**没有**官方 Android APK、开发者上架的 Google Play，也没有免费网页移植。声称有的多半是无关克隆或不安全下载。
+## 安卓和 iOS 版
 
-## 哪里购买与游玩
+官方手机版页面是 [farmer.ateo.ch](https://farmer.ateo.ch/)，从这里跳转到 [App Store](https://apps.apple.com/app/the-farmer-was-replaced/id6790322035) 和 [Google Play](https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced)。只从这两个商店安装。
 
-在 Steam 购买 *The Farmer Was Replaced*，用 Steam 客户端装到 PC 或 Mac。Linux 与 Steam Deck 经 Proton 运行。Deck 兼容性为 **Playable**，但游戏核心是写代码，外接键盘会轻松很多。
+- **电脑版的全部内容**：循环、变量、函数、列表、Megafarm 多无人机、模拟模式、成就和帽子。
+- **为触屏设计的代码键盘**：所有符号在一屏，括号和引号成对输入，在任意键上滑动即可移动光标。
+- 支持 **蓝牙键盘和鼠标**。
+- **内含《The Miner Was Replaced》**：地下采矿、8 种新资源、蘑菇分拣、遗迹和扫雷式谜题。
 
-本站（[thefarmerwasreplaced.com](/zh/)）是独立攻略与可复制脚本站，不是游戏托管，也不能在浏览器里跑无人机模拟器。
+购买前须知：
 
-## 为什么会搜「手机」和「在线」
+- **Steam 版和手机版需要分别购买**，Steam 已购不会解锁 App。
+- 发行商公告下有玩家提到手机版有 **免费试玩**，以你设备上的商店页为准。
+- 手机版客服邮箱：farmer@ateo.ch。
 
-- 名字像休闲农场，手机玩家会找 App。
-- 编程游戏玩家会找在线 IDE 式版本。
-- Deck 用户想确认能否离 PC 游玩。
+## Mac 能玩吗
 
-这些搜索目前多落在[首页](/zh/)，几乎无点击。独立页把问题写进 Title 与 H1，方便搜索给直接答案。
+可以。Steam 版自 2025 年 12 月更新起 **原生支持 macOS**，不再需要 Porting Kit、Wine 或 CrossOver。
 
-## 手机上能做什么（不能玩真游戏时）
+## 有网页版吗
 
-安卓或 iOS 上不能玩正版。但可以：
+没有官方网页版。声称“在线玩”的网站和来路不明的 APK 都是仿冒或不安全下载。本站是独立攻略站，只提供可复制的脚本。
 
-- 先在手机上看[教程](/zh/tutorial/)和[基础代码](/zh/basic-codes/)，再回电脑开玩。
-- 用手机看 Steam 截图与预告，回桌面再玩。
-- 收藏[混种代码](/zh/blog/polyculture-code/)、[南瓜代码](/zh/codes/pumpkin-code/)、[树木代码](/zh/codes/tree-code/)，之后粘贴。
+## 手机上写代码的建议
 
-## Steam Deck 提示（若「手机」其实指 Deck）
+- 先写短程序：`while True:` → `if can_harvest(): harvest()` → `move(North)`。
+- 多用函数、保持文件短小。
+- 用模拟模式先测试再跑到农场上。
+- 在手机上复制本站的[基础代码](/zh/basic-codes/)、[南瓜代码](/zh/codes/pumpkin-code/)，粘贴进 App。
 
-Steam 标为 Playable。预期摩擦：屏幕键盘写循环很慢，小字 UI 难读。尽量接蓝牙键盘。用 Deck 浏览器读本站攻略、复制脚本则没问题。
+## 常见问题
 
-## 下载安全
+**编程农场有安卓版吗？** 有，2026-11-02 起上架 Google Play。
 
-若有站提供「APK」「安卓模组」「免 Steam 在线畅玩」，一律当风险。官方渠道只有 Steam。随机 APK 常带恶意软件，且与正版无关。本站不托管、不推荐这类文件。
+**iPhone / iPad 能玩吗？** 能，App Store 有 iOS 版。
 
-核对平台请看 Steam 商店页列出的系统与 Deck 兼容性。商店没有 Android 或浏览器，就说明没有。
+**手机版包含编程矿场 DLC 吗？** 包含。
 
-## 手机上怎么用本站
+**Steam 买过，手机版免费吗？** 不免费，需要单独购买。
 
-1. 打开[教程](/zh/tutorial/)先扫一眼脚本。
-2. 收藏[基础代码](/zh/basic-codes/)、[南瓜](/zh/codes/pumpkin-code/)、[混种](/zh/blog/polyculture-code/)。
-3. 回电脑开游戏粘贴调试。
-
-这样「手机版」搜索能落到有用答案，而不是几乎无点击的首页。
-
-## FAQ
-
-**有免费网页版吗？** 无官方版。自称浏览器完整游戏的不是 Steam 正作。
-
-**有安卓版吗？** 无官方 Android。不要装同名随机 APK。
-
-**能在 iPhone / iPad 玩吗？** 无官方 iOS。
-
-**本站是游戏吗？** 不是。这是 Steam 游戏的代码与攻略站。
-
-**买了从哪开始？** 看[教程](/zh/tutorial/)，再[基础代码](/zh/basic-codes/)和[南瓜](/zh/codes/pumpkin-code/)、[树木](/zh/codes/tree-code/)。
+**有免费网页版吗？** 没有官方版本。
 
 ## 相关页面
 
+- [《The Miner Was Replaced》DLC 介绍](/zh/blog/the-miner-was-replaced/)
 - [完整教程](/zh/tutorial/)
-- [基础代码](/zh/basic-codes/)
-- [多无人机（Megafarm）](/zh/blog/multiple-drones/)
-- [混种代码](/zh/blog/polyculture-code/)
+- [用 VS Code 写编程农场代码](/zh/blog/vscode-external-editor/)

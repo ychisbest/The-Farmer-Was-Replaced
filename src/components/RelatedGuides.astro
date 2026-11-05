@@ -65,8 +65,23 @@ ru: "Несколько дронов" }),
 	},
 	{
 		href: "/blog/mobile-android-online",
-		label: t({ en: "Mobile / Android / Online", zh: "手机 / 安卓 / 网页", de: "Mobile / Android / Online",
-ru: "Мобильные / Android / Online" }),
+		label: t({ en: "Mobile: Android & iOS", zh: "手机版：安卓与 iOS", de: "Mobil: Android & iOS",
+ru: "Мобильная: Android и iOS" }),
+	},
+	{
+		href: "/blog/the-miner-was-replaced",
+		label: t({ en: "The Miner Was Replaced (DLC)", zh: "编程矿场 DLC", de: "The Miner Was Replaced (DLC)",
+ru: "The Miner Was Replaced (DLC)" }),
+	},
+	{
+		href: "/blog/vscode-external-editor",
+		label: t({ en: "VS Code setup", zh: "VS Code 设置", de: "VS Code einrichten",
+ru: "Настройка VS Code" }),
+	},
+	{
+		href: "/blog/games-like-the-farmer-was-replaced",
+		label: "Games like The Farmer Was Replaced",
+		enOnly: true,
 	},
 	{
 		href: "/codes/maze-code",
@@ -78,7 +93,7 @@ ru: "Код лабиринта" }),
 		label: t({ en: "Dinosaur hat", zh: "恐龙帽", de: "Dinosaurier-Hut",
 ru: "Шляпа динозавра" }),
 	},
-].filter((item) => item.href !== current);
+].filter((item) => item.href !== current && (!("enOnly" in item) || locale === DEFAULT_LOCALE_SETTING));
 ---
 
 <nav class="py-8 border-t border-neutral-200 dark:border-neutral-700">
