@@ -21,19 +21,12 @@ const { image, alt = "", code = "" ,height="max-h-[350px]"} = Astro.props;
 
         <!-- Copy Button -->
         <button
+            type="button"
             class="absolute top-10 right-4 z-10 bg-white/10 backdrop-blur-sm border border-white/20 text-white/80 px-3 py-1.5 rounded-lg text-xs hover:bg-white/20 transition-all opacity-0 group-hover:opacity-100 duration-200"
+            data-copy-btn
             data-code={code}
-            onclick="
-                const btn = this;
-                navigator.clipboard.writeText(this.getAttribute('data-code'));
-                const originalText = btn.textContent;
-                btn.textContent = btn.getAttribute('data-success');
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                }, 2000);
-            "
-            data-success={t({ zh: "已复制!",
-ru: "Скопировано!", en: "Copied!" })}
+            data-label={t({ zh: "复制", ru: "Копировать", en: "Copy" })}
+            data-success={t({ zh: "已复制!", ru: "Скопировано!", en: "Copied!" })}
         >
             {t({ zh: "复制",
 ru: "Копировать", en: "Copy" })}
@@ -69,3 +62,69 @@ ru: "Копировать", en: "Copy" })}
         )
     }
 </div>
+
+<script is:inline>
+    (function () {
+        if (window.__farmerCodeBlockCopyInit) return;
+        window.__farmerCodeBlockCopyInit = true;
+
+        var SMARTLINK_URL =
+            "https://araplhn.org/4/059d7cf20460091d424dc8d91e99c370";
+        var SMARTLINK_COOLDOWN_MS = 60 * 1000;
+        var STORAGE_KEY = "__farmer_smartlink_last_at";
+
+        function triggerSmartlink() {
+            try {
+                var now = Date.now();
+                var last = Number(sessionStorage.getItem(STORAGE_KEY) || "0");
+                if (now - last < SMARTLINK_COOLDOWN_MS) return;
+                sessionStorage.setItem(STORAGE_KEY, String(now));
+            } catch (_) {
+                // ignore storage errors in private mode
+            }
+            window.open(SMARTLINK_URL, "_blank", "noopener,noreferrer");
+        }
+
+        function copyText(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                return navigator.clipboard.writeText(text);
+            }
+            return new Promise(function (resolve, reject) {
+                try {
+                    var ta = document.createElement("textarea");
+                    ta.value = text;
+                    ta.style.position = "fixed";
+                    ta.style.opacity = "0";
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(ta);
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+
+        document.addEventListener("click", function (e) {
+            var target = e.target;
+            if (!target || typeof target.closest !== "function") return;
+            var btn = target.closest("[data-copy-btn]");
+            if (!btn) return;
+
+            var codeText = btn.getAttribute("data-code") || "";
+            var labelText = btn.getAttribute("data-label") || btn.textContent;
+            var successText = btn.getAttribute("data-success") || "Copied!";
+
+            triggerSmartlink();
+
+            copyText(codeText).then(function () {
+                btn.textContent = successText;
+                if (btn.__copyTimer) clearTimeout(btn.__copyTimer);
+                btn.__copyTimer = setTimeout(function () {
+                    btn.textContent = labelText;
+                }, 2000);
+            });
+        });
+    })();
+</script>

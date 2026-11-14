@@ -10,22 +10,73 @@
 </aside>
 <script is:inline>
 	(function () {
-		var root = document.currentScript && document.currentScript.previousElementSibling;
-		if (!root || !root.hasAttribute("data-ad-native")) return;
-		if (window.__farmerAdNativeLoaded) {
-			root.hidden = true;
-			root.style.display = "none";
-			return;
-		}
-		window.__farmerAdNativeLoaded = true;
-		var box = root.querySelector(".ad-native-box");
-		if (!box) return;
-		box.id = "container-b1cc5426fa303af1c313c4d3ee76938f";
-		var s = document.createElement("script");
-		s.async = true;
-		s.setAttribute("data-cfasync", "false");
-		s.src =
+		var CONTAINER_ID = "container-b1cc5426fa303af1c313c4d3ee76938f";
+		var SCRIPT_SRC =
 			"https://pl30884533.effectivecpmnetwork.com/b1cc5426fa303af1c313c4d3ee76938f/invoke.js";
-		root.appendChild(s);
+		var root =
+			document.currentScript &&
+			document.currentScript.previousElementSibling;
+		if (!root || !root.hasAttribute("data-ad-native")) return;
+
+		var queue = (window.__farmerAdNativeQueue =
+			window.__farmerAdNativeQueue || []);
+		queue.push(root);
+
+		if (window.__farmerAdNativeProcessing) return;
+		window.__farmerAdNativeProcessing = true;
+
+		function processNext() {
+			var nextRoot = queue.shift();
+			if (!nextRoot) {
+				window.__farmerAdNativeProcessing = false;
+				return;
+			}
+			var box = nextRoot.querySelector(".ad-native-box");
+			if (!box) {
+				processNext();
+				return;
+			}
+
+			var existing = document.getElementById(CONTAINER_ID);
+			if (existing && existing !== box) {
+				existing.removeAttribute("id");
+			}
+			box.id = CONTAINER_ID;
+
+			var finished = false;
+			var observer = null;
+			var timer = null;
+
+			function done() {
+				if (finished) return;
+				finished = true;
+				if (observer) observer.disconnect();
+				if (timer) clearTimeout(timer);
+				if (box.id === CONTAINER_ID && queue.length > 0) {
+					box.removeAttribute("id");
+				}
+				processNext();
+			}
+
+			if (typeof MutationObserver !== "undefined") {
+				observer = new MutationObserver(function () {
+					if (box.childNodes.length > 0) {
+						setTimeout(done, 300);
+					}
+				});
+				observer.observe(box, { childList: true, subtree: true });
+			}
+
+			timer = setTimeout(done, 4000);
+
+			var s = document.createElement("script");
+			s.async = true;
+			s.setAttribute("data-cfasync", "false");
+			s.src = SCRIPT_SRC;
+			s.onerror = done;
+			nextRoot.appendChild(s);
+		}
+
+		processNext();
 	})();
 </script>
