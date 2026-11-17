@@ -1,8 +1,8 @@
 ---
-title: "编程农场手机版：安卓、iOS、Mac 与网页版说明（2026）"
-description: "编程农场（The Farmer Was Replaced）2026-11-02 起已上线官方安卓和 iOS 版，带触屏代码键盘，并内含 DLC《The Miner Was Replaced》。Mac 版在 Steam 原生支持。目前仍没有网页版。"
+title: "编程农场手机版：官方安卓 Google Play、iOS 与 APK 安全指南（2026）"
+description: "编程农场（The Farmer Was Replaced）官方安卓（Google Play）与 iOS 下载入口，严防第三方 APK 风险；附触屏键盘长按单括号隐藏技巧、矿场 DLC 新手避坑与手机端常用 API 速查。"
 date: 2026-10-16
-updatedDate: 2026-11-05
+updatedDate: 2026-11-17
 ---
 
 **2026-11-02 更新：** 编程农场已正式登陆 **安卓和 iOS**。手机版由 Ateo 移植、Metaroot 发行，并内含首个 DLC [《The Miner Was Replaced》](/zh/blog/the-miner-was-replaced/)。本页以前写的“没有手机版”已经不成立。
@@ -31,7 +31,16 @@ updatedDate: 2026-11-05
 
 - **Steam 版和手机版需要分别购买**，Steam 已购不会解锁 App。
 - 发行商公告下有玩家提到手机版有 **免费试玩**，以你设备上的商店页为准。
+- **触屏键盘隐藏技巧（输入单个括号）：** 默认会自动成对补全括号，改单个括号时容易误删。**长按括号键** 即可只输入单个 `(` 或 `)`，不必整段删掉重写。
 - 手机版客服邮箱：farmer@ateo.ch。
+
+## 新手需要担心内含的《The Miner Was Replaced》DLC 太复杂吗？
+
+不需要。虽然手机版默认捆绑了矿场 DLC（新增煤炭、石英、蘑菇、炸药等 8 种地下资源），但**在科技树里主动解锁采矿升级前，地下采矿机制完全处于关闭状态**。新手可以安心先玩透基础农场循环，等熟练后再解锁矿场。
+
+## 网上的“编程农场 APK”能下载吗？
+
+**不要**从第三方镜像站下载来路不明的 `.apk` 安装包。目前唯一正版安卓渠道是 **Google Play**（包名 `com.TheFarmerWasReplaced.TheFarmerWasReplaced`），可从官网 [farmer.ateo.ch](https://farmer.ateo.ch/) 跳转安装，切勿冒险安装修改版 APK。
 
 ## Mac 能玩吗
 
@@ -47,6 +56,14 @@ updatedDate: 2026-11-05
 - 多用函数、保持文件短小。
 - 用模拟模式先测试再跑到农场上。
 - 在手机上复制本站的[基础代码](/zh/basic-codes/)、[南瓜代码](/zh/codes/pumpkin-code/)，粘贴进 App。
+
+### 手机端常用 API 速查（免切屏翻文档）
+
+- `harvest()` — 收获当前格作物
+- `can_harvest()` — 当前格是否成熟（返回 `True`/`False`）
+- `till()` — 翻土（种胡萝卜/南瓜前需要）
+- `plant(Entities.Carrot)` — 种植指定作物
+- `move(North)` / `South` / `East` / `West` — 向指定方向移动一格
 
 ## 常见问题
 

@@ -1,8 +1,8 @@
 ---
-title: "The Farmer Was Replaced Mobile: Android, iOS, Mac and Online (2026)"
-description: "Yes, The Farmer Was Replaced is now on Android and iOS (since Nov 2, 2026), with a touch code keyboard and The Miner Was Replaced included. Mac is native on Steam. There is still no browser version."
+title: "The Farmer Was Replaced Mobile: Official Android, iOS & APK Guide (2026)"
+description: "Official Android (Google Play) & iOS links for The Farmer Was Replaced (no safe third-party APK). Plus hidden touch-keyboard tricks, Miner DLC guide, and copy-paste mobile scripts."
 date: 2026-10-16
-updatedDate: 2026-11-05
+updatedDate: 2026-11-17
 ---
 
 **Update, November 2, 2026:** The Farmer Was Replaced is now officially on **Android and iOS**. The mobile port is by Ateo, published by Metaroot, and it includes the first DLC, [The Miner Was Replaced](/blog/the-miner-was-replaced/). This page used to say "no mobile version" — that is no longer true.
@@ -33,8 +33,16 @@ Good to know before you buy:
 
 - **Steam and mobile are separate purchases.** Owning the game on Steam does not unlock the app.
 - Community members on the publisher's launch post mention a **free trial** on mobile; check the store listing on your device.
-- Early feedback: auto-paired brackets are handy, but deleting a single bracket can be fiddly. A Bluetooth keyboard fixes it.
+- **Touch keyboard hidden trick (single parenthesis):** Brackets and quotes auto-pair by default, which can make editing a single `(` or `)` annoying. **Press and hold the parenthesis key** to insert an individual bracket without triggering a pair — or connect a Bluetooth keyboard if you write long scripts.
 - Mobile support: farmer@ateo.ch.
+
+## Should mobile beginners worry about The Miner Was Replaced DLC?
+
+No. Although the mobile version bundles **The Miner Was Replaced** DLC (adding 8 underground resources like Coal, Quartz, Mushrooms, and Dynamite), **mining mechanics stay completely inactive until you unlock the mining upgrade in the tech tree**. You can focus 100% on the base farming loop first and turn on mining whenever you are ready.
+
+## Is there a safe "The Farmer Was Replaced APK" download?
+
+Do **not** download third-party `.apk` files from mirror sites. The only legitimate Android build is on **Google Play** (`com.TheFarmerWasReplaced.TheFarmerWasReplaced`), linked directly from [farmer.ateo.ch](https://farmer.ateo.ch/). Check the store listing for regional pricing or trial availability rather than risking modified APKs.
 
 ## The Farmer Was Replaced on Mac
 
@@ -50,6 +58,15 @@ No. There is no official browser or HTML5 version. Sites that offer "The Farmer 
 - Keep scripts small and use functions; scrolling long files on a phone is slow.
 - Use Simulation Mode to test a change before running it on your farm.
 - Copy our [basic codes](/basic-codes/), [pumpkin code](/codes/pumpkin-code/) or [maze code](/codes/maze-code/) on your phone and paste them into the app.
+
+### Mobile Quick-Reference (Copy-Paste Ready)
+
+Since scrolling docs on a phone is slow, keep these core calls handy:
+- `harvest()` — harvest the tile under the drone
+- `can_harvest()` — returns `True` when the crop is ready
+- `till()` — turn grassland into soil (needed for carrots/pumpkins)
+- `plant(Entities.Carrot)` — plant a specific crop
+- `move(North)` / `South` / `East` / `West` — move one tile
 
 ## Steam Deck
 

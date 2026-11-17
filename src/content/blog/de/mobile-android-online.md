@@ -1,8 +1,8 @@
 ---
-title: "The Farmer Was Replaced mobil: Android, iOS, Mac und online (2026)"
-description: "Ja, The Farmer Was Replaced gibt es seit 2.11.2026 offiziell für Android und iOS, mit Touch-Code-Tastatur und The Miner Was Replaced inklusive. Mac läuft nativ über Steam. Eine Browser-Version gibt es nicht."
+title: "The Farmer Was Replaced mobil: Offizieller Android-, iOS- & APK-Guide (2026)"
+description: "Offizielle Links zu Google Play & App Store für The Farmer Was Replaced (keine sicheren Drittanbieter-APKs). Inklusive Touch-Tastatur-Trick, Miner-DLC-Hinweis und Kurzreferenz."
 date: 2026-10-16
-updatedDate: 2026-11-05
+updatedDate: 2026-11-17
 ---
 
 **Update 2.11.2026:** The Farmer Was Replaced ist jetzt offiziell für **Android und iOS** erhältlich. Der Mobil-Port stammt von Ateo (Publisher: Metaroot) und enthält das erste DLC, [The Miner Was Replaced](/de/blog/the-miner-was-replaced/).
@@ -28,6 +28,10 @@ Offizielle Seite: [farmer.ateo.ch](https://farmer.ateo.ch/) mit Links zum [App S
 - **The Miner Was Replaced inklusive.**
 
 Wichtig: **Steam und Mobil werden getrennt gekauft.** Laut Community gibt es auf Mobil eine Testversion; prüfe den Store-Eintrag. Support: farmer@ateo.ch.
+
+- **Touch-Tastatur-Trick (einzelne Klammer):** Klammern werden automatisch paarweise gesetzt. **Halte die Klammer-Taste gedrückt**, um eine einzelne `(` oder `)` einzugeben.
+- **Überfordert das Miner-DLC Einsteiger?** Nein — die Bergbau-Mechaniken bleiben deaktiviert, bis du das Upgrade im Tech-Tree freischaltest.
+- **APK-Warnung:** Lade keine Drittanbieter-APKs herunter. Die einzige offizielle Android-Version liegt bei **Google Play** (`com.TheFarmerWasReplaced.TheFarmerWasReplaced`), verlinkt auf [farmer.ateo.ch](https://farmer.ateo.ch/).
 
 ## Mac
 

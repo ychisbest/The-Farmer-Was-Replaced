@@ -1,8 +1,8 @@
 ---
-title: "The Farmer Was Replaced на телефоне: Android, iOS, Mac и онлайн (2026)"
-description: "Да, с 2 ноября 2026 года The Farmer Was Replaced официально доступна на Android и iOS — с сенсорной клавиатурой для кода и DLC The Miner Was Replaced. На Mac игра работает нативно через Steam. Браузерной версии нет."
+title: "The Farmer Was Replaced на телефоне: Android, iOS и безопасность APK (2026)"
+description: "Официальные ссылки на Google Play и App Store для The Farmer Was Replaced (без сомнительных APK). Скрытый приём сенсорной клавиатуры, совет по DLC The Miner и шпаргалка."
 date: 2026-10-16
-updatedDate: 2026-11-05
+updatedDate: 2026-11-17
 ---
 
 **Обновление 2 ноября 2026 года:** The Farmer Was Replaced официально вышла на **Android и iOS**. Мобильный порт сделала Ateo (издатель Metaroot), и он включает первое DLC — [The Miner Was Replaced](/ru/blog/the-miner-was-replaced/).
@@ -28,6 +28,10 @@ updatedDate: 2026-11-05
 - **The Miner Was Replaced включён.**
 
 Важно: **Steam и мобильная версия покупаются отдельно.** По словам игроков, на мобильных есть пробная версия — проверьте страницу в магазине. Поддержка: farmer@ateo.ch.
+
+- **Скрытый приём клавиатуры (одиночная скобка):** скобки ставятся парами, но если **удерживать клавишу скобки**, можно вставить одну `(` или `)`.
+- **Мешает ли DLC новичкам?** Нет: механики шахты не активны, пока вы сами не откроете апгрейд в дереве технологий.
+- **Осторожно с APK:** не скачивайте сторонние `.apk`. Единственная официальная Android-версия — в **Google Play** (`com.TheFarmerWasReplaced.TheFarmerWasReplaced`) со ссылкой на [farmer.ateo.ch](https://farmer.ateo.ch/).
 
 ## Mac
 
