@@ -1,4 +1,7 @@
 ---
+// Adsterra Native Banner for thefarmerwasreplaced.com (domain 5988510, placement 30784034).
+// Uses Anti-Adblock endpoint and strict single-slot mounting so #container-b1cc5426fa303af1c313c4d3ee76938f
+// stays anchored to the first visible slot on the page (never stripped or duplicated by footer fallback).
 ---
 
 <aside
@@ -8,75 +11,32 @@
 >
 	<div class="ad-native-box w-full"></div>
 </aside>
-<script is:inline>
+<script is:inline data-cfasync="false">
 	(function () {
 		var CONTAINER_ID = "container-b1cc5426fa303af1c313c4d3ee76938f";
 		var SCRIPT_SRC =
-			"https://pl30884533.effectivecpmnetwork.com/b1cc5426fa303af1c313c4d3ee76938f/invoke.js";
+			"https://bauval.org/21/b1cc5426fa303af1c313c4d3ee76938f";
 		var root =
 			document.currentScript &&
 			document.currentScript.previousElementSibling;
 		if (!root || !root.hasAttribute("data-ad-native")) return;
 
-		var queue = (window.__farmerAdNativeQueue =
-			window.__farmerAdNativeQueue || []);
-		queue.push(root);
-
-		if (window.__farmerAdNativeProcessing) return;
-		window.__farmerAdNativeProcessing = true;
-
-		function processNext() {
-			var nextRoot = queue.shift();
-			if (!nextRoot) {
-				window.__farmerAdNativeProcessing = false;
-				return;
-			}
-			var box = nextRoot.querySelector(".ad-native-box");
-			if (!box) {
-				processNext();
-				return;
-			}
-
-			var existing = document.getElementById(CONTAINER_ID);
-			if (existing && existing !== box) {
-				existing.removeAttribute("id");
-			}
-			box.id = CONTAINER_ID;
-
-			var finished = false;
-			var observer = null;
-			var timer = null;
-
-			function done() {
-				if (finished) return;
-				finished = true;
-				if (observer) observer.disconnect();
-				if (timer) clearTimeout(timer);
-				if (box.id === CONTAINER_ID && queue.length > 0) {
-					box.removeAttribute("id");
-				}
-				processNext();
-			}
-
-			if (typeof MutationObserver !== "undefined") {
-				observer = new MutationObserver(function () {
-					if (box.childNodes.length > 0) {
-						setTimeout(done, 300);
-					}
-				});
-				observer.observe(box, { childList: true, subtree: true });
-			}
-
-			timer = setTimeout(done, 4000);
-
-			var s = document.createElement("script");
-			s.async = true;
-			s.setAttribute("data-cfasync", "false");
-			s.src = SCRIPT_SRC;
-			s.onerror = done;
-			nextRoot.appendChild(s);
+		if (window.__farmerAdNativeMounted || document.getElementById(CONTAINER_ID)) {
+			root.hidden = true;
+			root.style.display = "none";
+			return;
 		}
 
-		processNext();
+		var box = root.querySelector(".ad-native-box");
+		if (!box) return;
+
+		window.__farmerAdNativeMounted = true;
+		box.id = CONTAINER_ID;
+
+		var s = document.createElement("script");
+		s.async = true;
+		s.setAttribute("data-cfasync", "false");
+		s.src = SCRIPT_SRC;
+		root.insertBefore(s, box);
 	})();
 </script>

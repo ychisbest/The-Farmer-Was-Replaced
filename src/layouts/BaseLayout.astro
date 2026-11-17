@@ -35,6 +35,7 @@ const { description } = Astro.props;
                     ? "github-dark"
                     : "github-light";
             const container = document.getElementById("utterances-container");
+            if (!container) return;
 
             // 清空容器，避免重复加载
             container.innerHTML = "";

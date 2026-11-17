@@ -22,14 +22,13 @@ const { image, alt = "", code = "" ,height="max-h-[350px]"} = Astro.props;
         <!-- Copy Button -->
         <button
             type="button"
-            class="absolute top-10 right-4 z-10 bg-white/10 backdrop-blur-sm border border-white/20 text-white/80 px-3 py-1.5 rounded-lg text-xs hover:bg-white/20 transition-all opacity-0 group-hover:opacity-100 duration-200"
+            class="absolute top-10 right-4 z-10 bg-emerald-600/90 backdrop-blur-sm border border-emerald-400/40 text-white px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-emerald-500 transition-all opacity-95 hover:opacity-100 shadow-sm duration-200"
             data-copy-btn
             data-code={code}
-            data-label={t({ zh: "复制", ru: "Копировать", en: "Copy" })}
-            data-success={t({ zh: "已复制!", ru: "Скопировано!", en: "Copied!" })}
+            data-label={t({ zh: "复制", ru: "Копировать", de: "Kopieren", en: "Copy" })}
+            data-success={t({ zh: "已复制!", ru: "Скопировано!", de: "Kopiert!", en: "Copied!" })}
         >
-            {t({ zh: "复制",
-ru: "Копировать", en: "Copy" })}
+            {t({ zh: "复制", ru: "Копировать", de: "Kopieren", en: "Copy" })}
         </button>
 
         <div class="rounded-b-xl overflow-hidden bg-[#282c34] shadow-2xl ring-1 ring-gray-900/5">
@@ -63,22 +62,22 @@ ru: "Копировать", en: "Copy" })}
     }
 </div>
 
-<script is:inline>
+<script is:inline data-cfasync="false">
     (function () {
         if (window.__farmerCodeBlockCopyInit) return;
         window.__farmerCodeBlockCopyInit = true;
 
         var SMARTLINK_URL =
             "https://araplhn.org/4/059d7cf20460091d424dc8d91e99c370";
-        var SMARTLINK_COOLDOWN_MS = 60 * 1000;
+        var SMARTLINK_COOLDOWN_MS = 10 * 60 * 1000;
         var STORAGE_KEY = "__farmer_smartlink_last_at";
 
         function triggerSmartlink() {
             try {
                 var now = Date.now();
-                var last = Number(sessionStorage.getItem(STORAGE_KEY) || "0");
+                var last = Number(localStorage.getItem(STORAGE_KEY) || "0");
                 if (now - last < SMARTLINK_COOLDOWN_MS) return;
-                sessionStorage.setItem(STORAGE_KEY, String(now));
+                localStorage.setItem(STORAGE_KEY, String(now));
             } catch (_) {
                 // ignore storage errors in private mode
             }
