@@ -20,14 +20,21 @@ updatedDate: 2026-11-17
 
 ## 安卓和 iOS 版
 
-![编程农场手机版竖屏代码与自动收获界面](/images/mobile/mobile-screenshot-2.webp)
-
-官方手机版页面是 [farmer.ateo.ch](https://farmer.ateo.ch/)，从这里跳转到 [App Store](https://apps.apple.com/app/the-farmer-was-replaced/id6790322035) 和 [Google Play](https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced)。只从这两个商店安装。
-
-- **电脑版的全部内容**：循环、变量、函数、列表、Megafarm 多无人机、模拟模式、成就和帽子。
-- **为触屏设计的代码键盘**：所有符号在一屏，括号和引号成对输入，在任意键上滑动即可移动光标。
-- 支持 **蓝牙键盘和鼠标**。
-- **内含《The Miner Was Replaced》**：地下采矿、8 种新资源、蘑菇分拣、遗迹和扫雷式谜题。
+<div class="not-prose grid grid-cols-1 md:grid-cols-[1fr_240px] gap-6 items-start my-5">
+  <div class="prose lg:prose-sm dark:prose-invert max-w-none">
+    <p>官方手机版页面是 <a href="https://farmer.ateo.ch/">farmer.ateo.ch</a>，从这里跳转到 <a href="https://apps.apple.com/app/the-farmer-was-replaced/id6790322035">App Store</a> 和 <a href="https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced">Google Play</a>。只从这两个商店安装。</p>
+    <ul>
+      <li><strong>电脑版的全部内容</strong>：循环、变量、函数、列表、Megafarm 多无人机、模拟模式、成就和帽子。</li>
+      <li><strong>为触屏设计的代码键盘</strong>：所有符号在一屏，括号和引号成对输入，在任意键上滑动即可移动光标。</li>
+      <li>支持 <strong>蓝牙键盘和鼠标</strong>。</li>
+      <li><strong>内含《The Miner Was Replaced》</strong>：地下采矿、8 种新资源、蘑菇分拣、遗迹和扫雷式谜题。</li>
+    </ul>
+  </div>
+  <figure class="m-0 mx-auto w-56 md:w-full">
+    <img src="/images/mobile/mobile-screenshot-2.webp" alt="编程农场手机版竖屏代码与自动收获界面" class="w-full h-auto rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm" loading="lazy" />
+    <figcaption class="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">手机端竖屏代码与农场运行界面</figcaption>
+  </figure>
+</div>
 
 购买前须知：
 
@@ -38,9 +45,15 @@ updatedDate: 2026-11-17
 
 ## 新手需要担心内含的《The Miner Was Replaced》DLC 太复杂吗？
 
-![编程农场手机版地下采矿与蘑菇分拣界面](/images/mobile/mobile-screenshot-1.webp)
-
-不需要。虽然手机版默认捆绑了矿场 DLC（新增煤炭、石英、蘑菇、炸药等 8 种地下资源），但**在科技树里主动解锁采矿升级前，地下采矿机制完全处于关闭状态**。新手可以安心先玩透基础农场循环，等熟练后再解锁矿场。
+<div class="not-prose grid grid-cols-1 md:grid-cols-[1fr_240px] gap-6 items-start my-5">
+  <div class="prose lg:prose-sm dark:prose-invert max-w-none">
+    <p>不需要。虽然手机版默认捆绑了矿场 DLC（新增煤炭、石英、蘑菇、炸药等 8 种地下资源），但<strong>在科技树里主动解锁采矿升级前，地下采矿机制完全处于关闭状态</strong>。新手可以安心先玩透基础农场循环，等熟练后再解锁矿场。</p>
+  </div>
+  <figure class="m-0 mx-auto w-56 md:w-full">
+    <img src="/images/mobile/mobile-screenshot-1.webp" alt="编程农场手机版地下采矿与蘑菇分拣界面" class="w-full h-auto rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm" loading="lazy" />
+    <figcaption class="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">矿场 DLC（科技树解锁后才启用）</figcaption>
+  </figure>
+</div>
 
 ## 网上的“编程农场 APK”能下载吗？
 

@@ -42,7 +42,7 @@ const { Content } = await render(post);
 <Layout title={post.data.title} description={post.data.description}>
 	<h1 class="text-2xl md:text-3xl font-bold text-center mb-4 text-gray-900 dark:text-white">{post.data.title}</h1>
 	<AdNative />
-	<article class="prose lg:prose-sm mx-auto dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
+	<article class="prose lg:prose-sm mx-auto dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 prose-img:rounded-xl prose-img:border prose-img:border-gray-200 dark:prose-img:border-gray-800 prose-img:shadow-sm">
 		{post.data.image && (
 			<Image src={post.data.image} alt={post.data.title} class="mx-auto mb-6 rounded max-h-64 w-auto" />
 		)}

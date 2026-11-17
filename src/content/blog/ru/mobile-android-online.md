@@ -20,14 +20,20 @@ updatedDate: 2026-11-17
 
 ## Android и iOS
 
-![Мобильная версия The Farmer Was Replaced на Android и iOS](/images/mobile/mobile-screenshot-2.webp)
-
-Официальная страница: [farmer.ateo.ch](https://farmer.ateo.ch/) со ссылками на [App Store](https://apps.apple.com/app/the-farmer-was-replaced/id6790322035) и [Google Play](https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced).
-
-- **Всё из ПК-версии**: циклы, переменные, функции, списки, Megafarm, режим симуляции, достижения и шляпы.
-- **Клавиатура для кода**: все символы на одном экране, скобки и кавычки ставятся парами, курсор двигается свайпом.
-- Поддержка **Bluetooth-клавиатуры и мыши**.
-- **The Miner Was Replaced включён.**
+<div class="not-prose grid grid-cols-1 md:grid-cols-[1fr_240px] gap-6 items-start my-5">
+  <div class="prose lg:prose-sm dark:prose-invert max-w-none">
+    <p>Официальная страница: <a href="https://farmer.ateo.ch/">farmer.ateo.ch</a> со ссылками на <a href="https://apps.apple.com/app/the-farmer-was-replaced/id6790322035">App Store</a> и <a href="https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced">Google Play</a>.</p>
+    <ul>
+      <li><strong>Всё из ПК-версии</strong>: циклы, переменные, функции, списки, Megafarm, режим симуляции, достижения и шляпы.</li>
+      <li><strong>Клавиатура для кода</strong>: все символы на одном экране, скобки и кавычки ставятся парами, курсор двигается свайпом.</li>
+      <li>Поддержка <strong>Bluetooth-клавиатуры и мыши</strong>.</li>
+      <li><strong>The Miner Was Replaced включён.</strong></li>
+    </ul>
+  </div>
+  <figure class="m-0 mx-auto w-56 md:w-full">
+    <img src="/images/mobile/mobile-screenshot-2.webp" alt="Мобильная версия The Farmer Was Replaced на Android и iOS" class="w-full h-auto rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm" loading="lazy" />
+  </figure>
+</div>
 
 Важно: **Steam и мобильная версия покупаются отдельно.** По словам игроков, на мобильных есть пробная версия — проверьте страницу в магазине. Поддержка: farmer@ateo.ch.
 

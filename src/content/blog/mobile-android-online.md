@@ -20,16 +20,22 @@ updatedDate: 2026-11-17
 
 ## The Farmer Was Replaced on Android and iOS
 
-![The Farmer Was Replaced mobile UI running a harvest loop on Android and iOS](/images/mobile/mobile-screenshot-2.webp)
-
-The official mobile site is [farmer.ateo.ch](https://farmer.ateo.ch/), which links to the [App Store](https://apps.apple.com/app/the-farmer-was-replaced/id6790322035) and [Google Play](https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced) listings. Install only from those two stores.
-
-What the mobile version has:
-
-- **Everything from the PC version**, rebuilt for phones and tablets: loops, variables, functions, lists, Megafarm (many drones in parallel), Simulation Mode, achievements and hats.
-- **A code keyboard made for touch.** Every symbol is on one screen, brackets and quotes come in pairs, and you swipe on any key to move the cursor.
-- **Bluetooth keyboard and mouse** support if you prefer real keys.
-- **The Miner Was Replaced included**: underground mining, 8 new resources, mushroom sorting, ruins and Minesweeper-style puzzles.
+<div class="not-prose grid grid-cols-1 md:grid-cols-[1fr_240px] gap-6 items-start my-5">
+  <div class="prose lg:prose-sm dark:prose-invert max-w-none">
+    <p>The official mobile site is <a href="https://farmer.ateo.ch/">farmer.ateo.ch</a>, which links to the <a href="https://apps.apple.com/app/the-farmer-was-replaced/id6790322035">App Store</a> and <a href="https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced">Google Play</a> listings. Install only from those two stores.</p>
+    <p>What the mobile version has:</p>
+    <ul>
+      <li><strong>Everything from the PC version</strong>, rebuilt for phones and tablets: loops, variables, functions, lists, Megafarm (many drones in parallel), Simulation Mode, achievements and hats.</li>
+      <li><strong>A code keyboard made for touch.</strong> Every symbol is on one screen, brackets and quotes come in pairs, and you swipe on any key to move the cursor.</li>
+      <li><strong>Bluetooth keyboard and mouse</strong> support if you prefer real keys.</li>
+      <li><strong>The Miner Was Replaced included</strong>: underground mining, 8 new resources, mushroom sorting, ruins and Minesweeper-style puzzles.</li>
+    </ul>
+  </div>
+  <figure class="m-0 mx-auto w-56 md:w-full">
+    <img src="/images/mobile/mobile-screenshot-2.webp" alt="The Farmer Was Replaced mobile UI running a harvest loop on Android and iOS" class="w-full h-auto rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm" loading="lazy" />
+    <figcaption class="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">Mobile portrait UI &amp; code editor</figcaption>
+  </figure>
+</div>
 
 Good to know before you buy:
 
@@ -40,9 +46,15 @@ Good to know before you buy:
 
 ## Should mobile beginners worry about The Miner Was Replaced DLC?
 
-![Underground mining and mushroom sorting in The Farmer Was Replaced mobile](/images/mobile/mobile-screenshot-1.webp)
-
-No. Although the mobile version bundles **The Miner Was Replaced** DLC (adding 8 underground resources like Coal, Quartz, Mushrooms, and Dynamite), **mining mechanics stay completely inactive until you unlock the mining upgrade in the tech tree**. You can focus 100% on the base farming loop first and turn on mining whenever you are ready.
+<div class="not-prose grid grid-cols-1 md:grid-cols-[1fr_240px] gap-6 items-start my-5">
+  <div class="prose lg:prose-sm dark:prose-invert max-w-none">
+    <p>No. Although the mobile version bundles <strong>The Miner Was Replaced</strong> DLC (adding 8 underground resources like Coal, Quartz, Mushrooms, and Dynamite), <strong>mining mechanics stay completely inactive until you unlock the mining upgrade in the tech tree</strong>. You can focus 100% on the base farming loop first and turn on mining whenever you are ready.</p>
+  </div>
+  <figure class="m-0 mx-auto w-56 md:w-full">
+    <img src="/images/mobile/mobile-screenshot-1.webp" alt="Underground mining and mushroom sorting in The Farmer Was Replaced mobile" class="w-full h-auto rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm" loading="lazy" />
+    <figcaption class="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">Miner DLC (optional tech tree unlock)</figcaption>
+  </figure>
+</div>
 
 ## Is there a safe "The Farmer Was Replaced APK" download?
 

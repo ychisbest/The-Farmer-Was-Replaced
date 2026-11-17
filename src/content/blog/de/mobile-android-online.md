@@ -20,14 +20,20 @@ updatedDate: 2026-11-17
 
 ## Android und iOS
 
-![The Farmer Was Replaced Mobilversion auf Android und iOS](/images/mobile/mobile-screenshot-2.webp)
-
-Offizielle Seite: [farmer.ateo.ch](https://farmer.ateo.ch/) mit Links zum [App Store](https://apps.apple.com/app/the-farmer-was-replaced/id6790322035) und zu [Google Play](https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced).
-
-- **Alles aus der PC-Version**: Schleifen, Variablen, Funktionen, Listen, Megafarm, Simulationsmodus, Erfolge und Hüte.
-- **Code-Tastatur für Touch**: alle Zeichen auf einem Bildschirm, Klammern und Anführungszeichen paarweise, Cursor per Wischen.
-- **Bluetooth-Tastatur und -Maus** werden unterstützt.
-- **The Miner Was Replaced inklusive.**
+<div class="not-prose grid grid-cols-1 md:grid-cols-[1fr_240px] gap-6 items-start my-5">
+  <div class="prose lg:prose-sm dark:prose-invert max-w-none">
+    <p>Offizielle Seite: <a href="https://farmer.ateo.ch/">farmer.ateo.ch</a> mit Links zum <a href="https://apps.apple.com/app/the-farmer-was-replaced/id6790322035">App Store</a> und zu <a href="https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced">Google Play</a>.</p>
+    <ul>
+      <li><strong>Alles aus der PC-Version</strong>: Schleifen, Variablen, Funktionen, Listen, Megafarm, Simulationsmodus, Erfolge und Hüte.</li>
+      <li><strong>Code-Tastatur für Touch</strong>: alle Zeichen auf einem Bildschirm, Klammern und Anführungszeichen paarweise, Cursor per Wischen.</li>
+      <li><strong>Bluetooth-Tastatur und -Maus</strong> werden unterstützt.</li>
+      <li><strong>The Miner Was Replaced inklusive.</strong></li>
+    </ul>
+  </div>
+  <figure class="m-0 mx-auto w-56 md:w-full">
+    <img src="/images/mobile/mobile-screenshot-2.webp" alt="The Farmer Was Replaced Mobilversion auf Android und iOS" class="w-full h-auto rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm" loading="lazy" />
+  </figure>
+</div>
 
 Wichtig: **Steam und Mobil werden getrennt gekauft.** Laut Community gibt es auf Mobil eine Testversion; prüfe den Store-Eintrag. Support: farmer@ateo.ch.
 
