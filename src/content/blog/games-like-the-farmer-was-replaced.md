@@ -1,7 +1,8 @@
 ---
-title: "Games Like The Farmer Was Replaced: 12 Programming Games to Play Next"
-description: "Best games like The Farmer Was Replaced: Bitburner, Autonauts, CodeCombat, Human Resource Machine, 7 Billion Humans, Turing Complete, Shenzhen I/O, TIS-100, Exapunks, Screeps, Colobot and The Miner Was Replaced."
+title: "Games Like The Farmer Was Replaced: 13 Programming Games to Play Next"
+description: "Best games like The Farmer Was Replaced: Database Detective, Bitburner, Autonauts, CodeCombat, Human Resource Machine, 7 Billion Humans, Turing Complete, Shenzhen I/O, TIS-100, Exapunks, Screeps, Colobot and The Miner Was Replaced."
 date: 2026-11-05
+updatedDate: 2026-11-17
 ---
 
 Finished the farm and want more code-driven automation? These are the games players recommend most often in the community, grouped by what you liked about **The Farmer Was Replaced**.
@@ -14,6 +15,7 @@ Finished the farm and want more code-driven automation? These are the games play
 | Real code, open-ended | **Bitburner**, **Screeps** |
 | Programming a farm / colony of bots | **Autonauts**, **Colobot** |
 | Learning Python or JavaScript | **CodeCombat** |
+| Solving cases with SQL queries | **Database Detective** |
 | Short logic puzzles | **Human Resource Machine**, **7 Billion Humans** |
 | Low-level / hardware | **Turing Complete**, **Shenzhen I/O**, **TIS-100**, **Exapunks** |
 
@@ -56,6 +58,18 @@ An MMO where your units run your **JavaScript** around the clock. Very open-ende
 ## 10. Colobot
 
 An older (now open-source) game where you program robots in a C-like language to colonize a planet. Often mentioned as the game The Farmer Was Replaced reminds people of.
+
+## 11. Database Detective: Minor Crimes Division
+
+<div class="not-prose grid grid-cols-1 md:grid-cols-[1fr_280px] gap-6 items-center my-4">
+  <div class="prose lg:prose-sm dark:prose-invert max-w-none">
+    <p>Released on Steam in July 2026, <strong>Database Detective: Minor Crimes Division</strong> swaps drone scripts for <strong>SQL queries</strong>. You investigate criminal cases by querying city records and joining tables—a great pick if you enjoyed the problem-solving logic of <em>The Farmer Was Replaced</em> and want to practice real-world database querying.</p>
+  </div>
+  <figure class="m-0">
+    <img src="/images/steam/database-detective-header.jpg" alt="Database Detective: Minor Crimes Division on Steam" class="w-full h-auto rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm" loading="lazy" />
+    <figcaption class="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">Database Detective (SQL puzzle game on Steam)</figcaption>
+  </figure>
+</div>
 
 ## Which one should you play first?
 
