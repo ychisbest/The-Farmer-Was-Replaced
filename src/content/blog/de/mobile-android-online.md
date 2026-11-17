@@ -20,6 +20,8 @@ updatedDate: 2026-11-17
 
 ## Android und iOS
 
+![The Farmer Was Replaced Mobilversion auf Android und iOS](/images/mobile/mobile-screenshot-2.webp)
+
 Offizielle Seite: [farmer.ateo.ch](https://farmer.ateo.ch/) mit Links zum [App Store](https://apps.apple.com/app/the-farmer-was-replaced/id6790322035) und zu [Google Play](https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced).
 
 - **Alles aus der PC-Version**: Schleifen, Variablen, Funktionen, Listen, Megafarm, Simulationsmodus, Erfolge und Hüte.

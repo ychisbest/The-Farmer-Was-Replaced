@@ -20,6 +20,8 @@ updatedDate: 2026-11-17
 
 ## 安卓和 iOS 版
 
+![编程农场手机版竖屏代码与自动收获界面](/images/mobile/mobile-screenshot-2.webp)
+
 官方手机版页面是 [farmer.ateo.ch](https://farmer.ateo.ch/)，从这里跳转到 [App Store](https://apps.apple.com/app/the-farmer-was-replaced/id6790322035) 和 [Google Play](https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced)。只从这两个商店安装。
 
 - **电脑版的全部内容**：循环、变量、函数、列表、Megafarm 多无人机、模拟模式、成就和帽子。
@@ -35,6 +37,8 @@ updatedDate: 2026-11-17
 - 手机版客服邮箱：farmer@ateo.ch。
 
 ## 新手需要担心内含的《The Miner Was Replaced》DLC 太复杂吗？
+
+![编程农场手机版地下采矿与蘑菇分拣界面](/images/mobile/mobile-screenshot-1.webp)
 
 不需要。虽然手机版默认捆绑了矿场 DLC（新增煤炭、石英、蘑菇、炸药等 8 种地下资源），但**在科技树里主动解锁采矿升级前，地下采矿机制完全处于关闭状态**。新手可以安心先玩透基础农场循环，等熟练后再解锁矿场。
 

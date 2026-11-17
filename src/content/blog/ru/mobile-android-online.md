@@ -20,6 +20,8 @@ updatedDate: 2026-11-17
 
 ## Android и iOS
 
+![Мобильная версия The Farmer Was Replaced на Android и iOS](/images/mobile/mobile-screenshot-2.webp)
+
 Официальная страница: [farmer.ateo.ch](https://farmer.ateo.ch/) со ссылками на [App Store](https://apps.apple.com/app/the-farmer-was-replaced/id6790322035) и [Google Play](https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced).
 
 - **Всё из ПК-версии**: циклы, переменные, функции, списки, Megafarm, режим симуляции, достижения и шляпы.

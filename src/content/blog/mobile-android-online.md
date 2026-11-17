@@ -20,6 +20,8 @@ updatedDate: 2026-11-17
 
 ## The Farmer Was Replaced on Android and iOS
 
+![The Farmer Was Replaced mobile UI running a harvest loop on Android and iOS](/images/mobile/mobile-screenshot-2.webp)
+
 The official mobile site is [farmer.ateo.ch](https://farmer.ateo.ch/), which links to the [App Store](https://apps.apple.com/app/the-farmer-was-replaced/id6790322035) and [Google Play](https://play.google.com/store/apps/details?id=com.TheFarmerWasReplaced.TheFarmerWasReplaced) listings. Install only from those two stores.
 
 What the mobile version has:
@@ -37,6 +39,8 @@ Good to know before you buy:
 - Mobile support: farmer@ateo.ch.
 
 ## Should mobile beginners worry about The Miner Was Replaced DLC?
+
+![Underground mining and mushroom sorting in The Farmer Was Replaced mobile](/images/mobile/mobile-screenshot-1.webp)
 
 No. Although the mobile version bundles **The Miner Was Replaced** DLC (adding 8 underground resources like Coal, Quartz, Mushrooms, and Dynamite), **mining mechanics stay completely inactive until you unlock the mining upgrade in the tech tree**. You can focus 100% on the base farming loop first and turn on mining whenever you are ready.
 
